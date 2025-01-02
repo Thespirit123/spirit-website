@@ -1,29 +1,56 @@
-import { ButtonHTMLAttributes, forwardRef, memo } from "react";
+import Link from "next/link";
+import {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  ForwardedRef,
+  forwardRef,
+  memo,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+// Keep only the types we need
+interface BaseProps {
   isLoading?: boolean;
   variant?: "primary" | "secondary" | "outline";
   size?: "sm" | "md" | "lg";
   fullWidth?: boolean;
+  disabled?: boolean;
+  className?: string;
+  children?: React.ReactNode;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
+type ButtonAsButtonProps = BaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
+    isLink?: false;
+  };
+
+type ButtonAsLinkProps = BaseProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps> & {
+    isLink: true;
+    href: string;
+  };
+
+type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
+
+const isLinkProps = (props: ButtonProps): props is ButtonAsLinkProps => {
+  return "isLink" in props && props.isLink === true;
+};
+
+const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+  (props, ref) => {
+    const {
       children,
       className,
-      disabled,
-      isLoading,
+      disabled = false,
+      isLoading = false,
       variant = "primary",
       size = "md",
       fullWidth = false,
-      ...props
-    },
-    ref
-  ) => {
+      ...rest
+    } = props;
+
     const baseStyles =
-      "rounded-[5px] font-medium text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
+      "rounded-[5px] font-medium text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center";
     const sizeStyles = {
       sm: "px-4 py-2",
       md: "px-6 py-3",
@@ -45,25 +72,54 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variantStyles[variant],
       fullWidth ? "w-full" : "w-auto",
       disabled || isLoading
-        ? "opacity-50 cursor-not-allowed"
+        ? "opacity-50 cursor-not-allowed pointer-events-none"
         : "cursor-pointer",
       className
     );
 
+    const content = isLoading ? (
+      <div className="flex items-center justify-center">
+        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+      </div>
+    ) : (
+      children
+    );
+
+    if (isLinkProps(props)) {
+      // Use OmitIsLink here
+      const { href, ...linkRest } = props;
+      const linkProps = Object.fromEntries(
+        Object.entries(linkRest).filter(([key]) => key !== "isLink")
+      );
+
+      return (
+        <Link
+          href={href}
+          className={classes}
+          {...linkProps}
+          ref={ref as ForwardedRef<HTMLAnchorElement>}
+          role="button"
+          tabIndex={disabled ? -1 : 0}
+          aria-disabled={disabled}
+        >
+          {content}
+        </Link>
+      );
+    }
+
+    const buttonProps = Object.fromEntries(
+      Object.entries(rest).filter(([key]) => key !== "isLink")
+    );
+
     return (
       <button
-        ref={ref}
+        ref={ref as ForwardedRef<HTMLButtonElement>}
         className={classes}
         disabled={disabled || isLoading}
-        {...props}
+        {...buttonProps}
+        aria-busy={isLoading}
       >
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : (
-          children
-        )}
+        {content}
       </button>
     );
   }

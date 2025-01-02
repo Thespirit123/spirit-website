@@ -67,74 +67,64 @@ const Navbar = () => {
 
       <div className="border-b border-black/10" />
 
-      <div className="flex items-center w-full">
-        <div className="flex items-center justify-between gap-8 w-full px-6 py-2">
-          <Link href="/">
-            <Image
-              src={LogoImg}
-              height={100}
-              width={100}
-              alt="Gather"
-              className="object-cover"
-            />
-          </Link>
+      <div className="flex items-center justify-between gap-8 w-full px-6 py-0">
+        <Link href="/">
+          <Image
+            src={LogoImg}
+            height={100}
+            width={100}
+            alt="Gather"
+            className="object-cover"
+          />
+        </Link>
 
-          {/* Desktop Menu */}
-          <ul className="hidden lg:flex gap-8">
-            <li>
-              <NavLink href="/movie-portal">
-                <Text>Movie Portal</Text>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink href="/utility-payment">
-                <Text>Utility Payment</Text>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink href="/whatsapp-tool">
-                <Text>Whatsapp Monitoring Tool</Text>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink href="/feedback">
-                <Text>Feedback</Text>
-              </NavLink>
-            </li>
-          </ul>
+        {/* Desktop Menu */}
+        <ul className="hidden lg:flex gap-8">
+          <li>
+            <NavLink href="/movie-portal" text="Movie Portal" />
+          </li>
+          <li>
+            <NavLink href="/utility-payment" text="Utility Payment" />
+          </li>
+          <li>
+            <NavLink href="/whatsapp-tool" text="Whatsapp Monitoring Tool" />
+          </li>
+          <li>
+            <NavLink href="/feedback" text="Feedback" />
+          </li>
+        </ul>
 
-          <div className="hidden lg:block">
-            <Button variant="primary" size="sm">
-              Log In
-            </Button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden p-2"
-            aria-expanded={isMenuOpen}
-            aria-label="Toggle menu"
-          >
-            <div className="w-6 h-5 flex flex-col justify-between">
-              <span
-                className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
-                  isMenuOpen ? "rotate-45 translate-y-2" : ""
-                }`}
-              />
-              <span
-                className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
-                  isMenuOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
-                  isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-                }`}
-              />
-            </div>
-          </button>
+        <div className="hidden lg:block">
+          <Button variant="primary" size="sm" isLink href="/auth/login">
+            Log In
+          </Button>
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={toggleMenu}
+          className="lg:hidden p-2"
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+        >
+          <div className="w-6 h-5 flex flex-col justify-between">
+            <span
+              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
+                isMenuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            />
+            <span
+              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
+                isMenuOpen ? "opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
+                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            />
+          </div>
+        </button>
       </div>
 
       <AnimatePresence>
@@ -202,9 +192,11 @@ const Navbar = () => {
                     custom={i}
                     variants={menuItemVariants}
                   >
-                    <NavLink href={item.href} onClick={toggleMenu}>
-                      <Text>{item.text}</Text>
-                    </NavLink>
+                    <NavLink
+                      href={item.href}
+                      text={item.text}
+                      onClick={toggleMenu}
+                    />
                   </motion.li>
                 ))}
               </motion.ul>
@@ -215,7 +207,13 @@ const Navbar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <Button variant="primary" size="sm" fullWidth>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  fullWidth
+                  isLink
+                  href="/auth/login"
+                >
                   Log In
                 </Button>
               </motion.div>
@@ -231,12 +229,12 @@ export default Navbar;
 
 interface NavLinkProps {
   href: string;
-  children: React.ReactNode;
+  text: string;
   onClick?: () => void;
   className?: string;
 }
 
-function NavLink({ href, children, onClick, className = "" }: NavLinkProps) {
+function NavLink({ href, text, onClick, className = "" }: NavLinkProps) {
   const pathname = usePathname();
   const isActive =
     (href === "/" && pathname === "/") ||
@@ -256,7 +254,9 @@ function NavLink({ href, children, onClick, className = "" }: NavLinkProps) {
         `}
         onClick={onClick}
       >
-        {children}
+        <Text className={`${isActive ? "font-semibold" : "font-normal"}`}>
+          {text}
+        </Text>
       </Link>
     </motion.div>
   );
