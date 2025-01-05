@@ -12,7 +12,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Button from "../custom-ui/button";
-import { Text } from "../custom-ui/text";
 
 const menuVariants = {
   closed: {
@@ -53,7 +52,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
           <PhoneIcon />
-          <Text>+1 (123) 456-7890</Text>
+          <p className="text-base">+1 (123) 456-7890</p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -254,9 +253,11 @@ function NavLink({ href, text, onClick, className = "" }: NavLinkProps) {
         `}
         onClick={onClick}
       >
-        <Text className={`${isActive ? "font-semibold" : "font-normal"}`}>
+        <p
+          className={`${isActive ? "font-semibold" : "font-normal"} text-base`}
+        >
           {text}
-        </Text>
+        </p>
       </Link>
     </motion.div>
   );

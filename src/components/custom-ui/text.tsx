@@ -13,7 +13,7 @@ export function Text({
   as: Component,
 }: TextProps) {
   const variants = {
-    h1: "text-[40px] md:text-[42px] lg:text-[44px] font-medium leading-tight",
+    h1: "text-[40px] md:text-[40px] lg:text-[42px] font-medium leading-tight",
     h2: "text-[28px] md:text-[30px] lg:text-[32px] font-medium leading-snug",
     h3: "text-[20px] md:text-[22px] lg:text-[24px] font-medium leading-normal",
     body: "text-[16px] md:text-[18px] lg:text-[18px] font-normal leading-relaxed",
