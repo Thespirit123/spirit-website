@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
@@ -40,6 +41,7 @@ export default function RootLayout({
       <body className={`${montserrat}`}>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
