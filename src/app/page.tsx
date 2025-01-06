@@ -1,8 +1,8 @@
 "use client";
-import { FAQSection } from "@/components/home/sections/faq";
-import { HeroSection } from "@/components/home/sections/hero";
-import { ServicesSection } from "@/components/home/sections/services";
-import { TestimonialsSection } from "@/components/home/testimonials";
+import { FAQSection } from "@/components/page-sections/home/faq";
+import { HeroSection } from "@/components/page-sections/home/hero";
+import { ServicesSection } from "@/components/page-sections/home/services";
+import { TestimonialsSection } from "@/components/page-sections/home/testimonials";
 
 export default function Home() {
   return (
