@@ -1,5 +1,4 @@
 "use client";
-import FacebookIcon from "@/assets/icons/facebook";
 import InstagramIcon from "@/assets/icons/instagram";
 import PhoneIcon from "@/assets/icons/phone";
 import TelegramIcon from "@/assets/icons/telegram";
@@ -13,14 +12,26 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Button from "../custom-ui/button";
 
+const SOCIAL_LINKS = {
+  WHATSAPP: `https://wa.me/2349035745258?text=${encodeURIComponent(
+    "Hi, I'd like to know more about your streaming service"
+  )}`,
+  TELEGRAM: "https://t.me/TheSpiritmedia",
+  INSTAGRAM: "https://www.instagram.com/theespiritmedia/",
+  TIKTOK: "https://www.tiktok.com/@theespiritmedia",
+  PHONE_NUMBER: "2349035745258",
+};
+
 const menuVariants = {
   closed: {
-    x: "100%",
-    transition: { type: "spring", stiffness: 300, damping: 30 },
+    y: -20,
+    opacity: 0,
+    transition: { duration: 0.2 },
   },
   open: {
-    x: 0,
-    transition: { type: "spring", stiffness: 300, damping: 30 },
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.2 },
   },
 };
 
@@ -47,20 +58,65 @@ const Navbar = () => {
     document.body.style.overflow = "unset";
   }, [pathname]);
 
+  const generateWhatsAppUrl = (phone: string, message: string) =>
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
   return (
     <nav className="w-11/12 bg-white mx-auto relative z-50 rounded-md mt-4 shadow-[0_0_7px_0_rgba(0,0,0,0.1)]">
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
           <PhoneIcon />
-          <p className="text-base">+234 903 574 5258</p>
+          <a
+            href={generateWhatsAppUrl(
+              SOCIAL_LINKS.PHONE_NUMBER,
+              "Hi, I'd like to know more about your streaming service"
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-base hover:text-brand-primary transition-colors cursor-pointer"
+            aria-label="Chat with us on WhatsApp"
+          >
+            +234 903 574 5258
+          </a>
         </div>
 
         <div className="flex items-center gap-2">
-          <WhatsappIcon />
-          <TelegramIcon />
-          <FacebookIcon />
-          <InstagramIcon />
-          <TikTokIcon />
+          <a
+            href={SOCIAL_LINKS.WHATSAPP}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with us on WhatsApp"
+            className="hover:opacity-80 transition-opacity"
+          >
+            <WhatsappIcon />
+          </a>
+          <a
+            href={SOCIAL_LINKS.TELEGRAM}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Join our Telegram channel"
+            className="hover:opacity-80 transition-opacity"
+          >
+            <TelegramIcon />
+          </a>
+          <a
+            href={SOCIAL_LINKS.INSTAGRAM}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow us on Instagram"
+            className="hover:opacity-80 transition-opacity"
+          >
+            <InstagramIcon />
+          </a>
+          <a
+            href={SOCIAL_LINKS.TIKTOK}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow us on TikTok"
+            className="hover:opacity-80 transition-opacity"
+          >
+            <TikTokIcon />
+          </a>
         </div>
       </div>
 
@@ -128,96 +184,74 @@ const Navbar = () => {
 
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="lg:hidden fixed inset-0 bg-white z-50"
-          >
-            <div className="flex flex-col h-full p-6">
-              <div className="flex justify-between items-center mb-8">
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+              onClick={toggleMenu}
+            />
+
+            {/* Dropdown Panel */}
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={menuVariants}
+              className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-md overflow-hidden z-50"
+            >
+              <div className="p-6">
+                <motion.ul
+                  className="flex flex-col gap-6"
+                  variants={{
+                    open: {
+                      transition: { staggerChildren: 0.1 },
+                    },
+                  }}
+                >
+                  {[
+                    { href: "/movie-portal", text: "Movie Portal" },
+                    { href: "/utility-payment", text: "Utility Payment" },
+                    {
+                      href: "/whatsapp-tool",
+                      text: "Whatsapp Monitoring Tool",
+                    },
+                    { href: "/feedback", text: "Feedback" },
+                  ].map((item, i) => (
+                    <motion.li
+                      key={item.href}
+                      custom={i}
+                      variants={menuItemVariants}
+                    >
+                      <NavLink
+                        href={item.href}
+                        text={item.text}
+                        onClick={toggleMenu}
+                      />
+                    </motion.li>
+                  ))}
+                </motion.ul>
+
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-6"
+                  variants={menuItemVariants}
+                  custom={4}
                 >
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                    <Image
-                      src={LogoImg}
-                      height={80}
-                      width={80}
-                      alt="Gather"
-                      className="object-cover"
-                    />
-                  </Link>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    fullWidth
+                    isLink
+                    href="/auth/login"
+                  >
+                    Log In
+                  </Button>
                 </motion.div>
-                <button
-                  onClick={toggleMenu}
-                  className="p-2"
-                  aria-label="Close menu"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
               </div>
-
-              <motion.ul
-                className="flex flex-col gap-6"
-                variants={{
-                  open: {
-                    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-                  },
-                }}
-              >
-                {[
-                  { href: "/movie-portal", text: "Movie Portal" },
-                  { href: "/utility-payment", text: "Utility Payment" },
-                  { href: "/whatsapp-tool", text: "Whatsapp Monitoring Tool" },
-                  { href: "/feedback", text: "Feedback" },
-                ].map((item, i) => (
-                  <motion.li
-                    key={item.href}
-                    custom={i}
-                    variants={menuItemVariants}
-                  >
-                    <NavLink
-                      href={item.href}
-                      text={item.text}
-                      onClick={toggleMenu}
-                    />
-                  </motion.li>
-                ))}
-              </motion.ul>
-
-              <motion.div
-                className="mt-auto"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <Button
-                  variant="primary"
-                  size="sm"
-                  fullWidth
-                  isLink
-                  href="/auth/login"
-                >
-                  Log In
-                </Button>
-              </motion.div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
