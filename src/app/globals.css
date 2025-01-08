@@ -31,3 +31,22 @@ body {
   color: #008ea8;
   opacity: 1;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cd-spin {
+  animation: spin 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cd-spin {
+    animation: none;
+  }
+}
