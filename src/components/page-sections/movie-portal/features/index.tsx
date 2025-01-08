@@ -35,36 +35,48 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="bg-[#ffffff] py-20 w-11/12 max-w-7xl mx-auto">
-      <div className="w-full max-w-7xl mx-auto flex gap-20">
-        <div className="w-[45%] mt-20">
-          <span className="text-brand-primary font-semibold">OUR FEATURES</span>
-          <Text variant="h2" className="font-semibold">
-            Elevate Your Viewing Experience with Next-Level Movie Streaming
-            Features
-          </Text>
-          <p className="font-light mt-4">
-            Elevate Your Viewing Experience with Next-Level Movie Streaming
-            Features. Elevate Your Viewing Experience with Next-Level Movie
-            Streaming Features
-          </p>
-          <Button
-            variant="primary"
-            className="mt-10 block"
-            onClick={() => console.log("Clicked")}
-          >
-            Get Instant Access
-          </Button>
-        </div>
-        <div className="grid grid-cols-2 gap-8 w-[55%]">
-          {features.map((feature) => (
-            <FeatureCard
-              key={feature.title}
-              image={feature.image}
-              title={feature.title}
-              subtitle={feature.subtitle}
-            />
-          ))}
+    <section className="bg-[#ffffff] py-10 sm:py-16 lg:py-20">
+      <div className="w-11/12 max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row lg:gap-20">
+          <div className="w-full lg:w-[45%] mb-10 lg:mb-0 lg:mt-20 text-center lg:text-left">
+            <span className="text-brand-primary font-semibold text-sm sm:text-base">
+              OUR FEATURES
+            </span>
+            <Text
+              variant="h2"
+              className="font-semibold text-2xl sm:text-3xl lg:text-4xl mt-4"
+            >
+              Elevate Your Viewing Experience with Next-Level Movie Streaming
+              Features
+            </Text>
+            <p className="font-light mt-4 text-gray-600 text-sm sm:text-base">
+              Discover a world of entertainment with our feature-rich streaming
+              platform. From crystal-clear 4K viewing to smart recommendations,
+              we&apos;ve crafted every detail to enhance your movie-watching
+              journey.
+            </p>
+            <div className="flex justify-center lg:justify-start">
+              <Button
+                variant="primary"
+                className="mt-8 lg:mt-10 w-full sm:w-auto"
+                onClick={() => console.log("Clicked")}
+              >
+                Get Instant Access
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 w-full lg:w-[55%]">
+            {features.map((feature, index) => (
+              <FeatureCard
+                key={feature.title}
+                image={feature.image}
+                title={feature.title}
+                subtitle={feature.subtitle}
+                loading={index > 1 ? "lazy" : undefined}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
