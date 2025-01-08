@@ -1,4 +1,3 @@
-import MoviesLogo from "@/assets/icons/movie-reel";
 import HeroBgImg from "@/assets/images/home-hero-bg.png";
 import HeroImg from "@/assets/images/movies-hero.png";
 import Button from "@/components/custom-ui/button";
@@ -31,11 +30,6 @@ const HeroSection = () => {
         </div>
 
         <div className="w-full lg:w-1/2 order-1 lg:order-2 text-center lg:text-left">
-          <p className="text-white font-medium text-xl md:text-2xl flex items-center justify-center lg:justify-start gap-2">
-            <MoviesLogo className="w-6 h-6 md:w-8 md:h-8" />
-            Netmirror App
-          </p>
-
           <Text
             variant="h1"
             className="text-white font-medium text-3xl md:text-4xl lg:text-5xl mt-4"

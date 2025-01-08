@@ -6,20 +6,20 @@ import Image from "next/image";
 const ReferSection = () => {
   return (
     <section className="flex bg-[#F8F8F8] items-center">
-      <div className="w-1/2">
+      <div className="hidden lg:block w-1/2">
         <Image src={ReferImg} alt="Refer and Stream" />
       </div>
-      <div className="w-1/2 text-right pr-16 flex flex-col gap-10 items-end">
+      <div className="w-full lg:w-1/2 p-10 text-center lg:text-right lg:pr-16 flex flex-col gap-6 lg:gap-10 items-center lg:items-end">
         <h3 className="text-4xl font-semibold">
           Earn While You Stream: Refer and Rewards
         </h3>
         <p className="text-lg font-light">
-          Elevate Your Viewing Experience with Next-Level Movie Streaming
-          Features. Elevate Your Viewing Experience with Next-Level Movie
-          Streaming Features
+          Share your love for entertainment and earn rewards. Invite friends to
+          use the app and unlock exclusive benefits with every successful
+          referral.
         </p>
         <div className="flex gap-4">
-          <div className="flex flex-col justify-between gap-4">
+          <div className="flex flex-col justify-between gap-2 lg:gap-4">
             <p className="text-xl font-medium">Get Unique Referral Code</p>
             <p className="text-xl font-medium">Share with Friends</p>
             <p className="text-xl font-medium">Earn Commissions</p>

@@ -52,7 +52,7 @@ const Navbar = () => {
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
           <PhoneIcon />
-          <p className="text-base">+1 (123) 456-7890</p>
+          <p className="text-base">+234 903 574 5258</p>
         </div>
 
         <div className="flex items-center gap-2">

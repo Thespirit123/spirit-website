@@ -7,7 +7,7 @@ import { VideoSlide } from "./videoSlide";
 const slides: Slide[] = [
   {
     appType: {
-      name: "Netmirror for Android",
+      name: "Stream Movies on Android",
       platform: "android",
     },
     price: "₦2,500 only",
@@ -21,7 +21,7 @@ const slides: Slide[] = [
   },
   {
     appType: {
-      name: "Netmirror for iOS",
+      name: "Stream Movies on iOS",
       platform: "ios",
     },
     price: "₦2,500 only",
@@ -35,7 +35,7 @@ const slides: Slide[] = [
   },
   {
     appType: {
-      name: "Netmirror Anime for Android",
+      name: "Anime Streaming for Android",
       platform: "android",
     },
     price: "₦2,000 only",
