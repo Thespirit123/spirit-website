@@ -3,13 +3,14 @@ import Download from "@/assets/icons/download";
 import Stream from "@/assets/icons/stream";
 import AndroidFrame from "@/assets/images/android-frame.png";
 import iOSFrame from "@/assets/images/iphone-frame.png";
+import { VimeoPlayer } from "@/components/cloud-assets/VimeoPlayer";
 import Button from "@/components/custom-ui/button";
 import { Platform } from "@/types";
 import Image from "next/image";
 import { memo } from "react";
 import { FaAndroid, FaApple } from "react-icons/fa";
 
-interface VideoSlideProps {
+interface Slide {
   appType: {
     name: string;
     platform: Platform;
@@ -17,6 +18,7 @@ interface VideoSlideProps {
   price: string;
   features: string[];
   videoSrc: string;
+  isLoading: boolean;
 }
 
 const PlatformIcon = ({ platform }: { platform: "ios" | "android" }) =>
@@ -27,60 +29,72 @@ const PlatformIcon = ({ platform }: { platform: "ios" | "android" }) =>
   );
 
 export const VideoSlide = memo(
-  ({ appType, price, features, videoSrc }: VideoSlideProps) => (
-    <div className="w-full min-h-[800px] flex items-center justify-between px-40">
-      <div className="w-1/2 pr-10 space-y-8">
-        <h3 className="text-4xl font-semibold text-white">
+  ({ appType, price, features, videoSrc }: Slide) => (
+    <div className="w-full min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-40 py-8 lg:py-0 gap-8 lg:gap-0">
+      <div className="w-full lg:w-1/2 lg:pr-10 space-y-6 lg:space-y-8">
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white text-center lg:text-left">
           Choose Your Perfect Entertainment App
         </h3>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 justify-center lg:justify-start">
           <PlatformIcon platform={appType.platform} />
-          <p className="text-2xl text-white">{appType.name}</p>
+          <p className="text-xl sm:text-2xl text-white">{appType.name}</p>
         </div>
 
-        <p className="text-3xl font-semibold text-brand-primary">{price}</p>
+        <p className="text-2xl sm:text-3xl font-semibold text-brand-primary text-center lg:text-left">
+          {price}
+        </p>
 
-        <ul className="space-y-4">
+        <ul className="space-y-3 lg:space-y-4">
           {features.map((feature, index) => (
             <li
               key={index}
-              className="flex items-center gap-3 text-white font-light"
+              className="flex items-center gap-3 text-white font-light justify-center lg:justify-start"
             >
               <Arrow />
-              <span>{feature}</span>
+              <span className="text-sm sm:text-base">{feature}</span>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 justify-center lg:justify-start">
           <div className="flex items-center gap-2 text-white">
             <Stream className="text-brand-primary" />
-            <span>Stream</span>
+            <span className="text-sm sm:text-base">Stream</span>
           </div>
 
           {appType.platform === "android" && (
             <div className="flex items-center gap-2 text-white">
               <Download className="text-brand-primary" />
-              <span>Download</span>
+              <span className="text-sm sm:text-base">Download</span>
             </div>
           )}
         </div>
 
-        <Button variant="primary" className="!mt-8">
-          Get Instant Access
-        </Button>
+        <div className="flex justify-center lg:justify-start w-full">
+          <Button variant="primary">Get Instant Access</Button>
+        </div>
       </div>
 
-      <div className="w-1/2 flex justify-end">
-        <div className="relative w-[320px] h-[650px]">
+      <div className="w-full sm:w-2/3 lg:w-1/2 flex justify-center lg:justify-end">
+        <div className="relative w-[280px] sm:w-[300px] lg:w-[320px] h-[570px] sm:h-[610px] lg:h-[650px]">
           <Image
             src={appType.platform === "android" ? AndroidFrame : iOSFrame}
             alt="Phone Frame"
             fill
-            className="object-contain"
+            className="object-contain z-10"
             priority
           />
+
+          <div
+            className={`absolute z-0 ${
+              appType.platform === "android"
+                ? "top-[2%] left-[4%] right-[4%] bottom-[2%] rounded-[30px]"
+                : "top-[4%] left-[5%] right-[5%] bottom-[4%] rounded-[40px]"
+            } overflow-hidden`}
+          >
+            <VimeoPlayer videoId={videoSrc} />
+          </div>
         </div>
       </div>
     </div>
