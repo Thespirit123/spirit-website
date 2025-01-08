@@ -6,74 +6,28 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-.slick-dots {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
-
-.slick-prev,
-.slick-next {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-
-.slick-prev:hover,
-.slick-next:hover {
-  background: white;
-}
-
-.slick-prev {
-  left: -20px;
-}
-
-.slick-next {
-  right: -20px;
-}
-
-.custom-slider {
-  padding-bottom: 60px;
-}
-
-.custom-slider .slick-dots {
-  bottom: 0;
-  width: auto;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.custom-slider-controls {
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 100px;
-}
-
-.custom-arrow {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.custom-arrow:hover {
-  transform: scale(1.1);
-}
-
 @layer base {
   :root {
     --radius: 0.5rem;
   }
+}
+
+.movie-portal-slider .slick-dots {
+  bottom: 40px;
+}
+
+.movie-portal-slider .slick-dots li {
+  margin: 0 6px;
+}
+
+.movie-portal-slider .slick-dots li button:before {
+  font-size: 12px;
+  color: white;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.movie-portal-slider .slick-dots li.slick-active button:before {
+  color: #008ea8;
+  opacity: 1;
 }

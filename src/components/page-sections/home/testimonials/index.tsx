@@ -7,6 +7,7 @@ import { Text } from "@/components/custom-ui/text";
 import ReviewCard from "@/components/review-card";
 import Image from "next/image";
 import Slider from "react-slick";
+import styles from "./testimonials.module.css";
 
 import { MouseEventHandler, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -48,13 +49,13 @@ const reviews = [
 
 export function TestimonialsSection() {
   const CustomPrevArrow = ({ onClick }: SlickArrowProps) => (
-    <div className="custom-arrow" onClick={onClick} aria-label="Previous slide">
+    <div className={styles.arrow} onClick={onClick} aria-label="Previous slide">
       <FaChevronLeft className="text-arrow-primary" />
     </div>
   );
 
   const CustomNextArrow = ({ onClick }: SlickArrowProps) => (
-    <div className="custom-arrow" onClick={onClick} aria-label="Next slide">
+    <div className={styles.arrow} onClick={onClick} aria-label="Next slide">
       <FaChevronRight className="text-arrow-primary" />
     </div>
   );
@@ -87,7 +88,7 @@ export function TestimonialsSection() {
       },
     ],
     appendDots: (dots: React.ReactNode) => (
-      <div className="custom-slider-controls">
+      <div className={styles.controls}>
         <CustomPrevArrow onClick={() => sliderRef.current?.slickPrev()} />
         {dots}
         <CustomNextArrow onClick={() => sliderRef.current?.slickNext()} />
@@ -111,7 +112,11 @@ export function TestimonialsSection() {
           <Image src={DotsImg} alt="Dots" width={200} height={200} />
         </div>
 
-        <Slider ref={sliderRef} {...sliderSettings} className="custom-slider">
+        <Slider
+          ref={sliderRef}
+          {...sliderSettings}
+          className={styles["testimonials-slider"]}
+        >
           {reviews.map((review, index) => (
             <ReviewCard
               key={index}
