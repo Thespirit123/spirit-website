@@ -1,5 +1,7 @@
+import { InProgress } from "@/components/in-progress";
+
 const SignUpPage = () => {
-  return <div>SignUpPage</div>;
+  return <InProgress />;
 };
 
 export default SignUpPage;

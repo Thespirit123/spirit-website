@@ -1,5 +1,7 @@
+import { InProgress } from "@/components/in-progress";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return <InProgress />;
 };
 
 export default LoginPage;

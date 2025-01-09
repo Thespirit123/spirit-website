@@ -1,5 +1,7 @@
+import { InProgress } from "@/components/in-progress";
+
 const WhatsappToolPage = () => {
-  return <div>WhatsappToolPage</div>;
+  return <InProgress />;
 };
 
 export default WhatsappToolPage;

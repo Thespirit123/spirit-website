@@ -8,7 +8,7 @@ const HeroSection = () => {
   return (
     <section className="min-h-[480px] h-[calc(100vh-120px)] flex">
       <Image src={HeroBgImg} alt="Hero Image" layout="fill" objectFit="cover" />
-      <div className="flex flex-col lg:flex-row w-11/12 max-w-7xl mx-auto z-10 relative items-center py-10 lg:py-0 gap-14 lg:gap-0">
+      <div className="flex flex-col lg:flex-row w-11/12 max-w-7xl mx-auto z-10 relative items-center py-10 lg:py-0 gap-14 lg:gap-10">
         <div className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px] mx-auto">
           <div className="absolute inset-0 rounded-full overflow-hidden cd-spin hover:pause-animation">
             <Image
@@ -29,7 +29,7 @@ const HeroSection = () => {
           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-white/5 to-transparent pointer-events-none" />
         </div>
 
-        <div className="w-full lg:w-1/2 order-1 lg:order-2 text-center lg:text-left">
+        <div className="w-full lg:w-1/2 order-1 lg:order-2 text-center lg:text-left lg:-mt-20">
           <Text
             variant="h1"
             className="text-white font-medium text-3xl md:text-4xl lg:text-5xl mt-4"

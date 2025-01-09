@@ -1,5 +1,7 @@
+import { InProgress } from "@/components/in-progress";
+
 const DashboardPage = () => {
-  return <div>DashboardPage</div>;
+  return <InProgress />;
 };
 
 export default DashboardPage;

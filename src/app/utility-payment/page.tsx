@@ -1,5 +1,7 @@
+import { InProgress } from "@/components/in-progress";
+
 const UtilitiesPage = () => {
-  return <div>UtilitiesPage</div>;
+  return <InProgress />;
 };
 
 export default UtilitiesPage;
