@@ -1,11 +1,7 @@
-import FacebookIcon from "@/assets/icons/facebook";
-import InstagramIcon from "@/assets/icons/instagram";
-import TelegramIcon from "@/assets/icons/telegram";
-import TikTokIcon from "@/assets/icons/tiktok";
-import WhatsappIcon from "@/assets/icons/whatsapp";
 import FooterImg from "@/assets/images/footer.png";
 import LogoImg from "@/assets/images/logo.png";
 import Image from "next/image";
+import { SocialLinks } from "./social-links";
 
 const footerLinks = {
   services: [
@@ -27,13 +23,7 @@ const Footer = () => {
             <p className="mb-6 max-w-sm font-light">
               Your plug for all things entertainment.
             </p>
-            <div className="flex items-center gap-2 mb-6">
-              <WhatsappIcon />
-              <TelegramIcon />
-              <FacebookIcon />
-              <InstagramIcon />
-              <TikTokIcon />
-            </div>
+            <SocialLinks className="mb-6" />
             <p className="mb-6 max-w-sm font-light">
               © 2025 Spirit HQ. All Rights Reserved
             </p>
@@ -57,7 +47,7 @@ const Footer = () => {
 
             <div>
               <ul className="space-y-3">
-                <li className="font-light">Email: support@spirithq.com</li>
+                <li className="font-light">Email: theespiritmedia@gmail.com</li>
                 <li className="font-light">Phone: +234 903 574 5258‬</li>
                 <li className="font-light">Support Hours: Mon-Fri, 9am-5pm</li>
               </ul>

@@ -1,9 +1,5 @@
 "use client";
-import InstagramIcon from "@/assets/icons/instagram";
 import PhoneIcon from "@/assets/icons/phone";
-import TelegramIcon from "@/assets/icons/telegram";
-import TikTokIcon from "@/assets/icons/tiktok";
-import WhatsappIcon from "@/assets/icons/whatsapp";
 import LogoImg from "@/assets/images/logo.png";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -11,12 +7,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import Button from "../custom-ui/button";
+import { SocialLinks } from "./social-links";
 
 const SOCIAL_LINKS = {
   WHATSAPP: `https://wa.me/2349035745258?text=${encodeURIComponent(
     "Hi, I'd like to know more about your streaming service"
   )}`,
-  TELEGRAM: "https://t.me/TheSpiritmedia",
+  TELEGRAM: "https://t.me/TheSpiritMediaEnt",
   INSTAGRAM: "https://www.instagram.com/theespiritmedia/",
   TIKTOK: "https://www.tiktok.com/@theespiritmedia",
   PHONE_NUMBER: "2349035745258",
@@ -80,44 +77,7 @@ const Navbar = () => {
           </a>
         </div>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={SOCIAL_LINKS.WHATSAPP}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat with us on WhatsApp"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <WhatsappIcon />
-          </a>
-          <a
-            href={SOCIAL_LINKS.TELEGRAM}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Join our Telegram channel"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <TelegramIcon />
-          </a>
-          <a
-            href={SOCIAL_LINKS.INSTAGRAM}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow us on Instagram"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <InstagramIcon />
-          </a>
-          <a
-            href={SOCIAL_LINKS.TIKTOK}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Follow us on TikTok"
-            className="hover:opacity-80 transition-opacity"
-          >
-            <TikTokIcon />
-          </a>
-        </div>
+        <SocialLinks />
       </div>
 
       <div className="border-b border-black/10" />
@@ -185,7 +145,6 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -194,7 +153,6 @@ const Navbar = () => {
               onClick={toggleMenu}
             />
 
-            {/* Dropdown Panel */}
             <motion.div
               initial="closed"
               animate="open"
