@@ -14,9 +14,9 @@ const ReferSection = () => {
           Earn While You Stream: Refer and Rewards
         </h3>
         <p className="text-lg font-light">
-          Share your love for entertainment and earn rewards. Invite friends to
-          use the app and unlock exclusive benefits with every successful
-          referral.
+          Earn a generous 10% commission on every successful referral! Join
+          thousands of satisfied users who are already earning passive income
+          while sharing their favorite streaming platform.
         </p>
         <div className="flex gap-4">
           <div className="flex flex-col justify-between gap-2 lg:gap-4">

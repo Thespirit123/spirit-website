@@ -7,7 +7,10 @@ export interface AppType {
 
 export interface Slide {
   appType: AppType;
-  price: string;
+  price: {
+    original: string;
+    discounted: string;
+  };
   features: string[];
   videoSrc: string;
 }

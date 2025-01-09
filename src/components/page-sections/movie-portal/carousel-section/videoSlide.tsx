@@ -15,7 +15,10 @@ interface Slide {
     name: string;
     platform: Platform;
   };
-  price: string;
+  price: {
+    original: string;
+    discounted: string;
+  };
   features: string[];
   videoSrc: string;
   isLoading: boolean;
@@ -41,9 +44,19 @@ export const VideoSlide = memo(
           <p className="text-xl sm:text-2xl text-white">{appType.name}</p>
         </div>
 
-        <p className="text-2xl sm:text-3xl font-semibold text-brand-primary text-center lg:text-left">
-          {price}
-        </p>
+        <div className="relative pt-2">
+          <div className="absolute -top-4 sm:-top-6 left-1/2 lg:left-0 transform -translate-x-1/2 lg:translate-x-0">
+            <span className="inline-block bg-brand-primary px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs text-white rounded-full whitespace-nowrap">
+              Limited Time Offer - 2 Weeks Only
+            </span>
+          </div>
+          <p className="text-2xl sm:text-3xl font-semibold text-center lg:text-left">
+            <span className="text-gray-400 line-through mr-3">
+              {price.original}
+            </span>
+            <span className="text-brand-primary">{price.discounted}</span>
+          </p>
+        </div>
 
         <ul className="space-y-3 lg:space-y-4">
           {features.map((feature, index) => (

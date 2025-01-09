@@ -10,7 +10,10 @@ const slides: Slide[] = [
       name: "Stream Movies on Android",
       platform: "android",
     },
-    price: "₦2,500 only",
+    price: {
+      original: "₦3,000",
+      discounted: "₦2,500",
+    },
     features: [
       "Unlimited HD streaming",
       "Download for offline viewing",
@@ -24,7 +27,10 @@ const slides: Slide[] = [
       name: "Stream Movies on iOS",
       platform: "ios",
     },
-    price: "₦2,500 only",
+    price: {
+      original: "₦3,500",
+      discounted: "₦2,500",
+    },
     features: [
       "Stream unlimited movies",
       "Crystal clear 4K quality",
@@ -38,7 +44,10 @@ const slides: Slide[] = [
       name: "Anime Streaming for Android",
       platform: "android",
     },
-    price: "₦2,000 only",
+    price: {
+      original: "₦2,500",
+      discounted: "₦2,000",
+    },
     features: [
       "Extensive anime library",
       "Download for offline viewing",
