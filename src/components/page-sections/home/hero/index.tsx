@@ -5,7 +5,11 @@ import Button from "@/components/custom-ui/button";
 import { useRealHeight } from "@/hooks/useRealHeight";
 import Image from "next/image";
 
-export const HeroSection = () => {
+interface HeroSectionProps {
+  onExplore: () => void;
+}
+
+export const HeroSection = ({ onExplore }: HeroSectionProps) => {
   const height = useRealHeight();
 
   return (
@@ -31,7 +35,7 @@ export const HeroSection = () => {
         <Button
           variant="primary"
           className="mt-6 mx-auto block"
-          onClick={() => console.log("Clicked")}
+          onClick={onExplore}
         >
           Explore Our Products
         </Button>
