@@ -1,8 +1,7 @@
-import Footer from "@/components/layout/footer";
-import Navbar from "@/components/layout/navbar";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import RootLayoutClient from "./layout-client";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -38,10 +37,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat}`}>
-        <Navbar />
-        {children}
-        <Footer />
+      <body className={montserrat.variable}>
+        <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );
