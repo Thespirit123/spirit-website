@@ -23,15 +23,8 @@ export default function RootLayoutClient({
     return () => clearTimeout(delay);
   }, []);
 
-  if (!mounted) {
-    return (
-      <>
-        <Navbar />
-        {children}
-        <Footer />
-      </>
-    );
-  }
+  // Hide everything until mounted
+  if (!mounted) return null;
 
   return (
     <>
@@ -41,7 +34,7 @@ export default function RootLayoutClient({
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-0 top-0 flex items-center justify-center bg-[#071920] z-10 min-h-screen"
+            className="fixed inset-0 top-0 flex items-center justify-center bg-[#071920] z-[100] min-h-screen"
           >
             <GridLoader
               color="#009BC4"
@@ -50,11 +43,15 @@ export default function RootLayoutClient({
             />
           </motion.div>
         ) : (
-          <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             <Navbar />
             {children}
             <Footer />
-          </>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
