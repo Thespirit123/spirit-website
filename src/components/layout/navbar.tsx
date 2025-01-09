@@ -82,7 +82,7 @@ const Navbar = () => {
 
       <div className="border-b border-black/10" />
 
-      <div className="flex items-center justify-between gap-8 w-full px-6 py-0">
+      <div className="flex items-center justify-between gap-8 w-full px-6 py-2">
         <Link href="/">
           <Image
             src={LogoImg}
