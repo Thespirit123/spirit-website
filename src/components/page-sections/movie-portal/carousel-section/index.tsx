@@ -77,6 +77,11 @@ const CarouselSection = () => {
     handleSlideChange(activeIndex === 0 ? slides.length - 1 : activeIndex - 1);
   }, [activeIndex]);
 
+  const handleVideoEnd = useCallback(() => {
+    const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
+    handleSlideChange(nextIndex);
+  }, [activeIndex, handleSlideChange]);
+
   useEffect(() => {
     setIsLoading(true);
   }, []);
@@ -85,7 +90,11 @@ const CarouselSection = () => {
     <section className="relative bg-brand-primary-dark-bg min-h-screen py-10 px-4 sm:px-6 lg:px-10">
       <AnimatePresence mode="wait">
         <motion.div key={activeIndex}>
-          <VideoSlide {...slides[activeIndex]} isLoading={isLoading} />
+          <VideoSlide
+            {...slides[activeIndex]}
+            isLoading={isLoading}
+            onVideoEnd={handleVideoEnd}
+          />
         </motion.div>
       </AnimatePresence>
 

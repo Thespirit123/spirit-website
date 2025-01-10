@@ -24,6 +24,10 @@ interface Slide {
   isLoading: boolean;
 }
 
+interface VideoSlideProps extends Slide {
+  onVideoEnd?: () => void;
+}
+
 const PlatformIcon = ({ platform }: { platform: "ios" | "android" }) =>
   platform === "ios" ? (
     <FaApple className="w-6 h-6 text-white" />
@@ -32,7 +36,7 @@ const PlatformIcon = ({ platform }: { platform: "ios" | "android" }) =>
   );
 
 export const VideoSlide = memo(
-  ({ appType, price, features, videoSrc }: Slide) => (
+  ({ appType, price, features, videoSrc, onVideoEnd }: VideoSlideProps) => (
     <div className="w-full min-h-[600px] sm:min-h-[700px] lg:min-h-[800px] flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-40 py-8 lg:py-0 gap-8 lg:gap-0">
       <div className="w-full lg:w-1/2 lg:pr-10 space-y-6 lg:space-y-8">
         <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white text-center lg:text-left">
@@ -106,7 +110,7 @@ export const VideoSlide = memo(
                 : "top-[4%] left-[5%] right-[5%] bottom-[4%] rounded-[40px]"
             } overflow-hidden`}
           >
-            <VimeoPlayer videoId={videoSrc} />
+            <VimeoPlayer videoId={videoSrc} onVideoEnd={onVideoEnd} />
           </div>
         </div>
       </div>

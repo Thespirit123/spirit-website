@@ -6,10 +6,11 @@ interface VimeoPlayerProps {
   videoId: string;
   className?: string;
   loop?: boolean;
+  onVideoEnd?: () => void;
 }
 
 export const VimeoPlayer = memo(
-  ({ videoId, className = "", loop = true }: VimeoPlayerProps) => {
+  ({ videoId, className = "", loop = false, onVideoEnd }: VimeoPlayerProps) => {
     return (
       <div className={`relative w-full h-full ${className}`}>
         <div className="absolute bg-black/90 flex items-center justify-center transition-opacity duration-300 inset-0">
@@ -23,6 +24,7 @@ export const VimeoPlayer = memo(
             autopause={false}
             background
             loop={loop}
+            onEnd={onVideoEnd}
           />
         </div>
       </div>

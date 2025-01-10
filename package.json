@@ -12,6 +12,7 @@
     "@cloudinary/react": "^1.13.1",
     "@cloudinary/url-gen": "^1.21.0",
     "@radix-ui/react-accordion": "^1.2.2",
+    "@radix-ui/react-tabs": "^1.1.2",
     "@types/vimeo__player": "^2.18.3",
     "@u-wave/react-vimeo": "^0.9.12",
     "@vimeo/player": "^2.25.0",
