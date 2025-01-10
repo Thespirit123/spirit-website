@@ -30,3 +30,21 @@ body {
     animation: none;
   }
 }
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 8px 2px rgba(0, 142, 168, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 12px 4px rgba(0, 142, 168, 0.4);
+    transform: scale(1.02);
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}

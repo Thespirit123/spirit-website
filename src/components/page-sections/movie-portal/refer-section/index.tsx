@@ -26,7 +26,7 @@ const ReferSection = () => {
           </div>
           <Image src={TimelineImg} alt="Timeline" />
         </div>
-        <Button variant="primary" className="w-max">
+        <Button variant="primary" className="w-max" glow>
           Get My Referral Link
         </Button>
       </div>

@@ -17,6 +17,7 @@ interface BaseProps {
   disabled?: boolean;
   className?: string;
   children?: React.ReactNode;
+  glow?: boolean; // New prop
 }
 
 type ButtonAsButtonProps = BaseProps &
@@ -46,6 +47,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       variant = "primary",
       size = "md",
       fullWidth = false,
+      glow = false, // Default to false
       ...rest
     } = props;
 
@@ -58,8 +60,10 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     };
 
     const variantStyles = {
-      primary:
+      primary: twMerge(
         "bg-[#008EA8] text-white hover:bg-[#007A91] focus:ring-[#008EA8]/50",
+        glow && "animate-glow"
+      ),
       secondary:
         "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-200/50",
       outline:
