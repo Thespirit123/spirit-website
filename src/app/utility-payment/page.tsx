@@ -1,7 +1,13 @@
-import { InProgress } from "@/components/in-progress";
+import { UtilityFAQSection } from "@/components/page-sections/utility/faq";
+import RechargeSection from "@/components/page-sections/utility/recharge";
 
 const UtilitiesPage = () => {
-  return <InProgress />;
+  return (
+    <>
+      <RechargeSection />
+      <UtilityFAQSection />
+    </>
+  );
 };
 
 export default UtilitiesPage;
