@@ -88,7 +88,7 @@ const Navbar = () => {
             src={LogoImg}
             height={100}
             width={100}
-            alt="Gather"
+            alt="The Spirit Media"
             className="object-cover"
           />
         </Link>

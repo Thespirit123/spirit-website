@@ -20,7 +20,12 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-12">
           {/* Logo Section */}
           <div className="flex-shrink-0 md:w-1/3 flex flex-col items-center md:items-start">
-            <Image src={LogoImg} alt="Spirit Media" width={120} height={40} />
+            <Image
+              src={LogoImg}
+              alt="The Spirit Media"
+              width={120}
+              height={40}
+            />
             <p className="mb-6 max-w-sm font-light text-sm sm:text-base text-center md:text-left">
               Your plug for all things entertainment.
             </p>

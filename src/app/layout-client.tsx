@@ -3,7 +3,8 @@
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLayoutEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useLayoutEffect, useMemo, useState } from "react";
 import { GridLoader } from "react-spinners";
 
 export default function RootLayoutClient({
@@ -13,6 +14,11 @@ export default function RootLayoutClient({
 }>) {
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
+
+  const isAuthPage = useMemo(() => {
+    return pathname?.startsWith("/auth");
+  }, [pathname]);
 
   useLayoutEffect(() => {
     setMounted(true);
@@ -48,9 +54,9 @@ export default function RootLayoutClient({
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
           >
-            <Navbar />
+            {!isAuthPage && <Navbar />}
             {children}
-            <Footer />
+            {!isAuthPage && <Footer />}
           </motion.div>
         )}
       </AnimatePresence>
