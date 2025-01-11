@@ -7,9 +7,12 @@ import { FormField } from "@/components/custom-ui/form-field";
 import { Text } from "@/components/custom-ui/text";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FiArrowLeft } from "react-icons/fi";
 
 const LoginPage = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     userName: "",
     password: "",
@@ -34,16 +37,27 @@ const LoginPage = () => {
         />
       </div>
 
-      <div className="w-full lg:w-[55%] px-0 sm:px-4 lg:px-10">
+      <div className="w-full lg:w-[55%] px-0 sm:px-4 lg:px-10 overflow-y-auto">
         <section className="max-w-2xl mx-auto">
-          <div className="flex flex-col items-center mb-8">
-            <Image
-              src={SpiritLogo}
-              alt="Spirit Logo"
-              width={120}
-              height={40}
-              className="mb-6"
-            />
+          <div className="flex flex-col mb-8 w-full">
+            <div className="flex items-center w-full">
+              <button
+                onClick={() => router.back()}
+                className="inline-flex items-center gap-2 text-gray-600 hover:text-brand-primary transition-colors"
+                type="button"
+              >
+                <FiArrowLeft className="w-5 h-5" />
+                <span className="text-sm font-medium">Back</span>
+              </button>
+              <div className="flex-1 flex justify-center">
+                <Image
+                  src={SpiritLogo}
+                  alt="Spirit Logo"
+                  width={120}
+                  height={40}
+                />
+              </div>
+            </div>
             <div className="self-start text-left mt-16">
               <Text
                 variant="h1"
