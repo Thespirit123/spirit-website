@@ -10,6 +10,8 @@ const footerLinks = {
     { label: "Utility Payment", href: "/utility-payment" },
     { label: "WhatsApp Monitoring Tool", href: "/whatsapp-tool" },
     { label: "Affiliate Hub", href: "/affiliate-hub" },
+    { label: "Feedback", href: "/feedback" },
+    { label: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
 };
 
