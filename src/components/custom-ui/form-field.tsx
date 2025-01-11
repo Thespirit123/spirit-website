@@ -31,7 +31,8 @@ interface FormFieldProps
     | "select"
     | "textarea"
     | "radio"
-    | "star-rating";
+    | "star-rating"
+    | "date";
   options?: Option[];
   onValueChange?: (value: string) => void;
   required?: boolean;

@@ -6,6 +6,7 @@ import Button from "@/components/custom-ui/button";
 import { FormField } from "@/components/custom-ui/form-field";
 import { Text } from "@/components/custom-ui/text";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -109,6 +110,18 @@ const LoginPage = () => {
             <Button type="submit" className="w-full">
               Login
             </Button>
+
+            <div className="text-center mt-10">
+              <span className="text-gray-600 text-sm">
+                Don&apos;t have an Account?{" "}
+                <Link
+                  href="/auth/sign-up"
+                  className="text-black hover:text-brand-primary/80 font-semibold"
+                >
+                  Sign Up
+                </Link>
+              </span>
+            </div>
           </form>
         </section>
       </div>
