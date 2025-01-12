@@ -2,6 +2,7 @@
 
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
+import { AuthProvider } from "@/context/auth";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useMemo, useState } from "react";
@@ -29,7 +30,6 @@ export default function RootLayoutClient({
     return () => clearTimeout(delay);
   }, []);
 
-  // Hide everything until mounted
   if (!mounted) return null;
 
   return (
@@ -49,15 +49,17 @@ export default function RootLayoutClient({
             />
           </motion.div>
         ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {!isAuthPage && <Navbar />}
-            {children}
-            {!isAuthPage && <Footer />}
-          </motion.div>
+          <AuthProvider>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              {!isAuthPage && <Navbar />}
+              {children}
+              {!isAuthPage && <Footer />}
+            </motion.div>
+          </AuthProvider>
         )}
       </AnimatePresence>
     </>

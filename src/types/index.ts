@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 export type Platform = "ios" | "android";
 
 export interface AppType {
@@ -13,4 +15,16 @@ export interface Slide {
   };
   features: string[];
   videoSrc: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  loading: boolean;
+  error: Error | null;
+}
+
+export interface AuthContextType extends AuthState {
+  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
