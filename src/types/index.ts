@@ -17,6 +17,15 @@ export interface Slide {
   videoSrc: string;
 }
 
+export interface UserData {
+  uid: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+}
+
 export interface AuthState {
   user: User | null;
   loading: boolean;
@@ -24,7 +33,9 @@ export interface AuthState {
 }
 
 export interface AuthContextType extends AuthState {
-  signUp: (email: string, password: string) => Promise<void>;
-  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (
+    userData: Omit<UserData, "uid"> & { password: string }
+  ) => Promise<void>;
+  signIn: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }

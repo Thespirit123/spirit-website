@@ -11,12 +11,18 @@ export function withAuth<P extends object>(
 
     useEffect(() => {
       if (!loading && !user) {
-        router.push("/auth/login");
+        console.log("No user found, redirecting to login");
+        router.replace("/auth/login");
       }
     }, [user, loading, router]);
 
-    if (loading) return null;
-    if (!user) return null;
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+
+    if (!user) {
+      return null;
+    }
 
     return <WrappedComponent {...props} />;
   };

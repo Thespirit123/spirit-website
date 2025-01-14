@@ -5,6 +5,7 @@ import SpiritLogo from "@/assets/images/logo.png";
 import Button from "@/components/custom-ui/button";
 import { FormField } from "@/components/custom-ui/form-field";
 import { Text } from "@/components/custom-ui/text";
+import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,15 +14,37 @@ import { FiArrowLeft } from "react-icons/fi";
 
 const LoginPage = () => {
   const router = useRouter();
+  const { signIn } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    userName: "",
+    email: "",
     password: "",
     remember: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      await signIn(formData.email, formData.password);
+
+      // Handle remember me
+      if (formData.remember) {
+        localStorage.setItem("rememberEmail", formData.email);
+      } else {
+        localStorage.removeItem("rememberEmail");
+      }
+
+      // Use replace instead of push to prevent back navigation to login
+      router.replace("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Login failed");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -73,12 +96,12 @@ const LoginPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <FormField
-              label="Username"
-              type="text"
+              label="Email Address"
+              type="email"
               required
-              value={formData.userName}
+              value={formData.email}
               onChange={(e) =>
-                setFormData((prev) => ({ ...prev, userName: e.target.value }))
+                setFormData((prev) => ({ ...prev, email: e.target.value }))
               }
             />
 
@@ -121,8 +144,12 @@ const LoginPage = () => {
               </a>
             </div>
 
-            <Button type="submit" className="w-full">
-              Login
+            {error && (
+              <div className="text-red-500 text-sm text-center">{error}</div>
+            )}
+
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Login"}
             </Button>
 
             <div className="text-center mt-10">

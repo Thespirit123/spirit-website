@@ -1,11 +1,20 @@
-import { auth } from "@/lib/firebase";
-import { AuthContextType, AuthState } from "@/types";
+import { auth, db } from "@/lib/firebase";
+import { AuthContextType, AuthState, UserData } from "@/types";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<AuthContextType | null>(null);
@@ -28,9 +37,38 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, []);
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (
+    userData: Omit<UserData, "uid"> & { password: string }
+  ) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      // Check if username exists
+      const usernameQuery = query(
+        collection(db, "users"),
+        where("username", "==", userData.username)
+      );
+      const usernameSnapshot = await getDocs(usernameQuery);
+
+      if (!usernameSnapshot.empty) {
+        throw new Error("Username already taken");
+      }
+
+      // Create auth account
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        userData.email,
+        userData.password
+      );
+
+      // Store user data
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        uid: userCredential.user.uid,
+        email: userData.email,
+        username: userData.username,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        dateOfBirth: userData.dateOfBirth,
+        createdAt: serverTimestamp(),
+      });
     } catch (error) {
       setState((prev) => ({ ...prev, error: error as Error }));
       throw error;

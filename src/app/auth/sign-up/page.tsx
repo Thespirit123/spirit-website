@@ -5,27 +5,73 @@ import SpiritLogo from "@/assets/images/logo.png";
 import Button from "@/components/custom-ui/button";
 import { FormField } from "@/components/custom-ui/form-field";
 import { Text } from "@/components/custom-ui/text";
+import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { FiArrowLeft } from "react-icons/fi";
+
+interface SignUpFormData {
+  firstName: string;
+  lastName: string;
+  userName: string;
+  email: string;
+  dateOfBirth: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const SignUpPage = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    userName: "",
-    email: "",
-    dateOfBirth: "",
-    password: "",
-    confirmPassword: "",
+  const { signUp } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<SignUpFormData>({
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      userName: "",
+      email: "",
+      dateOfBirth: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
+  const onSubmit = async (data: SignUpFormData) => {
+    console.log("data", data);
+    if (data.password !== data.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      setError(null);
+      setIsLoading(true);
+
+      await signUp({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        username: data.userName.toLowerCase(),
+        email: data.email,
+        dateOfBirth: data.dateOfBirth,
+        password: data.password,
+      });
+
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Sign up failed");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -73,89 +119,107 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <FormField
                 label="First Name"
                 type="text"
-                required
-                value={formData.firstName}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    firstName: e.target.value,
-                  }))
-                }
+                error={errors.firstName?.message}
+                {...register("firstName", {
+                  required: "First name is required",
+                  minLength: {
+                    value: 2,
+                    message: "First name must be at least 2 characters",
+                  },
+                })}
               />
               <FormField
                 label="Last Name"
                 type="text"
-                required
-                value={formData.lastName}
-                onChange={(e) =>
-                  setFormData((prev) => ({ ...prev, lastName: e.target.value }))
-                }
+                error={errors.lastName?.message}
+                {...register("lastName", {
+                  required: "Last name is required",
+                  minLength: {
+                    value: 2,
+                    message: "Last name must be at least 2 characters",
+                  },
+                })}
               />
             </div>
 
             <FormField
               label="Username"
               type="text"
-              required
-              value={formData.userName}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, userName: e.target.value }))
-              }
+              error={errors.userName?.message}
+              {...register("userName", {
+                required: "Username is required",
+                minLength: {
+                  value: 3,
+                  message: "Username must be at least 3 characters",
+                },
+                pattern: {
+                  value: /^[a-zA-Z0-9_]+$/,
+                  message:
+                    "Username can only contain letters, numbers and underscore",
+                },
+              })}
             />
 
             <FormField
               label="Email Address"
               type="email"
-              required
-              value={formData.email}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, email: e.target.value }))
-              }
+              error={errors.email?.message}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              })}
             />
 
             <FormField
               label="Date of Birth"
               type="date"
-              required
-              value={formData.dateOfBirth}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  dateOfBirth: e.target.value,
-                }))
-              }
+              error={errors.dateOfBirth?.message}
+              {...register("dateOfBirth", {
+                required: "Date of birth is required",
+              })}
             />
 
             <FormField
               label="Password"
               type="password"
-              required
-              value={formData.password}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, password: e.target.value }))
-              }
+              error={errors.password?.message}
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+              })}
             />
 
             <FormField
               label="Confirm Password"
               type="password"
-              required
-              value={formData.confirmPassword}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  confirmPassword: e.target.value,
-                }))
-              }
+              error={errors.confirmPassword?.message}
+              {...register("confirmPassword", {
+                required: "Please confirm your password",
+                validate: (val: string) => {
+                  if (watch("password") !== val) {
+                    return "Passwords do not match";
+                  }
+                },
+              })}
             />
 
-            <Button type="submit" className="w-full">
-              Create Account
+            {error && (
+              <div className="text-red-500 text-sm text-center">{error}</div>
+            )}
+
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
 
             <div className="text-center mt-10">

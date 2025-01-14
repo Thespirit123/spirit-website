@@ -1,6 +1,14 @@
 "use client";
 import PhoneIcon from "@/assets/icons/phone";
 import LogoImg from "@/assets/images/logo.png";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/hooks/useAuth";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +50,7 @@ const menuItemVariants = {
 };
 
 const Navbar = () => {
+  const { user, logout, profile, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -57,6 +66,43 @@ const Navbar = () => {
 
   const generateWhatsAppUrl = (phone: string, message: string) =>
     `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+  const handleLogout = useCallback(async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }, [logout]);
+
+  if (loading)
+    return <div className="w-8 h-8 rounded-full animate-pulse bg-gray-200" />;
+
+  const UserMenuContent = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="flex items-center gap-2 hover:text-brand-primary transition-colors">
+          <div className="w-8 h-8 rounded-full bg-brand-primary text-white flex items-center justify-center">
+            {profile?.firstName?.[0]?.toUpperCase() ||
+              user?.email?.[0].toUpperCase()}
+          </div>
+          <span className="hidden lg:block text-sm">
+            {" "}
+            {profile?.username || user?.email}
+          </span>
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuItem asChild>
+          <Link href="/dashboard">Dashboard</Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleLogout} className="text-red-600">
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 
   return (
     <nav className="w-11/12 bg-white mx-auto relative z-50 rounded-md mt-4 shadow-[0_0_7px_0_rgba(0,0,0,0.1)]">
@@ -109,10 +155,15 @@ const Navbar = () => {
           </li>
         </ul>
 
+        {/* Desktop Auth Button/Menu */}
         <div className="hidden lg:block">
-          <Button variant="primary" size="sm" isLink href="/auth/login">
-            Log In
-          </Button>
+          {user ? (
+            <UserMenuContent />
+          ) : (
+            <Button variant="primary" size="sm" isLink href="/auth/login">
+              Log In
+            </Button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -197,15 +248,33 @@ const Navbar = () => {
                   variants={menuItemVariants}
                   custom={4}
                 >
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    fullWidth
-                    isLink
-                    href="/auth/login"
-                  >
-                    Log In
-                  </Button>
+                  {user ? (
+                    <div className="space-y-2">
+                      <Link href="/dashboard">
+                        <Button variant="outline" size="sm" fullWidth>
+                          Dashboard
+                        </Button>
+                      </Link>
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        fullWidth
+                        onClick={handleLogout}
+                      >
+                        Logout
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      variant="primary"
+                      size="sm"
+                      fullWidth
+                      isLink
+                      href="/auth/login"
+                    >
+                      Log In
+                    </Button>
+                  )}
                 </motion.div>
               </div>
             </motion.div>
