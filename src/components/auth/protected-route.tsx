@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Loading } from "../loading";
 
 export function withAuth<P extends object>(
   WrappedComponent: React.ComponentType<P>
@@ -17,7 +18,7 @@ export function withAuth<P extends object>(
     }, [user, loading, router]);
 
     if (loading) {
-      return <div>Loading...</div>;
+      return <Loading fullScreen text="Checking authentication..." />;
     }
 
     if (!user) {

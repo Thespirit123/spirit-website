@@ -88,12 +88,11 @@ const Navbar = () => {
               user?.email?.[0].toUpperCase()}
           </div>
           <span className="hidden lg:block text-sm">
-            {" "}
             {profile?.username || user?.email}
           </span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className="w-56 z-[100]">
         <DropdownMenuItem asChild>
           <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
@@ -109,7 +108,7 @@ const Navbar = () => {
     <nav
       className={`${
         isDashboard ? "w-full mt-0" : "w-11/12 mt-4"
-      } bg-white mx-auto relative z-50 rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`}
+      } bg-white mx-auto relative z-[60] rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`}
     >
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
