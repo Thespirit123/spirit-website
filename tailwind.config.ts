@@ -15,6 +15,7 @@ export default {
           "primary-dark": "#133240",
           "primary-light": "#D5F9FF4D",
           "primary-dark-bg": "#061D23",
+          "dashboard-bg": "#F0FAFC",
         },
         arrow: {
           primary: "#5B5B5B",

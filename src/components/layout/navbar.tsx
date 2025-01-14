@@ -53,6 +53,7 @@ const Navbar = () => {
   const { user, logout, profile, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const isDashboard = pathname?.startsWith("/dashboard");
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(!isMenuOpen);
@@ -105,7 +106,11 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="w-11/12 bg-white mx-auto relative z-50 rounded-md mt-4 shadow-[0_0_7px_0_rgba(0,0,0,0.1)]">
+    <nav
+      className={`${
+        isDashboard ? "w-full mt-0" : "w-11/12 mt-4"
+      } bg-white mx-auto relative z-50 rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`}
+    >
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
           <PhoneIcon />

@@ -39,3 +39,18 @@ export interface AuthContextType extends AuthState {
   signIn: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 }
+
+export enum TransactionStatus {
+  COMPLETED = "Completed",
+  PROCESSING = "Processing",
+  REJECTED = "Rejected",
+}
+
+export interface Transaction {
+  id: string;
+  name: string;
+  amount: string;
+  date: string;
+  service: "Airtime" | "Spy App" | "Movies App";
+  status: TransactionStatus;
+}
