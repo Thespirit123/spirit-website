@@ -22,28 +22,28 @@ interface SlickArrowProps {
 
 const reviews = [
   {
-    name: "John Doe",
+    name: "Oluwaseun Adebayo",
     image: UserOneImg,
     rating: 5,
-    text: "Amazing service! The movie portal has transformed how I watch content.",
+    text: "The movie portal is superb! I can finally watch all my favorite Nollywood and Hollywood movies without stress.",
   },
   {
-    name: "Jane Doe",
+    name: "Chidinma Okonkwo",
     image: UserTwoImg,
     rating: 4.5,
-    text: "The utility payment service is a lifesaver. I can recharge my phone in seconds.",
+    text: "Quick airtime top-up, no wahala! DSTV subscription payment is also very smooth.",
   },
   {
-    name: "Alice Doe",
+    name: "Abdullahi Ibrahim",
     image: UserThreeImg,
     rating: 4,
-    text: "The WhatsApp monitoring tool is a game-changer. I can track my messages with ease.",
+    text: "This WhatsApp tool is exactly what I needed for my business. Customer support responded very fast too.",
   },
   {
-    name: "Bob Doe",
+    name: "Bukola Adeleke",
     image: UserFourImg,
     rating: 5,
-    text: "The customer service is top-notch. I highly recommend their services.",
+    text: "Transactions are safe and reliable. I've been using their services for 6 months now, no issues at all!",
   },
 ];
 
