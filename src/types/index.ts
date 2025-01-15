@@ -24,6 +24,7 @@ export interface UserData {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
+  phone: string;
 }
 
 export interface AuthState {
@@ -32,12 +33,15 @@ export interface AuthState {
   error: Error | null;
 }
 
-export interface AuthContextType extends AuthState {
-  signUp: (
-    userData: Omit<UserData, "uid"> & { password: string }
-  ) => Promise<void>;
-  signIn: (username: string, password: string) => Promise<void>;
+export interface AuthContextType {
+  user: User | null;
+  loading: boolean;
+  error: Error | null;
+  signUp: (userData: SignUpFormData) => Promise<User>;
+  signIn: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  isSigningUp: boolean;
+  signUpError: Error | null;
 }
 
 export enum TransactionStatus {
@@ -53,4 +57,23 @@ export interface Transaction {
   date: string;
   service: "Airtime" | "Spy App" | "Movies App";
   status: TransactionStatus;
+}
+
+export interface SignUpFormData {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  phone: string;
+  dateOfBirth: string;
+}
+
+export interface APIResponse {
+  status: boolean;
+  message: string;
+  data?: {
+    id: number;
+    token: string;
+  };
 }

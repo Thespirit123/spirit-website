@@ -19,6 +19,7 @@ interface SignUpFormData {
   userName: string;
   email: string;
   dateOfBirth: string;
+  phone: string;
   password: string;
   confirmPassword: string;
 }
@@ -29,45 +30,58 @@ const SignUpPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const defaultValues: SignUpFormData = {
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    dateOfBirth: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
   } = useForm<SignUpFormData>({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      userName: "",
-      email: "",
-      dateOfBirth: "",
-      password: "",
-      confirmPassword: "",
-    },
+    defaultValues,
   });
 
   const onSubmit = async (data: SignUpFormData) => {
-    console.log("data", data);
+    console.log("📝 Form Data:", {
+      ...data,
+      password: "***",
+      confirmPassword: "***",
+    });
+
     if (data.password !== data.confirmPassword) {
+      console.log("❌ Password mismatch");
       setError("Passwords do not match");
       return;
     }
 
     try {
+      console.log("🚀 Starting signup...");
       setError(null);
       setIsLoading(true);
 
       await signUp({
         firstName: data.firstName,
         lastName: data.lastName,
-        username: data.userName.toLowerCase(),
+        userName: data.userName.toLowerCase(),
         email: data.email,
         dateOfBirth: data.dateOfBirth,
+        phone: data.phone,
         password: data.password,
       });
 
+      console.log("✅ Signup successful");
       router.push("/dashboard");
     } catch (err) {
+      console.error("❌ Signup error:", err);
       setError(err instanceof Error ? err.message : "Sign up failed");
     } finally {
       setIsLoading(false);
@@ -174,6 +188,25 @@ const SignUpPage = () => {
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "Invalid email address",
+                },
+              })}
+            />
+
+            <FormField
+              label="Phone Number"
+              type="tel"
+              placeholder="+234 XXX XXX XXXX"
+              error={errors.phone?.message}
+              {...register("phone", {
+                required: "Phone number is required",
+                pattern: {
+                  value: /^\+?234[789][01]\d{8}$/,
+                  message: "Please enter a valid Nigerian phone number",
+                },
+                validate: (value) => {
+                  if (!value.startsWith("+234") && !value.startsWith("234")) {
+                    return "Phone number must start with +234";
+                  }
                 },
               })}
             />
