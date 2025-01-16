@@ -247,30 +247,6 @@ export const PaymentModal = ({
       logo: "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/Logo%202%20(Black%20bg)-oa6kh1QmsSpldy6txxtPw20bMPjGHw.jpg",
     },
     text: "Pay Now",
-    callback: (response: FlutterWaveResponse) => {
-      if (response.status === "completed" && selectedPlanDetails) {
-        setPaymentStatus("success");
-        onPaymentSuccess(response, selectedPlanDetails);
-        closePaymentModal();
-        handleClose();
-      } else {
-        setPaymentStatus("failed");
-        onPaymentError({
-          code: "PAYMENT_FAILED",
-          message: "Payment was not successful",
-        });
-      }
-    },
-    onClose: () => {
-      if (paymentStatus !== "success") {
-        onPaymentError({
-          code: "PAYMENT_INCOMPLETE",
-          message: "Payment was not completed",
-        });
-      }
-      closePaymentModal();
-      handleClose();
-    },
   };
 
   const fwConfig = {
