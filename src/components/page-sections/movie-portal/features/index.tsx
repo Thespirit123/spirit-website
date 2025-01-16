@@ -4,6 +4,7 @@ import Feature3 from "@/assets/icons/feature3.svg";
 import Feature4 from "@/assets/icons/feature4.svg";
 import Button from "@/components/custom-ui/button";
 import { Text } from "@/components/custom-ui/text";
+import { usePayment } from "@/context/payment";
 import { FeatureCard } from "./featureCard";
 
 const features = [
@@ -34,6 +35,8 @@ const features = [
 ];
 
 const FeaturesSection = () => {
+  const { handleOpenPayment } = usePayment();
+
   return (
     <section className="bg-[#ffffff] py-10 sm:py-16 lg:py-20">
       <div className="w-11/12 max-w-7xl mx-auto">
@@ -58,8 +61,8 @@ const FeaturesSection = () => {
             <div className="flex justify-center lg:justify-start">
               <Button
                 variant="primary"
-                className="mt-8 lg:mt-10 w-full sm:w-auto"
-                onClick={() => console.log("Clicked")}
+                className="mt-6 xl:mt-10 mx-auto xl:mx-0"
+                onClick={() => handleOpenPayment("")}
               >
                 Get Instant Access
               </Button>

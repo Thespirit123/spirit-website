@@ -92,7 +92,7 @@ const Navbar = () => {
           </span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 z-[100]">
+      <DropdownMenuContent align="end" className="w-56 z-5">
         <DropdownMenuItem asChild>
           <Link href="/dashboard">Dashboard</Link>
         </DropdownMenuItem>
@@ -108,7 +108,7 @@ const Navbar = () => {
     <nav
       className={`${
         isDashboard ? "w-full mt-0" : "w-11/12 mt-4"
-      } bg-white mx-auto relative z-[60] rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`}
+      } bg-white mx-auto relative z-10 rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`}
     >
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
@@ -204,7 +204,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+              className="fixed inset-0 bg-black/20 z-2 lg:hidden"
               onClick={toggleMenu}
             />
 
@@ -213,7 +213,7 @@ const Navbar = () => {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-md overflow-hidden z-50"
+              className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-md overflow-hidden z-3"
             >
               <div className="p-6">
                 <motion.ul

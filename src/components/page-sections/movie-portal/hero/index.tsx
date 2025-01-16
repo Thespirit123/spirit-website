@@ -2,9 +2,12 @@ import HeroBgImg from "@/assets/images/home-hero-bg.png";
 import HeroImg from "@/assets/images/movies-hero.png";
 import Button from "@/components/custom-ui/button";
 import { Text } from "@/components/custom-ui/text";
+import { usePayment } from "@/context/payment";
 import Image from "next/image";
 
 const HeroSection = () => {
+  const { handleOpenPayment } = usePayment();
+
   return (
     <section className="min-h-screen -mt-[120px] relative flex">
       <Image
@@ -15,8 +18,8 @@ const HeroSection = () => {
         className="absolute inset-0 z-0"
         priority
       />
-      <div className="absolute inset-0 bg-black/50 z-10" />
-      <div className="relative z-20 w-11/12 max-w-7xl mx-auto flex flex-col xl:flex-row items-center justify-center min-h-screen pt-[140px] pb-10">
+      <div className="absolute inset-0 bg-black/50 z-1" />
+      <div className="relative z-2 w-11/12 max-w-7xl mx-auto flex flex-col xl:flex-row items-center justify-center min-h-screen pt-[140px] pb-10">
         <div className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px] mx-auto">
           <div className="absolute inset-0 rounded-full overflow-hidden cd-spin hover:pause-animation">
             <Image
@@ -52,7 +55,7 @@ const HeroSection = () => {
           <Button
             variant="primary"
             className="mt-6 xl:mt-10 mx-auto xl:mx-0"
-            onClick={() => console.log("Clicked")}
+            onClick={() => handleOpenPayment("")}
           >
             Get Instant Access
           </Button>

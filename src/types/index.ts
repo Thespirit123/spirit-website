@@ -1,4 +1,5 @@
 import { User } from "firebase/auth";
+import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 
 export type Platform = "ios" | "android";
 
@@ -76,4 +77,70 @@ export interface APIResponse {
     id: number;
     token: string;
   };
+}
+
+export interface PaymentPlan {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  duration: string;
+  platform: Platform;
+  features: string[];
+}
+
+export interface PaymentResponse {
+  transaction_id: string;
+  tx_ref: string;
+  customer: {
+    email: string;
+    phone_number: string;
+    name: string;
+  };
+  amount: number;
+  status: string;
+}
+
+export interface PaymentError {
+  code: string;
+  message: string;
+  details?: Record<string, unknown>;
+}
+
+export interface PaymentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  productType: "movie-portal" | "whatsapp-tool";
+  onPaymentSuccess: (
+    response: FlutterWaveResponse,
+    planDetails: PaymentPlan
+  ) => void;
+  onPaymentError: (error: PaymentError) => void;
+  initialPlan?: string;
+}
+
+export interface FlutterwaveCustomer {
+  email: string;
+  phone_number: string;
+  name: string;
+}
+
+export interface FlutterwaveCustomizations {
+  title: string;
+  description: string;
+  logo: string;
+}
+
+export interface FlutterwaveConfig {
+  public_key: string;
+  tx_ref: string;
+  amount: number;
+  currency: string;
+  payment_options: string;
+  customer: FlutterwaveCustomer;
+  customizations: FlutterwaveCustomizations;
+  text: string;
+  callback: (response: FlutterWaveResponse) => void;
+  onClose: () => void;
+  disabled?: boolean;
 }

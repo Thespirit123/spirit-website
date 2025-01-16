@@ -17,7 +17,7 @@ export const VimeoPlayer = memo(
           <ImSpinner8 className="w-6 h-6 sm:w-8 sm:h-8 text-white animate-spin" />
         </div>
 
-        <div className="relative z-10">
+        <div className="relative">
           <Vimeo
             video={videoId}
             responsive

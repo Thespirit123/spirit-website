@@ -8,7 +8,6 @@ import {
 } from "react";
 import { twMerge } from "tailwind-merge";
 
-// Keep only the types we need
 interface BaseProps {
   isLoading?: boolean;
   variant?: "primary" | "secondary" | "outline";
@@ -17,29 +16,18 @@ interface BaseProps {
   disabled?: boolean;
   className?: string;
   children?: React.ReactNode;
-  glow?: boolean; // New prop
+  glow?: boolean;
+  asLink?: boolean;
+  href?: string;
 }
 
-type ButtonAsButtonProps = BaseProps &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> & {
-    isLink?: false;
-  };
-
-type ButtonAsLinkProps = BaseProps &
-  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps> & {
-    isLink: true;
-    href: string;
-  };
-
-type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
-
-const isLinkProps = (props: ButtonProps): props is ButtonAsLinkProps => {
-  return "isLink" in props && props.isLink === true;
-};
+type ButtonProps = BaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof BaseProps> &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof BaseProps>;
 
 const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-  (props, ref) => {
-    const {
+  (
+    {
       children,
       className,
       disabled = false,
@@ -47,10 +35,13 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       variant = "primary",
       size = "md",
       fullWidth = false,
-      glow = false, // Default to false
+      glow = false,
+      asLink = false,
+      href,
       ...rest
-    } = props;
-
+    },
+    ref
+  ) => {
     const baseStyles =
       "rounded-[5px] font-medium text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center";
     const sizeStyles = {
@@ -89,18 +80,12 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       children
     );
 
-    if (isLinkProps(props)) {
-      // Use OmitIsLink here
-      const { href, ...linkRest } = props;
-      const linkProps = Object.fromEntries(
-        Object.entries(linkRest).filter(([key]) => key !== "isLink")
-      );
-
+    if (asLink && href) {
       return (
         <Link
           href={href}
           className={classes}
-          {...linkProps}
+          {...rest}
           ref={ref as ForwardedRef<HTMLAnchorElement>}
           role="button"
           tabIndex={disabled ? -1 : 0}
@@ -111,16 +96,12 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
       );
     }
 
-    const buttonProps = Object.fromEntries(
-      Object.entries(rest).filter(([key]) => key !== "isLink")
-    );
-
     return (
       <button
         ref={ref as ForwardedRef<HTMLButtonElement>}
         className={classes}
         disabled={disabled || isLoading}
-        {...buttonProps}
+        {...rest}
         aria-busy={isLoading}
       >
         {content}

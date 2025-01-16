@@ -19,7 +19,7 @@ const CTASection = () => {
             <div className="absolute inset-0 bg-black/60" />
           </div>
 
-          <div className="relative z-10 flex flex-col items-center text-center px-6 py-16 md:py-20">
+          <div className="relative flex flex-col items-center text-center px-6 py-16 md:py-20">
             <Text
               variant="h2"
               className="text-white font-semibold text-3xl md:text-4xl"

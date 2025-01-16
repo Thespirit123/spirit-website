@@ -24,7 +24,7 @@ export const HeroSection = ({ onExplore }: HeroSectionProps) => {
         className="object-cover"
         priority
       />
-      <div className="w-11/12 max-w-7xl mx-auto z-10 mt-20 relative">
+      <div className="w-11/12 max-w-7xl mx-auto z-2 mt-20 relative">
         <h1 className="text-white text-center font-medium text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
           Innovative Digital Solutions <br /> at Your
           <span className="text-brand-primary"> Fingertips</span>
