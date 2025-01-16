@@ -164,7 +164,7 @@ const Navbar = () => {
           {user ? (
             <UserMenuContent />
           ) : (
-            <Button variant="primary" size="sm" isLink href="/auth/login">
+            <Button variant="primary" size="sm" asLink href="/auth/login">
               Log In
             </Button>
           )}
@@ -273,7 +273,7 @@ const Navbar = () => {
                       variant="primary"
                       size="sm"
                       fullWidth
-                      isLink
+                      asLink
                       href="/auth/login"
                     >
                       Log In
