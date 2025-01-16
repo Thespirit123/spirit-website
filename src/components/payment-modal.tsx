@@ -230,7 +230,7 @@ export const PaymentModal = ({
     }
   };
 
-  const config: FlutterwaveConfig = {
+  const config = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY!,
     tx_ref: Date.now().toString(),
     amount: selectedPlanDetails?.price ?? 0,
