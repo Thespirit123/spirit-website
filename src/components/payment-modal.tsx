@@ -192,8 +192,23 @@ export const PaymentModal = ({
   onPaymentError,
   initialPlan,
 }: PaymentModalProps) => {
-  const [step, setStep] = useState<Step>(initialPlan ? 2 : 1);
-  const [selectedPlan, setSelectedPlan] = useState<string>(initialPlan || "");
+  const [step, setStep] = useState<Step>(() => {
+    const initialStep = productType === "whatsapp-tool" || initialPlan ? 2 : 1;
+    return initialStep;
+  });
+
+  const [selectedPlan, setSelectedPlan] = useState<string>(() => {
+    const initialSelectedPlan =
+      productType === "whatsapp-tool"
+        ? WHATSAPP_TOOL_PLANS[0].id
+        : initialPlan || "";
+    return initialSelectedPlan;
+  });
+
+  const plans =
+    productType === "movie-portal" ? MOVIE_PORTAL_PLANS : WHATSAPP_TOOL_PLANS;
+  const selectedPlanDetails = plans.find((plan) => plan.id === selectedPlan);
+
   const [paymentStatus, setPaymentStatus] = useState<
     "idle" | "success" | "failed"
   >("idle");
@@ -203,10 +218,6 @@ export const PaymentModal = ({
     phone: "",
   });
 
-  const plans =
-    productType === "movie-portal" ? MOVIE_PORTAL_PLANS : WHATSAPP_TOOL_PLANS;
-  const selectedPlanDetails = plans.find((plan) => plan.id === selectedPlan);
-
   useEffect(() => {
     if (initialPlan) {
       setStep(2);
@@ -215,15 +226,28 @@ export const PaymentModal = ({
   }, [initialPlan]);
 
   const handleClose = () => {
-    setStep(1);
-    setSelectedPlan("");
-    setPaymentStatus("idle");
-    setCustomerInfo({ name: "", email: "", phone: "" });
+    if (productType === "whatsapp-tool") {
+      setPaymentStatus("idle");
+      setCustomerInfo({ name: "", email: "", phone: "" });
+    } else {
+      setStep(1);
+      setSelectedPlan("");
+      setPaymentStatus("idle");
+      setCustomerInfo({ name: "", email: "", phone: "" });
+    }
+
     onClose();
   };
 
+  useEffect(() => {
+    if (isOpen && productType === "whatsapp-tool") {
+      setStep(2);
+      setSelectedPlan(WHATSAPP_TOOL_PLANS[0].id);
+    }
+  }, [isOpen, productType]);
+
   const handleBack = () => {
-    if (initialPlan) {
+    if (productType === "whatsapp-tool" || initialPlan) {
       handleClose();
     } else {
       setStep(1);
@@ -282,21 +306,21 @@ export const PaymentModal = ({
     <Modal isOpen={isOpen} onClose={handleClose} className="sm:max-w-[900px]">
       <ModalHeader>
         <h2 className="text-xl md:text-2xl font-semibold">
-          {!initialPlan && step === 1
-            ? productType === "movie-portal"
-              ? "Choose Your App"
-              : "WhatsApp Tool License"
+          {productType === "whatsapp-tool"
+            ? "WhatsApp Tool License"
+            : step === 1
+            ? "Choose Your App"
             : "Complete Your Purchase"}
         </h2>
       </ModalHeader>
 
       <ModalBody>
-        {!initialPlan && step === 1 ? (
+        {productType === "movie-portal" && step === 1 ? (
           <StepOne
             plans={plans}
             selectedPlan={selectedPlan}
             onPlanSelect={setSelectedPlan}
-            onNext={() => selectedPlan && setStep(2)}
+            onNext={() => setStep(2)}
           />
         ) : selectedPlanDetails ? (
           <StepTwo

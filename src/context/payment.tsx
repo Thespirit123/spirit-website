@@ -23,8 +23,10 @@ const PaymentContext = createContext<PaymentContextType | null>(null);
 
 export const PaymentProvider = ({
   children,
+  productType = "movie-portal",
 }: {
   children: React.ReactNode;
+  productType?: "movie-portal" | "whatsapp-tool";
 }) => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -83,7 +85,7 @@ export const PaymentProvider = ({
           setInitialPlan(undefined);
         }}
         initialPlan={initialPlan}
-        productType="movie-portal"
+        productType={productType}
         onPaymentSuccess={handlePaymentSuccess}
         onPaymentError={handlePaymentError}
       />

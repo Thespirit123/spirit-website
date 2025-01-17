@@ -25,9 +25,9 @@ const features = [
   },
   {
     image: Feature4,
-    title: "Location Tracking",
+    title: "Activity Insights",
     subtitle:
-      "Track device location with precise GPS coordinates. Monitor movement patterns and geographical interactions without detection.",
+      "Monitor online/offline patterns and activity trends. Get detailed analytics on messaging habits and peak usage times.",
   },
 ];
 

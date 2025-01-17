@@ -1,9 +1,13 @@
+"use client";
 import HeroImg from "@/assets/images/whatsapp-hero.png";
 import Button from "@/components/custom-ui/button";
 import { Text } from "@/components/custom-ui/text";
+import { usePayment } from "@/context/payment";
 import Image from "next/image";
 
 const WhatsappHero = () => {
+  const { handleOpenPayment } = usePayment();
+
   return (
     <section className="relative min-h-[calc(100vh-0px)] flex flex-col lg:flex-row -mt-[120px] pt-[120px]">
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:px-16 py-10 lg:py-0">
@@ -22,7 +26,11 @@ const WhatsappHero = () => {
           Unleash Advanced Digital Insights with Comprehensive Communication
           Tracking.
         </h3>
-        <Button variant="primary" className="w-max mt-6 mx-auto lg:mx-0">
+        <Button
+          variant="primary"
+          className="w-max mt-6 mx-auto lg:mx-0"
+          onClick={() => handleOpenPayment()}
+        >
           Get Instant Access
         </Button>
       </div>

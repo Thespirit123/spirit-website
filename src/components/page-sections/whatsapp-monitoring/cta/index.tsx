@@ -1,9 +1,11 @@
 import CTABg from "@/assets/images/whatsapp-cta.jpg";
 import Button from "@/components/custom-ui/button";
 import { Text } from "@/components/custom-ui/text";
+import { usePayment } from "@/context/payment";
 import Image from "next/image";
 
 const CTASection = () => {
+  const { handleOpenPayment } = usePayment();
   return (
     <section className="w-full py-20">
       <div className="w-11/12 max-w-7xl mx-auto">
@@ -30,7 +32,13 @@ const CTASection = () => {
               Get instant access to comprehensive WhatsApp monitoring. Setup
               takes less than 5 minutes.
             </p>
-            <Button variant="primary" size="lg" className="mt-8" glow>
+            <Button
+              variant="primary"
+              size="lg"
+              className="mt-8"
+              glow
+              onClick={() => handleOpenPayment()}
+            >
               Get Started Today
             </Button>
           </div>

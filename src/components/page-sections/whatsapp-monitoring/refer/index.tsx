@@ -26,7 +26,13 @@ const WhatsappReferSection = () => {
           </div>
           <Image src={TimelineImg} alt="Timeline" />
         </div>
-        <Button variant="primary" className="w-max" glow>
+        <Button
+          variant="primary"
+          className="w-max"
+          glow
+          asLink
+          href="/auth/sign-up"
+        >
           Get My Referral Link
         </Button>
       </div>
