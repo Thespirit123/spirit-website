@@ -64,13 +64,18 @@ export function TestimonialsSection() {
 
   const sliderSettings = {
     dots: true,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 2.5,
     slidesToScroll: 1,
     rtl: false,
     arrows: false,
     focusOnSelect: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024,

@@ -195,17 +195,26 @@ const SignUpPage = () => {
             <FormField
               label="Phone Number"
               type="tel"
-              placeholder="+234 XXX XXX XXXX"
+              placeholder="080 XXX XXXX or +234 XXX XXX XXXX"
               error={errors.phone?.message}
               {...register("phone", {
                 required: "Phone number is required",
                 pattern: {
-                  value: /^\+?234[789][01]\d{8}$/,
+                  value: /^(\+?234|0)[789][01]\d{8}$/,
                   message: "Please enter a valid Nigerian phone number",
                 },
                 validate: (value) => {
+                  if (value.startsWith("0")) {
+                    return undefined;
+                  }
                   if (!value.startsWith("+234") && !value.startsWith("234")) {
-                    return "Phone number must start with +234";
+                    return "Phone number must start with 0 or +234";
+                  }
+                },
+                onChange: (e) => {
+                  const value = e.target.value;
+                  if (value.startsWith("0")) {
+                    e.target.value = "+234" + value.substring(1);
                   }
                 },
               })}

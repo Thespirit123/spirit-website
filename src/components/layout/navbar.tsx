@@ -14,6 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import Button from "../custom-ui/button";
 import { SocialLinks } from "./social-links";
 
@@ -75,6 +76,19 @@ const Navbar = () => {
       console.error("Logout failed:", error);
     }
   }, [logout]);
+
+  const handleUtilityClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast("Utility payments coming soon!", {
+      icon: "🚧",
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+      duration: 3000,
+    });
+  };
 
   if (loading)
     return <div className="w-8 h-8 rounded-full animate-pulse bg-gray-200" />;
@@ -149,7 +163,11 @@ const Navbar = () => {
             <NavLink href="/movie-portal" text="Movie Portal" />
           </li>
           <li>
-            <NavLink href="/utility-payment" text="Utility Payment" />
+            <NavLink
+              href="/utility-payment"
+              text="Utility Payment"
+              onClick={handleUtilityClick}
+            />
           </li>
           <li>
             <NavLink href="/whatsapp-tool" text="Whatsapp Monitoring Tool" />
@@ -226,7 +244,11 @@ const Navbar = () => {
                 >
                   {[
                     { href: "/movie-portal", text: "Movie Portal" },
-                    { href: "/utility-payment", text: "Utility Payment" },
+                    {
+                      href: "/utility-payment",
+                      text: "Utility Payment",
+                      onClick: handleUtilityClick,
+                    },
                     {
                       href: "/whatsapp-tool",
                       text: "Whatsapp Monitoring Tool",
@@ -241,7 +263,7 @@ const Navbar = () => {
                       <NavLink
                         href={item.href}
                         text={item.text}
-                        onClick={toggleMenu}
+                        onClick={item.onClick}
                       />
                     </motion.li>
                   ))}
@@ -294,7 +316,7 @@ export default Navbar;
 interface NavLinkProps {
   href: string;
   text: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   className?: string;
 }
 

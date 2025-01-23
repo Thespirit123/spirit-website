@@ -1,6 +1,7 @@
 import FooterImg from "@/assets/images/footer.png";
 import LogoImg from "@/assets/images/logo.png";
 import Image from "next/image";
+import { toast } from "react-hot-toast";
 import { SocialLinks } from "./social-links";
 
 const footerLinks = {
@@ -16,6 +17,19 @@ const footerLinks = {
 };
 
 const Footer = () => {
+  const handleUtilityClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    toast("Utility payments coming soon!", {
+      icon: "🚧",
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+      duration: 3000,
+    });
+  };
+
   return (
     <footer className="py-16 relative">
       <div className="w-11/12 max-w-7xl mx-auto mb-10">
@@ -37,9 +51,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Links Section */}
           <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 md:w-2/3 md:justify-end items-center md:items-start">
-            {/* Services Links */}
             <div className="min-w-[140px]">
               <ul className="space-y-3 text-center md:text-left">
                 {footerLinks.services.map((link, index) => (
@@ -47,6 +59,11 @@ const Footer = () => {
                     <a
                       href={link.href}
                       className="hover:text-primary font-light text-sm sm:text-base whitespace-nowrap"
+                      onClick={
+                        link.label === "Utility Payment"
+                          ? handleUtilityClick
+                          : undefined
+                      }
                     >
                       {link.label}
                     </a>

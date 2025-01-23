@@ -70,6 +70,12 @@ export interface SignUpFormData {
   dateOfBirth: string;
 }
 
+export interface CardHolderResponse {
+  status: string;
+  cardholder_id: string;
+  response_message: string;
+}
+
 export interface APIResponse {
   status: boolean;
   message: string;
@@ -143,4 +149,22 @@ export interface FlutterwaveConfig {
   callback: (response: FlutterWaveResponse) => void;
   onClose: () => void;
   disabled?: boolean;
+}
+
+export type UtilityType = "data" | "airtime" | "cable" | "electricity" | "epin";
+
+export interface UtilityProductItem {
+  product: string;
+  value: number;
+  product_id: number;
+  comm: number;
+}
+
+export interface UtilityProductResponse {
+  product_slug: UtilityType;
+  products: UtilityProductItem[];
+}
+
+export interface UtilityProductRequest {
+  product_slug: UtilityType;
 }

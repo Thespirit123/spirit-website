@@ -14,6 +14,7 @@ export const services = [
     },
     description:
       "Unlock unlimited entertainment with our comprehensive movie streaming platform. Access a vast library of films across genres, enjoy high-quality streaming, and discover new cinematic experiences anytime, anywhere.",
+    href: "/movie-portal",
   },
   {
     image: UtilityImg,
@@ -24,6 +25,8 @@ export const services = [
     },
     description:
       "Instant mobile credit solutions at your fingertips. Quickly recharge your phone, support multiple networks, and stay connected with our seamless and secure airtime top-up service.",
+    href: "/utility-payment",
+    isUtility: true,
   },
   {
     image: WhatsAppImg,
@@ -34,6 +37,7 @@ export const services = [
     },
     description:
       "Advanced communication tracking designed for personal and professional insights. Monitor messages, calls, and digital interactions with discretion and precision.",
+    href: "/whatsapp-tool",
   },
 ];
 

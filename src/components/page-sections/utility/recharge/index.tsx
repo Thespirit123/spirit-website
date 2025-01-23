@@ -6,7 +6,47 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import { FaBolt, FaPhone, FaTv, FaWifi } from "react-icons/fa";
 
+// interface UtilityFormData {
+//   airtime: UtilityProductItem[];
+//   data: UtilityProductItem[];
+//   cable: UtilityProductItem[];
+//   electricity: UtilityProductItem[];
+// }
+
 const RechargeSection = () => {
+  // const [activeTab, setActiveTab] = useState<UtilityType>("airtime");
+  // const { data, isLoading } = useUtilityProducts(activeTab);
+  // const [utilityProducts, setUtilityProducts] = useState<UtilityFormData>({
+  //   airtime: [],
+  //   data: [],
+  //   cable: [],
+  //   electricity: [],
+  // });
+
+  // useEffect(() => {
+  //   console.log("utilityProducts", utilityProducts);
+  // }, [utilityProducts]);
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setUtilityProducts((prev) => ({
+  //       ...prev,
+  //       [activeTab]: data,
+  //     }));
+  //   }
+  // }, [data, activeTab]);
+
+  // const networkProviderOptions = useMemo(() => {
+  //   return utilityProducts.airtime.map((item) => ({
+  //     value: item.product_id.toString(),
+  //     label: item.product, // Keep original name with VTU
+  //   }));
+  // }, [utilityProducts.airtime]);
+
+  // const handleTabChange = (value: string) => {
+  //   setActiveTab(value as UtilityType);
+  // };
+
   return (
     <section>
       <Text
