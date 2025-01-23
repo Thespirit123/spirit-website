@@ -20,7 +20,8 @@ const slides: Slide[] = [
       "Multiple device support",
       "Smart recommendations",
     ],
-    videoSrc: "1044997147",
+    videoUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/spirit-movie-android%20(540p)-0In0VJV6YKtokH1gy8KTQxkL4Rh2gn.mp4",
   },
   {
     appType: {
@@ -37,7 +38,8 @@ const slides: Slide[] = [
       "Smart recommendations",
       "Seamless iOS integration",
     ],
-    videoSrc: "1045000318",
+    videoUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/spirit-movie-ios%20(1080p)-IcraPsfDEj0xy8njtPmOdfSAmdoJcu.mp4",
   },
   {
     appType: {
@@ -54,7 +56,8 @@ const slides: Slide[] = [
       "HD quality streaming",
       "Seasonal updates",
     ],
-    videoSrc: "1044999327",
+    videoUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/spirit-anime-android%20(540p)-mXsG7MwpGlUNolJkxpYX4J0jvXbTom.mp4",
   },
 ];
 

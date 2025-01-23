@@ -15,7 +15,7 @@ export interface Slide {
     discounted: string;
   };
   features: string[];
-  videoSrc: string;
+  videoUrl: string;
 }
 
 export interface UserData {

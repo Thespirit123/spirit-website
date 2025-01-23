@@ -3,8 +3,8 @@ import Download from "@/assets/icons/download";
 import Stream from "@/assets/icons/stream";
 import AndroidFrame from "@/assets/images/android-frame.png";
 import iOSFrame from "@/assets/images/iphone-frame.png";
-import { VimeoPlayer } from "@/components/cloud-assets/VimeoPlayer";
 import Button from "@/components/custom-ui/button";
+import { VideoPlayer } from "@/components/video-player";
 import { usePayment } from "@/context/payment";
 import { Platform } from "@/types";
 import Image from "next/image";
@@ -21,7 +21,7 @@ interface Slide {
     discounted: string;
   };
   features: string[];
-  videoSrc: string;
+  videoUrl: string;
   isLoading: boolean;
 }
 
@@ -43,7 +43,7 @@ const getPlanId = (platform: Platform, isAnime: boolean) => {
 };
 
 export const VideoSlide = memo(
-  ({ appType, price, features, videoSrc, onVideoEnd }: VideoSlideProps) => {
+  ({ appType, price, features, videoUrl, onVideoEnd }: VideoSlideProps) => {
     const { handleOpenPayment } = usePayment();
 
     const handleGetAccess = () => {
@@ -130,7 +130,7 @@ export const VideoSlide = memo(
                   : "top-[4%] left-[5%] right-[5%] bottom-[4%] rounded-[40px]"
               } overflow-hidden`}
             >
-              <VimeoPlayer videoId={videoSrc} onVideoEnd={onVideoEnd} />
+              <VideoPlayer videoUrl={videoUrl} onVideoEnd={onVideoEnd} />
             </div>
           </div>
         </div>
