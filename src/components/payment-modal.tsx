@@ -77,7 +77,6 @@ const StepTwo = ({
   const isWhatsAppTool = selectedPlanDetails.name
     .toLowerCase()
     .includes("whatsapp");
-  console.log("selectedPlanDetails", selectedPlanDetails);
   return (
     <div className="py-4 md:py-6">
       <div className="relative mb-6 overflow-hidden">

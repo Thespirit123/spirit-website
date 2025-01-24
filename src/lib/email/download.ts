@@ -11,7 +11,6 @@ export async function sendDownloadEmail({
   downloadUrls,
   instructions,
 }: AppDownloadEmail) {
-  console.log("downloadUrls", downloadUrls);
   const emailContent = `
     <!DOCTYPE html>
     <html>
@@ -95,12 +94,6 @@ export async function sendDownloadEmail({
     });
     return response;
   } catch (error) {
-    console.error("❌ Email send failed:", {
-      error,
-      errorMessage: error instanceof Error ? error.message : "Unknown error",
-      errorStack: error instanceof Error ? error.stack : undefined,
-    });
-
     if (error instanceof Error) {
       throw new Error(`Failed to send download instructions: ${error.message}`);
     }

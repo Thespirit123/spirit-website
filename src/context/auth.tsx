@@ -53,7 +53,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         return userCredential.user;
       } catch (error) {
-        console.error("❌ Signup error:", error);
         setState((prev) => ({ ...prev, error: error as Error }));
         throw error;
       }

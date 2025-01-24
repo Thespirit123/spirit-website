@@ -8,7 +8,6 @@ export async function POST(request: Request) {
     await sendFeedbackEmail(feedback);
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Feedback submission error:", error);
     return NextResponse.json(
       { error: "Failed to send feedback" },
       { status: 500 }

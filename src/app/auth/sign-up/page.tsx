@@ -51,20 +51,12 @@ const SignUpPage = () => {
   });
 
   const onSubmit = async (data: SignUpFormData) => {
-    console.log("📝 Form Data:", {
-      ...data,
-      password: "***",
-      confirmPassword: "***",
-    });
-
     if (data.password !== data.confirmPassword) {
-      console.log("❌ Password mismatch");
       setError("Passwords do not match");
       return;
     }
 
     try {
-      console.log("🚀 Starting signup...");
       setError(null);
       setIsLoading(true);
 
@@ -78,10 +70,8 @@ const SignUpPage = () => {
         password: data.password,
       });
 
-      console.log("✅ Signup successful");
       router.push("/dashboard");
     } catch (err) {
-      console.error("❌ Signup error:", err);
       setError(err instanceof Error ? err.message : "Sign up failed");
     } finally {
       setIsLoading(false);

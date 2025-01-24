@@ -12,7 +12,6 @@ export function withAuth<P extends object>(
 
     useEffect(() => {
       if (!loading && !user) {
-        console.log("No user found, redirecting to login");
         router.replace("/auth/login");
       }
     }, [user, loading, router]);
