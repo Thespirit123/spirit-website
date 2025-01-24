@@ -5,6 +5,7 @@ import Button from "@/components/custom-ui/button";
 import { FormField } from "@/components/custom-ui/form-field";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const services = [
   { value: "movie", label: "Movie Portal" },
@@ -29,9 +30,37 @@ const FeedbackPage = () => {
     recommend: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error("Failed to submit feedback");
+
+      toast.success("Thank you for your feedback!");
+      setFormData({
+        fullName: "",
+        email: "",
+        rating: "",
+        service: "",
+        experience: "",
+        improvement: "",
+        recommend: "",
+      });
+    } catch (error) {
+      console.error("Feedback submission error:", error);
+      toast.error("Failed to submit feedback. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -147,8 +176,8 @@ const FeedbackPage = () => {
               }
             />
 
-            <Button type="submit" className="w-full">
-              Submit Feedback
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Submitting..." : "Submit Feedback"}
             </Button>
           </form>
         </section>

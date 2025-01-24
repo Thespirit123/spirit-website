@@ -1,4 +1,4 @@
-import { sendDownloadEmail } from "@/lib/email-service";
+import { sendDownloadEmail } from "@/lib/email/download";
 import { NextResponse } from "next/server";
 
 interface EmailRequestBody {

@@ -187,3 +187,13 @@ export interface AppDownloadConfig {
   downloadUrl?: string;
   instructions?: string[];
 }
+
+export interface FeedbackFormData {
+  fullName: string;
+  email: string;
+  rating: string;
+  service: string;
+  experience: string;
+  improvement: string;
+  recommend: string;
+}
