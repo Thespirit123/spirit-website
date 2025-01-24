@@ -28,6 +28,13 @@ const SOCIAL_LINKS = {
   PHONE_NUMBER: "2349035745258",
 };
 
+type ComingSoonFeature = "utility" | "international";
+
+const COMING_SOON_MESSAGES: Record<ComingSoonFeature, string> = {
+  utility: "Utility payments coming soon!",
+  international: "International numbers coming soon!",
+};
+
 const menuVariants = {
   closed: {
     y: -20,
@@ -77,9 +84,12 @@ const Navbar = () => {
     }
   }, [logout]);
 
-  const handleUtilityClick = (e: React.MouseEvent) => {
+  const handleUtilityClick = (
+    e: React.MouseEvent,
+    feature: ComingSoonFeature
+  ) => {
     e.preventDefault();
-    toast("Utility payments coming soon!", {
+    toast(COMING_SOON_MESSAGES[feature], {
       icon: "🚧",
       style: {
         borderRadius: "10px",
@@ -162,18 +172,26 @@ const Navbar = () => {
           <li>
             <NavLink href="/movie-portal" text="Movie Portal" />
           </li>
-          <li>
-            <NavLink
-              href="/utility-payment"
-              text="Utility Payment"
-              onClick={handleUtilityClick}
-            />
-          </li>
+
           <li>
             <NavLink href="/whatsapp-tool" text="Whatsapp Monitoring Tool" />
           </li>
           <li>
             <NavLink href="/feedback" text="Feedback" />
+          </li>
+          <li>
+            <NavLink
+              href="/utility-payment"
+              text="Utility Payment"
+              onClick={(e) => handleUtilityClick(e, "utility")}
+            />
+          </li>
+          <li>
+            <NavLink
+              href="/international-numbers"
+              text="International Numbers"
+              onClick={(e) => handleUtilityClick(e, "international")}
+            />
           </li>
         </ul>
 
@@ -245,15 +263,22 @@ const Navbar = () => {
                   {[
                     { href: "/movie-portal", text: "Movie Portal" },
                     {
-                      href: "/utility-payment",
-                      text: "Utility Payment",
-                      onClick: handleUtilityClick,
-                    },
-                    {
                       href: "/whatsapp-tool",
                       text: "Whatsapp Monitoring Tool",
                     },
                     { href: "/feedback", text: "Feedback" },
+                    {
+                      href: "/utility-payment",
+                      text: "Utility Payment",
+                      onClick: (e: React.MouseEvent) =>
+                        handleUtilityClick(e, "utility"),
+                    },
+                    {
+                      href: "/international-numbers",
+                      text: "International Numbers",
+                      onClick: (e: React.MouseEvent) =>
+                        handleUtilityClick(e, "international"),
+                    },
                   ].map((item, i) => (
                     <motion.li
                       key={item.href}

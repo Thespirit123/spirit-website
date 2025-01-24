@@ -76,7 +76,7 @@ export const ServiceCard = ({
           href={href}
           onClick={handleClick}
         >
-          Learn More
+          {isUtility ? "Coming Soon" : "Learn More"}
         </Button>
       </div>
     </div>
