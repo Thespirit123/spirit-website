@@ -73,116 +73,117 @@ const StepTwo = ({
   setCustomerInfo,
   onBack,
   fwConfig,
-}: StepTwoProps) => (
-  <div className="py-4 md:py-6">
-    <div className="relative mb-6 overflow-hidden">
-      {/* Background with subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent" />
-
-      {/* Content Container */}
-      <div className="relative p-6 border border-brand-primary/20 rounded-xl">
-        {/* Platform Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-sm mb-3">
-          <span>
-            {selectedPlanDetails.platform === "ios" ? "iOS" : "Android"}
-          </span>
-        </div>
-
-        {/* Plan Details */}
-        <div className="space-y-1">
-          <h3 className="text-xl font-semibold text-gray-900">
-            {selectedPlanDetails.name}
-          </h3>
-          <p className="text-sm text-gray-600">
-            {selectedPlanDetails.duration}
-          </p>
-        </div>
-
-        {/* Price Section */}
-        <div className="mt-4 flex items-baseline gap-2">
-          <p className="text-3xl font-bold text-gray-900">
-            ₦{selectedPlanDetails.price.toLocaleString()}
-          </p>
-          {selectedPlanDetails.originalPrice && (
-            <p className="text-base text-gray-500 line-through">
-              ₦{selectedPlanDetails.originalPrice.toLocaleString()}
-            </p>
+}: StepTwoProps) => {
+  const isWhatsAppTool = selectedPlanDetails.name
+    .toLowerCase()
+    .includes("whatsapp");
+  console.log("selectedPlanDetails", selectedPlanDetails);
+  return (
+    <div className="py-4 md:py-6">
+      <div className="relative mb-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent" />
+        <div className="relative p-6 border border-brand-primary/20 rounded-xl">
+          {!isWhatsAppTool && (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-sm mb-3">
+              <span>
+                {selectedPlanDetails.platform === "ios" ? "iOS" : "Android"}
+              </span>
+            </div>
           )}
-        </div>
 
-        {/* Features Summary */}
-        <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
-          <span>✓ Instant Access</span>
-          <span>•</span>
-          <span>✓ Lifetime Updates</span>
-          <span>•</span>
-          <span>✓ 24/7 Support</span>
+          <div className="space-y-1">
+            <h3 className="text-xl font-semibold text-gray-900">
+              {selectedPlanDetails.name}
+            </h3>
+            <p className="text-sm text-gray-600">
+              {selectedPlanDetails.duration}
+            </p>
+          </div>
+
+          <div className="mt-4 flex items-baseline gap-2">
+            <p className="text-3xl font-bold text-gray-900">
+              ₦{selectedPlanDetails.price.toLocaleString()}
+            </p>
+            {selectedPlanDetails.originalPrice && (
+              <p className="text-base text-gray-500 line-through">
+                ₦{selectedPlanDetails.originalPrice.toLocaleString()}
+              </p>
+            )}
+          </div>
+
+          <div className="mt-4 flex items-center gap-2 text-sm text-gray-600">
+            <span>✓ Instant Access</span>
+            <span>•</span>
+            <span>✓ Lifetime Updates</span>
+            <span>•</span>
+            <span>✓ 24/7 Support</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div className="space-y-4 max-w-md mx-auto">
-      <FormField
-        label="Full Name"
-        type="text"
-        required
-        placeholder="Enter your full name"
-        value={customerInfo.name}
-        onChange={(e) =>
-          setCustomerInfo({ ...customerInfo, name: e.target.value })
-        }
-      />
-      <FormField
-        label="Email Address"
-        type="email"
-        required
-        placeholder="Enter your email address"
-        value={customerInfo.email}
-        onChange={(e) =>
-          setCustomerInfo({ ...customerInfo, email: e.target.value })
-        }
-      />
-      <FormField
-        label="Phone Number"
-        type="tel"
-        required
-        placeholder="Enter your phone number"
-        value={customerInfo.phone}
-        onChange={(e) =>
-          setCustomerInfo({ ...customerInfo, phone: e.target.value })
-        }
-      />
-    </div>
+      <div className="space-y-4 max-w-md mx-auto">
+        <FormField
+          label="Full Name"
+          type="text"
+          required
+          placeholder="Enter your full name"
+          value={customerInfo.name}
+          onChange={(e) =>
+            setCustomerInfo({ ...customerInfo, name: e.target.value })
+          }
+        />
+        <FormField
+          label="Email Address"
+          type="email"
+          required
+          placeholder="Enter your email address"
+          value={customerInfo.email}
+          onChange={(e) =>
+            setCustomerInfo({ ...customerInfo, email: e.target.value })
+          }
+        />
+        <FormField
+          label="Phone Number"
+          type="tel"
+          required
+          placeholder="Enter your phone number"
+          value={customerInfo.phone}
+          onChange={(e) =>
+            setCustomerInfo({ ...customerInfo, phone: e.target.value })
+          }
+        />
+      </div>
 
-    <div className="mt-8 flex items-center justify-between gap-6 max-w-md mx-auto">
-      <button
-        onClick={onBack}
-        className={cn(
-          "flex-1 py-3 px-6 rounded-lg font-medium transition-all duration-200",
-          "text-gray-600 bg-gray-100 hover:bg-gray-200",
-          "focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2",
-          "disabled:opacity-50 disabled:cursor-not-allowed"
-        )}
-        aria-label="Go back to plan selection"
-      >
-        ← Back
-      </button>
+      <div className="mt-8 flex items-center justify-between gap-6 max-w-md mx-auto">
+        <button
+          onClick={onBack}
+          className={cn(
+            "flex-1 py-3 px-6 rounded-lg font-medium transition-all duration-200",
+            "text-gray-600 bg-gray-100 hover:bg-gray-200",
+            "focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2",
+            "disabled:opacity-50 disabled:cursor-not-allowed"
+          )}
+          aria-label="Go back to plan selection"
+        >
+          ← Back
+        </button>
 
-      <FlutterWaveButton
-        {...fwConfig}
-        className={cn(
-          "flex-[2] py-3 px-6 rounded-lg font-semibold transition-all duration-200",
-          "bg-brand-primary text-white hover:bg-brand-primary/90",
-          "focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2",
-          "disabled:opacity-50 disabled:cursor-not-allowed"
-        )}
-        disabled={
-          !customerInfo.name || !customerInfo.email || !customerInfo.phone
-        }
-      />
+        <FlutterWaveButton
+          {...fwConfig}
+          className={cn(
+            "flex-[2] py-3 px-6 rounded-lg font-semibold transition-all duration-200",
+            "bg-brand-primary text-white hover:bg-brand-primary/90",
+            "focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2",
+            "disabled:opacity-50 disabled:cursor-not-allowed"
+          )}
+          disabled={
+            !customerInfo.name || !customerInfo.email || !customerInfo.phone
+          }
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const PaymentModal = ({
   isOpen,

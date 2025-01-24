@@ -26,15 +26,13 @@ export const APP_DOWNLOADS: Record<DownloadAppType, AppDownloadConfig> = {
   },
   "android-whatsapp": {
     type: "android-whatsapp",
-    downloadUrl: "https://your-whatsapp-apk-link.com",
+    downloadUrls: {
+      android: "https://play.google.com/store/apps/details?id=com.wapro.tools",
+      ios: "https://apps.apple.com/ng/app/whats-web/id6444021754",
+    },
   },
   "ios-movies": {
     type: "ios-movies",
-    instructions: [
-      "1. Open TestFlight on your iOS device",
-      "2. Click on the invitation link sent to your email",
-      "3. Follow TestFlight installation instructions",
-      "4. Launch the app and enjoy!",
-    ],
+    downloadUrl: "https://netmirrorapp.com/#ios",
   },
 };

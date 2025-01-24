@@ -15,7 +15,7 @@ const faqData = [
   {
     question: "What devices are supported?",
     answer:
-      "The app is compatible with all Android devices running version 5.0 and above. Physical access to the target device is required for initial installation, which takes less than 5 minutes.",
+      "The app is compatible with both Android (version 5.0 and above) and iOS devices. For Android devices, physical access is required for initial installation. For iOS devices, the app is available directly through the App Store. Installation typically takes less than 5 minutes on either platform.",
   },
   {
     question: "Is installation complicated?",

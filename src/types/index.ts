@@ -173,6 +173,10 @@ export interface AppDownloadEmail {
   customerEmail: string;
   appName: string;
   downloadUrl?: string;
+  downloadUrls?: {
+    ios?: string;
+    android?: string;
+  };
   instructions?: string[];
 }
 
@@ -185,6 +189,10 @@ export type DownloadAppType =
 export interface AppDownloadConfig {
   type: DownloadAppType;
   downloadUrl?: string;
+  downloadUrls?: {
+    ios?: string;
+    android?: string;
+  };
   instructions?: string[];
 }
 

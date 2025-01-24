@@ -78,6 +78,7 @@ export const PaymentProvider = ({
           customerEmail: response.customer.email,
           appName: planDetails.name,
           downloadUrl: appConfig?.downloadUrl,
+          downloadUrls: appConfig?.downloadUrls,
           instructions: appConfig?.instructions,
         }),
       });
