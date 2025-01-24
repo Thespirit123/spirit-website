@@ -97,6 +97,7 @@ export const PaymentProvider = ({
   };
 
   const handlePaymentError = (error: PaymentError) => {
+    console.log("❌ Payment Error:", error);
     toast.error("Payment failed. Please try again.");
   };
 
