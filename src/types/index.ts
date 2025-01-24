@@ -168,3 +168,22 @@ export interface UtilityProductResponse {
 export interface UtilityProductRequest {
   product_slug: UtilityType;
 }
+
+export interface AppDownloadEmail {
+  customerEmail: string;
+  appName: string;
+  downloadUrl?: string;
+  instructions?: string[];
+}
+
+export type DownloadAppType =
+  | "android-movies"
+  | "android-anime"
+  | "android-whatsapp"
+  | "ios-movies";
+
+export interface AppDownloadConfig {
+  type: DownloadAppType;
+  downloadUrl?: string;
+  instructions?: string[];
+}

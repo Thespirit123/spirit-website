@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebase";
-import { Platform } from "@/types";
+import { DownloadAppType, Platform } from "@/types";
 import {
   addDoc,
   collection,
@@ -36,6 +36,7 @@ export const createPurchaseRecord = async (
     name: string;
     platform: Platform;
     price: number;
+    appType: DownloadAppType;
   }
 ): Promise<string> => {
   try {
