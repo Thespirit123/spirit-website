@@ -10,7 +10,7 @@ const footerLinks = {
     { label: "Movie Portal", href: "/movie-portal" },
     { label: "Utility Payment", href: "/utility-payment" },
     { label: "WhatsApp Monitoring Tool", href: "/whatsapp-tool" },
-    { label: "Affiliate Hub", href: "/affiliate-hub" },
+    { label: "Affiliate Hub", href: "/auth/login" },
     { label: "Feedback", href: "/feedback" },
     { label: "Terms & Conditions", href: "/terms-and-conditions" },
   ],
