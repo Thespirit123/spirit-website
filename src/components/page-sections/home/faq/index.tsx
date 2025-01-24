@@ -13,9 +13,10 @@ const faqData = [
       "Getting started is easy! Simply create an account, choose your subscription plan, and start streaming immediately. Our vast library of content is instantly accessible across all your devices.",
   },
   {
-    question: "What payment methods are accepted for utility payments?",
+    question:
+      "When will utility payments and international numbers be available?",
     answer:
-      "We accept various payment methods including credit/debit cards, mobile money, and bank transfers. All transactions are secure and processed instantly through our encrypted payment gateway.",
+      "We're currently working on expanding our services to include utility bill payments (airtime, data, electricity) and international number solutions. These features are in development and will be launching soon. Stay tuned to our platform for updates and announcements about these exciting new services.",
   },
   {
     question: "Is the WhatsApp monitoring tool legal to use?",

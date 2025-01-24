@@ -28,16 +28,16 @@ const reviews = [
     text: "The movie portal is superb! I can finally watch all my favorite Nollywood and Hollywood movies without stress.",
   },
   {
-    name: "Chidinma Okonkwo",
-    image: UserTwoImg,
-    rating: 4.5,
-    text: "Quick airtime top-up, no wahala! DSTV subscription payment is also very smooth.",
-  },
-  {
     name: "Abdullahi Ibrahim",
     image: UserThreeImg,
     rating: 4,
     text: "This WhatsApp tool is exactly what I needed for my business. Customer support responded very fast too.",
+  },
+  {
+    name: "Chidinma Okonkwo",
+    image: UserTwoImg,
+    rating: 5,
+    text: "The movie streaming quality is excellent! I love how easy it is to find new releases. The app is very stable and user-friendly.",
   },
   {
     name: "Bukola Adeleke",

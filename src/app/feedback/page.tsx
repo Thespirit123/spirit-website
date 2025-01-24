@@ -9,7 +9,6 @@ import { toast } from "react-hot-toast";
 
 const services = [
   { value: "movie", label: "Movie Portal" },
-  { value: "utility", label: "Utility Payment" },
   { value: "whatsapp", label: "WhatsApp Tool" },
 ];
 

@@ -17,8 +17,19 @@ export const services = [
     href: "/movie-portal",
   },
   {
-    image: UtilityImg,
+    image: WhatsAppImg,
     number: "02",
+    title: {
+      highlighted: "WhatsApp",
+      normal: "Monitoring Tool",
+    },
+    description:
+      "Advanced communication tracking designed for personal and professional insights. Monitor messages, calls, and digital interactions with discretion and precision.",
+    href: "/whatsapp-tool",
+  },
+  {
+    image: UtilityImg,
+    number: "03",
     title: {
       highlighted: "Utility",
       normal: "Payments",
@@ -27,17 +38,6 @@ export const services = [
       "Instant mobile credit solutions at your fingertips. Quickly recharge your phone, support multiple networks, and stay connected with our seamless and secure airtime top-up service.",
     href: "/utility-payment",
     isUtility: true,
-  },
-  {
-    image: WhatsAppImg,
-    number: "03",
-    title: {
-      highlighted: "WhatsApp",
-      normal: "Monitoring Tool",
-    },
-    description:
-      "Advanced communication tracking designed for personal and professional insights. Monitor messages, calls, and digital interactions with discretion and precision.",
-    href: "/whatsapp-tool",
   },
 ];
 
