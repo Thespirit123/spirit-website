@@ -12,3 +12,14 @@ export const formatCurrency = (amount: number): string => {
     minimumFractionDigits: 2,
   }).format(amount);
 };
+
+export function generateReferralCode(userId: string): string {
+  const userPrefix = userId.slice(0, 2).toUpperCase();
+  const randomNumbers = Math.floor(1000 + Math.random() * 9000);
+  return `SPIRIT-${userPrefix}-${randomNumbers}`;
+}
+
+export function validateReferralCode(code: string): boolean {
+  const pattern = /^SPIRIT-[A-Z0-9]{2}-\d{4}$/;
+  return pattern.test(code);
+}

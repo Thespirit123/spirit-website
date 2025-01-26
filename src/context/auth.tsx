@@ -1,4 +1,5 @@
 import { auth, db } from "@/lib/firebase";
+import { generateReferralCode } from "@/lib/utils";
 import { AuthContextType, AuthState, SignUpFormData } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -40,6 +41,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           userData.password
         );
 
+        const referralCode = generateReferralCode(userCredential.user.uid);
+
         await setDoc(doc(db, "users", userCredential.user.uid), {
           uid: userCredential.user.uid,
           email: userData.email,
@@ -48,6 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           lastName: userData.lastName,
           dateOfBirth: userData.dateOfBirth,
           phone: userData.phone,
+          referralCode,
           createdAt: serverTimestamp(),
           totalEarnings: 0,
           availableBalance: 0,

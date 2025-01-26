@@ -7,6 +7,7 @@ interface UserStats {
   availableBalance: number;
   pendingBalance: number;
   referralCount: number;
+  referralCode: string;
 }
 
 export const useUserStats = (userId: string | undefined) => {
@@ -31,6 +32,7 @@ export const useUserStats = (userId: string | undefined) => {
             availableBalance: data.availableBalance ?? 0,
             pendingBalance: data.pendingBalance ?? 0,
             referralCount: data.referralCount ?? 0,
+            referralCode: data.referralCode ?? "",
           });
         }
         setLoading(false);

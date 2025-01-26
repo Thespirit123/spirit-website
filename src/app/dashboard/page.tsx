@@ -1,6 +1,7 @@
 "use client";
 
 import { withAuth } from "@/components/auth/protected-route";
+import { ReferralCode } from "@/components/referral-code";
 import {
   Table,
   TableBody,
@@ -13,7 +14,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useUserStats } from "@/hooks/useUserStats";
 import { formatCurrency } from "@/lib/utils";
 import { Transaction, TransactionStatus } from "@/types";
-import { ClipboardCopy, Clock, TrendingUp, Users, Wallet } from "lucide-react";
+import { Clock, TrendingUp, Users, Wallet } from "lucide-react";
 import Link from "next/link";
 
 const transactions: Transaction[] = [
@@ -158,15 +159,7 @@ const DashboardPage = () => {
       </div>
 
       <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 lg:mb-8">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
-          <span className="text-gray-600">Referral Code</span>
-          <div className="flex items-center space-x-2 w-full sm:w-auto">
-            <span className="font-mono text-sm sm:text-base">
-              SPIRITHQ-JD-2232
-            </span>
-            <ClipboardCopy className="w-4 h-4 text-gray-400 cursor-pointer hover:text-gray-600" />
-          </div>
-        </div>
+        <ReferralCode code={stats?.referralCode ?? ""} isLoading={loading} />
       </div>
 
       <div className="bg-white rounded-lg overflow-hidden mb-4 sm:mb-6 lg:mb-8">

@@ -26,6 +26,12 @@ export interface UserData {
   lastName: string;
   dateOfBirth: string;
   phone: string;
+  referralCode: string;
+  createdAt: Date;
+  totalEarnings: number;
+  availableBalance: number;
+  pendingBalance: number;
+  referralCount: number;
 }
 
 export interface AuthState {
