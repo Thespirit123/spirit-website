@@ -9,54 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useAuth } from "@/hooks/useAuth";
+import { useUserStats } from "@/hooks/useUserStats";
+import { formatCurrency } from "@/lib/utils";
 import { Transaction, TransactionStatus } from "@/types";
-import {
-  Calendar,
-  ClipboardCopy,
-  Clock,
-  TrendingUp,
-  Wallet,
-} from "lucide-react";
+import { ClipboardCopy, Clock, TrendingUp, Users, Wallet } from "lucide-react";
 import Link from "next/link";
-
-const stats = [
-  {
-    title: "Total Lifetime Earnings",
-    amount: "₦40,689",
-    change: "8.5% Up from past week",
-    isPositive: true,
-    bgColor: "bg-purple-50",
-    icon: TrendingUp,
-    iconColor: "text-purple-500",
-  },
-  {
-    title: "This Month's Earnings",
-    amount: "₦10,009",
-    change: "1.3% Up from past week",
-    isPositive: true,
-    bgColor: "bg-yellow-50",
-    icon: Calendar,
-    iconColor: "text-yellow-500",
-  },
-  {
-    title: "Available for Withdrawal",
-    amount: "₦8,689",
-    change: "4.3% Down from yesterday",
-    isPositive: false,
-    bgColor: "bg-green-50",
-    icon: Wallet,
-    iconColor: "text-green-500",
-  },
-  {
-    title: "Pending Commissions",
-    amount: "₦8,689",
-    change: "1.8% Up from yesterday",
-    isPositive: true,
-    bgColor: "bg-red-50",
-    icon: Clock,
-    iconColor: "text-red-500",
-  },
-];
 
 const transactions: Transaction[] = [
   {
@@ -115,45 +73,90 @@ const getStatusStyle = (status: TransactionStatus): string => {
 };
 
 const DashboardPage = () => {
+  const { user } = useAuth();
+  const { stats, loading } = useUserStats(user?.uid);
+
+  const statsData = [
+    {
+      title: "Total Lifetime Earnings",
+      amount: formatCurrency(stats?.totalEarnings ?? 0),
+      change: "Updated in real-time",
+      isPositive: true,
+      bgColor: "bg-purple-50",
+      icon: TrendingUp,
+      iconColor: "text-purple-500",
+    },
+    {
+      title: "Available for Withdrawal",
+      amount: formatCurrency(stats?.availableBalance ?? 0),
+      change: "Ready to withdraw",
+      isPositive: true,
+      bgColor: "bg-green-50",
+      icon: Wallet,
+      iconColor: "text-green-500",
+    },
+    {
+      title: "Pending Balance",
+      amount: formatCurrency(stats?.pendingBalance ?? 0),
+      change: "Processing commissions",
+      isPositive: true,
+      bgColor: "bg-yellow-50",
+      icon: Clock,
+      iconColor: "text-yellow-500",
+    },
+    {
+      title: "Total Referrals",
+      amount: stats?.referralCount?.toString() ?? "0",
+      change: "Active referrals",
+      isPositive: true,
+      bgColor: "bg-blue-50",
+      icon: Users,
+      iconColor: "text-blue-500",
+    },
+  ];
+
   return (
     <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg">
       <h1 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
         Your Dashboard
       </h1>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <div
-              key={index}
-              className="p-4 rounded-lg bg-white relative flex flex-col hover:shadow-md transition-shadow"
-            >
-              <h3 className="text-sm text-gray-600 mb-2 pr-10 sm:pr-12">
-                {stat.title}
-              </h3>
-              <p className="text-lg sm:text-xl lg:text-2xl font-semibold mb-1 sm:mb-2">
-                {stat.amount}
-              </p>
-              <p
-                className={`text-xs sm:text-sm ${
-                  stat.isPositive ? "text-green-600" : "text-red-600"
-                }`}
-              >
-                {stat.change}
-              </p>
-              <div
-                className={`absolute top-4 right-4 ${stat.bgColor} p-2 rounded-xl`}
-              >
-                <Icon className="w-5 h-5 sm:w-6 sm:h-6 ${stat.iconColor}" />
+        {statsData.map((stat, index) => (
+          <div
+            key={index}
+            className="p-4 rounded-lg bg-white relative flex flex-col hover:shadow-md transition-shadow"
+          >
+            {loading ? (
+              <div className="animate-pulse">
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div className="h-8 bg-gray-200 rounded w-1/2 mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/4"></div>
               </div>
-            </div>
-          );
-        })}
+            ) : (
+              <>
+                <h3 className="text-sm text-gray-600 mb-2 pr-10 sm:pr-12">
+                  {stat.title}
+                </h3>
+                <p className="text-lg sm:text-xl lg:text-2xl font-semibold mb-1 sm:mb-2">
+                  {stat.amount}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-500">
+                  {stat.change}
+                </p>
+                <div
+                  className={`absolute top-4 right-4 ${stat.bgColor} p-2 rounded-xl`}
+                >
+                  <stat.icon
+                    className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.iconColor}`}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        ))}
       </div>
 
-      {/* Referral Code Card */}
       <div className="bg-white rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 lg:mb-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-4">
           <span className="text-gray-600">Referral Code</span>
@@ -166,7 +169,6 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* Transactions Table */}
       <div className="bg-white rounded-lg overflow-hidden mb-4 sm:mb-6 lg:mb-8">
         <div className="overflow-x-auto">
           <Table>
@@ -214,7 +216,6 @@ const DashboardPage = () => {
         </div>
       </div>
 
-      {/* How It Works Section */}
       <div className="bg-white rounded-lg p-4 sm:p-6">
         <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
           How It Works

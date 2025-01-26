@@ -49,6 +49,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           dateOfBirth: userData.dateOfBirth,
           phone: userData.phone,
           createdAt: serverTimestamp(),
+          totalEarnings: 0,
+          availableBalance: 0,
+          pendingBalance: 0,
+          referralCount: 0,
         });
 
         return userCredential.user;
