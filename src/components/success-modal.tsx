@@ -59,6 +59,7 @@ export const SuccessModal = ({
               target="_blank"
               rel="noopener noreferrer"
               variant="primary"
+              glow
             >
               Download App
             </Button>
