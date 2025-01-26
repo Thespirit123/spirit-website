@@ -26,10 +26,7 @@ export const APP_DOWNLOADS: Record<DownloadAppType, AppDownloadConfig> = {
   },
   "android-whatsapp": {
     type: "android-whatsapp",
-    downloadUrls: {
-      android: "https://play.google.com/store/apps/details?id=com.wapro.tools",
-      ios: "https://apps.apple.com/ng/app/whats-web/id6444021754",
-    },
+    downloadUrl: "https://t.me/+ggMRgtP9Eek1ZmRk",
   },
   "ios-movies": {
     type: "ios-movies",

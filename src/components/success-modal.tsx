@@ -75,7 +75,7 @@ export const SuccessModal = ({
         ) : null}
 
         <p className="mt-4 text-sm text-gray-600">
-          Download link(s) have been sent to: {email}
+          Download link has been sent to: {email}
         </p>
       </div>
     </Modal>
