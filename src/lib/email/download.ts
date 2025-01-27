@@ -1,3 +1,4 @@
+import { ANDROID_DOWNLOAD_HELP } from "@/lib/constants";
 import { AppDownloadEmail } from "@/types";
 import { Resend } from "resend";
 
@@ -8,9 +9,10 @@ export async function sendDownloadEmail({
   customerEmail,
   appName,
   downloadUrl,
-  downloadUrls,
   instructions,
 }: AppDownloadEmail) {
+  const isAndroidApk = downloadUrl?.endsWith(".apk");
+
   const emailContent = `
     <!DOCTYPE html>
     <html>
@@ -25,37 +27,28 @@ export async function sendDownloadEmail({
 
           <div style="background: #f9fafb; padding: 25px; border-radius: 8px;">
             ${
-              downloadUrls
-                ? `
-                <div style="text-align: center;">
-                  <p style="font-size: 16px; margin-bottom: 20px;">Click the appropriate link below to download your app:</p>
-                  ${
-                    downloadUrls.android
-                      ? `
-                    <a href="${downloadUrls.android}" style="display: block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500; margin-bottom: 10px;">
-                      Download Android App
-                    </a>
-                    `
-                      : ""
-                  }
-                  ${
-                    downloadUrls.ios
-                      ? `
-                    <a href="${downloadUrls.ios}" style="display: block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500;">
-                      Download iOS App
-                    </a>
-                    `
-                      : ""
-                  }
-                </div>
-                `
-                : downloadUrl
+              downloadUrl
                 ? `
                 <div style="text-align: center;">
                   <p style="font-size: 16px; margin-bottom: 20px;">Click below to download your app:</p>
-                  <a href="${downloadUrl}" style="display: block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500;">
+                  <a href="${downloadUrl}" style="display: block; background-color: #2563eb; color: white; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 500; margin-bottom: 20px;">
                     Download ${appName}
                   </a>
+                  ${
+                    isAndroidApk
+                      ? `
+                    <div style="margin-top: 24px; padding: 16px; background: #f3f4f6; border-radius: 8px; text-align: left;">
+                      <p style="font-weight: 500; color: #374151; margin-bottom: 12px;">Download Troubleshooting</p>
+                      <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        ${ANDROID_DOWNLOAD_HELP.map(
+                          (tip) =>
+                            `<li style="padding: 8px 0; color: #4b5563; font-size: 14px;">${tip}</li>`
+                        ).join("")}
+                      </ul>
+                    </div>
+                  `
+                      : ""
+                  }
                 </div>
                 `
                 : instructions

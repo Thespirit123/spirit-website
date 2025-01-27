@@ -1,4 +1,4 @@
-import { AppDownloadConfig, DownloadAppType } from "@/types";
+import { AppDownloadConfig, CommissionRates, DownloadAppType } from "@/types";
 
 if (!process.env.NEXT_PUBLIC_API_BASE_URL)
   throw new Error("API_BASE_URL is required");
@@ -33,3 +33,19 @@ export const APP_DOWNLOADS: Record<DownloadAppType, AppDownloadConfig> = {
     downloadUrl: "https://netmirrorapp.com/#ios",
   },
 };
+
+export const COMMISSION_RATES: CommissionRates = {
+  "android-movies": 0.1,
+  "android-anime": 0.1,
+  "android-whatsapp": 0.1,
+  "ios-movies": 0.1,
+};
+
+export const ANDROID_DOWNLOAD_HELP = [
+  "If you're having trouble downloading:",
+  "1. Try clearing your browser cache",
+  "2. Enable 'Install Unknown Apps' in Settings > Security",
+  "3. Try sharing the link to WhatsApp/Telegram and downloading from there",
+  "4. If using Chrome, check 'Downloads' permission is enabled",
+  "5. Make sure you have enough storage space",
+];

@@ -211,3 +211,36 @@ export interface FeedbackFormData {
   improvement: string;
   recommend: string;
 }
+
+export interface CommissionRates {
+  "android-movies": number;
+  "android-anime": number;
+  "android-whatsapp": number;
+  "ios-movies": number;
+}
+
+export interface CustomerInfo {
+  name: string;
+  email: string;
+  phone: string;
+  referralCode?: string;
+}
+
+export interface PurchaseRecord {
+  transactionId: number;
+  transactionRef: string;
+  customerEmail: string;
+  customerName: string;
+  appType: DownloadAppType;
+  amount: number;
+  referralCode?: string;
+  referrerId?: string;
+  commissionAmount?: number;
+  status: TransactionStatus;
+}
+
+export interface ReferralValidation {
+  isValid: boolean;
+  referrerId?: string;
+  error?: string;
+}
