@@ -12,61 +12,21 @@ import {
 } from "@/components/ui/table";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserStats } from "@/hooks/useUserStats";
+import { processUserBalance } from "@/lib/purchases";
 import { formatCurrency } from "@/lib/utils";
-import { Transaction, TransactionStatus } from "@/types";
+import { TransactionStatus } from "@/types";
+import { Timestamp } from "firebase/firestore";
 import { Clock, TrendingUp, Users, Wallet } from "lucide-react";
 import Link from "next/link";
-
-const transactions: Transaction[] = [
-  {
-    id: "00001",
-    name: "Christine Brooks",
-    amount: "₦50.00",
-    date: "14 Feb 2019",
-    service: "Airtime",
-    status: TransactionStatus.COMPLETED,
-  },
-  {
-    id: "00002",
-    name: "Rosie Pearson",
-    amount: "₦1,530.00",
-    date: "14 Feb 2019",
-    service: "Spy App",
-    status: TransactionStatus.PROCESSING,
-  },
-  {
-    id: "00003",
-    name: "Darrell Caldwell",
-    amount: "₦3,650.00",
-    date: "14 Feb 2019",
-    service: "Movies App",
-    status: TransactionStatus.REJECTED,
-  },
-  {
-    id: "00004",
-    name: "Gilbert Johnston",
-    amount: "₦1,450.40",
-    date: "14 Feb 2019",
-    service: "Spy App",
-    status: TransactionStatus.COMPLETED,
-  },
-  {
-    id: "00005",
-    name: "Alan Cain",
-    amount: "₦70.90",
-    date: "14 Feb 2019",
-    service: "Airtime",
-    status: TransactionStatus.PROCESSING,
-  },
-];
+import { useEffect } from "react";
 
 const getStatusStyle = (status: TransactionStatus): string => {
   switch (status) {
-    case "Completed":
+    case TransactionStatus.COMPLETED:
       return "bg-emerald-100 text-emerald-800";
-    case "Processing":
+    case TransactionStatus.PROCESSING:
       return "bg-purple-100 text-purple-800";
-    case "Rejected":
+    case TransactionStatus.REJECTED:
       return "bg-red-100 text-red-800";
     default:
       return "bg-gray-100 text-gray-800";
@@ -76,6 +36,14 @@ const getStatusStyle = (status: TransactionStatus): string => {
 const DashboardPage = () => {
   const { user } = useAuth();
   const { stats, loading } = useUserStats(user?.uid);
+  console.log("stats", stats);
+
+  useEffect(() => {
+    const pendingBalance = stats?.pendingBalance ?? 0;
+    if (user?.uid && pendingBalance >= 1000) {
+      processUserBalance(user.uid).catch(console.error);
+    }
+  }, [user?.uid, stats?.pendingBalance]);
 
   const statsData = [
     {
@@ -115,6 +83,14 @@ const DashboardPage = () => {
       iconColor: "text-blue-500",
     },
   ];
+
+  const formatDate = (timestamp: Timestamp) => {
+    return new Date(timestamp.seconds * 1000).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    });
+  };
 
   return (
     <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg">
@@ -176,34 +152,45 @@ const DashboardPage = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {transactions.map((transaction) => (
-                <TableRow key={transaction.id}>
-                  <TableCell className="font-medium whitespace-nowrap">
-                    {transaction.id}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    {transaction.name}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    {transaction.amount}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    {transaction.date}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    {transaction.service}
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    <span
-                      className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyle(
-                        transaction.status
-                      )}`}
-                    >
-                      {transaction.status}
-                    </span>
+              {stats?.referrals && stats.referrals.length > 0 ? (
+                stats.referrals.map((referral) => (
+                  <TableRow key={referral.id}>
+                    <TableCell className="font-medium whitespace-nowrap">
+                      {referral.id}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {referral.name}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {formatCurrency(referral.amount)}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {formatDate(referral.date)}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      {referral.service}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      <span
+                        className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyle(
+                          TransactionStatus.COMPLETED
+                        )}`}
+                      >
+                        {TransactionStatus.COMPLETED}
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={6}
+                    className="h-24 text-center text-gray-500"
+                  >
+                    No referrals yet
                   </TableCell>
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </div>

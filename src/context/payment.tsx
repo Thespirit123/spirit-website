@@ -7,37 +7,54 @@ import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { createContext, useContext, useState } from "react";
 import toast from "react-hot-toast";
 
+interface CustomerInfo {
+  name: string;
+  email: string;
+  phone: string;
+  referralCode?: string;
+}
+
 interface PaymentContextType {
   showPaymentModal: boolean;
+  setShowPaymentModal: (show: boolean) => void;
   showSuccessModal: boolean;
+  setShowSuccessModal: (show: boolean) => void;
   customerEmail: string;
+  setCustomerEmail: (email: string) => void;
+  appType: DownloadAppType | null;
+  setAppType: (type: DownloadAppType | null) => void;
+  customerInfo: CustomerInfo;
+  setCustomerInfo: (info: CustomerInfo) => void;
   handleOpenPayment: (planId?: string) => void;
-  handlePaymentSuccess: (
-    response: FlutterWaveResponse,
-    planDetails: PaymentPlan
-  ) => Promise<void>;
-  handlePaymentError: (error: PaymentError) => void;
-  handleCloseSuccess: () => void;
-  appType?: DownloadAppType;
 }
 
 const PaymentContext = createContext<PaymentContextType | null>(null);
 
+interface PaymentProviderProps {
+  children: React.ReactNode;
+  productType?: "movie-portal" | "whatsapp-tool";
+}
+
 export const PaymentProvider = ({
   children,
   productType = "movie-portal",
-}: {
-  children: React.ReactNode;
-  productType?: "movie-portal" | "whatsapp-tool";
-}) => {
+}: PaymentProviderProps) => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
   const [initialPlan, setInitialPlan] = useState<string>();
-  const [appType, setAppType] = useState<DownloadAppType>();
+  const [appType, setAppType] = useState<DownloadAppType | null>(null);
+  const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
+    name: "",
+    email: "",
+    phone: "",
+    referralCode: "",
+  });
 
   const handleOpenPayment = (planId?: string) => {
-    setInitialPlan(planId);
+    if (planId) {
+      setInitialPlan(planId);
+    }
     setShowPaymentModal(true);
   };
 
@@ -45,32 +62,36 @@ export const PaymentProvider = ({
     response: FlutterWaveResponse,
     planDetails: PaymentPlan
   ) => {
-    const downloadType: DownloadAppType = planDetails.name
-      .toLowerCase()
-      .includes("whatsapp")
-      ? "android-whatsapp"
-      : planDetails.name.toLowerCase().includes("anime")
-      ? "android-anime"
-      : planDetails.platform === "ios"
-      ? "ios-movies"
-      : "android-movies";
-
-    setCustomerEmail(response.customer.email);
-    setAppType(downloadType);
-    setShowPaymentModal(false);
-    setShowSuccessModal(true);
-
     try {
-      await createPurchaseRecord(response, {
+      const downloadType: DownloadAppType = planDetails.name
+        .toLowerCase()
+        .includes("whatsapp")
+        ? "android-whatsapp"
+        : planDetails.name.toLowerCase().includes("anime")
+        ? "android-anime"
+        : planDetails.platform === "ios"
+        ? "ios-movies"
+        : "android-movies";
+      setCustomerEmail(response.customer.email);
+      setAppType(downloadType);
+      setShowPaymentModal(false);
+      setShowSuccessModal(true);
+
+      console.log("👥 Referral Info:", {
+        hasReferralCode: !!customerInfo.referralCode,
+        referralCode: customerInfo.referralCode,
+      });
+      const purchaseId = await createPurchaseRecord(response, {
         id: planDetails.id,
         name: planDetails.name,
         platform: planDetails.platform,
         price: planDetails.price,
         appType: downloadType,
+        referralCode: customerInfo.referralCode,
       });
+      console.log("💾 Purchase Record Created:", { purchaseId });
 
       const appConfig = APP_DOWNLOADS[downloadType];
-
       const emailResponse = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -82,17 +103,15 @@ export const PaymentProvider = ({
           instructions: appConfig?.instructions,
         }),
       });
-
       if (!emailResponse.ok) {
         throw new Error("Failed to send email");
       }
-
-      toast.success("Download instructions sent to your email!");
     } catch (error) {
-      console.error("❌ Payment Success Handler Error:", error);
-      toast.error(
-        "Purchase recorded but email failed to send. Contact support if needed."
-      );
+      console.error("❌ Payment Success Handler Error:", {
+        error,
+        stack: error instanceof Error ? error.stack : undefined,
+        step: "final",
+      });
     }
   };
 
@@ -103,30 +122,41 @@ export const PaymentProvider = ({
 
   const handleCloseSuccess = () => setShowSuccessModal(false);
 
+  const value = {
+    showPaymentModal,
+    setShowPaymentModal,
+    showSuccessModal,
+    setShowSuccessModal,
+    customerEmail,
+    setCustomerEmail,
+    appType,
+    setAppType,
+    customerInfo,
+    setCustomerInfo,
+    handleOpenPayment,
+  };
+
   return (
-    <PaymentContext.Provider
-      value={{
-        showPaymentModal,
-        showSuccessModal,
-        customerEmail,
-        handleOpenPayment,
-        handlePaymentSuccess,
-        handlePaymentError,
-        handleCloseSuccess,
-        appType,
-      }}
-    >
+    <PaymentContext.Provider value={value}>
       {children}
       <PaymentModal
         isOpen={showPaymentModal}
         onClose={() => {
           setShowPaymentModal(false);
           setInitialPlan(undefined);
+          setCustomerInfo({
+            name: "",
+            email: "",
+            phone: "",
+            referralCode: "",
+          });
         }}
         initialPlan={initialPlan}
         productType={productType}
         onPaymentSuccess={handlePaymentSuccess}
         onPaymentError={handlePaymentError}
+        customerInfo={customerInfo}
+        setCustomerInfo={setCustomerInfo}
       />
       <SuccessModal
         isOpen={showSuccessModal}

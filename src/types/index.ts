@@ -1,4 +1,5 @@
 import { User } from "firebase/auth";
+import { Timestamp } from "firebase/firestore";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 
 export type Platform = "ios" | "android";
@@ -18,6 +19,14 @@ export interface Slide {
   videoUrl: string;
 }
 
+export interface ReferralRecord {
+  id: string;
+  name: string;
+  amount: number;
+  date: Timestamp;
+  service: string;
+}
+
 export interface UserData {
   uid: string;
   email: string;
@@ -32,6 +41,7 @@ export interface UserData {
   availableBalance: number;
   pendingBalance: number;
   referralCount: number;
+  referrals: ReferralRecord[];
 }
 
 export interface AuthState {
@@ -60,9 +70,9 @@ export enum TransactionStatus {
 export interface Transaction {
   id: string;
   name: string;
-  amount: string;
-  date: string;
-  service: "Airtime" | "Spy App" | "Movies App";
+  amount: number;
+  date: Timestamp | Date;
+  service: string;
   status: TransactionStatus;
 }
 
@@ -129,6 +139,8 @@ export interface PaymentModalProps {
   ) => void;
   onPaymentError: (error: PaymentError) => void;
   initialPlan?: string;
+  customerInfo: CustomerInfo;
+  setCustomerInfo: (info: CustomerInfo) => void;
 }
 
 export interface FlutterwaveCustomer {
@@ -236,7 +248,9 @@ export interface PurchaseRecord {
   referralCode?: string;
   referrerId?: string;
   commissionAmount?: number;
+  commissionStatus?: "pending" | "failed";
   status: TransactionStatus;
+  createdAt: Date;
 }
 
 export interface ReferralValidation {

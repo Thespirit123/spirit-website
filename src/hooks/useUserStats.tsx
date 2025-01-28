@@ -1,4 +1,5 @@
 import { db } from "@/lib/firebase";
+import { ReferralRecord } from "@/types";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ interface UserStats {
   pendingBalance: number;
   referralCount: number;
   referralCode: string;
+  referrals: ReferralRecord[];
 }
 
 export const useUserStats = (userId: string | undefined) => {
@@ -33,6 +35,7 @@ export const useUserStats = (userId: string | undefined) => {
             pendingBalance: data.pendingBalance ?? 0,
             referralCount: data.referralCount ?? 0,
             referralCode: data.referralCode ?? "",
+            referrals: data.referrals || [],
           });
         }
         setLoading(false);

@@ -1,6 +1,11 @@
 import { MOVIE_PORTAL_PLANS, WHATSAPP_TOOL_PLANS } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
-import { FlutterwaveConfig, PaymentModalProps, PaymentPlan } from "@/types";
+import {
+  CustomerInfo,
+  FlutterwaveConfig,
+  PaymentModalProps,
+  PaymentPlan,
+} from "@/types";
 import { FlutterWaveButton, closePaymentModal } from "flutterwave-react-v3";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { useEffect, useState } from "react";
@@ -52,12 +57,6 @@ const StepOne = ({
     </div>
   </div>
 );
-
-interface CustomerInfo {
-  name: string;
-  email: string;
-  phone: string;
-}
 
 interface StepTwoProps {
   selectedPlanDetails: PaymentPlan;
@@ -151,6 +150,18 @@ const StepTwo = ({
             setCustomerInfo({ ...customerInfo, phone: e.target.value })
           }
         />
+        <FormField
+          label="Referral Code (Optional)"
+          type="text"
+          placeholder="Have a referral code?"
+          value={customerInfo.referralCode || ""}
+          onChange={(e) =>
+            setCustomerInfo({
+              ...customerInfo,
+              referralCode: e.target.value.trim(),
+            })
+          }
+        />
       </div>
 
       <div className="mt-8 flex items-center justify-between gap-6 max-w-md mx-auto">
@@ -191,6 +202,8 @@ export const PaymentModal = ({
   onPaymentSuccess,
   onPaymentError,
   initialPlan,
+  customerInfo,
+  setCustomerInfo,
 }: PaymentModalProps) => {
   const [step, setStep] = useState<Step>(() => {
     const initialStep = productType === "whatsapp-tool" || initialPlan ? 2 : 1;
@@ -212,11 +225,6 @@ export const PaymentModal = ({
   const [paymentStatus, setPaymentStatus] = useState<
     "idle" | "success" | "failed"
   >("idle");
-  const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
-    name: "",
-    email: "",
-    phone: "",
-  });
 
   useEffect(() => {
     if (initialPlan) {
@@ -228,12 +236,10 @@ export const PaymentModal = ({
   const handleClose = () => {
     if (productType === "whatsapp-tool") {
       setPaymentStatus("idle");
-      setCustomerInfo({ name: "", email: "", phone: "" });
     } else {
       setStep(1);
       setSelectedPlan("");
       setPaymentStatus("idle");
-      setCustomerInfo({ name: "", email: "", phone: "" });
     }
 
     onClose();
