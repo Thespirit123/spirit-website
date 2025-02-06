@@ -36,7 +36,6 @@ const getStatusStyle = (status: TransactionStatus): string => {
 const DashboardPage = () => {
   const { user } = useAuth();
   const { stats, loading } = useUserStats(user?.uid);
-  console.log("stats", stats);
 
   useEffect(() => {
     const pendingBalance = stats?.pendingBalance ?? 0;

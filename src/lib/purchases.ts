@@ -2,7 +2,6 @@ import { db } from "@/lib/firebase";
 import {
   DownloadAppType,
   Platform,
-  PurchaseRecord,
   ReferralRecord,
   ReferralValidation,
   TransactionStatus,
@@ -33,9 +32,9 @@ export const createPurchaseRecord = async (
   }
 ): Promise<string> => {
   try {
-    let referrerId: string | undefined;
-    let commissionAmount: number | undefined;
-    let commissionStatus: "pending" | "failed" | undefined;
+    let referrerId: string | null = null;
+    let commissionAmount: number | null = null;
+    let commissionStatus: "pending" | "failed" | null = null;
 
     if (productDetails.referralCode) {
       const validation = await validateReferralCode(
@@ -50,20 +49,24 @@ export const createPurchaseRecord = async (
       }
     }
 
-    const purchase: PurchaseRecord = {
+    const purchase = {
       transactionId: response.transaction_id,
       transactionRef: response.tx_ref,
       customerEmail: response.customer.email,
       customerName: response.customer.name,
       appType: productDetails.appType,
       amount: productDetails.price,
-      referralCode: productDetails.referralCode,
-      referrerId,
-      commissionAmount,
-      commissionStatus,
       status: TransactionStatus.COMPLETED,
       createdAt: new Date(),
+      ...(productDetails.referralCode && {
+        referralCode: productDetails.referralCode,
+      }),
+      ...(referrerId && { referrerId }),
+      ...(commissionAmount && { commissionAmount }),
+      ...(commissionStatus && { commissionStatus }),
     };
+
+    console.log("📝 Attempting to create purchase record:", purchase);
 
     const purchasesRef = collection(db, "purchases");
     const docRef = await addDoc(purchasesRef, purchase);
@@ -84,12 +87,14 @@ export const createPurchaseRecord = async (
         });
       }
     }
+
     return docRef.id;
   } catch (error) {
     console.error("Purchase record error:", {
       error,
       errorMessage: error instanceof Error ? error.message : "Unknown error",
       stack: error instanceof Error ? error.stack : undefined,
+      data: { response, productDetails },
     });
     throw error;
   }
