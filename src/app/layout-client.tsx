@@ -3,6 +3,7 @@ import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { Loading } from "@/components/loading";
 import { AuthProvider } from "@/context/auth";
+import { useSubdomain } from "@/hooks/useSubdomain";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -19,10 +20,15 @@ export default function RootLayoutClient({
   const [mounted, setMounted] = useState(false);
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
+  const isConfessionsSubdomain = useSubdomain();
 
-  const isAuthPage = useMemo(() => {
-    return pathname?.startsWith("/auth");
-  }, [pathname]);
+  const shouldHideNavAndFooter = useMemo(() => {
+    return (
+      pathname?.startsWith("/auth") ||
+      pathname?.startsWith("/confessions") ||
+      isConfessionsSubdomain
+    );
+  }, [pathname, isConfessionsSubdomain]);
 
   useLayoutEffect(() => {
     setMounted(true);
@@ -48,9 +54,9 @@ export default function RootLayoutClient({
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                {!isAuthPage && <Navbar />}
+                {!shouldHideNavAndFooter && <Navbar />}
                 {children}
-                {!isAuthPage && <Footer />}
+                {!shouldHideNavAndFooter && <Footer />}
                 <Toaster />
               </motion.div>
             </AuthProvider>
