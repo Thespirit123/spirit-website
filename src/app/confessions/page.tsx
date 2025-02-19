@@ -2,8 +2,8 @@
 import ConfessionsBg from "@/assets/images/confessions-bg.png";
 import MaskImg from "@/assets/images/mask.png";
 import { Card } from "@/components/ui/card";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import { Lock, Send } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
 
 const glassEffect =
@@ -25,24 +25,32 @@ const ConfessionPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center px-2 sm:px-4 py-8 sm:py-12 relative">
-      <Image
-        src={ConfessionsBg}
-        alt="Background"
-        fill
-        className="object-cover absolute inset-0 z-0"
-        priority
-      />
+    <div className="min-h-screen flex flex-col items-center px-2 sm:px-4 py-8 sm:py-12 relative overflow-hidden">
+      <div className="absolute inset-0 w-full h-full">
+        <OptimizedImage
+          src={ConfessionsBg}
+          alt="Background"
+          fill
+          priority
+          quality={75}
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
 
       <div
         className={`relative z-10 ${containerWidths.sm} sm:${containerWidths.md} lg:${containerWidths.lg} xl:${containerWidths.xl} flex flex-col items-center`}
       >
         <div className="text-center mb-8 sm:mb-12 w-full">
           <div className="w-[180px] h-[150px] sm:w-[250px] sm:h-[200px] mx-auto">
-            <Image
+            <OptimizedImage
               src={MaskImg}
               alt="Venetian Mask"
+              width={250}
+              height={200}
               className="w-full h-full object-contain"
+              quality={90}
+              sizes="(max-width: 640px) 180px, 250px"
             />
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold text-white mb-3 sm:mb-4">
