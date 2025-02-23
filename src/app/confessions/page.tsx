@@ -32,7 +32,7 @@ const ConfessionPage = () => {
           alt="Background"
           fill
           priority
-          quality={75}
+          quality={100}
           sizes="100vw"
           className="object-cover"
         />
