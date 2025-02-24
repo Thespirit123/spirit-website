@@ -1,68 +1,154 @@
-import HeroImg from "@/assets/images/home-hero-bg.png";
-import HeroScreensMobile from "@/assets/images/home-hero-screens-mobile.png";
-import HeroScreens from "@/assets/images/home-hero-screens.png";
+import PromoDiscount from "@/assets/images/promo-discount.jpg";
+import PromoNumbers from "@/assets/images/promo-numbers.jpeg";
+import PromoRewards from "@/assets/images/promo-rewards.jpg";
 import Button from "@/components/custom-ui/button";
-import { useRealHeight } from "@/hooks/useRealHeight";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-interface HeroSectionProps {
-  onExplore: () => void;
+interface Promotion {
+  id: number;
+  title: string;
+  subtitle: string;
+  cta: string;
+  image: typeof PromoNumbers;
 }
 
-export const HeroSection = ({ onExplore }: HeroSectionProps) => {
-  const height = useRealHeight();
+const promotions: Promotion[] = [
+  {
+    id: 1,
+    title: "Buy More, Save More!",
+    subtitle: "Get FREE International Numbers: Buy 5 get 1 FREE • Buy 10 get 2 FREE • Buy 20 get 5 FREE. Limited time offer - Stock up now and maximize your savings!",
+    cta: "View Bundles",
+    image: PromoNumbers,
+  },
+  {
+    id: 2,
+    title: "Exclusive 20% OFF Everything",
+    subtitle: "Special offer for Spirit Media users! Enjoy 20% off all products including Movies, WhatsApp Tools, and Premium Apps. Don't miss out on these amazing savings!",
+    cta: "Shop Now",
+    image: PromoDiscount,
+  },
+  {
+    id: 3,
+    title: "Earn 20% Lifetime Commission",
+    subtitle: "Join our referral program and earn 20% commission on every purchase your referrals make - forever! Start building your passive income stream today.",
+    cta: "Join Program",
+    image: PromoRewards,
+  },
+];
+
+export const HeroSection = ({ onExplore }: { onExplore: () => void }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % promotions.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  const navigate = (direction: 'prev' | 'next') => {
+    setCurrentSlide(prev => {
+      if (direction === 'prev') {
+        return prev === 0 ? promotions.length - 1 : prev - 1;
+      }
+      return (prev + 1) % promotions.length;
+    });
+  };
 
   return (
-    <section
-      className="min-h-[480px] flex overflow-hidden"
-      style={{ height: height ? `${height - 120}px` : "calc(100vh - 120px)" }}
+    <div
+      className="relative min-h-[700px] lg:min-h-[800px] bg-gray-900 overflow-hidden"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
-      <Image
-        src={HeroImg}
-        alt="Hero Image"
-        fill
-        className="object-cover"
-        priority
-      />
-      <div className="w-11/12 max-w-7xl mx-auto z-2 mt-20 relative">
-        <h1 className="text-white text-center font-medium text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
-          Innovative Digital Solutions <br /> at Your
-          <span className="text-brand-primary"> Fingertips</span>
-        </h1>
-        <h3 className="text-white text-center mt-2 sm:mt-4 font-normal text-lg sm:text-xl md:text-xl lg:text-2xl">
-          Cutting-Edge Mobile Apps & Services
-        </h3>
-        <Button
-          variant="primary"
-          className="mt-6 mx-auto block"
-          onClick={onExplore}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
         >
-          Explore Our Products
-        </Button>
+          <Image
+            src={promotions[currentSlide].image}
+            alt=""
+            fill
+            className="object-cover"
+            priority
+            quality={90}
+          />
+          <div className="absolute inset-0 backdrop-blur-sm bg-black/30" />
 
-        <div className="w-full mt-[7rem] absolute bottom-0 left-0 right-0">
-          <div className="hidden lg:block">
-            <Image
-              src={HeroScreens}
-              alt="Hero Screens"
-              width={1200}
-              height={800}
-              className="w-[95%] sm:w-[85%] md:w-3/4 lg:w-3/5 h-auto mx-auto"
-              priority
-            />
+          <div className="absolute inset-0">
+            <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8">
+              <div className="h-full flex flex-col justify-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="max-w-xl backdrop-blur-md bg-black/20 p-6 sm:p-8 rounded-lg"
+                >
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3">
+                    {promotions[currentSlide].title}
+                  </h2>
+                  <p className="text-base sm:text-lg lg:text-xl text-white/90 mb-6 leading-relaxed">
+                    {promotions[currentSlide].subtitle}
+                  </p>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={onExplore}
+                    className="text-base px-6 py-3 backdrop-blur-none"
+                  >
+                    {promotions[currentSlide].cta}
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
           </div>
-          <div className="block lg:hidden -mb-24 sm:-mb-56">
-            <Image
-              src={HeroScreensMobile}
-              alt="Hero Screens"
-              width={800}
-              height={600}
-              className="w-full h-auto mx-auto"
-              priority
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center items-center gap-6 py-4">
+        <button
+          onClick={() => navigate('prev')}
+          className="p-2 rounded-full bg-black/20 hover:bg-black/30 transition-colors backdrop-blur-md"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+
+        <div className="flex gap-3">
+          {promotions.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={cn(
+                "w-2.5 h-2.5 rounded-full transition-all duration-300",
+                currentSlide === index
+                  ? "bg-white w-8"
+                  : "bg-white/50 hover:bg-white/75"
+              )}
+              aria-label={`Go to slide ${index + 1}`}
             />
-          </div>
+          ))}
         </div>
+
+        <button
+          onClick={() => navigate('next')}
+          className="p-2 rounded-full bg-black/20 hover:bg-black/30 transition-colors backdrop-blur-md"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
       </div>
-    </section>
+    </div>
   );
 };

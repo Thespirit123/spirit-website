@@ -1,15 +1,9 @@
-import InstagramIcon from "@/assets/icons/instagram";
 import TelegramIcon from "@/assets/icons/telegram";
-import TikTokIcon from "@/assets/icons/tiktok";
 import WhatsappIcon from "@/assets/icons/whatsapp";
 
 export const SOCIAL_LINKS = {
-  WHATSAPP: `https://wa.me/2349035745258?text=${encodeURIComponent(
-    "Hi, I'd like to know more about your streaming service"
-  )}`,
-  TELEGRAM: "https://t.me/TheSpiritMediaEnt",
-  INSTAGRAM: "https://www.instagram.com/theespiritmedia/",
-  TIKTOK: "https://www.tiktok.com/@theespiritmedia",
+  WHATSAPP: `https://chat.whatsapp.com/IZ9kgz1qkJW4wpDZl36KwR`,
+  TELEGRAM: "https://t.me/Thespiritupdates",
 } as const;
 
 interface SocialLinksProps {
@@ -17,7 +11,7 @@ interface SocialLinksProps {
   iconClassName?: string;
 }
 
-export const SocialLinks = ({
+const SocialLinks = ({
   className = "",
   iconClassName = "",
 }: SocialLinksProps) => (
@@ -40,23 +34,7 @@ export const SocialLinks = ({
     >
       <TelegramIcon />
     </a>
-    <a
-      href={SOCIAL_LINKS.INSTAGRAM}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Follow us on Instagram"
-      className={`hover:opacity-80 transition-opacity ${iconClassName}`}
-    >
-      <InstagramIcon />
-    </a>
-    <a
-      href={SOCIAL_LINKS.TIKTOK}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Follow us on TikTok"
-      className={`hover:opacity-80 transition-opacity ${iconClassName}`}
-    >
-      <TikTokIcon />
-    </a>
   </div>
 );
+
+export default SocialLinks;

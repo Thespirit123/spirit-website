@@ -32,7 +32,7 @@ const PaymentContext = createContext<PaymentContextType | null>(null);
 
 interface PaymentProviderProps {
   children: React.ReactNode;
-  productType?: "movie-portal" | "whatsapp-tool";
+  productType?: "movie-portal" | "whatsapp-tool" | "cracked-apps";
 }
 
 export const PaymentProvider = ({
@@ -63,24 +63,37 @@ export const PaymentProvider = ({
     planDetails: PaymentPlan
   ) => {
     try {
-      const downloadType: DownloadAppType = planDetails.name
-        .toLowerCase()
-        .includes("whatsapp")
-        ? "android-whatsapp"
-        : planDetails.name.toLowerCase().includes("anime")
-        ? "android-anime"
-        : planDetails.platform === "ios"
-        ? "ios-movies"
-        : "android-movies";
+      let downloadType: DownloadAppType;
+
+      if (productType === "cracked-apps") {
+        if (planDetails.name.toLowerCase().includes("bulk message pro")) {
+          downloadType = "bulk-message-pro";
+        } else if (planDetails.name.toLowerCase().includes("auto save contact")) {
+          downloadType = "auto-save-contact";
+        } else if (planDetails.name.toLowerCase().includes("capcut premium")) {
+          downloadType = "cap-cut-premium";
+        } else if (planDetails.name.toLowerCase().includes("spotify premium")) {
+          downloadType = "spotify-premium";
+        } else {
+          downloadType = "android-movies";
+        }
+      } else {
+        downloadType = planDetails.name
+          .toLowerCase()
+          .includes("whatsapp")
+          ? "android-whatsapp"
+          : planDetails.name.toLowerCase().includes("anime")
+            ? "android-anime"
+            : planDetails.platform === "ios"
+              ? "ios-movies"
+              : "android-movies";
+      }
+
       setCustomerEmail(response.customer.email);
       setAppType(downloadType);
       setShowPaymentModal(false);
       setShowSuccessModal(true);
 
-      console.log("👥 Referral Info:", {
-        hasReferralCode: !!customerInfo.referralCode,
-        referralCode: customerInfo.referralCode,
-      });
       const purchaseId = await createPurchaseRecord(response, {
         id: planDetails.id,
         name: planDetails.name,
@@ -92,6 +105,10 @@ export const PaymentProvider = ({
       console.log("💾 Purchase Record Created:", { purchaseId });
 
       const appConfig = APP_DOWNLOADS[downloadType];
+      if (!appConfig) {
+        throw new Error(`No download config found for type: ${downloadType}`);
+      }
+
       const emailResponse = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -112,6 +129,7 @@ export const PaymentProvider = ({
         stack: error instanceof Error ? error.stack : undefined,
         step: "final",
       });
+      toast.error("Payment successful, but there was an error processing your order. Please contact support.");
     }
   };
 

@@ -1,4 +1,8 @@
-import { MOVIE_PORTAL_PLANS, WHATSAPP_TOOL_PLANS } from "@/lib/pricing";
+import {
+  CRACKED_APPS_PLANS,
+  MOVIE_PORTAL_PLANS,
+  WHATSAPP_TOOL_PLANS,
+} from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 import {
   CustomerInfo,
@@ -195,6 +199,19 @@ const StepTwo = ({
   );
 };
 
+const getPlans = (productType: string): PaymentPlan[] => {
+  switch (productType) {
+    case "movie-portal":
+      return MOVIE_PORTAL_PLANS;
+    case "whatsapp-tool":
+      return WHATSAPP_TOOL_PLANS;
+    case "cracked-apps":
+      return CRACKED_APPS_PLANS;
+    default:
+      return [];
+  }
+};
+
 export const PaymentModal = ({
   isOpen,
   onClose,
@@ -206,20 +223,28 @@ export const PaymentModal = ({
   setCustomerInfo,
 }: PaymentModalProps) => {
   const [step, setStep] = useState<Step>(() => {
-    const initialStep = productType === "whatsapp-tool" || initialPlan ? 2 : 1;
+    const initialStep =
+      productType === "whatsapp-tool" || productType === "cracked-apps"
+        ? 2
+        : 1;
     return initialStep;
   });
 
   const [selectedPlan, setSelectedPlan] = useState<string>(() => {
-    const initialSelectedPlan =
-      productType === "whatsapp-tool"
-        ? WHATSAPP_TOOL_PLANS[0].id
-        : initialPlan || "";
+    let initialSelectedPlan = "";
+
+    if (productType === "whatsapp-tool") {
+      initialSelectedPlan = WHATSAPP_TOOL_PLANS[0].id;
+    } else if (productType === "cracked-apps") {
+      initialSelectedPlan = CRACKED_APPS_PLANS[0].id;
+    } else if (initialPlan) {
+      initialSelectedPlan = initialPlan;
+    }
+
     return initialSelectedPlan;
   });
 
-  const plans =
-    productType === "movie-portal" ? MOVIE_PORTAL_PLANS : WHATSAPP_TOOL_PLANS;
+  const plans = getPlans(productType);
   const selectedPlanDetails = plans.find((plan) => plan.id === selectedPlan);
 
   const [paymentStatus, setPaymentStatus] = useState<
@@ -234,14 +259,9 @@ export const PaymentModal = ({
   }, [initialPlan]);
 
   const handleClose = () => {
-    if (productType === "whatsapp-tool") {
-      setPaymentStatus("idle");
-    } else {
-      setStep(1);
-      setSelectedPlan("");
-      setPaymentStatus("idle");
-    }
-
+    setStep(1);
+    setSelectedPlan("");
+    setPaymentStatus("idle");
     onClose();
   };
 
@@ -253,11 +273,7 @@ export const PaymentModal = ({
   }, [isOpen, productType]);
 
   const handleBack = () => {
-    if (productType === "whatsapp-tool" || initialPlan) {
-      handleClose();
-    } else {
-      setStep(1);
-    }
+    setStep(1);
   };
 
   const config = {
@@ -274,7 +290,8 @@ export const PaymentModal = ({
     customizations: {
       title: `Spirit Media - ${selectedPlanDetails?.name}`,
       description: `Payment for ${selectedPlanDetails?.duration}`,
-      logo: "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/Logo%202%20(Black%20bg)-oa6kh1QmsSpldy6txxtPw20bMPjGHw.jpg",
+      logo:
+        "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/Logo%202%20(Black%20bg)-oa6kh1QmsSpldy6txxtPw20bMPjGHw.jpg",
     },
     text: "Pay Now",
   };
@@ -314,6 +331,8 @@ export const PaymentModal = ({
         <h2 className="text-xl md:text-2xl font-semibold">
           {productType === "whatsapp-tool"
             ? "WhatsApp Tool License"
+            : productType === "cracked-apps"
+            ? "Cracked Apps Purchase"
             : step === 1
             ? "Choose Your App"
             : "Complete Your Purchase"}
@@ -321,7 +340,7 @@ export const PaymentModal = ({
       </ModalHeader>
 
       <ModalBody>
-        {productType === "movie-portal" && step === 1 ? (
+        {step === 1 ? (
           <StepOne
             plans={plans}
             selectedPlan={selectedPlan}

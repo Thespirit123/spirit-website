@@ -132,7 +132,7 @@ export interface PaymentError {
 export interface PaymentModalProps {
   isOpen: boolean;
   onClose: () => void;
-  productType: "movie-portal" | "whatsapp-tool";
+  productType: "movie-portal" | "whatsapp-tool" | "cracked-apps";
   onPaymentSuccess: (
     response: FlutterWaveResponse,
     planDetails: PaymentPlan
@@ -202,7 +202,11 @@ export type DownloadAppType =
   | "android-movies"
   | "android-anime"
   | "android-whatsapp"
-  | "ios-movies";
+  | "ios-movies"
+  | "bulk-message-pro"
+  | "auto-save-contact"
+  | "cap-cut-premium"
+  | "spotify-premium";
 
 export interface AppDownloadConfig {
   type: DownloadAppType;

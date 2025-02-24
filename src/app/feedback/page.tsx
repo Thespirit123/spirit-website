@@ -63,7 +63,7 @@ const FeedbackPage = () => {
   };
 
   return (
-    <section className="flex flex-col lg:flex-row min-h-screen px-4 sm:px-6 lg:px-10 mt-10">
+    <section className="flex flex-col lg:flex-row min-h-screen px-4 sm:px-6 lg:px-10 mt-44">
       {/* Mobile Text Content */}
       <div className="lg:hidden text-center mb-8">
         <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2">

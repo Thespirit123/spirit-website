@@ -1,6 +1,7 @@
 "use client";
 
 import { withAuth } from "@/components/auth/protected-route";
+import Button from "@/components/custom-ui/button";
 import { ReferralCode } from "@/components/referral-code";
 import {
   Table,
@@ -13,10 +14,9 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { useUserStats } from "@/hooks/useUserStats";
 import { processUserBalance } from "@/lib/purchases";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatDate } from "@/lib/utils";
 import { TransactionStatus } from "@/types";
-import { Timestamp } from "firebase/firestore";
-import { Clock, TrendingUp, Users, Wallet } from "lucide-react";
+import { ArrowRight, Clock, TrendingUp, Users, Wallet } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -34,7 +34,7 @@ const getStatusStyle = (status: TransactionStatus): string => {
 };
 
 const DashboardPage = () => {
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const { stats, loading } = useUserStats(user?.uid);
 
   useEffect(() => {
@@ -83,19 +83,26 @@ const DashboardPage = () => {
     },
   ];
 
-  const formatDate = (timestamp: Timestamp) => {
-    return new Date(timestamp.seconds * 1000).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
+
 
   return (
-    <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg">
-      <h1 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">
-        Your Dashboard
-      </h1>
+    <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg mt-20">
+      <div className="flex justify-between items-center mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-semibold">
+          Your Dashboard
+        </h1>
+
+        {isAdmin === true && (
+          <Button
+            variant="outline"
+            onClick={() => (window.location.href = "/admin")}
+            className="flex items-center gap-2 text-brand-primary border-brand-primary hover:bg-brand-primary/5"
+          >
+            Admin Dashboard
+            <ArrowRight className="w-4 h-4" />
+          </Button>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
         {statsData.map((stat, index) => (

@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import { Timestamp } from "firebase/firestore";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -23,3 +24,11 @@ export function validateReferralCode(code: string): boolean {
   const pattern = /^SPIRIT-[A-Z0-9]{2}-\d{4}$/;
   return pattern.test(code);
 }
+
+export const formatDate = (timestamp: Timestamp) => {
+  return new Date(timestamp.seconds * 1000).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+};

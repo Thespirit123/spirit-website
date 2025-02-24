@@ -31,14 +31,12 @@ const LoginPage = () => {
     try {
       await signIn(formData.email, formData.password);
 
-      // Handle remember me
       if (formData.remember) {
         localStorage.setItem("rememberEmail", formData.email);
       } else {
         localStorage.removeItem("rememberEmail");
       }
 
-      // Use replace instead of push to prevent back navigation to login
       router.replace("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");

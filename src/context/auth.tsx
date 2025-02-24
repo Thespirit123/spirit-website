@@ -10,7 +10,7 @@ import {
   User,
 } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -67,23 +67,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     },
   });
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = useCallback(async (email: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       setState((prev) => ({ ...prev, error: error as Error }));
       throw error;
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     try {
       await signOut(auth);
     } catch (error) {
       setState((prev) => ({ ...prev, error: error as Error }));
       throw error;
     }
-  };
+  }, []);
 
   return (
     <AuthContext.Provider

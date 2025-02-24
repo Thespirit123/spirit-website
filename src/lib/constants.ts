@@ -32,6 +32,27 @@ export const APP_DOWNLOADS: Record<DownloadAppType, AppDownloadConfig> = {
     type: "ios-movies",
     downloadUrl: "https://netmirrorapp.com/#ios",
   },
+  "bulk-message-pro": {
+    type: "bulk-message-pro",
+    downloadUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/BulkMessagePro-1.0.0.apk",
+  },
+  "auto-save-contact": {
+    type: "auto-save-contact",
+    downloadUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/AutoSave%20Contact-YBNZXTPj08FTeoa3rmdcoOtFd37CcI.apk",
+  },
+  "cap-cut-premium": {
+    type: "cap-cut-premium",
+    downloadUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/CapCutPremium-1.0.0.apk",
+  },
+  "spotify-premium": {
+    type: "spotify-premium",
+    downloadUrl:
+      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/Spotify-Premium-I2Yjx0dLIxwTFFUKoct3UZdeqd3kyP",
+  },
+
 };
 
 export const COMMISSION_RATES: CommissionRates = {

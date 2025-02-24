@@ -2,7 +2,7 @@ import FooterImg from "@/assets/images/footer.png";
 import LogoImg from "@/assets/images/logo.png";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
-import { SocialLinks } from "./social-links";
+import SocialLinks from "./social-links";
 
 const footerLinks = {
   services: [

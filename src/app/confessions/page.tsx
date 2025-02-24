@@ -3,8 +3,11 @@ import ConfessionsBg from "@/assets/images/confessions-bg.png";
 import MaskImg from "@/assets/images/mask.png";
 import { Card } from "@/components/ui/card";
 import { OptimizedImage } from "@/components/ui/optimized-image";
+import { cn } from "@/lib/utils";
+import { submitConfession } from "@/services/confessions";
 import { Lock, Send } from "lucide-react";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const glassEffect =
   "bg-white/10 backdrop-blur-md border border-white/20 shadow-xl";
@@ -18,10 +21,31 @@ const containerWidths = {
 
 const ConfessionPage = () => {
   const [confession, setConfession] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = () => {
-    console.log("Confession submitted:", confession);
-    setConfession("");
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!confession.trim()) {
+      toast.error("Please enter your confession");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await submitConfession(confession);
+
+      toast.success("Confession submitted successfully. Thank you!");
+      setConfession("");
+    } catch (error) {
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Failed to submit confession"
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -97,11 +121,27 @@ const ConfessionPage = () => {
 
             <button
               type="submit"
-              className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white py-3.5 sm:py-3 rounded-lg
-                flex items-center justify-center space-x-2 transition-colors text-base sm:text-base mt-auto"
+              disabled={isSubmitting || !confession.trim()}
+              className={cn(
+                "w-full bg-brand-primary text-white py-3.5 sm:py-3 rounded-lg",
+                "flex items-center justify-center space-x-2 transition-all",
+                "text-base sm:text-base mt-auto",
+                isSubmitting && "opacity-50 cursor-not-allowed",
+                !confession.trim() && "opacity-50 cursor-not-allowed",
+                !isSubmitting && confession.trim() && "hover:bg-brand-primary/90"
+              )}
             >
-              <Send className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>Share your Confession</span>
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                  <span>Submitting...</span>
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span>Share your Confession</span>
+                </>
+              )}
             </button>
           </form>
         </Card>

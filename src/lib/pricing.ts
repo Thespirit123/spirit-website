@@ -62,3 +62,54 @@ export const WHATSAPP_TOOL_PLANS: PaymentPlan[] = [
     ],
   },
 ];
+
+export const CRACKED_APPS_PLANS: PaymentPlan[] = [
+  {
+    id: "bulk-message-pro-plan-id",
+    name: "Bulk Message Pro",
+    price: 4000,
+    duration: "Lifetime Access",
+    platform: "android",
+    features: [
+      "Mass message broadcasting",
+      "Message scheduling",
+      "Template management",
+    ],
+  },
+  {
+    id: "auto-save-contact-plan-id",
+    name: "Auto Save Contact",
+    price: 2000,
+    duration: "Lifetime Access",
+    platform: "android",
+    features: [
+      "Automatic contact saving",
+      "Smart categorization",
+      "Cloud backup & sync",
+    ],
+  },
+  {
+    id: "cap-cut-premium-plan-id",
+    name: "CapCut Premium",
+    price: 4000,
+    duration: "Lifetime Access",
+    platform: "android",
+    features: [
+      "Premium effects & filters",
+      "No watermark export",
+      "4K resolution support",
+    ],
+  },
+  {
+    id: "spotify-premium-plan-id",
+    name: "Spotify Premium",
+    price: 3000,
+    duration: "Lifetime Access",
+    platform: "android",
+    features: [
+      "Ad-free listening",
+      "High quality audio",
+      "Unlimited skips",
+    ],
+  },
+];
