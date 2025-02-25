@@ -156,7 +156,7 @@ const ConfessionPage = () => {
             {
               title: "Weekly Features",
               description:
-                "Selected confessions are shared every Thursday at 9 PM.",
+                "Selected confessions are shared every Wednesday at 9 PM.",
             },
             {
               title: "Safe Space",

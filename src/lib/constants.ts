@@ -35,7 +35,7 @@ export const APP_DOWNLOADS: Record<DownloadAppType, AppDownloadConfig> = {
   "bulk-message-pro": {
     type: "bulk-message-pro",
     downloadUrl:
-      "https://46gozvqrkdqidcjl.public.blob.vercel-storage.com/BulkMessagePro-1.0.0.apk",
+      "https://t.me/+2RGv538p_Ck4ZjZk",
   },
   "auto-save-contact": {
     type: "auto-save-contact",
