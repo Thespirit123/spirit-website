@@ -7,10 +7,11 @@ import {
     getDocs,
     orderBy,
     query,
+    QueryConstraint,
     serverTimestamp,
     Timestamp,
     updateDoc,
-    where,
+    where
 } from "firebase/firestore";
 
 export interface Confession {
@@ -21,13 +22,14 @@ export interface Confession {
     isAnonymous: boolean;
 }
 
+type NewConfession = Omit<Confession, 'id' | 'createdAt'>;
+
 export const getConfessions = async (status?: string): Promise<Confession[]> => {
     try {
         const confessionsRef = collection(db, "confessions");
-        const constraints = [orderBy("createdAt", "desc")];
+        const constraints: QueryConstraint[] = [orderBy("createdAt", "desc")];
 
         if (status && status !== "all") {
-            // @ts-expect-error status is missing
             constraints.push(where("status", "==", status));
         }
 
@@ -44,7 +46,6 @@ export const getConfessions = async (status?: string): Promise<Confession[]> => 
     }
 };
 
-// Update confession status
 export const updateConfessionStatus = async (
     confessionId: string,
     status: 'pending' | 'approved' | 'flagged'
@@ -58,7 +59,6 @@ export const updateConfessionStatus = async (
     }
 };
 
-// Get confession stats
 export const getConfessionStats = async () => {
     try {
         const snapshot = await getDocs(collection(db, "confessions"));
@@ -78,8 +78,7 @@ export const getConfessionStats = async () => {
 
 export const submitConfession = async (content: string): Promise<DocumentReference> => {
     try {
-        // @ts-expect-error createdAt is missing
-        const confession: Omit<Confession, 'createdAt'> = {
+        const confession: NewConfession = {
             content: content.trim(),
             status: 'pending',
             isAnonymous: true,

@@ -2,7 +2,6 @@
 import PhoneIcon from "@/assets/icons/phone";
 import LogoImg from "@/assets/images/logo.png";
 import { useAuth } from "@/hooks/useAuth";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,7 +31,7 @@ const Navbar = () => {
   const { user, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith("/dashboard");
+  const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/admin");
 
   const toggleMenu = useCallback(() => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,10 +62,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={cn(
-        `${isDashboard ? "w-full mt-0" : "w-11/12 mt-4"} bg-white mx-auto relative z-10 rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`,
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300", "bg-white/80 backdrop-blur-md shadow-sm"
-      )}
+      className={`${isDashboard ? "w-full mt-0" : "w-11/12 mt-4"
+        } bg-white mx-auto relative z-10 rounded-md shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`}
     >
       <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">

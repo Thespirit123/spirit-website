@@ -14,7 +14,6 @@ import {
 } from "@/services/confessions";
 import {
   CheckCircle,
-  Clock,
   Eye,
   Search,
   XCircle
@@ -97,34 +96,7 @@ function AdminDashboardComponent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm rounded-xl overflow-hidden mb-6">
-        <div className="px-6 py-8">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
-                Confessions Dashboard
-              </h1>
-              <p className="text-blue-100">Manage and moderate user content</p>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
-                <Clock size={16} className="text-white/70" />
-                <span className="text-sm text-white/90">
-                  Last updated: 2 mins ago
-                </span>
-              </div>
-              <img
-                src="/api/placeholder/40/40"
-                alt="Admin"
-                className="w-10 h-10 rounded-full ring-2 ring-white/20"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 pt-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <AdminStatsCard title="Total Confessions" value={stats.total} icon={<ConfessionIcon/>} />
           <AdminStatsCard title="Pending Review" value={stats.pending} icon={<PendingIcon/>} />
@@ -132,7 +104,6 @@ function AdminDashboardComponent() {
           <AdminStatsCard title="Flagged Content" value={stats.flagged} icon={<FlagIcon />} />
         </div>
 
-        {/* Filters and Search */}
         <div className="mt-8 flex flex-col md:flex-row gap-4 justify-between items-center">
           <div className="relative flex-grow md:flex-grow-0">
             <Search
@@ -147,12 +118,12 @@ function AdminDashboardComponent() {
               className="pl-10 pr-4 py-2 border rounded-lg w-full md:w-80"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 justify-center">
             {["All", "Pending", "Approved", "Flagged"].map((status) => (
               <button
                 key={status}
                 className={cn(
-                  "px-4 py-2 rounded-lg",
+                  "px-3 py-1.5 rounded-lg text-sm",
                   selectedStatus === status.toLowerCase()
                     ? "bg-blue-600 text-white"
                     : "bg-white border hover:bg-gray-50"
@@ -172,71 +143,73 @@ function AdminDashboardComponent() {
           ) : error ? (
             <div className="p-8 text-center text-red-600">{error}</div>
           ) : (
-            <table className="w-full">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">
-                    ID
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">
-                    Confession
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">
-                    Date
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">
-                    Status
-                  </th>
-                  <th className="px-6 py-4 text-left text-sm font-medium text-gray-500">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {filteredConfessions.map((confession) => (
-                  <tr key={confession.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                      {confession.id.slice(0, 6)}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                      {confession.content}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {confession.createdAt.toDate().toLocaleDateString()}
-                    </td>
-                    <td className="px-6 py-4">
-                      <StatusBadge status={confession.status} />
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => handleViewConfession(confession)}
-                        >
-                          <Eye className="h-4 w-4 text-blue-500" />
-                          <span className="sr-only">View</span>
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleStatusUpdate(confession.id, "approved")
-                          }
-                        >
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          <span className="sr-only">Approve</span>
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleStatusUpdate(confession.id, "flagged")
-                          }
-                        >
-                          <XCircle className="h-4 w-4 text-red-500" />
-                          <span className="sr-only">Reject</span>
-                        </button>
-                      </div>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[800px]">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">
+                      ID
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">
+                      Confession
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">
+                      Date
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">
+                      Status
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {filteredConfessions.map((confession) => (
+                    <tr key={confession.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-3 text-sm text-gray-900">
+                        {confession.id.slice(0, 6)}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-900">
+                        {confession.content}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500">
+                        {confession.createdAt.toDate().toLocaleDateString()}
+                      </td>
+                      <td className="px-4 py-3">
+                        <StatusBadge status={confession.status} />
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleViewConfession(confession)}
+                          >
+                            <Eye className="h-4 w-4 text-blue-500" />
+                            <span className="sr-only">View</span>
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleStatusUpdate(confession.id, "approved")
+                            }
+                          >
+                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <span className="sr-only">Approve</span>
+                          </button>
+                          <button
+                            onClick={() =>
+                              handleStatusUpdate(confession.id, "flagged")
+                            }
+                          >
+                            <XCircle className="h-4 w-4 text-red-500" />
+                            <span className="sr-only">Reject</span>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>

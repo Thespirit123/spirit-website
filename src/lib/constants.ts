@@ -69,4 +69,5 @@ export const ANDROID_DOWNLOAD_HELP = [
   "3. Try sharing the link to WhatsApp/Telegram and downloading from there",
   "4. If using Chrome, check 'Downloads' permission is enabled",
   "5. Make sure you have enough storage space",
+  "6. For the spotify premium app, disable google play protect in the play store settings",
 ];

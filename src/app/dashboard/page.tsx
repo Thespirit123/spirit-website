@@ -18,7 +18,7 @@ import { formatCurrency, formatDate } from "@/lib/utils";
 import { TransactionStatus } from "@/types";
 import { ArrowRight, Clock, TrendingUp, Users, Wallet } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 const getStatusStyle = (status: TransactionStatus): string => {
   switch (status) {
@@ -44,51 +44,131 @@ const DashboardPage = () => {
     }
   }, [user?.uid, stats?.pendingBalance]);
 
-  const statsData = [
-    {
-      title: "Total Lifetime Earnings",
-      amount: formatCurrency(stats?.totalEarnings ?? 0),
-      change: "Updated in real-time",
-      isPositive: true,
-      bgColor: "bg-purple-50",
-      icon: TrendingUp,
-      iconColor: "text-purple-500",
-    },
-    {
-      title: "Available for Withdrawal",
-      amount: formatCurrency(stats?.availableBalance ?? 0),
-      change: "Ready to withdraw",
-      isPositive: true,
-      bgColor: "bg-green-50",
-      icon: Wallet,
-      iconColor: "text-green-500",
-    },
-    {
-      title: "Pending Balance",
-      amount: formatCurrency(stats?.pendingBalance ?? 0),
-      change: "Processing commissions",
-      isPositive: true,
-      bgColor: "bg-yellow-50",
-      icon: Clock,
-      iconColor: "text-yellow-500",
-    },
-    {
-      title: "Total Referrals",
-      amount: stats?.referralCount?.toString() ?? "0",
-      change: "Active referrals",
-      isPositive: true,
-      bgColor: "bg-blue-50",
-      icon: Users,
-      iconColor: "text-blue-500",
-    },
-  ];
+  const statsData = useMemo(
+    () => [
+      {
+        title: "Total Lifetime Earnings",
+        amount: formatCurrency(stats?.totalEarnings ?? 0),
+        change: "Updated in real-time",
+        isPositive: true,
+        bgColor: "bg-purple-50",
+        icon: TrendingUp,
+        iconColor: "text-purple-500",
+      },
+      {
+        title: "Available for Withdrawal",
+        amount: formatCurrency(stats?.availableBalance ?? 0),
+        change: "Ready to withdraw",
+        isPositive: true,
+        bgColor: "bg-green-50",
+        icon: Wallet,
+        iconColor: "text-green-500",
+      },
+      {
+        title: "Pending Balance",
+        amount: formatCurrency(stats?.pendingBalance ?? 0),
+        change: "Processing commissions",
+        isPositive: true,
+        bgColor: "bg-yellow-50",
+        icon: Clock,
+        iconColor: "text-yellow-500",
+      },
+      {
+        title: "Total Referrals",
+        amount: stats?.referralCount?.toString() ?? "0",
+        change: "Active referrals",
+        isPositive: true,
+        bgColor: "bg-blue-50",
+        icon: Users,
+        iconColor: "text-blue-500",
+      },
+    ],
+    [
+      stats?.totalEarnings,
+      stats?.availableBalance,
+      stats?.pendingBalance,
+      stats?.referralCount,
+    ]
+  );
 
-
+  const referralTable = useMemo(() => {
+    return (
+      <div className="bg-white rounded-lg overflow-hidden mb-4 sm:mb-6 lg:mb-8">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="whitespace-nowrap text-xs sm:text-sm">
+                  ID
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-xs sm:text-sm">
+                  NAME
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-xs sm:text-sm">
+                  AMOUNT
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-xs sm:text-sm">
+                  DATE
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-xs sm:text-sm">
+                  SERVICE
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-xs sm:text-sm">
+                  STATUS
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {stats?.referrals && stats.referrals.length > 0 ? (
+                stats.referrals.map((referral) => (
+                  <TableRow key={referral.id}>
+                    <TableCell className="font-medium whitespace-nowrap text-xs sm:text-sm">
+                      {referral.id}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-xs sm:text-sm">
+                      {referral.name}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-xs sm:text-sm">
+                      {formatCurrency(referral.amount)}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-xs sm:text-sm">
+                      {formatDate(referral.date)}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-xs sm:text-sm">
+                      {referral.service}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap text-xs sm:text-sm">
+                      <span
+                        className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyle(
+                          TransactionStatus.COMPLETED
+                        )}`}
+                      >
+                        {TransactionStatus.COMPLETED}
+                      </span>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={6}
+                    className="h-24 text-center text-gray-500 text-xs sm:text-sm"
+                  >
+                    No referrals yet
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    );
+  }, [stats?.referrals]);
 
   return (
-    <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg mt-20">
-      <div className="flex justify-between items-center mb-4 sm:mb-6">
-        <h1 className="text-xl sm:text-2xl font-semibold">
+    <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-0">
           Your Dashboard
         </h1>
 
@@ -96,9 +176,9 @@ const DashboardPage = () => {
           <Button
             variant="outline"
             onClick={() => (window.location.href = "/admin")}
-            className="flex items-center gap-2 text-brand-primary border-brand-primary hover:bg-brand-primary/5"
+            className="flex items-center gap-2 text-brand-primary border-brand-primary hover:bg-brand-primary/5 text-sm"
           >
-            Admin Dashboard
+            Confessions Dashboard
             <ArrowRight className="w-4 h-4" />
           </Button>
         )}
@@ -144,63 +224,7 @@ const DashboardPage = () => {
         <ReferralCode code={stats?.referralCode ?? ""} isLoading={loading} />
       </div>
 
-      <div className="bg-white rounded-lg overflow-hidden mb-4 sm:mb-6 lg:mb-8">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="whitespace-nowrap">ID</TableHead>
-                <TableHead className="whitespace-nowrap">NAME</TableHead>
-                <TableHead className="whitespace-nowrap">AMOUNT</TableHead>
-                <TableHead className="whitespace-nowrap">DATE</TableHead>
-                <TableHead className="whitespace-nowrap">SERVICE</TableHead>
-                <TableHead className="whitespace-nowrap">STATUS</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {stats?.referrals && stats.referrals.length > 0 ? (
-                stats.referrals.map((referral) => (
-                  <TableRow key={referral.id}>
-                    <TableCell className="font-medium whitespace-nowrap">
-                      {referral.id}
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {referral.name}
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {formatCurrency(referral.amount)}
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {formatDate(referral.date)}
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      {referral.service}
-                    </TableCell>
-                    <TableCell className="whitespace-nowrap">
-                      <span
-                        className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyle(
-                          TransactionStatus.COMPLETED
-                        )}`}
-                      >
-                        {TransactionStatus.COMPLETED}
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={6}
-                    className="h-24 text-center text-gray-500"
-                  >
-                    No referrals yet
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      </div>
+      {referralTable}
 
       <div className="bg-white rounded-lg p-4 sm:p-6">
         <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">
@@ -214,8 +238,9 @@ const DashboardPage = () => {
         <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3">
           Earning Opportunities
         </h3>
-        <p className="text-sm sm:text-base text-gray-600 mb-2"></p>
-        You can earn commissions by referring people to:
+        <p className="text-sm sm:text-base text-gray-600 mb-2">
+          You can earn commissions by referring people to:
+        </p>
         <ul className="list-disc pl-6 mb-4 sm:mb-6 text-sm sm:text-base text-gray-600">
           <li className="mb-1">Movie Portal App</li>
           <li className="mb-1">WhatsApp Monitoring Tool</li>

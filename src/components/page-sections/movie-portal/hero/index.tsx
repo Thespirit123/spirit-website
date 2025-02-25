@@ -9,7 +9,7 @@ const HeroSection = () => {
   const { handleOpenPayment } = usePayment();
 
   return (
-    <section className="min-h-screen -mt-[120px] pt-[100px] relative flex">
+    <section className="min-h-screen -mt-[120px] relative flex">
       <Image
         src={HeroBgImg}
         alt="Hero Image"

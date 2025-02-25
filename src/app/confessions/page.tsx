@@ -114,7 +114,7 @@ const ConfessionPage = () => {
             >
               <span className="flex items-center">
                 <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-brand-primary animate-pulse mr-2"></span>
-                Posted every Thursday at 9 PM
+                Posted every Wednesday at 9 PM
               </span>
               <span>{confession.length}/500 characters</span>
             </div>
