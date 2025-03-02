@@ -14,9 +14,9 @@ const faqData = [
   },
   {
     question:
-      "When will utility payments and international numbers be available?",
+      "When will utility payments and foreign numbers be available?",
     answer:
-      "We're currently working on expanding our services to include utility bill payments (airtime, data, electricity) and international number solutions. These features are in development and will be launching soon. Stay tuned to our platform for updates and announcements about these exciting new services.",
+      "We're currently working on expanding our services to include utility bill payments (airtime, data, electricity) and foreign number solutions. These features are in development and will be launching soon. Stay tuned to our platform for updates and announcements about these exciting new services.",
   },
   {
     question: "Is the WhatsApp monitoring tool legal to use?",

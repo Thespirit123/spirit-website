@@ -24,7 +24,7 @@ type ComingSoonFeature = "utility" | "international";
 
 const COMING_SOON_MESSAGES: Record<ComingSoonFeature, string> = {
   utility: "Utility payments coming soon!",
-  international: "International numbers coming soon!",
+  international: "Foreign numbers coming soon!",
 };
 
 const Navbar = () => {
@@ -123,7 +123,7 @@ const Navbar = () => {
           <li>
             <NavLink
               href="/international-numbers"
-              text="International Numbers"
+              text="Foreign Numbers"
               onClick={(e) => handleUtilityClick(e, "international")}
             />
           </li>

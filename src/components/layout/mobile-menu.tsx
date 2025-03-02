@@ -88,7 +88,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                     },
                                     {
                                         href: "/international-numbers",
-                                        text: "International Numbers",
+                                        text: "Foreign Numbers",
                                         onClick: (e: React.MouseEvent<HTMLElement>) =>
                                             handleUtilityClick(e as React.MouseEvent<HTMLAnchorElement>, "international"),
                                     },

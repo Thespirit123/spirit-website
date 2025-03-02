@@ -27,7 +27,7 @@ export const HeroSection = ({ onExplore }: HeroSectionProps) => {
       <div className="w-11/12 max-w-7xl mx-auto z-2 mt-20 relative">
         <h1 className="text-white text-center font-medium text-3xl sm:text-4xl md:text-4xl lg:text-5xl leading-tight">
           Your Plug for Movies, Bill Payments, <br />
-          International Numbers & <span className="text-brand-primary">More!</span>
+          Foreign Numbers & <span className="text-brand-primary">More!</span>
         </h1>
         <h3 className="text-white text-center mt-2 sm:mt-4 font-normal text-lg sm:text-xl md:text-xl lg:text-2xl">
           Get everything you need in one place.
