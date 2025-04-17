@@ -1,0 +1,83 @@
+.FooterMain{
+    width:100%;
+    max-width:1250px;
+    margin:0 auto;
+    border-bottom: 1px solid #80808030;
+  
+    padding:35px 10px 
+}
+
+.FooterDiv{
+    display:flex;
+    gap:10px;
+    padding: 5px;
+}
+.SocialIconsDiv{
+    display: flex;
+    gap:15px;
+    padding-top: 15px;
+}
+.socialBrandIcons{
+    color:#64748b;
+    font-size: 22px;
+}
+.footerDivHeader{
+    flex:1
+}
+.footerDivHeader1 {
+    flex: 1.3;
+    padding-right: 20px;
+}
+.sectionHeader{
+    font-size: 17px;
+    font-weight: 600;
+    color:#000;
+    margin-bottom: 15px;
+}
+.h{
+    display:flex;
+    align-items: center;
+    gap:15px;
+    margin-bottom: 10px;
+}
+.textDescription{
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000a1;
+
+}
+.footerLinks{
+    font-size: 14px;
+    font-weight: 400;
+    color:#000000a1;
+  
+}
+.footerList{
+   padding-bottom: 6px;
+}
+.SpiritMediaCopyRight{
+    text-align:center;
+    padding: 25px 4px;
+    font-size: 14px;
+    color: gray;
+}
+
+@media(max-width:500px) {
+    .FooterDiv {
+        flex-direction: column;
+    }
+}
+@media(max-width:768px){
+.FooterDiv {
+        flex-wrap: wrap;
+    }
+
+.sectionHeader{
+   margin-bottom: 5px;
+   margin-top:5px; 
+}
+.llk{
+    display:none !important
+}
+}
+
