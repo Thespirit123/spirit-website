@@ -1,24 +1,24 @@
 // import FooterImg from "@/assets/images/footer.png";
 // import LogoImg from "@/assets/images/logo.png";
 // import Image from "next/image";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 // import SocialLinks from "./social-links";
 import "./footer.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faFacebook, faXTwitter, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
-const footerLinks = {
-  services: [
-    { label: "Home", href: "/" },
-    { label: "Movie Portal", href: "/movie-portal" },
-    { label: "Utility Payment", href: "/utility-payment" },
-    { label: "WhatsApp Monitoring Tool", href: "/whatsapp-tool" },
-    { label: "Affiliate Hub", href: "/auth/login" },
-    { label: "Feedback", href: "/feedback" },
-    { label: "Terms & Conditions", href: "/terms-and-conditions" },
-  ],
-};
+// const footerLinks = {
+//   services: [
+//     { label: "Home", href: "/" },
+//     { label: "Movie Portal", href: "/movie-portal" },
+//     { label: "Utility Payment", href: "/utility-payment" },
+//     { label: "WhatsApp Monitoring Tool", href: "/whatsapp-tool" },
+//     { label: "Affiliate Hub", href: "/auth/login" },
+//     { label: "Feedback", href: "/feedback" },
+//     { label: "Terms & Conditions", href: "/terms-and-conditions" },
+//   ],
+// };
 
 
 

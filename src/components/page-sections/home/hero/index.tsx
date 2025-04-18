@@ -2,7 +2,7 @@
 // import HeroScreensMobile from "@/assets/images/home-hero-screens-mobile.png";
 // import HeroScreens from "@/assets/images/home-hero-screens.png";
 // import Button from "@/components/custom-ui/button";
-import { useRealHeight } from "@/hooks/useRealHeight";
+// import { useRealHeight } from "@/hooks/useRealHeight";
 // import Image from "next/image";
 import HeroCarousel from "../carousel"
 // interface HeroSectionProps {
