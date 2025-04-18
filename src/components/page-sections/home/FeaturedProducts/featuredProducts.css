@@ -61,6 +61,11 @@ height: 250px;
         color:#fff;
 
 }
+.featuredProductCardAddToCart{
+    display:flex;
+    align-items: center;
+    gap:8px
+}
 .featuredProductCardLoveIcone{
     position: absolute;
     right: 10px;
