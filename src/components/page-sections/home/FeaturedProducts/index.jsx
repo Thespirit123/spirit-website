@@ -8,6 +8,20 @@ import Image from "next/image";
 
 
 const index = () => {
+
+
+  const icomImage =  <svg width="17" height="16" viewBox="0 0 17 16" fill="none" >
+<g clipPath="url(#clip0_709_899)">
+<path d="M5.57145 14.6663C5.93964 14.6663 6.23812 14.3679 6.23812 13.9997C6.23812 13.6315 5.93964 13.333 5.57145 13.333C5.20326 13.333 4.90479 13.6315 4.90479 13.9997C4.90479 14.3679 5.20326 14.6663 5.57145 14.6663Z" stroke="#F8FAFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M12.9049 14.6663C13.2731 14.6663 13.5716 14.3679 13.5716 13.9997C13.5716 13.6315 13.2731 13.333 12.9049 13.333C12.5368 13.333 12.2383 13.6315 12.2383 13.9997C12.2383 14.3679 12.5368 14.6663 12.9049 14.6663Z" stroke="#F8FAFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M1.60498 1.36621H2.93831L4.71165 9.64621C4.7767 9.94945 4.94543 10.2205 5.18879 10.4128C5.43215 10.605 5.73492 10.7064 6.04498 10.6995H12.565C12.8684 10.6991 13.1626 10.5951 13.399 10.4048C13.6354 10.2145 13.7997 9.94923 13.865 9.65288L14.965 4.69954H3.65165" stroke="#F8FAFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_709_899">
+<rect width="16" height="16" fill="white" transform="translate(0.238281)"/>
+</clipPath>
+</defs>
+</svg> 
   const featuredProducts = [{id:1, text:"Premium Movie Pass ", Price:"3500", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -159,18 +173,8 @@ const index = () => {
       />
             
             <div className='featuredProductCardBestSell'>{app.cartText}</div>
-            <div className='featuredProductCardAddToCart'> <svg width="17" height="16" viewBox="0 0 17 16" fill="none" >
-<g clipPath="url(#clip0_709_899)">
-<path d="M5.57145 14.6663C5.93964 14.6663 6.23812 14.3679 6.23812 13.9997C6.23812 13.6315 5.93964 13.333 5.57145 13.333C5.20326 13.333 4.90479 13.6315 4.90479 13.9997C4.90479 14.3679 5.20326 14.6663 5.57145 14.6663Z" stroke="#F8FAFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M12.9049 14.6663C13.2731 14.6663 13.5716 14.3679 13.5716 13.9997C13.5716 13.6315 13.2731 13.333 12.9049 13.333C12.5368 13.333 12.2383 13.6315 12.2383 13.9997C12.2383 14.3679 12.5368 14.6663 12.9049 14.6663Z" stroke="#F8FAFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-<path d="M1.60498 1.36621H2.93831L4.71165 9.64621C4.7767 9.94945 4.94543 10.2205 5.18879 10.4128C5.43215 10.605 5.73492 10.7064 6.04498 10.6995H12.565C12.8684 10.6991 13.1626 10.5951 13.399 10.4048C13.6354 10.2145 13.7997 9.94923 13.865 9.65288L14.965 4.69954H3.65165" stroke="#F8FAFC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_709_899">
-<rect width="16" height="16" fill="white" transform="translate(0.238281)"/>
-</clipPath>
-</defs>
-</svg>
+            <div className='featuredProductCardAddToCart'> 
+             
 <span>Add to Cart</span></div>
             <div className='featuredProductCardLoveIcone'><svg width="17" height="16" viewBox="0 0 17 16" fill="none">
 <g clipPath="url(#clip0_709_978)">
