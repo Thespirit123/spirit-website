@@ -1,8 +1,8 @@
-import FooterImg from "@/assets/images/footer.png";
-import LogoImg from "@/assets/images/logo.png";
-import Image from "next/image";
+// import FooterImg from "@/assets/images/footer.png";
+// import LogoImg from "@/assets/images/logo.png";
+// import Image from "next/image";
 import { toast } from "react-hot-toast";
-import SocialLinks from "./social-links";
+// import SocialLinks from "./social-links";
 import "./footer.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -23,18 +23,18 @@ const footerLinks = {
 
 
 const Footer = () => {
-  const handleUtilityClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    toast("Utility payments coming soon!", {
-      icon: "🚧",
-      style: {
-        borderRadius: "10px",
-        background: "#333",
-        color: "#fff",
-      },
-      duration: 3000,
-    });
-  };
+  // const handleUtilityClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  //   e.preventDefault();
+  //   toast("Utility payments coming soon!", {
+  //     icon: "🚧",
+  //     style: {
+  //       borderRadius: "10px",
+  //       background: "#333",
+  //       color: "#fff",
+  //     },
+  //     duration: 3000,
+  //   });
+  // };
 
   const quickLinks = [{ id: 1, text: "Home", href: "" }, { id: 2, text: "About Us", href: "" }, { id: 3, text: "Services", href: "" }, { id: 4, text: "Products", href: "" }, { id: 5, text: "Contact", href: "" }]
   const serviceLinks = [{ id: 1, text: "Movie Portal", href: "" }, { id: 2, text: "Utility Payments", href: "" }, { id: 3, text: "WhatsApp Monitoring", href: "" }, { id: 4, text: "Support", href: "" }, { id: 5, text: "Business Solutions", href: "" }]

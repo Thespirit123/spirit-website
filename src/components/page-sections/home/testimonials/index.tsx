@@ -1,11 +1,11 @@
-import DotsImg from "@/assets/images/dots.png";
+// import DotsImg from "@/assets/images/dots.png";
 import UserOneImg from "@/assets/images/user1.jpg";
 import UserTwoImg from "@/assets/images/user2.jpg";
 import UserThreeImg from "@/assets/images/user3.jpg";
 import UserFourImg from "@/assets/images/user4.jpg";
 import { Text } from "@/components/custom-ui/text";
 import ReviewCard from "@/components/review-card";
-import Image from "next/image";
+// import Image from "next/image";
 import Slider from "react-slick";
 
 import styles from "./testimonials.module.css";

@@ -1,16 +1,16 @@
-import HeroImg from "@/assets/images/home-hero-bg.png";
-import HeroScreensMobile from "@/assets/images/home-hero-screens-mobile.png";
-import HeroScreens from "@/assets/images/home-hero-screens.png";
-import Button from "@/components/custom-ui/button";
+// import HeroImg from "@/assets/images/home-hero-bg.png";
+// import HeroScreensMobile from "@/assets/images/home-hero-screens-mobile.png";
+// import HeroScreens from "@/assets/images/home-hero-screens.png";
+// import Button from "@/components/custom-ui/button";
 import { useRealHeight } from "@/hooks/useRealHeight";
-import Image from "next/image";
+// import Image from "next/image";
 import HeroCarousel from "../carousel"
-interface HeroSectionProps {
-  onExplore: () => void;
-}
+// interface HeroSectionProps {
+//   onExplore: () => void;
+// }
 
-export const HeroSection = ({ onExplore }: HeroSectionProps) => {
-  const height = useRealHeight();
+export const HeroSection = () => {
+  // const height = useRealHeight();
 
   return (
     <div>

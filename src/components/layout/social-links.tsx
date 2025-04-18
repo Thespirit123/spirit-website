@@ -1,6 +1,6 @@
 import TelegramIcon from "@/assets/icons/telegram";
 import FacebookIcon from "@/assets/icons/facebook";
-import InstagramIcon from "@/assets/icons/instagram";
+// import InstagramIcon from "@/assets/icons/instagram";
 
 export const SOCIAL_LINKS = {
   WHATSAPP: `https://chat.whatsapp.com/IZ9kgz1qkJW4wpDZl36KwR`,

@@ -11,7 +11,7 @@ import Button from "../custom-ui/button";
 import MobileMenu from "./mobile-menu";
 import NavLink from "./navlink";
 import "./footer.css"
-import SocialLinks from "./social-links";
+// import SocialLinks from "./social-links";
 import UserMenuContent from "./user-menu-content";
 
 const SOCIAL_LINKS = {

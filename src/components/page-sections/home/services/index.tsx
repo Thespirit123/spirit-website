@@ -2,7 +2,7 @@ import MoviePortalImg from "@/assets/images/service-movies.png";
 import UtilityImg from "@/assets/images/service-utility.png";
 import WhatsAppImg from "@/assets/images/service-whatsapp.png";
 import { forwardRef } from "react";
-import { ServiceCard } from "./serviceCard";
+// import { ServiceCard } from "./serviceCard";
 import Sec from "./servicesSection"
 
 export const services = [
@@ -42,7 +42,7 @@ export const services = [
   },
 ];
 
-export const ServicesSection = forwardRef<HTMLElement>((props, ref) => (
+export const ServicesSection = forwardRef<HTMLElement>(() => (
   // <section ref={ref} className="pt-20 pb-10">
   //   <div className="bg-brand-primary-light text-center w-max mx-auto px-4 py-2 rounded-full">
   //     <h3 className="text-brand-primary font-semibold text-2xl">
