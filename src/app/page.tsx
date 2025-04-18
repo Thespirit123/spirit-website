@@ -10,13 +10,13 @@ import { useRef } from "react";
 export default function Home() {
   const servicesRef = useRef<HTMLElement>(null);
 
-  const scrollToServices = () => {
-    servicesRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const scrollToServices = () => {
+  //   servicesRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
 
   return (
     <>
-      <HeroSection onExplore={scrollToServices} />
+      <HeroSection />
       <FeaturedProducts/>
       <ServicesSection ref={servicesRef} />
       <TestimonialsSection />
