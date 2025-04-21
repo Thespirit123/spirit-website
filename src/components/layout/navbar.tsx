@@ -64,7 +64,7 @@ const Navbar = () => {
   return (
     <nav
       className={`${isDashboard ? "w-full mt-0" : "w-full mt-0"
-        } bg-white mx-auto relative z-10  shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`} style={{position:"fixed"}}
+        } bg-white mx-auto relative z-10  shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`} style={{position:"fixed",zIndex:"50"}}
     >
       {/* <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
