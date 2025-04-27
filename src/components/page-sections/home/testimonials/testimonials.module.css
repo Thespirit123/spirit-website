@@ -1,0 +1,74 @@
+.testimonials-slider {
+  padding-bottom: 60px;
+}
+
+.testimonials-slider :global(.slick-dots) {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+
+.testimonials-slider :global(.slick-prev),
+.testimonials-slider :global(.slick-next) {
+  width: 40px;
+  height: 40px;
+  background:#dfdfdf;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.testimonials-slider :global(.slick-prev:hover),
+.testimonials-slider :global(.slick-next:hover) {
+  background: #c1baba;
+}
+
+.testimonials-slider :global(.slick-prev) {
+  left: -20px;
+}
+
+.testimonials-slider :global(.slick-next) {
+  right: -20px;
+}
+.testimonials-slider :global(.text-arrow-primary){
+  display: none !important;
+}
+.controls {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.arrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.arrow:hover {
+  transform: scale(1.1);
+}
+
+
+/* .slick-prev:before,
+.slick-next:before {
+
+  color: #c1baba !important;
+
+} */
