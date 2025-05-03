@@ -88,6 +88,7 @@
     padding:5px 8px;
     border-radius:5px;
     font-size:14px;
+    width: fit-content;
 
 }
 .FFee{
@@ -244,7 +245,7 @@ overflow:scroll !important;
         overflow:hidden;
     }
     .contentSec1{
-        width:800px !important;
+        width:600px !important;
         overflow-x:hidden
  
     }
