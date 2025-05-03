@@ -13,11 +13,11 @@ import { getFirestore } from "firebase/firestore";
 
  const firebaseConfig = {
  apiKey: "23erty6589iou",
-   authDomain: "",
-   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+   authDomain: "https://www.thespiritmedia.com.ng" ,
+   projectId: "6",
+  storageBucket: "2",
+   messagingSenderId: "4",
+  appId: "5",
  };
 
 export const app = initializeApp(firebaseConfig);
