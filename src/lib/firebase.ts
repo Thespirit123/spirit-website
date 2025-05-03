@@ -16,7 +16,7 @@ import { getFirestore } from "firebase/firestore";
    authDomain: "https://www.thespiritmedia.com.ng" ,
    projectId: "62",
   storageBucket: "22",
-   messagingSenderId: "4",
+   messagingSenderId: "56",
   appId: "5",
  };
 
