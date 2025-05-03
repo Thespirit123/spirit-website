@@ -10,13 +10,13 @@
     margin:60px auto 0 auto;
 }
 .PreRes{
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 600;
     color:#fff;
 }
 .PreRes1{
     color:gold;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 600;
 }
 .PreRes2{
@@ -244,8 +244,8 @@ overflow:scroll !important;
         overflow:hidden;
     }
     .contentSec1{
-        width:548px;
-        over-flow-x:hidden
+        width:558px !important;
+        overflow-x:hidden
  
     }
     .Section11 {
