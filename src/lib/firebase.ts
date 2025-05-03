@@ -14,8 +14,8 @@ import { getFirestore } from "firebase/firestore";
  const firebaseConfig = {
  apiKey: "23erty6589iou",
    authDomain: "https://www.thespiritmedia.com.ng" ,
-   projectId: "6",
-  storageBucket: "2",
+   projectId: "62",
+  storageBucket: "22",
    messagingSenderId: "4",
   appId: "5",
  };
