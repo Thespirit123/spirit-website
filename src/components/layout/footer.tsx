@@ -110,7 +110,7 @@ const Footer = () => {
 
       <div className = "FooterMain">
         <div className = "FooterDiv">
-            <div className = "footerDivHeader1">
+            <div className = " footerDivHeader footerDivHeader1">
             <ul className = "">
               <li><div className = "sectionHeader">Spirit Media</div></li>
               <li><p className = "textDescription">Providing innovative digital solutions at your finger since 2015</p></li>

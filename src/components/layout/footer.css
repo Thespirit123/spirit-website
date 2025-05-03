@@ -80,4 +80,10 @@
     display:none !important
 }
 }
-
+@media(min-width:500px) and (max-width:768px){
+    .footerDivHeader{
+        flex: 0 0 48%;
+            /* Each item takes 50% width (i.e., 2 per row) */
+            box-sizing: border-box;
+    }
+}

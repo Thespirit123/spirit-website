@@ -1,6 +1,6 @@
 .lk{
     background-image: linear-gradient(45deg, #008EA8, #006C80);
-    padding: 10px;
+    padding: 10px 15px;
 
 }
 .Section11{
@@ -10,13 +10,13 @@
     margin:60px auto 0 auto;
 }
 .PreRes{
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 600;
     color:#fff;
 }
 .PreRes1{
     color:gold;
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 600;
 }
 .PreRes2{
@@ -65,7 +65,7 @@
 
 .brs{
     padding:8px 12px;
-    border-radius:8px;
+    border-radius:25px;
 
 }
 .brs1{
@@ -75,14 +75,14 @@
 }
 .contentSec{
     width:100%;
-    max-width:1250px;
+    max-width:1265px;
     margin:60px auto 10px auto;
 }
 .contentSec1{
     display:flex;
     gap:15px;
     margin-bottom:10px;
-    padding:2px 10px;
+    padding:2px 15px;
 }
 .contentSec2{
     padding:5px 8px;
@@ -97,7 +97,7 @@
     display:flex;
     gap:15px;
     align-item:center !important;
-    padding-left:10px;
+    padding-left:15px;
 }
 .lineBr{
     width:80px;
@@ -151,7 +151,7 @@ gap:20px
 }
 .componentSec1{
         width: 33.3%;
-    border: 1px solid #e5e4e4c9;
+    /* border: 1px solid #e5e4e4c9; */
     border-radius: 10px;
     box-shadow: 0px 2px 11px 0px #e8e9ed
 }
@@ -244,7 +244,7 @@ overflow:scroll !important;
         overflow:hidden;
     }
     .contentSec1{
-        width:600px;
+        width:548px;
         over-flow-x:hidden
  
     }
@@ -267,13 +267,13 @@ overflow:scroll !important;
 .ArticleSec2 {
     
     width: 600px;
-    padding:2px 10px;
+    padding:2px 15px;
     margin:10px auto;
     /* overflow:scroll; */
 }
 .componentSec {
     flex-direction: column;
-    padding:5px 10px;
+    padding:5px 15px;
 }
 .componentSec1 {
     width: 100%;
@@ -293,4 +293,26 @@ overflow:scroll !important;
   
     margin: 40px auto 10px auto;
 }
+}
+@media(min-width:1020px){
+    .PreRes, .PreRes1 {
+            font-size: 48px;
+        }
+            
+}
+
+@media (min-width:500px) and (max-width: 768px) {
+    .ArticleSec2 {
+        width: 758px;
+      
+        /* overflow: scroll; */
+    }
+}
+@media(min-width:769px){
+        .componentSec ,.ArticleSec2 {
+                padding: 5px 15px;
+            }
+                        .brs {
+                            padding: 8px 24px;
+                        }
 }

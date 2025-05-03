@@ -24,7 +24,7 @@ const form = () => {
           <div className='brs row'>Browse All Freebies</div>
           <div className='brs row1'>View Categories</div>
         </div>
-        <p className='brs1'>Join 50,000+ creators who've  downloaded our free resources</p>
+        <p className='brs1'>Join 50,000+ creators who've  downloaded our free resources.</p>
       </div>
       </div>
 
@@ -44,7 +44,7 @@ const form = () => {
 <path d="M9.99984 1.66699L12.5748 6.88366L18.3332 7.72533L14.1665 11.7837L15.1498 17.517L9.99984 14.8087L4.84984 17.517L5.83317 11.7837L1.6665 7.72533L7.42484 6.88366L9.99984 1.66699Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg> */}
 <span>Featured Freebies</span></div>
-<div style={{padding:"0px 10px"}}><div className="lineBr"></div></div>
+<div style={{padding:"0px 15px"}}><div className="lineBr"></div></div>
 <div className="bvn">
         <div className='ArticleSec2'>
           {featuredFreebies.map((app)=>(
