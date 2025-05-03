@@ -102,22 +102,31 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden lg:flex gap-8">
           <li>
+            <NavLink href="/movie-portal" text="Foreign Numbers" />
+          </li>
+          <li>
+            <NavLink href="/movie-portal" text="Airtime & Data " />
+          </li>
+          <li>
             <NavLink href="/movie-portal" text="Movie Portal" />
+          </li>
+          <li>
+            <NavLink href="/movie-portal" text="WhatsApp Spy App" />
           </li>
           <li>
             <NavLink
               href="/utility-payment"
-              text="Utility Payment"
+              text="Cracked App"
               onClick={(e) => handleUtilityClick(e, "utility")}
             />
           </li>
 
           <li>
-            <NavLink href="/feedback" text="Services" />
+            <NavLink href="/freebies" text="Freebies" />
           </li>
-          <li>
+          {/* <li>
             <NavLink href="/feedback" text="Support" />
-          </li>
+          </li> */}
           {/* <li>
             <NavLink href="/feedback" text="Feedback" />
           </li> */}
