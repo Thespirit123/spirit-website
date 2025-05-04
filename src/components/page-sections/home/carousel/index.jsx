@@ -3,6 +3,8 @@
 import React, {useState} from "react"
 import Carousel from "react-multi-carousel";
 import HeroImg from "/public/Image8.png";
+import HeroImg1 from "/public/caroIM.png";
+import HeroImg2 from "/public/caroIM1.jpg";
 import Image from "next/image";
 import "./carousel.css"
 
@@ -42,7 +44,7 @@ const CarouselDiv =()=>{
   ssr={true} // means to render carousel on server-side.
   infinite={true}
   autoPlay={deviceType !== "mobile" ? true : false}
-  autoPlaySpeed={1000}
+  autoPlaySpeed={3000}
   keyBoardControl={true}
   customTransition="all .5"
   transitionDuration={500}
@@ -71,53 +73,39 @@ const CarouselDiv =()=>{
   <div >
   <div  className="section1">
      <Image
-              src={HeroImg}
+              src={HeroImg1}
               alt="Hero Screens"
            
               className="sectionImg"
               
             />
-      <div   className="NewArrivalD">
+      {/* <div   className="NewArrivalD">
         <div  className="NewArrivalD1">New Arrivals</div>
         <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
         <div  className="NewArrivalD3"><button>Explore</button></div>
-        </div>
+        </div> */}
   </div>
   </div>
   <div >
   <div  className="section1">
      <Image
-              src={HeroImg}
+              src={HeroImg2}
               alt="Hero Screens"
             
              
               className="sectionImg"
               
             />
-           <div className="NewArrivalD">
+           {/* <div className="NewArrivalD">
         <div  className="NewArrivalD1">New Arrivals</div>
         <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
         <div  className="NewArrivalD3"><button>Explore</button></div>
-        </div>
+        </div> */}
   </div>
   </div>
-  <div >
-  <div  className="section1">
-     <Image
-              src={HeroImg}
-              alt="Hero Screens"
-             
-              className="sectionImg"
-              
-            />
-            
-        <div className="NewArrivalD">
-        <div  className="NewArrivalD1">New Arrivals</div>
-        <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
-        <div  className="NewArrivalD3"><button>Explore</button></div>
-        </div>
-  </div>
-  </div>
+  {/* <div >
+ 
+  </div> */}
 </Carousel>
 
 

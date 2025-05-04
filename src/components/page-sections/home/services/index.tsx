@@ -78,6 +78,28 @@ export const services = [
     image: MoviePortalImg,
     number: "01",
     title: {
+      highlighted: "Foreign",
+      normal: "Numbers",
+    },
+    description:
+      "Access international phone numbers instantly. Verify accounts, maintain privacy, and expand your global reach with our reliable foreign number service that works across multiple countries and platforms.",
+    href: "/movie-portal",
+  },
+  {
+    image: MoviePortalImg,
+    number: "02",
+    title: {
+      highlighted: "Airtime",
+      normal: "and Data",
+    },
+    description:
+      "Instant mobile credit solutions at your fingertips. Quickly recharge your phone, support multiple networks, and stay connected with our seamless and secure airtime top-up service.",
+    href: "/movie-portal",
+  },
+  {
+    image: MoviePortalImg,
+    number: "03",
+    title: {
       highlighted: "Movies",
       normal: "Portal",
     },
@@ -87,26 +109,37 @@ export const services = [
   },
   {
     image: WhatsAppImg,
-    number: "02",
+    number: "04",
     title: {
       highlighted: "WhatsApp",
-      normal: "Monitoring Tool",
+      normal: "Spy App",
     },
     description:
       "Advanced communication tracking designed for personal and professional insights. Monitor messages, calls, and digital interactions with discretion and precision.",
     href: "/whatsapp-tool",
   },
   {
-    image: UtilityImg,
-    number: "03",
+    image: WhatsAppImg,
+    number: "05",
     title: {
-      highlighted: "Utility",
-      normal: "Payments",
+      highlighted: "Cracked",
+      normal: "App",
     },
     description:
-      "Instant mobile credit solutions at your fingertips. Quickly recharge your phone, support multiple networks, and stay connected with our seamless and secure airtime top-up service.",
-    href: "/utility-payment",
-    isUtility: true,
+      "Explore premium software without the premium price tag. Get access to modified applications with unlocked features, ad-free experiences, and enhanced functionality through our regularly updated collection.",
+    href: "/whatsapp-tool",
+  },
+  {
+    image: UtilityImg,
+    number: "06",
+    title: {
+      highlighted: "Freebies",
+      normal: "Portal",
+    },
+    description:
+      "Discover amazing digital giveaways all in one place. From promotional codes to limited-time offers, our freebies page curates the best no-cost opportunities across the web, updated daily for maximum value.",
+    href: "/freebies",
+    // isUtility: true,
   },
 ];
 
