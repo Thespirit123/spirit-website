@@ -1,31 +1,39 @@
 'use client';
 
 import React from 'react'
+import "./internationalNumber.css"
+import Image  from "next/image";
+import FreebiesImg from "@/assets/images/interHeroImg.png";
 
 const page2 = () => {
 
   return (
     <div>
 
-          <div>
-            <div>
-                <div>
-                    <p>The Fastest & Most Affordable Online SMS Verification</p>
-                    <p>Keep your personal number private and stay secure online. 
+          <div className="">
+            <div className="">
+                <div className="">
+                    <p className="">The Fastest & Most Affordable Online SMS Verification</p>
+                    <p className="">Keep your personal number private and stay secure online. 
 </p>
-                   <div>
-                        <div>Get Started</div>
-                        <div>View Demo</div>
+                   <div className="">
+                        <div className="">Get Started</div>
+                        <div className="">View Demo</div>
                    </div>
                    <div>
-                    <p>instant Delivery</p>
-                    <p>24/7 support</p>
+                    <p className="">instant Delivery</p>
+                    <p className="">24/7 support</p>
                    </div>
 
                 </div>
                 <div>
                      <div>
-                        ewlo
+                        <Image
+                        src={FreebiesImg}
+                        alt="hero image"
+                        height=''
+                        className=''
+                        />
                      </div>
                 </div>
             </div>

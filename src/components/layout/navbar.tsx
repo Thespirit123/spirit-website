@@ -105,13 +105,13 @@ const Navbar = () => {
             <NavLink href="/movie-portal" text="Foreign Numbers" />
           </li>
           <li>
-            <NavLink href="/movie-portal" text="Airtime & Data " />
+            <NavLink href="/utility-payment" text="Airtime & Data " />
           </li>
           <li>
             <NavLink href="/movie-portal" text="Movie Portal" />
           </li>
           <li>
-            <NavLink href="/movie-portal" text="WhatsApp Spy App" />
+            <NavLink href="/whatsapp-tool" text="WhatsApp Spy App" />
           </li>
           <li>
             <NavLink

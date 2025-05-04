@@ -14,17 +14,17 @@ import "react-multi-carousel/lib/styles.css";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 1,
+    items: 1.5,
     slidesToSlide: 1 // optional, default to 1.
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 1,
+    items: 1.4,
     slidesToSlide: 1 // optional, default to 1.
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 1.3,
     slidesToSlide: 1 // optional, default to 1.
   }
 };
@@ -36,6 +36,25 @@ const CarouselDiv =()=>{
  
     return(
         <div style={{paddingTop:"60px"}}>
+
+          <div >
+     <div className="section2M">
+       <Image
+              src={HeroImg}
+              alt="Hero Screens"
+             
+              className="sectionImg"
+              
+            />
+            <div  className="NewArrivalD">
+        <div  className="NewArrivalD1">New Arrivals</div>
+        <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
+        <div  className="NewArrivalD3">Explore</div>
+        </div>
+     </div>
+  </div>
+
+
                  <Carousel
   swipeable={false}
   draggable={false}
@@ -54,22 +73,7 @@ const CarouselDiv =()=>{
   dotListClass="custom-dot-list-style"
   itemClass="carousel-item-padding-40-px"
 >
-  <div >
-     <div className="section1">
-       <Image
-              src={HeroImg}
-              alt="Hero Screens"
-             
-              className="sectionImg"
-              
-            />
-            <div  className="NewArrivalD">
-        <div  className="NewArrivalD1">New Arrivals</div>
-        <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
-        <div  className="NewArrivalD3">Explore</div>
-        </div>
-     </div>
-  </div>
+  
   <div >
   <div  className="section1">
      <Image
@@ -79,11 +83,7 @@ const CarouselDiv =()=>{
               className="sectionImg"
               
             />
-      {/* <div   className="NewArrivalD">
-        <div  className="NewArrivalD1">New Arrivals</div>
-        <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
-        <div  className="NewArrivalD3"><button>Explore</button></div>
-        </div> */}
+    
   </div>
   </div>
   <div >
@@ -96,16 +96,34 @@ const CarouselDiv =()=>{
               className="sectionImg"
               
             />
-           {/* <div className="NewArrivalD">
-        <div  className="NewArrivalD1">New Arrivals</div>
-        <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
-        <div  className="NewArrivalD3"><button>Explore</button></div>
-        </div> */}
+        
   </div>
   </div>
-  {/* <div >
- 
-  </div> */}
+ <div >
+  <div  className="section1">
+     <Image
+              src={HeroImg1}
+              alt="Hero Screens"
+           
+              className="sectionImg"
+              
+            />
+    
+  </div>
+  </div>
+   <div >
+  <div  className="section1">
+     <Image
+              src={HeroImg2}
+              alt="Hero Screens"
+            
+             
+              className="sectionImg"
+              
+            />
+        
+  </div>
+  </div>
 </Carousel>
 
 

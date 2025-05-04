@@ -73,25 +73,30 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                 }}
                             >
                                 {[
-                                    { href: "/movie-portal", text: "Movie Portal" },
-                                    {
-                                        href: "/whatsapp-tool",
-                                        text: "Whatsapp Monitoring Tool",
-                                    },
-                                    { href: "/cracked", text: "Cracked Apps" },
-                                    { href: "/feedback", text: "Feedback" },
-                                    {
-                                        href: "/utility-payment",
-                                        text: "Utility Payment",
-                                        onClick: (e: React.MouseEvent<HTMLElement>) =>
-                                            handleUtilityClick(e as React.MouseEvent<HTMLAnchorElement>, "utility"),
-                                    },
+                                    // { href: "/international-numbers", text: "Foreign Numbers" },
+                                    // { href: "/utility-payment", text: "Airtime & Data" },
                                     {
                                         href: "/international-numbers",
                                         text: "Foreign Numbers",
                                         onClick: (e: React.MouseEvent<HTMLElement>) =>
                                             handleUtilityClick(e as React.MouseEvent<HTMLAnchorElement>, "international"),
                                     },
+                                    {
+                                        href: "/utility-payment",
+                                        text: "Airtime & Data",
+                                        onClick: (e: React.MouseEvent<HTMLElement>) =>
+                                            handleUtilityClick(e as React.MouseEvent<HTMLAnchorElement>, "utility"),
+                                    },
+                                    { href: "/movie-portal", text: "Movie Portal" },
+                                    {
+                                        href: "/whatsapp-tool",
+                                        text: "Whatsapp Spy App",
+                                    },
+                                    { href: "/cracked", text: "Cracked Apps" },
+                                    { href: "/freebies", text: "Freebies" },
+                                    { href: "/", text: "1-800 SPIRIT" },
+                                   
+                                   
                                 ].map((item, i) => (
                                     <motion.li
                                         key={item.href}
