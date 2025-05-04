@@ -16,12 +16,14 @@ export default function Home() {
 
   return (
     <>
+    <div style={{overflowX : "hidden"}}>
       <HeroSection />
       <FeaturedProducts/>
       <ServicesSection ref={servicesRef} />
       <TestimonialsSection />
       <FAQSection />
       <EmailSubscription/>
+      </div>
     </>
   );
 }

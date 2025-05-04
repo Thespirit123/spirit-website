@@ -66,6 +66,9 @@
 // ));
 
 // ServicesSection.displayName = "ServicesSection";
+import CrackedImg from "@/assets/images/serviceID.png";
+import FreebiesImg from "@/assets/images/freebies.png";
+import ForeignNumbersImg from "@/assets/images/ForeignNumbers.png";
 
 import MoviePortalImg from "@/assets/images/service-movies.png";
 import UtilityImg from "@/assets/images/service-utility.png";
@@ -75,7 +78,7 @@ import { ServiceCard } from "./serviceCard";
 
 export const services = [
   {
-    image: MoviePortalImg,
+    image: ForeignNumbersImg,
     number: "01",
     title: {
       highlighted: "Foreign",
@@ -86,7 +89,7 @@ export const services = [
     href: "/movie-portal",
   },
   {
-    image: MoviePortalImg,
+    image: UtilityImg,
     number: "02",
     title: {
       highlighted: "Airtime",
@@ -94,7 +97,7 @@ export const services = [
     },
     description:
       "Instant mobile credit solutions at your fingertips. Quickly recharge your phone, support multiple networks, and stay connected with our seamless and secure airtime top-up service.",
-    href: "/movie-portal",
+    href: "/utility-payment",
   },
   {
     image: MoviePortalImg,
@@ -119,7 +122,7 @@ export const services = [
     href: "/whatsapp-tool",
   },
   {
-    image: WhatsAppImg,
+    image: CrackedImg,
     number: "05",
     title: {
       highlighted: "Cracked",
@@ -127,10 +130,10 @@ export const services = [
     },
     description:
       "Explore premium software without the premium price tag. Get access to modified applications with unlocked features, ad-free experiences, and enhanced functionality through our regularly updated collection.",
-    href: "/whatsapp-tool",
+    href: "/cracked",
   },
   {
-    image: UtilityImg,
+    image: FreebiesImg,
     number: "06",
     title: {
       highlighted: "Freebies",
