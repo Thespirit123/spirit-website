@@ -1,7 +1,7 @@
 .featPro {
     width: 100%;
-    max-width: 1250px;
-    padding: 10px;
+    max-width: 1260px;
+    padding: 10px 15px;
     margin: 0 auto;
 }
 
@@ -116,7 +116,10 @@ position: relative;
 }
 
 .featuredProductCardStar {
-    padding: 8px;
+    padding: 8px 0px;
+    display:flex;
+    align-items: center;
+    gap:5px;
 }
 
 .featuredProductCardPrice {

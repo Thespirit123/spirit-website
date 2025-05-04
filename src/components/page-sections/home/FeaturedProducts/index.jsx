@@ -190,7 +190,7 @@ const index = () => {
            </div>
            <div className='divGuide'>
            <p className='featuredProductCardText'>{app.text}</p>
-           <div className='featuredProductCardStar'>{app.star}</div>
+           <div className='featuredProductCardStar'>{app.star}<span style={{color:"gray",fontSize:'12px'}}>4.5</span></div>
            <div className='featuredProductCardPrice'>₦{app.Price}</div>
            </div>
         </div>
