@@ -36,8 +36,8 @@ const Footer = () => {
   //   });
   // };
 
-  const quickLinks = [{ id: 1, text: "Home", href: "" }, { id: 2, text: "About Us", href: "" }, { id: 3, text: "Services", href: "" }, { id: 4, text: "Products", href: "" }, { id: 5, text: "Contact", href: "" }]
-  const serviceLinks = [{ id: 1, text: "Movie Portal", href: "" }, { id: 2, text: "Utility Payments", href: "" }, { id: 3, text: "WhatsApp Monitoring", href: "" }, { id: 4, text: "Support", href: "" }, { id: 5, text: "Business Solutions", href: "" }]
+  const quickLinks = [{ id: 1, text: "Home", href: "/" }, { id: 2, text: "About Us", href: "" }, { id: 3, text: "Services", href: "" }, { id: 4, text: "Products", href: "" }, { id: 5, text: "Contact", href: "" }]
+  const serviceLinks = [{ id: 1, text: "Movie Portal", href: "/movie-portal" }, { id: 2, text: "Utility Payments", href: "/utility-payment" }, { id: 3, text: "WhatsApp Monitoring", href: "/whatsapp-tool" }, { id: 4, text: "Support", href: "" }, { id: 5, text: "Business Solutions", href: "" }]
   const footerSocialLinks = [{ id: 1, icon: faFacebook }, { id: 2, icon: faXTwitter }, { id: 3, icon: faLinkedin }, { id: 4, icon: faInstagram }]
   return (
     <footer className="relative">
@@ -137,7 +137,7 @@ const Footer = () => {
               <ul>
               <li><div className = "sectionHeader">Services</div></li>
                 {serviceLinks.map((app, id)=>(
-                  <li key = {id} className = "footerList"><a href="" className="footerLinks">{app.text}</a></li>
+                  <li key = {id} className = "footerList"><a href={app.href} className="footerLinks">{app.text}</a></li>
                 ))}
               </ul>
 
