@@ -11,7 +11,7 @@ const index = () => {
 
 
    
-  const featuredProducts = [{id:1, text:"Premium Movie Pass ", Price:"3500", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+  const featuredProducts = [{id:1, text:"USA Foreign Number  ", Price:"1000", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -45,7 +45,7 @@ const index = () => {
 </clipPath>
 </defs>
 </svg>
-, cartText:"Best Seller",href:"",img:HeroImg},{id:2, text:"Utility Payment Plan", Price:"1500", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+, cartText:"Best Seller",href:"",img:HeroImg},{id:2, text:"10gb Data Plan", Price:"2800", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -78,7 +78,7 @@ const index = () => {
 <rect width="16" height="16" fill="white" transform="translate(64)"/>
 </clipPath>
 </defs>
-</svg>, cartText:"New",href:"", img:HeroImg1},{id:3, text:"Communication Package", Price:"200", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+</svg>, cartText:"New",href:"", img:HeroImg1},{id:3, text:"Spotify Cracked App", Price:"2000", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -111,7 +111,7 @@ const index = () => {
 <rect width="16" height="16" fill="white" transform="translate(64)"/>
 </clipPath>
 </defs>
-</svg>, cartText:"Limited",href:"", img:HeroImg2},{id:4, text:"Premium Support Plan", Price:"1500", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+</svg>, cartText:"Limited",href:"", img:HeroImg2},{id:4, text:"Marketing 101 (How to Perfectly Run Sponsored Ads On Instagram and meta)", Price:"100k", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -191,7 +191,7 @@ const index = () => {
            <div className='divGuide'>
            <p className='featuredProductCardText'>{app.text}</p>
            <div className='featuredProductCardStar'>{app.star}<span style={{color:"gray",fontSize:'12px'}}>4.5</span></div>
-           <div className='featuredProductCardPrice'>₦{app.Price}</div>
+           <div className='featuredProductCardPrice'><span className="priceSlash">₦{app.Price}</span>{" "}<span>Free</span></div>
            </div>
         </div>
         ))}

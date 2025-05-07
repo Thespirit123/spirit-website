@@ -112,7 +112,14 @@ position: relative;
     font-size: 18px;
     font-weight: 600;
     color: #000000;
+    white-space: nowrap;       
+  overflow: hidden;           
+  text-overflow: ellipsis; 
 
+}
+.priceSlash{
+    text-decoration: line-through;
+    color:#878585ad;
 }
 
 .featuredProductCardStar {

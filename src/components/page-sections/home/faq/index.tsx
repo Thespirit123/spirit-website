@@ -10,28 +10,28 @@ const faqData = [
   {
     question: "What services does Spirit Media offer?",
     answer:
-      "Getting started is easy! Simply create an account, choose your subscription plan, and start streaming immediately. Our vast library of content is instantly accessible across all your devices.",
+      "At Spirit Media, we pride ourselves as The Plug for All Things. Our services include Foreign Numbers, Airtime & Data, Cracked Apps, Movies, and much more.",
   },
   {
     question:
       "Is my data secure?",
     answer: 
-      "We're currently working on expanding our services to include utility bill payments (airtime, data, electricity) and foreign number solutions. These features are in development and will be launching soon. Stay tuned to our platform for updates and announcements about these exciting new services.",
+      "Absolutely. We value your privacy. Your data is 100% secure — we never share or sell it. Our top-tier security experts work round the clock to prevent any data breaches.",
   },
   {
     question: "How can I contact support?",
     answer:
-      "Yes, our WhatsApp monitoring tool is legal when used with proper consent and for legitimate purposes such as parental control or business monitoring. We recommend reviewing local laws and regulations.",
+      "You can reach our support team via email at Theespiritmedia@gmail.com. Alternatively, visit the Community Section for assistance and updates.",
   },
   {
     question: "What are your business hours?",
     answer:
-      "Our customer support team is available 24/7 through multiple channels. You can reach us via live chat, email, or phone. We typically respond to all queries within 2-4 hours.",
+      "We're available 24/7 to serve you anytime, any day.",
   },
   {
     question: "Do you offer refunds?",
     answer:
-      "Our customer support team is available 24/7 through multiple channels. You can reach us via live chat, email, or phone. We typically respond to all queries within 2-4 hours.",
+      "Yes, we do. Refunds are considered if there's an issue with our service or if a product is faulty.",
   },
 ];
 

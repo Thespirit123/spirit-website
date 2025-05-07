@@ -1,0 +1,52 @@
+.InterHouseBack{
+    background-color: #008ea8;
+    padding: 100px 15px 30px 15px;
+    height:100vh
+}
+
+.InterItemDiv{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1250PX;
+    margin: 0 auto;
+    gap:20px;
+}
+.InterItemDiv1{
+    width:50%;
+}
+.InterItemDiv2{
+    font-size: 52px;
+    font-weight: 600;
+    color:#fff;
+}
+.InterItemDiv3{
+    font-size: 16px;
+    font-weight: 500;
+    color:#e9e9e9;
+    margin-bottom: 30px;
+}
+.getButton{
+background-color: #fff;
+color:#000
+}
+.divHeight{
+    height:350px;
+}
+.heroImage5{
+    height:100%;
+}
+.VButton{
+    border:1px solid #34bbd3;
+}
+.InterItemDiv3{
+    display: flex;
+    gap:10px
+}
+.InterItemDivButton{
+    padding:5px 15px;
+    display: flex;
+        gap: 10px;
+        border-radius: 5px;
+}
