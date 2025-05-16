@@ -250,9 +250,11 @@ padding: 6px 20px;
 border-radius: 6px; 
 background-color: #fff;
 color:#000;
+text-align: center;
 width: fit-content;
 margin: auto;
 font-weight: 400;
+font-size: 14px;
 }
 .payN3{
     text-align: center;
