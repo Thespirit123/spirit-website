@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 1250PX;
+    max-width: 1150px;
     margin: 0 auto;
     gap:20px;
 }
@@ -27,6 +27,16 @@
     color:#e9e9e9;
     margin-bottom: 30px;
 }
+.platform1{
+    width:100%;
+    max-width:1150px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 10px;
+}
 .getButton{
 background-color: #fff;
 color:#000
@@ -36,6 +46,7 @@ color:#000
 }
 .heroImage5{
     height:100%;
+    
 }
 .VButton{
     border:1px solid #34bbd3;
@@ -49,4 +60,330 @@ color:#000
     display: flex;
         gap: 10px;
         border-radius: 5px;
+}
+.OurFeatures{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.OURF1{
+    display: flex;
+    gap:20px;
+    width: 100%;
+    max-width: 1150px;
+    margin:0 auto;
+    flex-wrap: wrap;
+    padding:2px 15px;
+}
+.sT{
+    font-weight:500 ;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.OURF12{
+width: calc(50% - 10px);
+border-radius: 8px;
+box-sizing: border-box;
+padding:35px 15px 35px 15px;
+border-radius: 6px;
+/* border:1px solid #e5e5e5; */
+box-shadow: 0px 1px 13px 0px #e1e1e5;
+}
+
+.sT1{
+    font-size: 14px;
+    font-weight:400;
+    color:#5d5858;
+
+}
+.FourD{
+    display:flex;
+    gap:15px;
+}
+.OurP{
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 50px;
+}
+.OurP1{
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    padding:10px;
+    margin: 0 auto;
+}
+.OurPDiv{
+    background-color: #f4f4f4;
+    padding:30px 0px
+}
+.OurP12{
+    width:100%;
+    max-width: 1150px;
+    margin:0 auto;
+    padding:15px
+
+}
+.OurP13{
+    width:100%;
+    display:flex;
+    align-items: center;
+    padding: 8px 10px;
+
+}
+.add1{
+    background-color: #008ea8;
+    color:#fff
+}
+.PSectionT{
+text-align: center;
+margin-top: 50px;
+font-weight: 600;
+font-size: 28px;
+}
+.OURDiv{
+    margin-top: 70px;
+    padding:30px 0px 50px 0px
+}
+.PSectionT1{
+    text-align: center;
+    width:100%;
+    max-width: 650px;
+    margin: 10px auto;
+}
+.add2{
+background-color: #f9f9f9;
+    border-bottom: 1px solid #e5dddd9c;
+}
+.OurP14{
+    width:25%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+}
+.OurP16{
+display:flex;
+justify-content: end;
+}
+.ORNow{
+    padding: 6px 14px;
+    border-radius: 6px;
+    color:#fff;
+    text-align: center;
+    width: fit-content;
+    background-color: #008ea8;
+}
+.DChoose{
+    width:100%;
+    background-color: #fff;
+    padding: 50px 15px
+}
+.WhyChoose{
+  
+    width:100%;
+    max-width:1150px;
+    margin:10px auto;
+
+
+}
+.WhyChoose1{
+text-align: center;
+font-weight: 600;
+font-size: 26px;
+}
+.WhyChoose2{
+    text-align: center;
+    /* margin-top: 10px; */
+    font-weight: 400;
+    font-size: 16px;
+}
+.WhyChoose3{
+    display:flex;
+    gap:20px;
+    margin-top: 40px;
+}
+.WhyChoose4{
+    /* border: 1px solid gray; */
+    border-radius: 8px;
+    padding:30px 15px;
+        box-shadow: 0px 1px 13px 0px #e1e1e5;
+}
+.WhyChoose4{
+   width:33.3%
+}
+.WhyChoose8{
+    font-size: 14px;
+    font-weight: 400px;
+    margin-top:16px;
+}
+.DpayN{
+    padding:50px 10px;
+    background-color: #008ea8;
+}
+.payN{
+    font-size: 26px;
+    text-align: center;
+    color:#fff;
+    margin-bottom: 20px;
+}
+.WhyChoose5{
+    width:50px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+.yyCd{
+  width:100%;  
+}
+.payN1{
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    padding:10px;
+    font-size: 16px;
+    color:#dfdee9;
+    margin:0 auto;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.payN2{
+padding: 6px 20px;
+border-radius: 6px; 
+background-color: #fff;
+color:#000;
+width: fit-content;
+margin: auto;
+font-weight: 400;
+}
+.payN3{
+    text-align: center;
+    margin-top:20px;
+    color:#dfdee9;
+    font-size: 16px;
+    font-weight: 400;
+}
+.platform2{
+    font-size: 26px;
+    font-weight: 600;
+
+}
+.CountIncrement1{
+    display:flex;
+    gap:20px;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+    max-width: 900px;
+    margin:0px auto;
+    padding:30px 15px 60px 15px
+}
+.count2{
+    text-align: center;
+}
+
+.platform3 {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    padding:2px 15px;
+
+}
+.platform4{
+    display:flex;
+    gap:20px;
+    width:100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding:10px 15px;
+}
+@media(max-width:768px){
+    .InterItemDiv{
+        flex-direction: column;
+    }
+        .InterItemDiv1 {
+            width: 100%;
+        }
+        .heroImage5{
+  
+    margin-left:-10px
+}
+                .InterHouseBack {
+                padding: 70px 15px 30px 15px;
+                    height: auto;
+                }
+                .PSectionT1{
+                    padding:2px 15px;
+                }
+                                .InterItemDiv2 {
+                                    font-size: 30px;
+                                    text-align: center;
+                                   
+                                }
+    .InterItemDiv3{
+         text-align: center;
+         justify-content: center;
+         align-items: center;
+            margin-bottom: 8px;
+        }
+        .hideD{
+            display:none;
+        }
+        .PSectionT{
+        padding:2px 15px
+        }
+        .Aff{
+            width:100%;
+            overflow-x: scroll;
+        }
+        .OurP12{
+            width:600px
+        }
+        .WhyChoose3{
+            flex-direction: column;
+        }
+        .WhyChoose4{
+            width:100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .WhyChoose8{
+            color:#434347b5;
+            font-weight: 400;
+        }
+                .payN {
+                    margin-bottom: 2px;
+                }
+
+                                
+}
+@media(max-width:500px){
+.OURF1{
+    flex-direction: column;
+}
+.OURF12{
+    width:100%;
+}
+.platform4{
+    flex-direction: column;
+}
+.CountIncrement1{
+    flex-wrap: wrap;
+    gap:20px;
+    padding: 3px 15px 60px 15px;
+}
+.count2{
+    flex: 0 0 40%;
+    box-sizing: border-box;
+    text-align: left;
+}
+.secText{
+    font-size: 14px;
+}
+.platform1{
+    padding:50px 10px 20px 10px;
+}
+}
+@media(min-width:769px){
+    .hideDS{
+        display:none;
+    }
 }

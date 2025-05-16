@@ -26,15 +26,17 @@
     height: 100px;
     text-align: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #1a1919;
-    background-color: #151b2d;
-    background: linear-gradient(71deg, #ffffff, #fafafb, #9ba3a3);
     border-radius: 5px;
     position: relative;
     z-index: 50;
     background-clip: padding-box;
+        box-shadow: 0px 5px 8px 3px #ededef;
+}
+.usersDiv{
+    color:#008ea8
 }
 
 .ch2 {
@@ -147,13 +149,13 @@
 
 @media (max-width:768px) {
 
-    .slider::before,
+    /* .slider::before,
     .slider::after,
     .ccl,
     .slider,
     .slider .slide {
         height: 70px
-    }
+    } */
 
     .rig::before,
     .rig::after,

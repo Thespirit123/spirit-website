@@ -72,7 +72,7 @@ export function TestimonialsSection() {
     rtl: false,
     arrows: true,
     focusOnSelect: true,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
     pauseOnFocus: true,

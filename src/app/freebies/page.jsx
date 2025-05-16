@@ -9,8 +9,8 @@ import ContentImag2 from "@/assets/images/freeB2.png";
 
 const form = () => {
 
-  const textLink = [{id:1,text:"All Resources", section:""},{id:2,text:"Templates", section:""},{id:3,text:"Graphics", section:""},{id:4,text:"Tools", section:""},{id:5,text:"UI Kits", section:""},{id:6,text:"Mockups", section:""}]
-  const featuredFreebies = [{id:1,text:"Premium UI Kit",text1:'500 downloads', img:ContentImag},{id:2,text:"Icon Pack Essential",text1:'3500 downloads',img:ContentImag1}]
+  const textLink = [{id:1,text:"All Resources", section:""},{id:2,text:"Health", section:""},{id:3,text:"Wealth", section:""},{id:4,text:"Mindset", section:""},{id:5,text:"Sex", section:""},{id:6,text:"Tools", section:""}]
+  const featuredFreebies = [{id:1,text:"How To Perfectly Run Sponsored Ads On Meta & Instagram",text1:'500 downloads', img:ContentImag},{id:2,text:"How To Make A Girl Experience Or",text1:'3500 downloads',img:ContentImag1}]
   const featuredFreebies1 = [{id:1,text:'Essential UI Component Pack',text1:'A comprehensive collection of React components for modern web applications',text2:'2,547 downloads',text3:'UI kits',text4:'Required Email',img:ContentImag},{id:2,text:'Social Media Template Kit',text1:'Ready-to-use social media templates for Instagram and Facebook.',text2:'1.823 downloads',text3:'templates',text4:'',img:ContentImag1},{id:3,text:'Dashboard Wireframe Kit',text1:'Professional wireframe templates for dashboard design',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag2}]
   return (
     <div >

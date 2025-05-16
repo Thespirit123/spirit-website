@@ -147,7 +147,7 @@ const index = () => {
 </svg>, cartText:"Popular",href:"", img:HeroImg3}]
   return (
     <div className='featPro'>
-      <div className='featuredText'><span className="FP">Featured Products</span><span className=""><a href="" className="FPLink">view all</a></span></div>
+      <div className='featuredText'><span className="FP">Featured Products</span><span className=""><a href="" className="FPLink"></a></span></div>
 
       <div className='featuredProductDiv'>
         {featuredProducts.map((app)=>(

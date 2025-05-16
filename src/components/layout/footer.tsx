@@ -1,12 +1,12 @@
 // import FooterImg from "@/assets/images/footer.png";
 // import LogoImg from "@/assets/images/logo.png";
-// import Image from "next/image";
+// import Image from "next/image";faXTwitter,
 // import { toast } from "react-hot-toast";
 // import SocialLinks from "./social-links";
 import "./footer.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { faFacebook, faXTwitter, faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faTelegram,  faWhatsapp, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 // const footerLinks = {
 //   services: [
@@ -36,9 +36,9 @@ const Footer = () => {
   //   });
   // };
 
-  const quickLinks = [{ id: 1, text: "Home", href: "/" }, { id: 2, text: "About Us", href: "" }, { id: 3, text: "Services", href: "" }, { id: 4, text: "Products", href: "" }, { id: 5, text: "Contact", href: "" }]
-  const serviceLinks = [{ id: 1, text: "Movie Portal", href: "/movie-portal" }, { id: 2, text: "Utility Payments", href: "/utility-payment" }, { id: 3, text: "WhatsApp Monitoring", href: "/whatsapp-tool" }, { id: 4, text: "Support", href: "" }, { id: 5, text: "Business Solutions", href: "" }]
-  const footerSocialLinks = [{ id: 1, icon: faFacebook }, { id: 2, icon: faXTwitter }, { id: 3, icon: faLinkedin }, { id: 4, icon: faInstagram }]
+  const quickLinks = [ { id: 1, text: "About Us", href: "" },  { id: 2, text: "Contact", href: "" }, { id: 3, text: "Careers", href: "" }]
+  const serviceLinks = [{ id: 1, text: "Movie Portal", href: "/movie-portal" }, { id: 2, text: "Utility Payments", href: "/utility-payment" }, { id: 3, text: "WhatsApp Monitoring", href: "/whatsapp-tool" }, { id: 4, text: "Virtual Numbers", href: "" },{ id: 5, text: "SMS Verification", href: "" },{ id: 6, text: "Support", href: "" }]
+  const footerSocialLinks = [{ id: 1, icon: faTelegram }, { id: 2, icon: faWhatsapp },  { id: 3, icon: faInstagram }]
   return (
     <footer className="relative">
        {/* <div className="w-11/12 max-w-7xl mx-auto mb-10">
@@ -126,7 +126,7 @@ const Footer = () => {
             </div>
           <div className="footerDivHeader">
               <ul>
-              <li><div className = "sectionHeader">Quick Links</div></li>
+              <li><div className = "sectionHeader"> Company</div></li>
                 {quickLinks.map((app,id)=>(
                   <li key = {id} className = "footerList"><a href="" className="footerLinks">{app.text}</a></li>
                 ))}
