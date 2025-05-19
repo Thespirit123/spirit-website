@@ -175,7 +175,7 @@ const index = () => {
 </clipPath>
 </defs>
 </svg>            
-<span>Add to Cart</span></div>
+<span>Get Now</span></div>
             <div className='featuredProductCardLoveIcone'><svg width="17" height="16" viewBox="0 0 17 16" fill="none">
 <g clipPath="url(#clip0_709_978)">
 <path d="M13.1668 9.33333C14.1602 8.36 15.1668 7.19333 15.1668 5.66667C15.1668 4.69421 14.7805 3.76158 14.0929 3.07394C13.4053 2.38631 12.4726 2 11.5002 2C10.3268 2 9.50016 2.33333 8.50016 3.33333C7.50016 2.33333 6.6735 2 5.50016 2C4.5277 2 3.59507 2.38631 2.90744 3.07394C2.2198 3.76158 1.8335 4.69421 1.8335 5.66667C1.8335 7.2 2.8335 8.36667 3.8335 9.33333L8.50016 14L13.1668 9.33333Z" stroke="#0F172A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -191,7 +191,7 @@ const index = () => {
            <div className='divGuide'>
            <p className='featuredProductCardText'>{app.text}</p>
            <div className='featuredProductCardStar'>{app.star}<span style={{color:"gray",fontSize:'12px'}}>4.5</span></div>
-           <div className='featuredProductCardPrice'><span className="priceSlash">₦{app.Price}</span>{" "}<span>Free</span></div>
+           <div className='featuredProductCardPrice'>{app.id === 4?<><span className="priceSlash">₦{app.Price}</span>{" "}<span>Free</span></>:<span>₦{app.Price}</span>}</div>
            </div>
         </div>
         ))}

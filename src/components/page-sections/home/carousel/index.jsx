@@ -47,9 +47,9 @@ const CarouselDiv =()=>{
               
             />
             <div  className="NewArrivalD">
-        <div  className="NewArrivalD1">New Arrivals</div>
-        <p  className="NewArrivalD2">Be the first to experience our latest digital products</p>
-        <div  className="NewArrivalD3">Explore</div>
+        <div  className="NewArrivalD1">Your Plug For Foreign Numbers, Bill Payments, Movies & More!</div>
+        <p  className="NewArrivalD2">Get everything you need in one place.</p>
+        <div  className="NewArrivalD3">Explore Our Products</div>
         </div>
      </div>
   </div>

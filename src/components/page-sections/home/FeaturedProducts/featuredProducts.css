@@ -150,3 +150,11 @@ position: relative;
     }
 
 }
+
+@media(min-width:1440px){
+    .featPro {
+           
+            max-width: 1300px;
+            
+        }
+}

@@ -94,7 +94,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                     },
                                     { href: "/cracked", text: "Cracked Apps" },
                                     { href: "/freebies", text: "Freebies" },
-                                    { href: "/", text: "1-800 SPIRIT" },
+                                    { href: "/feedback", text: "Feedback" },
                                    
                                    
                                 ].map((item, i) => (
