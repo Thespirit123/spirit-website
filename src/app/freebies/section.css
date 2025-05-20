@@ -89,6 +89,7 @@
     border-radius:5px;
     font-size:14px;
     width: fit-content;
+    cursor: pointer;
 
 }
 .FFee{
@@ -144,15 +145,21 @@ gap:20px
     font-size:16px;
     font-weight:500;
 }
+.CopTu{
+    padding:10px 15px;
+}
 .componentSec{
     display:flex;
     gap:15px;
+    justify-content: space-between;
+    flex-wrap: wrap;
     margin-top:60px;
     margin-bottom:80px
 }
 .componentSec1{
-        width: 33.3%;
-    /* border: 1px solid #e5e4e4c9; */
+        /* width: 33.3%; */
+        flex: 0 0 32%;
+        box-sizing: border-box;
     border-radius: 10px;
     box-shadow: 0px 2px 11px 0px #e8e9ed
 }
@@ -245,7 +252,7 @@ overflow:scroll !important;
         overflow:hidden;
     }
     .contentSec1{
-        width:590px !important;
+        width:490px !important;
         overflow-x:hidden
  
     }
@@ -274,10 +281,11 @@ overflow:scroll !important;
 }
 .componentSec {
     flex-direction: column;
-    padding:5px 15px;
+   
 }
 .componentSec1 {
-    width: 100%;
+    /* width: 100%; */
+    flex:0 0 100%;
     max-width:500px;
     margin:2px auto;
    
@@ -308,12 +316,25 @@ overflow:scroll !important;
       
         /* overflow: scroll; */
     }
+    
 }
+
+
 @media(min-width:769px){
-        .componentSec ,.ArticleSec2 {
+        .ArticleSec2 {
                 padding: 5px 15px;
             }
                         .brs {
                             padding: 8px 24px;
                         }
+
 }
+
+@media (min-width:768px) and (max-width: 1023px) {
+    .componentSec1{
+        flex: 0 0 48%;
+    }
+
+
+}
+
