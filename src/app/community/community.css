@@ -1,0 +1,385 @@
+.CommunityHeroDiv{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding:20px 15px;
+    width:100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+}
+.NowButton1{
+    padding:8px 15px;
+    width: fit-content;
+    background-color: #008ea8;
+    color: #fff;
+    border-radius: 8px;
+}
+.MoreButton2{
+    border:1px solid #008ea8;
+    padding: 8px 15px;
+    color:#008ea8;
+    border-radius: 8px;
+
+}
+.communityText{
+    padding: 4px 20px;
+    
+    background-color: #008ea83b;
+    border-radius: 30px;
+    color:#008ea8;
+    width: fit-content;
+}
+.communityTextHero{
+  font-size: 36px;
+  font-weight: 800;
+  color:#008ea8;
+}
+.heroAddT{
+    padding-top: 20px;
+}
+.heroAddT1{
+    padding-bottom: 25px;
+}
+.communityText1{
+    width: 100%;
+    max-width: 500px;
+    margin:0 auto 25px auto;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    color:#1a1a1ac9
+
+}
+.countHeader{
+    font-weight: 600;
+    font-size: 18px;
+}
+.countHeader1{
+    font-size: 14px;
+    font-weight: 600;
+    color:#080808c7;
+}
+.communityHeroButtonDiv{
+    display:flex;
+    gap:20px;
+}
+.communityHeroButtonDiv{
+    padding:15px 20px;
+    border-radius: 6px;
+}
+.communityCountDiv{
+    width:100%;
+    max-width: 1000px;
+    display:flex;
+    gap:10px;
+    justify-content: space-between;
+    padding:20px 100px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+box-shadow: 0px 2px 6px 0px #c7c2c2;
+    margin-top: 30px;
+}
+.communityCountDiv1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.communitySection2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 15px;
+}
+.topDivB{
+    padding:30px 10px;
+    background-color:#e4e5e5;
+}
+.communitySection2Text{
+    font-size: 28px;
+    font-weight: 600;
+}
+.communitySection2Text1{
+    width:100%;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    color:#000000ad;
+    margin-bottom: 30px;
+}
+.communitySection3{
+   padding:30px 30px; 
+   width:100%;
+   max-width: 900px;
+   margin: 0 auto;
+   background-color: #fff;
+box-shadow: 0px 2px 6px 0px #c7c2c2;;
+   border-radius: 8px;
+}
+.InviteFriendHousing{
+    width:100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    padding:30px 20px;
+}
+.ffRR{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+.ffRR1{
+    color:#060606;
+    font-size: 14px;
+    padding:15px 0px;
+}
+.theyGot{
+    display:flex;
+    gap:15px;
+}
+.InviteFriendHousing1{
+width:50%;
+}
+.ShareYourR{
+    padding:10px 15px;
+    border-radius: 6px;
+    background-color: #008ea8;
+    color:#fff;
+    width: fit-content;
+    margin-top: 20px;
+}
+.coupon{
+    font-size: 14px;
+    font-weight: 400;
+    color:#000;
+}
+.CoverMeS{
+    width:100%;
+    max-width: 1000px;
+    margin:0 auto;
+    padding:20px 15px;
+    background-color:#e4e5e5 ;
+    margin-top: 30px;
+    border-radius: 8px;
+}
+
+.communitySection4{
+    display:flex;
+    gap:20px;
+}
+.aad{
+    margin-top: 50px;
+}
+.communitySection4Div{
+    width:50%;
+   
+   
+}
+.rfr{
+    box-shadow: 0px 2px 3px 1px #8080808f;
+padding: 20px;
+border-radius: 8px;
+}
+.RewardJ{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.RewardJ1{
+    font-size: 16px;
+    font-weight: 400;
+    color:#040404c9
+}
+.pointsDiv{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pointsDiv1{
+    font-weight: 600;
+    font-size: 14px;
+}
+.pointsDiv2{
+    font-weight: 400;
+    font-size: 14px;
+}
+.pointsDivLine{
+    height: 10px;
+    background-color: gray;
+    border-radius: 30px;
+    position: relative;
+}
+.pointsDiv44{
+    font-size: 14px;
+}
+.pointsDivLineColor{
+    position: absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:70%;
+    background-color: #008ea8;
+     border-radius: 30px;
+    
+}
+.sectionTestimony{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    width:100%;
+    max-width: 1000px;
+    margin:30px auto;
+    padding:30px 10px;
+
+
+}
+.textFF{
+    text-align: center;
+}
+.textFF1{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color:#312f2f;
+}
+.iconDiv{
+    text-align: center;
+}
+.wwY{
+    display:flex;
+    gap:15px
+}
+.wwY1{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.wwY2{
+    font-size: 16px;
+    color:#3e3f45db;
+    margin-bottom: 10px;
+}
+.JoinOurCommunity, .JoinOurCommunity1, .JoinOurCommunity{
+    text-align: center;
+}
+.JoinOurCommunity{
+font-size: 26px;
+    font-weight: 600;
+    color:#fff;
+}
+.JoinOurCommunity1{
+    width:100%;
+    max-width: 500px;
+    color:#e3e3e3d4;
+    margin:0 auto;
+font-weight: 400;}
+
+.JoinOurCommunity2{
+    display:flex;
+    width:100%;
+    
+    max-width: 600px;
+    gap:20px;
+    margin:20px 0px
+}
+.JoinOurCommunity3, .JoinOurCommunity4{
+width:50%;
+border-radius: 5px;
+}
+.JoinOurCommunity3{
+    background-color: #fff;
+    padding: 6px 15px;
+    font-size: 14px;
+    color:#000;
+    text-align: center;
+
+}
+.JoinOurCommunity4{
+    background-color: green;
+    padding: 6px 15px;
+    color:#fff;
+    font-size: 14px;
+    text-align: center;
+}
+.JoinOurCommunity5{
+    text-align: center;
+    color: #e3e3e3d4;
+}
+.NLN{
+    background: -webkit-linear-gradient();
+}
+.JoinCommSec{
+    padding:60px 80px;
+    border-radius: 8px;
+    background-color: #008ea8;
+    width:100%;
+    max-width:800px;
+    margin: 0 auto;
+}
+.NLN{
+    padding:40px
+}
+
+@media(max-width:768px){
+   .communityText, .countHeader1 {
+    text-align:center ;
+   } 
+   .CommunityHeroDiv{
+    margin-bottom: 30px;
+   }
+   .communityTextHero{
+    text-align: center;
+    font-size: 28px;
+   }
+   .communityCountDiv{
+    padding:20px 10px;
+   }
+   .communitySection2Text{
+    text-align: center;
+    font-size: 24px;
+   }
+   .communitySection4{
+    flex-direction: column;
+   }
+   .communitySection4Div {
+       width: 100%;
+   }
+   .JoinCommSec{
+        padding : 40px 10px;
+   }
+   .NLN{
+    padding:20px;
+   }
+   .JoinOurCommunity2{
+ flex-direction: column;
+   }
+   .JoinOurCommunity3,
+   .JoinOurCommunity4 {
+       width: 100%;
+       
+   }
+   .sectionTestimony{
+ flex-direction: column;
+   }
+   .InviteFriendHousing{
+    flex-direction: column;
+   }
+   .InviteFriendHousing1 {
+       width: 100%;
+   }
+   .CMCm{
+    padding:2px 20px;
+   }
+   .communitySection3{
+    padding:30px 15px;
+   }
+}

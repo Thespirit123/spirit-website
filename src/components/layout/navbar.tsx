@@ -1,11 +1,11 @@
 "use client";
+import React, { useCallback, useState, useEffect } from "react";
 import PhoneIcon from "@/assets/icons/phone";
 import LogoImg from "@/assets/images/logo.png";
 import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Button from "../custom-ui/button";
 import MobileMenu from "./mobile-menu";
@@ -29,6 +29,8 @@ const COMING_SOON_MESSAGES: Record<ComingSoonFeature, string> = {
 };
 
 const Navbar = () => {
+
+  const [isFixed, setIsFixed] = useState(false);
   const { user, loading } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -38,6 +40,19 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
     document.body.style.overflow = !isMenuOpen ? "hidden" : "unset";
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const generateWhatsAppUrl = (phone: string, message: string) =>
     `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
@@ -61,10 +76,11 @@ const Navbar = () => {
   if (loading)
     return <div className="w-8 h-8 rounded-full animate-pulse bg-gray-200" />;
 
+  
   return (
     <nav
-      className={`${isDashboard ? "w-full mt-0" : "w-full mt-0"
-        } bg-white mx-auto relative z-10  shadow-[0_0_7px_0_rgba(0,0,0,0.1)]`} style={{position:"fixed",zIndex:"50"}}
+      className={`navbar ${isFixed ? 'fixed' : ''} ${isDashboard ? "w-full mt-0" : "w-full mt-0"
+       } mx-auto relative  `} 
     >
       {/* <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">

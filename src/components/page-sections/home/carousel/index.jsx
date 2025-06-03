@@ -35,10 +35,10 @@ const CarouselDiv =()=>{
  const {deviceType,setDeviceType} = useState("mobile")
  
     return(
-        <div style={{paddingTop:"60px"}}>
+        <div>
 
           <div >
-     <div className="section2M">
+     <div className="section2M" style={{paddingTop:"60px"}}>
        <Image
               src={HeroImg}
               alt="Hero Screens"
@@ -54,7 +54,7 @@ const CarouselDiv =()=>{
      </div>
   </div>
 
-
+<div style={{marginTop:'8px'}}>
                  <Carousel
   swipeable={false}
   draggable={false}
@@ -125,6 +125,8 @@ const CarouselDiv =()=>{
   </div>
   </div>
 </Carousel>
+
+</div>
 
 
         </div>

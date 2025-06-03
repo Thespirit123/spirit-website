@@ -61,6 +61,18 @@
     font-size: 14px;
     color: gray;
 }
+.navbar{
+    width: 100%;
+   z-index: 1000;
+    transition: top 0.3s, position 0.3s;
+ 
+}
+.fixed {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 @media(max-width:500px) {
     .FooterDiv {
