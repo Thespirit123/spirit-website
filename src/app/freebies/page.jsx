@@ -3,23 +3,25 @@
 import React, {useState} from 'react'
 import "./section.css"
 import Image from "next/image";
-import ContentImage from "@/assets/images/Image.png";
-import ContentImg from "@/assets/images/Image.png";
-import ContentImag from "@/assets/images/FreeB.png";
-import ContentImag1 from "@/assets/images/freeB1.png";
-import ContentImag2 from "@/assets/images/freeB2.png";
+import ContentImage from "@/assets/images/freebies1.jpeg";
+import ContentImage1 from "@/assets/images/freebies3.jpeg";
+import ContentImage2 from "@/assets/images/freebies7.jpeg";
+import ContentImg from "@/assets/images/freebies6.jpeg";
+import ContentImag from "@/assets/images/freebies5.jpeg";
+import ContentImag1 from "@/assets/images/freebies4.jpeg";
+import ContentImag2 from "@/assets/images/freebies2.jpeg";
 
 const form = () => {
 
   // const textLink = [{id:1,text:"All Resources", section:""},{id:2,text:"Health", section:""},{id:3,text:"Wealth", section:""},{id:4,text:"Mindset", section:""},{id:5,text:"Sex", section:""},{id:6,text:"Tools", section:""}]
   const featuredFreebies = [{id:1,text:"How To Perfectly Run Sponsored Ads On Meta & Instagram",text1:'500 downloads', img:ContentImag},{id:2,text:"How To Make A Girl Experience Orgasm",text1:'3500 downloads',img:ContentImag1}]
-  const featuredFreebies1 = [{id:1,text:'Auto Responder for WhatsApp',text1:'No more stress! Our premium auto responder replies to all your clients instantly - on the go.',text2:'2,547 downloads',text3:'UI kits',text4:'Required Email',img:ContentImag, category:"Tools"},
-    {id:2,text:'How to Perfectly Run Sponsored Ads on Meta & Instagram',text1:"Discover the hidden secrets your mentors won't tell you. This free course gives you real insights into running effective sponsored ads.",text2:'1.823 downloads',text3:'templates',text4:'',img:ContentImag1, category:"Wealth"},
-    {id:3,text:'How to Make a Girl Experience Orgasm',text1:'Learn how truly satisfy the woman you love. This guide teaches you how to help her climax and enjoy intense pleasure.',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag2, category:"Sex"},
-    {id:4,text:'Attia - Outline',text1:"Health is Wealth isn't just a saying. Peter Attia's book shows you how to live a longer purposeful life.",text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag2, category:"Health"},
-    {id:5,text:"Alex's Books on Offers and Leads",text1:'Forget overpriced marketing courses. These books give you practical strategies that actually work. ',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag2, category:"Wealth"},
+  const featuredFreebies1 = [{id:1,text:'Auto Responder for WhatsApp',text1:'No more stress! Our premium auto responder replies to all your clients instantly - on the go.',text2:'2,547 downloads',text3:'UI kits',text4:'Required Email',img:ContentImage2, category:"Tools"},
+    {id:2,text:'How to Perfectly Run Sponsored Ads on Meta & Instagram',text1:"Discover the hidden secrets your mentors won't tell you. This free course gives you real insights into running effective sponsored ads.",text2:'1.823 downloads',text3:'templates',text4:'',img:ContentImag, category:"Wealth"},
+    {id:3,text:'How to Make a Girl Experience Orgasm',text1:'Learn how truly satisfy the woman you love. This guide teaches you how to help her climax and enjoy intense pleasure.',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag1, category:"Sex"},
+    {id:4,text:'Attia - Outline',text1:"Health is Wealth isn't just a saying. Peter Attia's book shows you how to live a longer purposeful life.",text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImg, category:"Health"},
+    {id:5,text:"Alex's Books on Offers and Leads",text1:'Forget overpriced marketing courses. These books give you practical strategies that actually work. ',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImage1, category:"Wealth"},
   {id:6,text:'The Richest Man in Babylon',text1:'The first book that changed how I see money. Its storytelling approach teaches timeless lessons on building wealth.',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag2, category:"Wealth"},
-{id:7,text:'Letters from a Stoic',text1:'The godfather of stoicism breaks it down in this classic. Timeless Wisdom for a better, calmer life. ',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImag2, category:"Mindset"}]
+{id:7,text:'Letters from a Stoic',text1:'The godfather of stoicism breaks it down in this classic. Timeless Wisdom for a better, calmer life. ',text2:'3,102 downloads',text3:'mockups',text4:'Required email',img:ContentImage, category:"Mindset"}]
 
 const [selectedCategory,setSelectedCategory] = useState("All Resources");
 const categories = ["All Resources", ...new Set(featuredFreebies1.map(item =>item.category))]
