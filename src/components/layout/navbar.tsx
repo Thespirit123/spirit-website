@@ -80,7 +80,7 @@ const Navbar = () => {
   return (
     <nav
       className={`navbar ${isFixed ? 'fixed' : ''} ${isDashboard ? "w-full mt-0" : "w-full mt-0"
-       } mx-auto relative  `} 
+       } mx-auto absolute  `} 
     >
       {/* <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">

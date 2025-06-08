@@ -53,9 +53,12 @@ margin-bottom: 10px;
     .section1{
         height: 150px;
     }
+    .react-multi-carousel-item{
+        width:340px !important
+    }
         .section2M {
             
-            height: 350px;
+            height: 480px;
         }
         .NewArrivalD {
             position: absolute;
@@ -65,9 +68,10 @@ margin-bottom: 10px;
             transform: translate(0, 0);
         }
         .NewArrivalD1{
-                font-size: 24px;
+                font-size: 32px;
                 width: 96%;
                 text-align: center;
+                margin-top:20px;
         }
         .NewArrivalD2{
             text-align: center;

@@ -3,8 +3,8 @@
 import React, {useState} from "react"
 import Carousel from "react-multi-carousel";
 import HeroImg from "/public/Image8.png";
-import HeroImg1 from "/public/caroIM.png";
-import HeroImg2 from "/public/caroIM1.jpg";
+import HeroImg1 from "/public/sliderImage.jpeg";
+import HeroImg2 from "/public/sliderImage1.jpeg";
 import Image from "next/image";
 import "./carousel.css"
 
@@ -24,7 +24,7 @@ const responsive = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1.3,
+    items: 1,
     slidesToSlide: 1 // optional, default to 1.
   }
 };
