@@ -40,7 +40,14 @@
 }
 .getButton{
 background-color: #fff;
+box-shadow: 0px 1px 8px 2px #1611183d;
 color:#000
+}
+.getButton:hover{
+transform: translateY(-5px);
+background-color: #131621;
+color:#fff;
+transition: all 2s;
 }
 .divHeight{
     height:350px;
@@ -51,6 +58,11 @@ color:#000
 }
 .VButton{
     border:1px solid #34bbd3;
+}
+.VButton:hover{
+    background-color: #34bbd3;
+    transform: translateY(-5px);
+    transition: all 2s;
 }
 .InterItemDiv3{
     display: flex;
@@ -81,6 +93,7 @@ color:#000
     font-weight:500 ;
     font-size: 20px;
     margin-bottom: 15px;
+    color: #008ea8;
 }
 .OURF12{
 width: calc(50% - 10px);
@@ -135,7 +148,13 @@ box-shadow: 0px 1px 13px 0px #e1e1e5;
 }
 .add1{
     background-color: #008ea8;
-    color:#fff
+    color:#fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.OurP13:last-child{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 .PSectionT{
 text-align: center;
@@ -185,7 +204,7 @@ justify-content: end;
     width:100%;
     max-width:1200px;
     margin:10px auto;
-    padding:2px 15px;
+    padding:2px 0px;
 
 
 }
@@ -214,6 +233,10 @@ font-size: 26px;
 .WhyChoose4{
    width:33.3%
 }
+.WhyChoose4{
+    font-weight: bold;
+}
+
 .WhyChoose8{
     font-size: 14px;
     font-weight: 400px;
@@ -228,6 +251,7 @@ font-size: 26px;
     text-align: center;
     color:#fff;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 .WhyChoose5{
     width:50px;
@@ -258,6 +282,15 @@ width: fit-content;
 margin: auto;
 font-weight: 400;
 font-size: 14px;
+box-shadow: 0px 2px 0px 2px #79a1ad4d;
+}
+.payN2:hover{
+    transform: translateY(-5px);
+    background-color:#111727 ;
+    color:#fff;
+    transition: all 3s;
+    /* box-shadow: 0px 2px 0px 2px #bad2da4d; */
+
 }
 .payN3{
     text-align: center;
@@ -305,6 +338,11 @@ font-size: 14px;
     .InterItemDiv{
         flex-direction: column;
     }
+    .OurP14, .ORNow{
+        font-size: 14px;
+    }
+  
+    
         .InterItemDiv1 {
             width: 100%;
         }
@@ -326,6 +364,7 @@ font-size: 14px;
                                     font-size: 29px;
                                     font-weight: bold;
                                     text-align: center;
+                                    margin-top: 40px;
                                    
                                 }
     .InterItemDiv3{
@@ -343,9 +382,14 @@ font-size: 14px;
         .Aff{
             width:100%;
             overflow-x: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .Aff::-webkit-scrollbar{
+         display:none;
         }
         .OurP12{
-            width:600px
+            width:450px
         }
         .WhyChoose3{
             flex-direction: column;

@@ -5,8 +5,8 @@ import "./community.css"
 
 const page = () => {
   const waysToEarnDiv = [
-     {id:1, icon:"", text:'Ways To Earn', text1:"Multiple ways to earn points and advance your membership level.", link:""},
-      {id:2, icon:"", text:'ways to Redeem', text1:"Exchange your points for valuable rewards and experience.", link:""}
+     {id:1, icon:"", text:'Ways To Earn', text1:"Refer your friends and family.", link:""},
+      {id:2, icon:"", text:'ways to Redeem', text1:"Go to your referral page and withdraw your referral rewards to your account and receive your money instantly.", link:""}
   ]
 
   const testimony = [
@@ -22,10 +22,10 @@ const page = () => {
         <div  className='communityTextHero heroAddT'>The Spirit  </div>
         <div  className='communityTextHero heroAddT1'> Community Rewards</div>
 
-        <div  className='communityText1'>Earn rewards, get exclusive discounts, and join Nigeria's fastest-growing digital community</div>
+        <div  className='communityText1'>Earn massive referral rewards for life when you refer your friends to our foreign number or airtime page</div>
         <div  className='communityHeroButtonDiv'>
-          <div  className='communityHeroButton NowButton1'>Join Now</div>
-          <div  className='communityHeroButton MoreButton2'>Learn More</div>
+          <div  className='communityHeroButton NowButton1'>Airtime</div>
+          <div  className='communityHeroButton MoreButton2'>Foreign numbers</div>
         </div>
         <div  className='communityCountDiv'>
            <div  className='communityCountDiv1'>
@@ -53,8 +53,7 @@ special offers.</div>
   <div className='communitySection4'>
     <div className='communitySection4Div'>
       <p className='RewardJ'>Your Rewards Journey</p>
-      <p className='RewardJ1'>Collect points with every interaction and 
-unlock exclusive benefits.</p>
+      <p className='RewardJ1'>Choose between airtime & foreign number and pull your friends in. With that you can unlock exclusive benefits. </p>
     </div>
     <div className='communitySection4Div'>
       <div className='pointsDiv'>
@@ -80,7 +79,7 @@ unlock exclusive benefits.</p>
           <p className='wwY2'>{app.text1}</p>
         </div>
       </div>
-      <div className=''>Show More</div>
+      <div className='MoreShow'>Show More</div>
     </div>
     ))}
 
@@ -95,8 +94,8 @@ unlock exclusive benefits.</p>
     <div className='InviteFriendHousing'>
       <div className='InviteFriendHousing1 vfg'>
       <div className='ffRR'>Friend Referrals</div>
-      <div className='ffRR1' >Give your friends & family ₦2,000 off their first purchase. For each 
-successful referral, you'll receive ₦2,000 in rewards!</div>
+      <div className='ffRR1' >Give your friends & family up to 50% of their first purchase. For each 
+you will receive  up to ₦2000 in rewards!</div>
 <div className='theyGot'>
   <div className=''>icon</div>
    <div className=''>
@@ -115,7 +114,10 @@ successful referral, you'll receive ₦2,000 in rewards!</div>
 
       </div>
       <div className='InviteFriendHousing1'>
-        image
+        <div>
+         image
+        </div>
+        
       </div>
     </div>
     </div>

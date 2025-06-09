@@ -238,6 +238,9 @@ gap:20px
     font-weight:400;
     font-size:14px;
 }
+.LLcc{
+    font-weight: bold;
+}
 @media(max-width:768px){
     .Tare{
 width:100%;

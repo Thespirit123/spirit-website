@@ -117,8 +117,8 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden lg:flex gap-8">
-          <li>
-            <NavLink href="/movie-portal" text="Foreign Numbers" />
+          <li >
+            <NavLink href="/international-numbers" text="Foreign Numbers"  />
           </li>
           <li>
             <NavLink href="/utility-payment" text="Airtime & Data " />

@@ -1,8 +1,8 @@
 import React from 'react'
 import "./featuredProducts.css"
-import HeroImg from "@/assets/images/Image.png";
-import HeroImg1 from "@/assets/images/Image1.png";
-import HeroImg2 from "@/assets/images/Image2.png";
+import HeroImg from "@/assets/images/homes1.jpeg";
+import HeroImg1 from "@/assets/images/homes2.jpeg";
+import HeroImg2 from "@/assets/images/homes3.jpeg";
 import HeroImg3 from "@/assets/images/Image3.png";
 import Image from "next/image";
 

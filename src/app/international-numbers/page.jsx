@@ -23,9 +23,9 @@ const page2 = () => {
    const WhyChooseUs = [{id:1,text:"Receive SMS hassle-free",text1:'We currently support a large variety of services including, but not limited to Snapchat, Instagram, WhatsApp, Facebook, Telegram, and even Twitter. To buy an online phone number has never been this easy!',icon:InternationalImg4},{id:2,text:"High quality verifications",text1:'At The Spirit Media, we pride ourselves on providing the highest quality SMS verifications for your needs. We make sure to only provide non-VoIP phone numbers in order to work with any service.',icon:InternationalImg5},{id:3,text:"No Price Fluctuation",text1:'Our numbers start at affordable rates, and our prices never fluctuate, even during high demand! What you see is what you pay.',icon: InternationalImg3}]
    const countIncrement = [{id:1,text:'50+',text1:"Countries Supported"},{id:2,text:'300+',text1:"Service Available"},{id:3,text:'10,000+',text1:"Nigerian Users"},{id:4,text:'99.9%',text1:"Success Rate"}]
   return (
-    <div style={{paddingTop:"60px"}}>
+    <div >
 
-          <div className="InterHouseBack">
+          <div className="InterHouseBack" >
             <div className="InterItemDiv">
                 <div className="InterItemDiv1">
                     <p className="InterItemDiv2">The Fastest & Most Affordable Online SMS Verification</p>
