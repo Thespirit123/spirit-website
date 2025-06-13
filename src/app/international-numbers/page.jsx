@@ -105,7 +105,7 @@ const page2 = () => {
           <div className="Aff">
           <div className='OurP12'>
             <div className='OurP13 add1'>
-              <div className='OurP14'>services</div>
+              <div className='OurP14'>Services</div>
               <div className='OurP14'>Active Orders</div>
               <div className='OurP14'>Price</div>
                <div className='OurP14'></div>
