@@ -102,7 +102,7 @@ const AppLandingPage = () => {
 
   return (
     <PaymentProvider productType="cracked-apps">
-      <div className="min-h-screen relative bg-gradient-to-b from-white to-[#F8FDFE]" style={{paddingTop:"30px"}}>
+      <div className="min-h-screen relative bg-gradient-to-b from-white to-[#F8FDFE]" style={{paddingTop:"100px"}}>
         <div className="relative overflow-hidden -mt-[88px]">
           <div className="absolute inset-0 bg-gradient-to-b from-[#D5F9FF]/30 to-transparent" />
           <div className="absolute inset-0">
