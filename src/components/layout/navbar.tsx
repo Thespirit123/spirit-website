@@ -41,6 +41,13 @@ const Navbar = () => {
     document.body.style.overflow = !isMenuOpen ? "hidden" : "unset";
   }, [isMenuOpen]);
 
+  const toggleMenu1 = useCallback(() => {
+    setIsMenuOpen(!isMenuOpen);
+    document.body.style.overflow = !isMenuOpen ? "unset" : "hidden";
+  }, [isMenuOpen]);
+
+
+
   useEffect(() => {
     const handleScroll = () => {
       setIsFixed(window.scrollY > 100);
@@ -118,27 +125,29 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden lg:flex gap-8">
           <li >
-            <NavLink href="/international-numbers" text="Foreign Numbers"  />
+            <NavLink href="/international-numbers" text="Foreign Numbers" reloadOnClick onClick={toggleMenu} />
           </li>
           <li>
-            <NavLink href="/utility-payment" text="Airtime & Data " />
+            <NavLink href="/utility-payment" text="Airtime & Data " reloadOnClick onClick={toggleMenu1}/>
           </li>
           <li>
-            <NavLink href="/movie-portal" text="Movie Portal" />
+            <NavLink href="/movie-portal" text="Movie Portal" reloadOnClick onClick={toggleMenu1}/>
           </li>
           <li>
-            <NavLink href="/whatsapp-tool" text="WhatsApp Spy App" />
+            <NavLink href="/whatsapp-tool" text="WhatsApp Spy App" reloadOnClick onClick={toggleMenu1} />
           </li>
-          <li>
+          {/* <li>
             <NavLink
+           
               href="/utility-payment"
               text="Cracked App"
+              reloadOnClick
               onClick={(e) => handleUtilityClick(e, "utility")}
             />
-          </li>
+          </li> */}
 
           <li>
-            <NavLink href="/freebies" text="Freebies" />
+            <NavLink href="/freebies" text="Freebies" reloadOnClick onClick={toggleMenu1} />
           </li>
           {/* <li>
             <NavLink href="/feedback" text="Support" />
