@@ -461,6 +461,9 @@
     .rfr{
         box-shadow: 0px 2px 3px 1px rgb(173 173 173 / 10%), 0px 5.81426px 8.72138px -1.45356px rgba(0, 0, 0, 0.1);
     }
+    .CoverMeS{
+   padding:20px 0px
+    }
 
     .CommunityHeroDiv {
         margin-bottom: 30px;
@@ -526,6 +529,7 @@
 
     .InviteFriendHousing {
         flex-direction: column;
+        padding:30px 15px;
     }
 
     .InviteFriendHousing1 {
