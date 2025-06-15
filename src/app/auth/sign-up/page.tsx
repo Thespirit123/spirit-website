@@ -70,7 +70,7 @@ const SignUpPage = () => {
         password: data.password,
       });
 
-      router.push("/dashboard");
+      router.push("/select-platform");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Sign up failed");
     } finally {
@@ -119,7 +119,7 @@ const SignUpPage = () => {
               >
                 Create Account
               </Text>
-              <Text className="text-gray-600">Join our affiliate program</Text>
+              <Text className="text-gray-600">Join our community</Text>
             </div>
           </div>
 

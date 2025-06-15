@@ -48,7 +48,7 @@ const RechargeSection = () => {
   // };
 
   return (
-    <section>
+    <section className="border border-red-200">
       <Text
         variant="h1"
         className="font-medium text-2xl md:text-3xl lg:text-4xl text-center mt-10 mb-4"

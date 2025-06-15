@@ -1,44 +1,69 @@
-import { useAuth } from "@/hooks/useAuth";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { Loading } from "../loading";
+"use client";
 
-interface WithAuthOptions {
-  adminOnly?: boolean;
-}
+import { useAuth } from "@/hooks/useAuth";
+import { getSelectedPlatform } from "@/lib/platform-storage";
+import { usePathname, useRouter } from "next/navigation";
+import { ComponentType, useEffect } from "react";
+import { Text } from "../custom-ui/text";
+
+export type WithAuthProps = Record<string, never>;
 
 export function withAuth<P extends object>(
-  WrappedComponent: React.ComponentType<P>,
-  options: WithAuthOptions = {}
-) {
-  return function WithAuthComponent(props: P) {
-    const { user, loading, isAdmin } = useAuth();
+  WrappedComponent: ComponentType<P>
+): ComponentType<P & WithAuthProps> {
+  const ComponentWithAuth = (props: P) => {
+    const { user, loading } = useAuth();
     const router = useRouter();
+    const pathname = usePathname();
 
     useEffect(() => {
-      if (loading) {
-        return;
-      }
+      if (!loading) {
+        if (!user) {
+          router.replace(`/auth/login?redirect=${pathname}`);
+          return;
+        }
 
-      if (!user) {
-        router.replace("/auth/login");
-        return;
-      }
+        const platform = getSelectedPlatform();
+        if (!platform) {
+          if (pathname !== "/select-platform") {
+            router.replace("/select-platform");
+          }
+          return;
+        }
 
-      if (options.adminOnly && isAdmin !== true) {
-        router.replace("/");
-        return;
+        if (platform === "affiliate" && pathname === "/utilities-dashboard") {
+          router.replace("/dashboard");
+        } else if (platform === "utilities" && pathname === "/dashboard") {
+          router.replace("/utilities-dashboard");
+        } else if (platform && pathname === "/select-platform") {
+          if (platform === "affiliate") router.replace("/dashboard");
+          else if (platform === "utilities") router.replace("/utilities-dashboard");
+        }
       }
-    }, [user, loading, isAdmin, router, options.adminOnly]);
+    }, [user, loading, router, pathname]);
 
-    if (loading) {
-      return <Loading fullScreen text="Checking authentication..." />;
+    if (loading || !user) {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <Text>Loading authentication status...</Text>
+        </div>
+      );
     }
 
-    if (!user || (options.adminOnly && isAdmin !== true)) {
-      return null;
+    const selectedPlatform = getSelectedPlatform();
+    if (!selectedPlatform && pathname !== "/select-platform") {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <Text>Redirecting to platform selection...</Text>
+        </div>
+      );
     }
 
-    return <WrappedComponent {...props} />;
+    return <WrappedComponent {...(props as P)} />;
   };
+
+  ComponentWithAuth.displayName = `WithAuth(${WrappedComponent.displayName || WrappedComponent.name || "Component"
+    })`;
+
+  return ComponentWithAuth;
 }

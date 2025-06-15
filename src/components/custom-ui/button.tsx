@@ -10,7 +10,7 @@ import { twMerge } from "tailwind-merge";
 
 interface BaseProps {
   isLoading?: boolean;
-  variant?: "primary" | "secondary" | "outline";
+  variant?: "primary" | "secondary" | "outline" | "destructive";
   size?: "sm" | "md" | "lg";
   fullWidth?: boolean;
   disabled?: boolean;
@@ -59,6 +59,8 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
         "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-200/50",
       outline:
         "border-2 border-[#008EA8] text-[#008EA8] hover:bg-[#008EA8] hover:text-white focus:ring-[#008EA8]/50",
+      destructive:
+        "bg-red-600 text-white hover:bg-red-700 focus:ring-red-600/50",
     };
 
     const classes = twMerge(

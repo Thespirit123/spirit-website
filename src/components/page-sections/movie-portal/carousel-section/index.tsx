@@ -74,11 +74,11 @@ const CarouselSection = () => {
 
   const handleNext = useCallback(() => {
     handleSlideChange(activeIndex === slides.length - 1 ? 0 : activeIndex + 1);
-  }, [activeIndex]);
+  }, [activeIndex, handleSlideChange]);
 
   const handlePrev = useCallback(() => {
     handleSlideChange(activeIndex === 0 ? slides.length - 1 : activeIndex - 1);
-  }, [activeIndex]);
+  }, [activeIndex, handleSlideChange]);
 
   const handleVideoEnd = useCallback(() => {
     const nextIndex = activeIndex === slides.length - 1 ? 0 : activeIndex + 1;
@@ -115,9 +115,8 @@ const CarouselSection = () => {
             <button
               key={idx}
               onClick={() => handleSlideChange(idx)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
-                idx === activeIndex ? "bg-brand-primary" : "bg-white/30"
-              }`}
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${idx === activeIndex ? "bg-brand-primary" : "bg-white/30"
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}

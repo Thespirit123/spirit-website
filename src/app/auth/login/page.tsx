@@ -37,7 +37,7 @@ const LoginPage = () => {
         localStorage.removeItem("rememberEmail");
       }
 
-      router.replace("/dashboard");
+      router.replace("/select-platform");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed");
     } finally {
@@ -87,7 +87,7 @@ const LoginPage = () => {
                 Welcome!
               </Text>
               <Text className="text-gray-600">
-                Log in to your affiliate dashboard
+                Log in to your dashboard
               </Text>
             </div>
           </div>

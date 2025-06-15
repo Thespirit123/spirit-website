@@ -1,8 +1,10 @@
 "use client";
 import { useAuth } from "@/hooks/useAuth";
+import { SelectedPlatform, setSelectedPlatform } from "@/lib/platform-storage";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import React from "react";
+import { X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useCallback } from "react";
 import Button from "../custom-ui/button";
 import NavLink from "./navlink";
 
@@ -33,7 +35,7 @@ const menuItemVariants = {
     open: (i: number) => ({
         x: 0,
         opacity: 1,
-        transition: { delay: i * 0.1 },
+        transition: { delay: i * 0.05, type: "spring", stiffness: 300, damping: 20 },
     }),
 };
 
@@ -43,6 +45,46 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
     handleUtilityClick,
 }) => {
     const { user, logout } = useAuth();
+    const router = useRouter();
+
+    const handleLogout = useCallback(async () => {
+        try {
+            await logout();
+            setSelectedPlatform(null);
+            toggleMenu();
+            router.push('/auth/login');
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    }, [logout, router, toggleMenu]);
+
+    const handlePlatformNavigation = useCallback((platform: SelectedPlatform, path: string) => {
+        setSelectedPlatform(platform);
+        toggleMenu();
+        router.push(path);
+    }, [router, toggleMenu]);
+
+    const navItems = [
+        {
+            href: "/international-numbers",
+            text: "Foreign Numbers",
+        },
+        {
+            href: "/utility-payment",
+            text: "Airtime & Data",
+            onClick: (e: React.MouseEvent<HTMLElement>) =>
+                handleUtilityClick(e as React.MouseEvent<HTMLAnchorElement>, "utility"),
+        },
+        { href: "/movie-portal", text: "Movie Portal" },
+        {
+            href: "/whatsapp-tool",
+            text: "Whatsapp Spy App",
+        },
+        { href: "/cracked", text: "Cracked Apps" },
+        { href: "/freebies", text: "Freebies" },
+        { href: "/feedback", text: "Feedback" },
+    ];
+
 
     return (
         <AnimatePresence>
@@ -52,7 +94,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className=" inset-0 bg-black/20 z-2 lg:hidden"
+                        className="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
                         onClick={toggleMenu}
                     />
 
@@ -61,42 +103,28 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                         animate="open"
                         exit="closed"
                         variants={menuVariants}
-                        className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg rounded-b-md overflow-hidden z-3"
+                        className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-xl rounded-b-lg overflow-hidden z-30"
                     >
-                        <div className="p-6">
+                        <button
+                            onClick={toggleMenu}
+                            className="absolute top-0 right-4 text-gray-500 hover:text-gray-700 z-40"
+                            aria-label="Close menu"
+                        >
+                            <X size={30} />
+                        </button>
+                        <div className="p-5 pt-12">
                             <motion.ul
-                                className="flex flex-col gap-6"
+                                className="flex flex-col gap-1"
                                 variants={{
                                     open: {
-                                        transition: { staggerChildren: 0.1 },
+                                        transition: { staggerChildren: 0.05, delayChildren: 0.1 },
                                     },
+                                    closed: {
+                                        transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                                    }
                                 }}
                             >
-                                {[
-                                    // { href: "/international-numbers", text: "Foreign Numbers" },
-                                    // { href: "/utility-payment", text: "Airtime & Data" },
-                                    {
-                                        href: "/international-numbers",
-                                        text: "Foreign Numbers",
-                                        
-                                    },
-                                    {
-                                        href: "/utility-payment",
-                                        text: "Airtime & Data",
-                                        onClick: (e: React.MouseEvent<HTMLElement>) =>
-                                            handleUtilityClick(e as React.MouseEvent<HTMLAnchorElement>, "utility"),
-                                    },
-                                    { href: "/movie-portal", text: "Movie Portal" },
-                                    {
-                                        href: "/whatsapp-tool",
-                                        text: "Whatsapp Spy App",
-                                    },
-                                    { href: "/cracked", text: "Cracked Apps" },
-                                    { href: "/freebies", text: "Freebies" },
-                                    { href: "/feedback", text: "Feedback" },
-                                   
-                                   
-                                ].map((item, i) => (
+                                {navItems.map((item, i) => (
                                     <motion.li
                                         key={item.href}
                                         custom={i}
@@ -105,31 +133,49 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                         <NavLink
                                             href={item.href}
                                             text={item.text}
-                                            onClick={item.onClick}
+                                            onClick={(e) => {
+                                                item.onClick?.(e);
+                                                if (!item.onClick) {
+                                                    toggleMenu();
+                                                }
+                                            }}
+                                            className="block px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
                                         />
                                     </motion.li>
                                 ))}
                             </motion.ul>
 
-                            <motion.div className="mt-6" variants={menuItemVariants} custom={4}>
+                            <motion.div
+                                className="mt-5 pt-5 border-t border-gray-200"
+                                custom={navItems.length}
+                                variants={menuItemVariants}
+                            >
                                 {user ? (
-                                    <div className="space-y-2">
-                                        <Link href="/dashboard">
-                                            <Button variant="outline" size="sm" fullWidth>
-                                                Dashboard
-                                            </Button>
-                                        </Link>
+                                    <div className="space-y-3">
                                         <Button
-                                            variant="primary"
-                                            size="sm"
+                                            variant="outline"
+                                            size="lg"
                                             fullWidth
-                                            onClick={async () => {
-                                                try {
-                                                    await logout();
-                                                } catch (error) {
-                                                    console.error("Logout failed:", error);
-                                                }
-                                            }}
+                                            onClick={() => handlePlatformNavigation('affiliate', '/dashboard')}
+                                            className="justify-start text-gray-700"
+                                        >
+                                            Affiliate Dashboard
+                                        </Button>
+                                        <Button
+                                            variant="outline"
+                                            size="lg"
+                                            fullWidth
+                                            onClick={() => handlePlatformNavigation('utilities', '/utilities-dashboard')}
+                                            className="justify-start text-gray-700"
+                                        >
+                                            Utilities Dashboard
+                                        </Button>
+                                        <Button
+                                            variant="destructive"
+                                            size="lg"
+                                            fullWidth
+                                            onClick={handleLogout}
+                                            className="justify-start"
                                         >
                                             Logout
                                         </Button>
@@ -137,12 +183,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                 ) : (
                                     <Button
                                         variant="primary"
-                                        size="sm"
+                                        size="lg"
                                         fullWidth
-                                        asLink
-                                        href="/auth/login"
+                                        onClick={() => {
+                                            toggleMenu();
+                                            router.push('/auth/login');
+                                        }}
                                     >
-                                        Log In
+                                        Log In / Sign Up
                                     </Button>
                                 )}
                             </motion.div>

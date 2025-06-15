@@ -168,10 +168,6 @@ const DashboardPage = () => {
   return (
     <section className="p-4 sm:p-6 lg:p-10 min-h-screen bg-brand-dashboard-bg">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-4 sm:mb-6">
-        <h1 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-0">
-          Your Dashboard
-        </h1>
-
         {isAdmin === true && (
           <Button
             variant="outline"
