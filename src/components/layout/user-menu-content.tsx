@@ -47,7 +47,7 @@ const UserMenuContent = () => {
                     Affiliate Dashboard
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handlePlatformNavigation('utilities', '/utilities')}>
-                    Utilities Dashboard
+                    Airtime/Data Dashboard
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-red-600 focus:text-red-700 focus:bg-red-50 cursor-pointer">

@@ -1,16 +1,16 @@
 "use client";
-import React, { useCallback, useState, useEffect } from "react";
 import PhoneIcon from "@/assets/icons/phone";
 import LogoImg from "@/assets/images/logo.png";
 import { useAuth } from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import Button from "../custom-ui/button";
+import "./footer.css";
 import MobileMenu from "./mobile-menu";
 import NavLink from "./navlink";
-import "./footer.css"
 // import SocialLinks from "./social-links";
 import UserMenuContent from "./user-menu-content";
 
@@ -21,10 +21,9 @@ const SOCIAL_LINKS = {
   PHONE_NUMBER: "2349035745258",
 };
 
-type ComingSoonFeature = "utility" | "international";
+type ComingSoonFeature = "international";
 
 const COMING_SOON_MESSAGES: Record<ComingSoonFeature, string> = {
-  utility: "Utility payments coming soon!",
   international: "Foreign numbers coming soon!",
 };
 
@@ -83,11 +82,11 @@ const Navbar = () => {
   if (loading)
     return <div className="w-8 h-8 rounded-full animate-pulse bg-gray-200" />;
 
-  
+
   return (
     <nav
       className={`navbar ${isFixed ? 'fixed' : ''} ${isDashboard ? "w-full mt-0" : "w-full mt-0"
-       } mx-auto absolute  `} 
+        } mx-auto absolute  `}
     >
       {/* <div className="flex justify-between items-center px-6 py-2">
         <div className="flex items-center gap-4">
@@ -128,17 +127,17 @@ const Navbar = () => {
             <NavLink href="/international-numbers" text="Foreign Numbers" reloadOnClick onClick={toggleMenu} />
           </li>
           <li>
-            <NavLink href="/utility-payment" text="Airtime & Data " reloadOnClick onClick={toggleMenu1}/>
+            <NavLink href="/utility-payment" text="Airtime & Data " reloadOnClick onClick={toggleMenu1} />
           </li>
           <li>
-            <NavLink href="/movie-portal" text="Movie Portal" reloadOnClick onClick={toggleMenu1}/>
+            <NavLink href="/movie-portal" text="Movie Portal" reloadOnClick onClick={toggleMenu1} />
           </li>
           <li>
             <NavLink href="/whatsapp-tool" text="WhatsApp Spy App" reloadOnClick onClick={toggleMenu1} />
           </li>
           {/* <li>
             <NavLink
-           
+
               href="/utility-payment"
               text="Cracked App"
               reloadOnClick
@@ -172,10 +171,10 @@ const Navbar = () => {
         </ul>
 
         {/* Desktop Auth Button/Menu */}
-        <div className="hidden lg:block llk "  style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"20px"}}>
+        <div className="hidden lg:block llk " style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "20px" }}>
 
           <div className="flex items-center gap-4">
-            <PhoneIcon /> 
+            <PhoneIcon />
             <a
               href={generateWhatsAppUrl(
                 SOCIAL_LINKS.PHONE_NUMBER,
@@ -208,19 +207,16 @@ const Navbar = () => {
         >
           <div className="w-6 h-5 flex flex-col justify-between">
             <span
-              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
-                isMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
+              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
             />
             <span
-              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
+              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""
+                }`}
             />
             <span
-              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${
-                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
+              className={`h-0.5 w-full bg-gray-800 transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
             />
           </div>
         </button>
