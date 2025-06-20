@@ -4,48 +4,38 @@ import { FormField } from "@/components/custom-ui/form-field";
 import { Text } from "@/components/custom-ui/text";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+import { useState } from "react";
 import { FaBolt, FaPhone, FaTv, FaWifi } from "react-icons/fa";
 
-// interface UtilityFormData {
-//   airtime: UtilityProductItem[];
-//   data: UtilityProductItem[];
-//   cable: UtilityProductItem[];
-//   electricity: UtilityProductItem[];
-// }
-
 const RechargeSection = () => {
-  // const [activeTab, setActiveTab] = useState<UtilityType>("airtime");
-  // const { data, isLoading } = useUtilityProducts(activeTab);
-  // const [utilityProducts, setUtilityProducts] = useState<UtilityFormData>({
-  //   airtime: [],
-  //   data: [],
-  //   cable: [],
-  //   electricity: [],
-  // });
+  const [airtimeForm, setAirtimeForm] = useState({
+    phoneNumber: "",
+    network: "",
+    amount: "",
+    referralCode: "",
+  });
 
-  // useEffect(() => {
-  //   console.log("utilityProducts", utilityProducts);
-  // }, [utilityProducts]);
+  const [dataForm, setDataForm] = useState({
+    phoneNumber: "",
+    network: "",
+    dataPlan: "",
+    referralCode: "",
+  });
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setUtilityProducts((prev) => ({
-  //       ...prev,
-  //       [activeTab]: data,
-  //     }));
-  //   }
-  // }, [data, activeTab]);
+  const [cableForm, setCableForm] = useState({
+    operator: "",
+    smartcardNumber: "",
+    amount: "",
+    referralCode: "",
+  });
 
-  // const networkProviderOptions = useMemo(() => {
-  //   return utilityProducts.airtime.map((item) => ({
-  //     value: item.product_id.toString(),
-  //     label: item.product, // Keep original name with VTU
-  //   }));
-  // }, [utilityProducts.airtime]);
-
-  // const handleTabChange = (value: string) => {
-  //   setActiveTab(value as UtilityType);
-  // };
+  const [electricityForm, setElectricityForm] = useState({
+    provider: "",
+    packageType: "",
+    meterNumber: "",
+    amount: "",
+    referralCode: "",
+  });
 
   return (
     <section className="border border-red-200">
@@ -100,6 +90,13 @@ const RechargeSection = () => {
                     type="tel"
                     placeholder="Enter phone number"
                     required
+                    value={airtimeForm.phoneNumber}
+                    onChange={(e) =>
+                      setAirtimeForm((prev) => ({
+                        ...prev,
+                        phoneNumber: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Network Provider"
@@ -112,6 +109,10 @@ const RechargeSection = () => {
                       { value: "glo", label: "Glo" },
                       { value: "9mobile", label: "9Mobile" },
                     ]}
+                    value={airtimeForm.network}
+                    onValueChange={(value) =>
+                      setAirtimeForm((prev) => ({ ...prev, network: value }))
+                    }
                   />
                   <FormField
                     label="Amount"
@@ -119,11 +120,25 @@ const RechargeSection = () => {
                     placeholder="Enter amount"
                     min="100"
                     required
+                    value={airtimeForm.amount}
+                    onChange={(e) =>
+                      setAirtimeForm((prev) => ({
+                        ...prev,
+                        amount: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Referral Code (Optional)"
                     type="text"
                     placeholder="Enter referral code"
+                    value={airtimeForm.referralCode}
+                    onChange={(e) =>
+                      setAirtimeForm((prev) => ({
+                        ...prev,
+                        referralCode: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <Button className="mt-8 mx-auto block">Purchase Airtime</Button>
@@ -135,6 +150,13 @@ const RechargeSection = () => {
                     label="Phone Number"
                     type="tel"
                     placeholder="Enter phone number"
+                    value={dataForm.phoneNumber}
+                    onChange={(e) =>
+                      setDataForm((prev) => ({
+                        ...prev,
+                        phoneNumber: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Network Provider"
@@ -147,6 +169,10 @@ const RechargeSection = () => {
                       { value: "glo", label: "Glo" },
                       { value: "9mobile", label: "9Mobile" },
                     ]}
+                    value={dataForm.network}
+                    onValueChange={(value) =>
+                      setDataForm((prev) => ({ ...prev, network: value }))
+                    }
                   />
                   <FormField
                     label="Data Plan"
@@ -158,11 +184,22 @@ const RechargeSection = () => {
                       { value: "weekly", label: "Weekly" },
                       { value: "monthly", label: "Monthly" },
                     ]}
+                    value={dataForm.dataPlan}
+                    onValueChange={(value) =>
+                      setDataForm((prev) => ({ ...prev, dataPlan: value }))
+                    }
                   />
                   <FormField
                     label="Referral Code (Optional)"
                     type="text"
                     placeholder="Enter referral code"
+                    value={dataForm.referralCode}
+                    onChange={(e) =>
+                      setDataForm((prev) => ({
+                        ...prev,
+                        referralCode: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <Button className="mt-8 mx-auto block">Buy Data</Button>
@@ -180,12 +217,23 @@ const RechargeSection = () => {
                       { value: "gotv", label: "GOTV" },
                       { value: "startimes", label: "StarTimes" },
                     ]}
+                    value={cableForm.operator}
+                    onValueChange={(value) =>
+                      setCableForm((prev) => ({ ...prev, operator: value }))
+                    }
                   />
                   <FormField
                     label="Smartcard Number"
                     type="text"
                     placeholder="Enter smartcard number"
                     required
+                    value={cableForm.smartcardNumber}
+                    onChange={(e) =>
+                      setCableForm((prev) => ({
+                        ...prev,
+                        smartcardNumber: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Amount"
@@ -193,11 +241,25 @@ const RechargeSection = () => {
                     placeholder="Enter amount"
                     min="100"
                     required
+                    value={cableForm.amount}
+                    onChange={(e) =>
+                      setCableForm((prev) => ({
+                        ...prev,
+                        amount: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Referral Code (Optional)"
                     type="text"
                     placeholder="Enter referral code"
+                    value={cableForm.referralCode}
+                    onChange={(e) =>
+                      setCableForm((prev) => ({
+                        ...prev,
+                        referralCode: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <Button className="mt-8 mx-auto block">Pay Subscription</Button>
@@ -219,6 +281,13 @@ const RechargeSection = () => {
                         label: "Port Harcourt Electric (PHEDC)",
                       },
                     ]}
+                    value={electricityForm.provider}
+                    onValueChange={(value) =>
+                      setElectricityForm((prev) => ({
+                        ...prev,
+                        provider: value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Package Type"
@@ -229,12 +298,26 @@ const RechargeSection = () => {
                       { value: "prepaid", label: "Prepaid Meter" },
                       { value: "postpaid", label: "Postpaid Meter" },
                     ]}
+                    value={electricityForm.packageType}
+                    onValueChange={(value) =>
+                      setElectricityForm((prev) => ({
+                        ...prev,
+                        packageType: value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Meter Number"
                     type="text"
                     placeholder="Enter meter number"
                     required
+                    value={electricityForm.meterNumber}
+                    onChange={(e) =>
+                      setElectricityForm((prev) => ({
+                        ...prev,
+                        meterNumber: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Amount"
@@ -242,11 +325,25 @@ const RechargeSection = () => {
                     placeholder="Enter amount"
                     min="100"
                     required
+                    value={electricityForm.amount}
+                    onChange={(e) =>
+                      setElectricityForm((prev) => ({
+                        ...prev,
+                        amount: e.target.value,
+                      }))
+                    }
                   />
                   <FormField
                     label="Referral Code (Optional)"
                     type="text"
                     placeholder="Enter referral code"
+                    value={electricityForm.referralCode}
+                    onChange={(e) =>
+                      setElectricityForm((prev) => ({
+                        ...prev,
+                        referralCode: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <Button className="mt-8 mx-auto block">Pay Bill</Button>
