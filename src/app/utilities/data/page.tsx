@@ -4,13 +4,20 @@ import nineMobileLogo from "@/assets/images/9mobile-logo.png";
 import airtelLogo from "@/assets/images/airtel-logo.png";
 import gloLogo from "@/assets/images/globacom-logo.png";
 import mtnLogo from "@/assets/images/mtn-logo.jpeg";
+import { Card, CardContent } from "@/components/ui/card";
 import ProgressSteps from "@/components/ui/ProgressSteps";
 import { useAuth } from "@/hooks/useAuth";
 import { getWalletData } from "@/lib/wallet";
 import { Step } from "@/types";
-import { DataFormData, DataPlan, Network, TransactionResult } from "@/types/wallet";
+import {
+    DataFormData,
+    DataPlan,
+    Network,
+    TransactionResult,
+} from "@/types/wallet";
 import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import { DataSkeleton } from "./components/DataSkeleton";
 import { OrderStep } from "./components/OrderStep";
 import { ReviewStep } from "./components/ReviewStep";
 import { SummaryStep } from "./components/SummaryStep";
@@ -164,29 +171,29 @@ const DataPurchasePage: React.FC = () => {
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen py-10">
-            <div className="container mx-auto px-4 py-6">
-                <div className="max-w-3xl mx-auto">
-                    <div className="mb-8 text-center">
-                        <h2 className="text-3xl font-bold text-gray-800">Buy Data</h2>
-                        <p className="text-gray-500">
-                            Instantly top up any mobile number in Nigeria.
-                        </p>
-                    </div>
-                    <div className="mb-8">
-                        <ProgressSteps
-                            steps={["Details", "Review", "Complete"]}
-                            currentStep={currentStep - 1}
-                        />
-                    </div>
-                    {isLoading ? (
-                        <div className="text-center p-10">
-                            <p>Loading data plans...</p>
-                        </div>
-                    ) : (
-                        renderStep()
-                    )}
+        <div className="bg-gray-50 min-h-screen pt-32 pb-10">
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-gray-800">Buy Data</h2>
+                    <p className="text-gray-500">
+                        Instantly top up any mobile number in Nigeria.
+                    </p>
                 </div>
+                {isLoading ? (
+                    <DataSkeleton />
+                ) : (
+                    <Card>
+                        <CardContent className="pt-6">
+                            <div className="mb-8 px-4 sm:px-8">
+                                <ProgressSteps
+                                    steps={["Details", "Review", "Complete"]}
+                                    currentStep={currentStep - 1}
+                                />
+                            </div>
+                            {renderStep()}
+                        </CardContent>
+                    </Card>
+                )}
             </div>
         </div>
     );
