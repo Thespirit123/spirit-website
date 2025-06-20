@@ -46,7 +46,7 @@ const UserMenuContent = () => {
                 <DropdownMenuItem onClick={() => handlePlatformNavigation('affiliate', '/dashboard')}>
                     Affiliate Dashboard
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handlePlatformNavigation('utilities', '/utilities-dashboard')}>
+                <DropdownMenuItem onClick={() => handlePlatformNavigation('utilities', '/utilities')}>
                     Utilities Dashboard
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />

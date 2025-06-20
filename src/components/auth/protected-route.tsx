@@ -31,13 +31,13 @@ export function withAuth<P extends object>(
           return;
         }
 
-        if (platform === "affiliate" && pathname === "/utilities-dashboard") {
+        if (platform === "affiliate" && pathname === "/utilities") {
           router.replace("/dashboard");
         } else if (platform === "utilities" && pathname === "/dashboard") {
-          router.replace("/utilities-dashboard");
+          router.replace("/utilities");
         } else if (platform && pathname === "/select-platform") {
           if (platform === "affiliate") router.replace("/dashboard");
-          else if (platform === "utilities") router.replace("/utilities-dashboard");
+          else if (platform === "utilities") router.replace("/utilities");
         }
       }
     }, [user, loading, router, pathname]);

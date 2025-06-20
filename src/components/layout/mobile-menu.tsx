@@ -165,7 +165,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                                             variant="outline"
                                             size="lg"
                                             fullWidth
-                                            onClick={() => handlePlatformNavigation('utilities', '/utilities-dashboard')}
+                                            onClick={() => handlePlatformNavigation('utilities', '/utilities')}
                                             className="justify-start text-gray-700"
                                         >
                                             Utilities Dashboard

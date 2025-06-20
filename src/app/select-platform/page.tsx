@@ -25,7 +25,7 @@ const SelectPlatformPage = () => {
                 if (currentPlatform === 'affiliate') {
                     router.replace("/dashboard");
                 } else if (currentPlatform === 'utilities') {
-                    router.replace("/utilities-dashboard");
+                    router.replace("/utilities");
                 }
             }
         }
@@ -36,7 +36,7 @@ const SelectPlatformPage = () => {
         if (platform === 'affiliate') {
             router.replace("/dashboard");
         } else if (platform === 'utilities') {
-            router.replace("/utilities-dashboard");
+            router.replace("/utilities");
         }
     };
 

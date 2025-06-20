@@ -1,6 +1,7 @@
 import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
+import { StaticImageData } from "next/image";
 
 export type Platform = "ios" | "android";
 
@@ -261,4 +262,28 @@ export interface ReferralValidation {
   isValid: boolean;
   referrerId?: string;
   error?: string;
+}
+
+export type Step = 1 | 2 | 3;
+
+export interface Network {
+  id: "mtn" | "glo" | "airtel" | "9mobile";
+  name: string;
+  logo: StaticImageData;
+  apiId: string;
+}
+
+export interface AirtimeFormData {
+  phoneNumber: string;
+  amount: number;
+  network: Network;
+}
+
+export interface TransactionResult {
+  status: "success" | "failed";
+  message: string;
+  details: {
+    transactionId: string;
+    date: string;
+  } & Partial<AirtimeFormData>;
 }
