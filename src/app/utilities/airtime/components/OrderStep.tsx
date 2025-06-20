@@ -1,6 +1,5 @@
 import Button from "@/components/custom-ui/button";
 import { FormField } from "@/components/custom-ui/form-field";
-import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { AirtimeFormData, Network } from "@/types";
 import { Phone, Wallet } from "lucide-react";
@@ -45,12 +44,12 @@ const OrderStepComponent: React.FC<OrderStepProps> = ({
     };
 
     return (
-        <Card className="p-6">
+        <>
             <div className="flex items-center mb-6">
                 <div className="p-2 bg-blue-50 rounded-full mr-3 text-blue-600">
                     <Phone size={20} />
                 </div>
-                <h3 className="text-lg font-medium text-gray-800">Purchase Details</h3>
+                <h3 className="text-lg font-bold text-gray-800">Purchase Details</h3>
             </div>
 
             <div className="space-y-6">
@@ -131,7 +130,7 @@ const OrderStepComponent: React.FC<OrderStepProps> = ({
                     Continue
                 </Button>
             </div>
-        </Card>
+        </>
     );
 };
 

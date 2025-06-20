@@ -1,0 +1,26 @@
+import React from "react";
+
+export const AirtimeSkeleton: React.FC = () => {
+    return (
+        <div className="bg-white p-6 rounded-xl border border-neutral-200 shadow">
+            <div className="mb-8 px-4 sm:px-8">
+                <div className="h-2 bg-gray-200 rounded-md w-full animate-pulse" />
+            </div>
+            <div className="space-y-6">
+                <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded-md w-1/4 animate-pulse" />
+                    <div className="h-12 bg-gray-200 rounded-md w-full animate-pulse" />
+                </div>
+                <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded-md w-1/4 animate-pulse" />
+                    <div className="h-12 bg-gray-200 rounded-md w-full animate-pulse" />
+                </div>
+                <div className="space-y-2">
+                    <div className="h-4 bg-gray-200 rounded-md w-1/4 animate-pulse" />
+                    <div className="h-12 bg-gray-200 rounded-md w-full animate-pulse" />
+                </div>
+                <div className="h-12 bg-gray-300 rounded-md w-full mt-4 animate-pulse" />
+            </div>
+        </div>
+    );
+};

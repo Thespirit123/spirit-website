@@ -1,5 +1,4 @@
 import Button from "@/components/custom-ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AirtimeFormData } from "@/types";
 import { ArrowLeft, ShieldAlert } from "lucide-react";
 import Image from "next/image";
@@ -23,13 +22,13 @@ const ReviewStepComponent: React.FC<ReviewStepProps> = ({
     const hasSufficientBalance = walletBalance >= formData.amount;
 
     return (
-        <Card className="p-6">
-            <CardHeader className="p-0 mb-6">
-                <CardTitle className="text-lg font-medium text-gray-800">
+        <>
+            <div className="mb-6">
+                <h3 className="text-lg font-bold text-gray-800">
                     Review Your Order
-                </CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
+                </h3>
+            </div>
+            <div>
                 <div className="space-y-4 border border-gray-200 rounded-lg p-4">
                     <div className="flex justify-between items-center">
                         <span className="text-gray-500">Phone Number</span>
@@ -94,8 +93,8 @@ const ReviewStepComponent: React.FC<ReviewStepProps> = ({
                         Pay with Wallet
                     </Button>
                 </div>
-            </CardContent>
-        </Card>
+            </div>
+        </>
     );
 };
 

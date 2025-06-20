@@ -1,5 +1,4 @@
 import Button from "@/components/custom-ui/button";
-import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { TransactionResult } from "@/types";
 import { CheckCircle, XCircle } from "lucide-react";
@@ -18,7 +17,7 @@ const SummaryStepComponent: React.FC<SummaryStepProps> = ({ result }) => {
     const isSuccess = result.status === "success";
 
     return (
-        <Card className="p-6 text-center">
+        <div className="text-center">
             {isSuccess ? (
                 <CheckCircle size={48} className="mx-auto text-green-500 mb-4" />
             ) : (
@@ -81,7 +80,7 @@ const SummaryStepComponent: React.FC<SummaryStepProps> = ({ result }) => {
                     Go to Dashboard
                 </Button>
             </div>
-        </Card>
+        </div>
     );
 };
 

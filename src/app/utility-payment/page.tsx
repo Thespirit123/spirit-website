@@ -10,7 +10,7 @@ import ieLogo from '@/assets/images/ie.png';
 import josLogo from '@/assets/images/jos.png';
 import kadunaLogo from '@/assets/images/kaduna.png';
 import kedcoLogo from '@/assets/images/kedco.png';
-import mtnLogo from '@/assets/images/mtn-logo.png';
+import mtnLogo from '@/assets/images/mtn-logo.jpeg';
 import phedcLogo from '@/assets/images/phedc.png';
 import Button from "@/components/custom-ui/button";
 import { Text } from "@/components/custom-ui/text";

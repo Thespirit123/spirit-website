@@ -12,7 +12,9 @@ import {
     ArrowRight,
     ArrowUpRight,
     Clock,
+    MessageSquare,
     Phone,
+    Receipt,
     Tv,
     Wallet,
     Wifi,
@@ -111,220 +113,258 @@ const UtilitiesDashboardPage: React.FC = () => {
     };
 
     return (
-        <div className="bg-[#F5F7F9] min-h-screen py-10">
-            <div className="container mx-auto px-4 py-6">
-                <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-[#394B59]">
-                        Hello, {customerInfo.name}!
-                    </h2>
-                    <p className="text-[#8E9BAA]">What would you like to do today?</p>
-                </div>
+        <div className="p-4 pt-14 sm:p-6 lg:p-8">
+            <div className="mb-8">
+                <h2 className="text-2xl font-bold text-[#394B59]">
+                    Hello, {customerInfo.name}!
+                </h2>
+                <p className="text-[#8E9BAA]">What would you like to do today?</p>
+            </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                    <Card className="lg:col-span-1">
-                        <CardHeader>
-                            <div className="flex items-center justify-between">
-                                <CardTitle className="text-lg font-medium">
-                                    Wallet Balance
-                                </CardTitle>
-                                <Wallet size={24} />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <Card className="lg:col-span-1">
+                    <CardHeader>
+                        <div className="flex items-center justify-between">
+                            <CardTitle className="text-lg font-medium">
+                                Wallet Balance
+                            </CardTitle>
+                            <Wallet size={24} />
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        {isLoading ? (
+                            <div className="animate-pulse h-8 bg-gray-200 rounded mb-4"></div>
+                        ) : (
+                            <div className="text-3xl font-bold mb-4">
+                                ₦{walletBalance.toLocaleString()}
                             </div>
-                        </CardHeader>
-                        <CardContent>
-                            {isLoading ? (
-                                <div className="animate-pulse h-8 bg-gray-200 rounded mb-4"></div>
-                            ) : (
-                                <div className="text-3xl font-bold mb-4">
-                                    ₦{walletBalance.toLocaleString()}
-                                </div>
-                            )}
-                            <div className="mt-auto">
-                                <Button
-                                    variant="primary"
-                                    fullWidth
-                                    onClick={() => setShowFundingModal(true)}
-                                    disabled={isLoading}
-                                >
-                                    Fund Wallet
-                                </Button>
-                            </div>
-                        </CardContent>
-                    </Card>
+                        )}
+                        <div className="mt-auto">
+                            <Button
+                                variant="primary"
+                                fullWidth
+                                onClick={() => setShowFundingModal(true)}
+                                disabled={isLoading}
+                            >
+                                Fund Wallet
+                            </Button>
+                        </div>
+                    </CardContent>
+                </Card>
 
-                    <Card className="lg:col-span-2">
-                        <CardHeader>
-                            <div className="flex justify-between items-center">
-                                <CardTitle className="text-lg font-medium">
-                                    Recent Transactions
-                                </CardTitle>
-                                <a
-                                    href="/transactions"
-                                    className="text-[#008EA8] flex items-center hover:underline text-sm"
-                                >
-                                    View All <ArrowRight size={16} className="ml-1" />
-                                </a>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            {isLoading ? (
-                                <div className="space-y-3">
-                                    {[1, 2, 3].map((i) => (
-                                        <div
-                                            key={i}
-                                            className="animate-pulse flex items-center justify-between py-2 border-b border-[#F5F7F9] last:border-b-0"
-                                        >
-                                            <div className="flex items-center">
-                                                <div className="w-8 h-8 bg-gray-200 rounded-full mr-3"></div>
-                                                <div>
-                                                    <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
-                                                    <div className="h-3 bg-gray-200 rounded w-16"></div>
-                                                </div>
+                <Card className="lg:col-span-2">
+                    <CardHeader>
+                        <div className="flex justify-between items-center">
+                            <CardTitle className="text-lg font-medium">
+                                Recent Transactions
+                            </CardTitle>
+                            <a
+                                href="/transactions"
+                                className="text-[#008EA8] flex items-center hover:underline text-sm"
+                            >
+                                View All <ArrowRight size={16} className="ml-1" />
+                            </a>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        {isLoading ? (
+                            <div className="space-y-3">
+                                {[1, 2, 3].map((i) => (
+                                    <div
+                                        key={i}
+                                        className="animate-pulse flex items-center justify-between py-2 border-b border-[#F5F7F9] last:border-b-0"
+                                    >
+                                        <div className="flex items-center">
+                                            <div className="w-8 h-8 bg-gray-200 rounded-full mr-3"></div>
+                                            <div>
+                                                <div className="h-4 bg-gray-200 rounded w-24 mb-2"></div>
+                                                <div className="h-3 bg-gray-200 rounded w-16"></div>
                                             </div>
-                                            <div className="h-4 bg-gray-200 rounded w-16"></div>
                                         </div>
-                                    ))}
-                                </div>
-                            ) : recentTransactions.length === 0 ? (
-                                <div className="text-center py-8 text-gray-500">
-                                    No transactions yet
-                                </div>
-                            ) : (
-                                <div className="space-y-3">
-                                    {recentTransactions.slice(0, 3).map((transaction) => (
-                                        <div
-                                            key={transaction.id}
-                                            className="flex items-center justify-between py-2 border-b border-[#F5F7F9] last:border-b-0"
-                                        >
-                                            <div className="flex items-center">
-                                                <div
-                                                    className={`p-2 rounded-full mr-3 ${transaction.type === "electricity"
-                                                        ? "bg-[#F5F7F9] text-[#F59E0B]"
-                                                        : transaction.type === "wallet"
-                                                            ? "bg-[#F5F7F9] text-[#10B981]"
-                                                            : "bg-[#F5F7F9] text-[#008EA8]"
-                                                        }`}
-                                                >
-                                                    {getTransactionIcon(transaction.type)}
-                                                </div>
-                                                <div>
-                                                    <p className="text-[#394B59] font-medium">
-                                                        {transaction.description}
-                                                    </p>
-                                                    <p className="text-xs text-[#8E9BAA]">
-                                                        {transaction.date}
-                                                    </p>
-                                                </div>
-                                            </div>
+                                        <div className="h-4 bg-gray-200 rounded w-16"></div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : recentTransactions.length === 0 ? (
+                            <div className="text-center py-8 text-gray-500">
+                                No transactions yet
+                            </div>
+                        ) : (
+                            <div className="space-y-3">
+                                {recentTransactions.slice(0, 3).map((transaction) => (
+                                    <div
+                                        key={transaction.id}
+                                        className="flex items-center justify-between py-2 border-b border-[#F5F7F9] last:border-b-0"
+                                    >
+                                        <div className="flex items-center">
                                             <div
-                                                className={`flex items-center ${transaction.isCredit
-                                                    ? "text-[#10B981]"
-                                                    : "text-[#394B59]"
+                                                className={`p-2 rounded-full mr-3 ${transaction.type === "electricity"
+                                                    ? "bg-[#F5F7F9] text-[#F59E0B]"
+                                                    : transaction.type === "wallet"
+                                                        ? "bg-[#F5F7F9] text-[#10B981]"
+                                                        : "bg-[#F5F7F9] text-[#008EA8]"
                                                     }`}
                                             >
-                                                <span className="font-medium">
-                                                    {transaction.isCredit ? "+ " : "- "}₦
-                                                    {transaction.amount.toLocaleString()}
-                                                </span>
-                                                {transaction.isCredit ? (
-                                                    <ArrowDownRight
-                                                        size={16}
-                                                        className="ml-1 text-[#10B981]"
-                                                    />
-                                                ) : (
-                                                    <ArrowUpRight
-                                                        size={16}
-                                                        className="ml-1 text-[#394B59]"
-                                                    />
-                                                )}
+                                                {getTransactionIcon(transaction.type)}
+                                            </div>
+                                            <div>
+                                                <p className="text-[#394B59] font-medium">
+                                                    {transaction.description}
+                                                </p>
+                                                <p className="text-xs text-[#8E9BAA]">
+                                                    {transaction.date}
+                                                </p>
                                             </div>
                                         </div>
-                                    ))}
+                                        <div
+                                            className={`flex items-center ${transaction.isCredit
+                                                ? "text-[#10B981]"
+                                                : "text-[#394B59]"
+                                                }`}
+                                        >
+                                            <span className="font-medium">
+                                                {transaction.isCredit ? "+ " : "- "}₦
+                                                {transaction.amount.toLocaleString()}
+                                            </span>
+                                            {transaction.isCredit ? (
+                                                <ArrowDownRight
+                                                    size={16}
+                                                    className="ml-1 text-[#10B981]"
+                                                />
+                                            ) : (
+                                                <ArrowUpRight
+                                                    size={16}
+                                                    className="ml-1 text-[#394B59]"
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </CardContent>
+                </Card>
+            </div>
+
+            <h3 className="text-xl font-bold text-[#394B59] mb-4">Pay Bills</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/utilities/airtime">
+                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <CardContent className="p-6">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
+                                    <Phone size={24} />
                                 </div>
-                            )}
+                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
+                                    Airtime
+                                </h3>
+                                <p className="text-sm text-[#8E9BAA]">
+                                    MTN, GLO, Airtel & 9Mobile
+                                </p>
+                            </div>
                         </CardContent>
                     </Card>
-                </div>
-
-                <h3 className="text-xl font-bold text-[#394B59] mb-4">Pay Bills</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <a href="/utilities/airtime">
-                        <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                            <CardContent className="p-6">
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
-                                        <Phone size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-medium text-[#394B59] mb-2">
-                                        Airtime
-                                    </h3>
-                                    <p className="text-sm text-[#8E9BAA]">
-                                        MTN, GLO, Airtel & 9Mobile
-                                    </p>
+                </a>
+                <a href="/utilities/data">
+                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <CardContent className="p-6">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
+                                    <Wifi size={24} />
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </a>
-                    <a href="/utilities/data">
-                        <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                            <CardContent className="p-6">
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
-                                        <Wifi size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-medium text-[#394B59] mb-2">
-                                        Data
-                                    </h3>
-                                    <p className="text-sm text-[#8E9BAA]">
-                                        MTN, GLO, Airtel & 9Mobile
-                                    </p>
+                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
+                                    Data
+                                </h3>
+                                <p className="text-sm text-[#8E9BAA]">
+                                    MTN, GLO, Airtel & 9Mobile
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </a>
+                <a href="/utilities/electricity">
+                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <CardContent className="p-6">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
+                                    <Zap size={24} />
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </a>
-                    <a href="/utilities/electricity">
-                        <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                            <CardContent className="p-6">
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
-                                        <Zap size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-medium text-[#394B59] mb-2">
-                                        Electricity
-                                    </h3>
-                                    <p className="text-sm text-[#8E9BAA]">
-                                        AEDC, IKEDC, EKEDC & more
-                                    </p>
+                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
+                                    Electricity
+                                </h3>
+                                <p className="text-sm text-[#8E9BAA]">
+                                    AEDC, IKEDC, EKEDC & more
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </a>
+                <a href="/utilities/cable">
+                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <CardContent className="p-6">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
+                                    <Tv size={24} />
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </a>
-                    <a href="/utilities/cable">
-                        <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                            <CardContent className="p-6">
-                                <div className="flex flex-col items-center text-center">
-                                    <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
-                                        <Tv size={24} />
-                                    </div>
-                                    <h3 className="text-lg font-medium text-[#394B59] mb-2">
-                                        Cable TV
-                                    </h3>
-                                    <p className="text-sm text-[#8E9BAA]">
-                                        DSTV, GOTV & StarTimes
-                                    </p>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </a>
-                </div>
-
-                <WalletFundingModal
-                    isOpen={showFundingModal}
-                    onClose={() => setShowFundingModal(false)}
-                    onSuccess={handleFundingSuccess}
-                    onError={handleFundingError}
-                    customerInfo={customerInfo}
-                />
+                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
+                                    Cable TV
+                                </h3>
+                                <p className="text-sm text-[#8E9BAA]">
+                                    DSTV, GOTV & StarTimes
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </a>
             </div>
+
+            <h3 className="text-xl font-bold text-[#394B59] mb-4 mt-8">
+                Account & Support
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/utilities/transactions">
+                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <CardContent className="p-6">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
+                                    <Receipt size={24} />
+                                </div>
+                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
+                                    All Transactions
+                                </h3>
+                                <p className="text-sm text-[#8E9BAA]">
+                                    View your payment history
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </a>
+                <a href="/utilities/contact">
+                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
+                        <CardContent className="p-6">
+                            <div className="flex flex-col items-center text-center">
+                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
+                                    <MessageSquare size={24} />
+                                </div>
+                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
+                                    Customer Support
+                                </h3>
+                                <p className="text-sm text-[#8E9BAA]">
+                                    Get help and support
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </a>
+            </div>
+
+            <WalletFundingModal
+                isOpen={showFundingModal}
+                onClose={() => setShowFundingModal(false)}
+                onSuccess={handleFundingSuccess}
+                onError={handleFundingError}
+                customerInfo={customerInfo}
+            />
         </div>
     );
 };

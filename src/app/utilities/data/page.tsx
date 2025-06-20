@@ -3,7 +3,7 @@
 import nineMobileLogo from "@/assets/images/9mobile-logo.png";
 import airtelLogo from "@/assets/images/airtel-logo.png";
 import gloLogo from "@/assets/images/globacom-logo.png";
-import mtnLogo from "@/assets/images/mtn-logo.png";
+import mtnLogo from "@/assets/images/mtn-logo.jpeg";
 import ProgressSteps from "@/components/ui/ProgressSteps";
 import { useAuth } from "@/hooks/useAuth";
 import { getWalletData } from "@/lib/wallet";
