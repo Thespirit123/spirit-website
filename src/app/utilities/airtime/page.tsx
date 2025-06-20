@@ -14,6 +14,11 @@ import { OrderStep } from "./components/OrderStep";
 import { ReviewStep } from "./components/ReviewStep";
 import { SummaryStep } from "./components/SummaryStep";
 
+interface AirtimeApiResponse {
+    message: string;
+    transactionId?: string;
+}
+
 const NETWORKS: Network[] = [
     { id: "mtn", name: "MTN", logo: mtnLogo, apiId: "1" },
     { id: "glo", name: "GLO", logo: gloLogo, apiId: "3" },
@@ -38,6 +43,7 @@ const AirtimePurchasePage: React.FC = () => {
             const { balance } = await getWalletData(user.uid);
             setWalletBalance(balance);
         } catch (error) {
+            console.log("Error fetching wallet balance:", error);
             toast.error("Could not fetch wallet balance.");
         } finally {
             setIsFetchingBalance(false);
@@ -74,9 +80,9 @@ const AirtimePurchasePage: React.FC = () => {
                 }),
             });
 
-            const result = await response.json();
+            const result: AirtimeApiResponse = await response.json();
 
-            if (!response.ok) {
+            if (!response.ok || !result.transactionId) {
                 throw new Error(result.message || "An unknown error occurred.");
             }
 

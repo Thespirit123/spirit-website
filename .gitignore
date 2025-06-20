@@ -40,3 +40,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+spirit-media-firebase-adminsdk-rr4xo-352b8c2076.json
+*.json

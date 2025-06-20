@@ -87,6 +87,7 @@ export const processWalletFunding = async (
         amount,
         timestamp: serverTimestamp(),
         description: "Wallet Funding",
+        // @ts-expect-error
         paymentMethod: response.payment_type || "Unknown",
         reference: response.tx_ref || "",
         status: "success",
@@ -101,6 +102,7 @@ export const processWalletFunding = async (
             customerEmail: response.customer.email,
             customerName: response.customer.name,
             customerPhone: response.customer.phone_number,
+            // @ts-expect-error
             processorResponse: response.processor_response,
             paymentDate: clientTimestamp.toISOString(),
         },
@@ -145,6 +147,7 @@ export const processWalletFunding = async (
         status: "success",
         isCredit: true,
         reference: response.tx_ref || "",
+        // @ts-expect-error
         paymentMethod: response.payment_type || "Unknown",
     };
 

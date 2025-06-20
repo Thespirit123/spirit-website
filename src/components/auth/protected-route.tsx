@@ -8,11 +8,16 @@ import { Text } from "../custom-ui/text";
 
 export type WithAuthProps = Record<string, never>;
 
+interface WithAuthOptions {
+  adminOnly?: boolean;
+}
+
 export function withAuth<P extends object>(
-  WrappedComponent: ComponentType<P>
+  WrappedComponent: ComponentType<P>,
+  options?: WithAuthOptions
 ): ComponentType<P & WithAuthProps> {
   const ComponentWithAuth = (props: P) => {
-    const { user, loading } = useAuth();
+    const { user, loading, isAdmin } = useAuth();
     const router = useRouter();
     const pathname = usePathname();
 
@@ -20,6 +25,11 @@ export function withAuth<P extends object>(
       if (!loading) {
         if (!user) {
           router.replace(`/auth/login?redirect=${pathname}`);
+          return;
+        }
+
+        if (options?.adminOnly && !isAdmin) {
+          router.replace("/dashboard");
           return;
         }
 
@@ -40,12 +50,20 @@ export function withAuth<P extends object>(
           else if (platform === "utilities") router.replace("/utilities");
         }
       }
-    }, [user, loading, router, pathname]);
+    }, [user, loading, router, pathname, isAdmin, options]);
 
     if (loading || !user) {
       return (
         <div className="flex items-center justify-center h-screen">
           <Text>Loading authentication status...</Text>
+        </div>
+      );
+    }
+
+    if (options?.adminOnly && !isAdmin) {
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <Text>Unauthorized. Redirecting...</Text>
         </div>
       );
     }
