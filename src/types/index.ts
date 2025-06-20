@@ -287,3 +287,31 @@ export interface TransactionResult {
     date: string;
   } & Partial<AirtimeFormData>;
 }
+
+export interface Disco {
+  meter_id: number;
+  meter_company: string;
+}
+
+export interface ElectricityCustomerInfo {
+  name: string;
+  address: string;
+}
+
+export interface ElectricityFormData {
+  disco: Disco;
+  meterType: "prepaid" | "postpaid";
+  meterNumber: string;
+  amount: number;
+  customerInfo: ElectricityCustomerInfo;
+}
+
+export interface ElectricityTransactionResult {
+  status: "success" | "failed";
+  message: string;
+  details: {
+    transactionId: string;
+    date: string;
+    token?: string;
+  } & Partial<ElectricityFormData>;
+}
