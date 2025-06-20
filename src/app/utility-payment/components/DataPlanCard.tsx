@@ -1,4 +1,9 @@
+"use client";
+
+import Button from '@/components/custom-ui/button';
+import { useAuth } from '@/hooks/useAuth';
 import Image, { StaticImageData } from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 interface DataPlan {
@@ -22,16 +27,29 @@ const DataPlanCard: React.FC<DataPlanCardProps> = ({
     textColor = 'text-black',
     plans,
 }) => {
-    return (
-        <div className={`${cardColor} shadow-lg transition-shadow rounded-lg overflow-hidden h-max`}>
-            <div className="flex items-center justify-center mb-4 pt-4">
-                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden">
-                    <Image src={networkLogo} alt={`${networkName} Logo`} width={32} height={32} style={{ objectFit: 'contain' }} />
-                </div>
-            </div>
-            <p className={`text-center font-bold mb-6 ${textColor}`}>{networkName}</p>
+    const { user } = useAuth();
+    const router = useRouter();
 
-            <div className="bg-white p-4 md:p-6">
+    const handleBuyNowClick = () => {
+        if (user) {
+            router.push('/utilities/airtime');
+        } else {
+            router.push('/auth/login');
+        }
+    };
+
+    return (
+        <div className={`${cardColor} shadow-lg transition-shadow rounded-lg overflow-hidden flex flex-col`}>
+            <div>
+                <div className="flex items-center justify-center mb-4 pt-4">
+                    <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center overflow-hidden">
+                        <Image src={networkLogo} alt={`${networkName} Logo`} width={32} height={32} style={{ objectFit: 'contain' }} />
+                    </div>
+                </div>
+                <p className={`text-center font-bold mb-6 ${textColor}`}>{networkName}</p>
+            </div>
+
+            <div className="bg-white p-4 md:p-6 flex-grow flex flex-col">
                 <table className="w-full text-sm">
                     <thead className="sr-only">
                         <tr>
@@ -50,6 +68,16 @@ const DataPlanCard: React.FC<DataPlanCardProps> = ({
                         ))}
                     </tbody>
                 </table>
+                <div className="mt-auto pt-4">
+                    <Button
+                        onClick={handleBuyNowClick}
+                        variant="primary"
+                        size="sm"
+                        fullWidth
+                    >
+                        Buy Now
+                    </Button>
+                </div>
             </div>
         </div>
     );
