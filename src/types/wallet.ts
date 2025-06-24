@@ -69,6 +69,7 @@ export interface DataPlan {
     plan_size: string;
     plan_price: string;
     validity: string;
+    data_network_type: string;
 }
 
 export interface DataFormData {
