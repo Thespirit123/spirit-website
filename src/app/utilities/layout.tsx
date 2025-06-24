@@ -123,16 +123,23 @@ const Sidebar: React.FC<{
                         target={opt.key === "contact" ? "_blank" : undefined}
                         rel={opt.key === "contact" ? "noopener noreferrer" : undefined}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors
-              ${activeKey === opt.key
-                                ? "bg-[#008EA8] text-white"
+                ${activeKey === opt.key
+                                ? "text-[#008EA8]"
                                 : "text-[#394B59] hover:bg-[#F5F7F9]"
                             }
             `}
                         tabIndex={0}
                         aria-current={activeKey === opt.key ? "page" : undefined}
                     >
-                        {opt.icon}
-                        <span>{opt.label}</span>
+                        {React.cloneElement(opt.icon as React.ReactElement, {
+                            // @ts-expect-error
+                            color: activeKey === opt.key ? "#008EA8" : "#394B59",
+                        })}
+                        <span
+                            className={activeKey === opt.key ? "font-bold text-[#008EA8]" : undefined}
+                        >
+                            {opt.label}
+                        </span>
                     </a>
                 ))}
             </nav>
