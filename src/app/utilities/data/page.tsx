@@ -15,7 +15,7 @@ import {
     Network,
     TransactionResult,
 } from "@/types/wallet";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
 import { DataSkeleton } from "./components/DataSkeleton";
 import { OrderStep } from "./components/OrderStep";
@@ -33,12 +33,20 @@ const parsePrice = (price: string): number => {
     return parseFloat(price.replace("NGN ", "").replace(",", ""));
 };
 
+type DataNetworkType = string;
+
+interface DataPlansApiResponse {
+    available_network_types: string;
+    data_list: DataPlan[];
+}
+
 const DataPurchasePage: React.FC = () => {
     const { user } = useAuth();
     const [currentStep, setCurrentStep] = useState<Step>(1);
     const [formData, setFormData] = useState<DataFormData | null>(null);
     const [walletBalance, setWalletBalance] = useState<number>(0);
     const [allPlans, setAllPlans] = useState<DataPlan[]>([]);
+    const [networkTypes, setNetworkTypes] = useState<DataNetworkType[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isProcessing, setIsProcessing] = useState(false);
     const [transactionResult, setTransactionResult] =
@@ -58,8 +66,14 @@ const DataPurchasePage: React.FC = () => {
             if (!plansResponse.ok) {
                 throw new Error("Failed to fetch data plans");
             }
-            const plans = await plansResponse.json();
-            setAllPlans(plans);
+            const plansApi: DataPlansApiResponse = await plansResponse.json();
+            setAllPlans(plansApi.data_list);
+
+            const types = plansApi.available_network_types
+                .split(",")
+                .map((t) => t.trim())
+                .filter(Boolean);
+            setNetworkTypes(types);
         } catch (error) {
             toast.error(
                 error instanceof Error ? error.message : "Could not load page data."
@@ -150,6 +164,7 @@ const DataPurchasePage: React.FC = () => {
                         walletBalance={walletBalance}
                         networks={NETWORKS}
                         allPlans={allPlans}
+                        networkTypes={networkTypes}
                     />
                 );
             case 2:

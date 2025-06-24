@@ -24,7 +24,10 @@ export async function GET() {
             throw new Error(data.message || "Provider returned an error.");
         }
 
-        return NextResponse.json(data.data_list);
+        return NextResponse.json({
+            available_network_types: data.available_network_types,
+            data_list: data.data_list,
+        });
     } catch (error) {
         const message =
             error instanceof Error

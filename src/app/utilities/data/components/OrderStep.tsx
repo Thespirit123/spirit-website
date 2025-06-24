@@ -8,6 +8,7 @@ interface OrderStepProps {
     walletBalance: number;
     networks: Network[];
     allPlans: DataPlan[];
+    networkTypes: string[];
 }
 
 const parsePrice = (price: string): number => {
@@ -22,8 +23,10 @@ export const OrderStep: React.FC<OrderStepProps> = ({
     walletBalance,
     networks,
     allPlans,
+    networkTypes,
 }) => {
     const [selectedNetworkId, setSelectedNetworkId] = useState<string>("");
+    const [selectedNetworkType, setSelectedNetworkType] = useState<string>("");
     const [selectedPlanId, setSelectedPlanId] = useState<string>("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -33,9 +36,26 @@ export const OrderStep: React.FC<OrderStepProps> = ({
         [selectedNetworkId, networks]
     );
 
+    const filteredNetworkTypes = useMemo(
+        () =>
+            networkTypes.filter((type) =>
+                allPlans.some(
+                    (plan) =>
+                        plan.network === selectedNetworkId &&
+                        plan.data_network_type === type
+                )
+            ),
+        [networkTypes, allPlans, selectedNetworkId]
+    );
+
     const filteredPlans = useMemo(
-        () => allPlans.filter((plan) => plan.network === selectedNetworkId),
-        [selectedNetworkId, allPlans]
+        () =>
+            allPlans.filter(
+                (plan) =>
+                    plan.network === selectedNetworkId &&
+                    plan.data_network_type === selectedNetworkType
+            ),
+        [selectedNetworkId, selectedNetworkType, allPlans]
     );
 
     const selectedPlan = useMemo(
@@ -72,7 +92,7 @@ export const OrderStep: React.FC<OrderStepProps> = ({
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <label
                         htmlFor="network-select"
@@ -85,6 +105,7 @@ export const OrderStep: React.FC<OrderStepProps> = ({
                         value={selectedNetworkId}
                         onChange={(e) => {
                             setSelectedNetworkId(e.target.value);
+                            setSelectedNetworkType("");
                             setSelectedPlanId("");
                         }}
                         className={selectStyles}
@@ -99,7 +120,33 @@ export const OrderStep: React.FC<OrderStepProps> = ({
                         ))}
                     </select>
                 </div>
-
+                <div>
+                    <label
+                        htmlFor="network-type-select"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                        Plan Type
+                    </label>
+                    <select
+                        id="network-type-select"
+                        value={selectedNetworkType}
+                        onChange={(e) => {
+                            setSelectedNetworkType(e.target.value);
+                            setSelectedPlanId("");
+                        }}
+                        disabled={!selectedNetworkId}
+                        className={selectStyles}
+                    >
+                        <option value="" disabled>
+                            Select plan type
+                        </option>
+                        {filteredNetworkTypes.map((type) => (
+                            <option key={type} value={type}>
+                                {type}
+                            </option>
+                        ))}
+                    </select>
+                </div>
                 <div>
                     <label
                         htmlFor="plan-select"
@@ -111,7 +158,7 @@ export const OrderStep: React.FC<OrderStepProps> = ({
                         id="plan-select"
                         value={selectedPlanId}
                         onChange={(e) => setSelectedPlanId(e.target.value)}
-                        disabled={!selectedNetworkId}
+                        disabled={!selectedNetworkType}
                         className={selectStyles}
                     >
                         <option value="" disabled>

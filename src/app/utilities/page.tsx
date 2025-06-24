@@ -42,6 +42,7 @@ const getTransactionIcon = (type: Transaction["type"]): React.ReactNode => {
 
 const UtilitiesDashboardPage: React.FC = () => {
     const { user } = useAuth();
+    console.log('user', user)
     const [walletBalance, setWalletBalance] = useState<number>(0);
     const [showFundingModal, setShowFundingModal] = useState(false);
     const [recentTransactions, setRecentTransactions] = useState<Transaction[]>(
@@ -113,7 +114,7 @@ const UtilitiesDashboardPage: React.FC = () => {
     };
 
     return (
-        <div className="p-4 pt-14 sm:p-6 lg:p-8">
+        <div className="p-4 sm:p-6 lg:p-8">
             <div className="mb-8">
                 <h2 className="text-2xl font-bold text-[#394B59]">
                     Hello, {customerInfo.name}!
@@ -125,7 +126,7 @@ const UtilitiesDashboardPage: React.FC = () => {
                 <Card className="lg:col-span-1">
                     <CardHeader>
                         <div className="flex items-center justify-between">
-                            <CardTitle className="text-lg font-medium">
+                            <CardTitle className="text-lg font-bold text-[#394B59]">
                                 Wallet Balance
                             </CardTitle>
                             <Wallet size={24} />
@@ -155,7 +156,7 @@ const UtilitiesDashboardPage: React.FC = () => {
                 <Card className="lg:col-span-2">
                     <CardHeader>
                         <div className="flex justify-between items-center">
-                            <CardTitle className="text-lg font-medium">
+                            <CardTitle className="text-lg font-bold text-[#394B59]">
                                 Recent Transactions
                             </CardTitle>
                             <a
