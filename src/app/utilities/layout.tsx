@@ -14,6 +14,7 @@ import {
     Zap,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -106,7 +107,9 @@ const Sidebar: React.FC<{
             aria-label="Sidebar"
         >
             <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100 lg:hidden">
-                <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority />
+                <Link href="/">
+                    <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority />
+                </Link>
                 <button
                     onClick={onClose}
                     className="p-2 rounded hover:bg-gray-100"
@@ -179,7 +182,9 @@ const UtilitiesLayout: React.FC<UtilitiesLayoutProps> = ({ children }) => {
                     >
                         <Menu size={28} color="black" />
                     </button>
-                    <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority className="ml-4" />
+                    <Link href="/">
+                        <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority className="ml-4" />
+                    </Link>
                 </div>
                 <main className="p-4 pt-6 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">{children}</main>
                 <ChatButton />
