@@ -106,7 +106,7 @@ const Sidebar: React.FC<{
       `}
             aria-label="Sidebar"
         >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100 lg:hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
                 <Link href="/">
                     <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority />
                 </Link>
@@ -115,7 +115,7 @@ const Sidebar: React.FC<{
                     className="p-2 rounded hover:bg-gray-100"
                     aria-label="Close sidebar"
                 >
-                    <ChevronLeft size={24} />
+                    <ChevronLeft size={24} className="lg:hidden" />
                 </button>
             </div>
             <nav className="flex flex-col gap-1 px-2 py-6">

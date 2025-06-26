@@ -160,7 +160,7 @@ const UtilitiesDashboardPage: React.FC = () => {
                                 Recent Transactions
                             </CardTitle>
                             <a
-                                href="/transactions"
+                                href="/utilities/transactions"
                                 className="text-[#008EA8] flex items-center hover:underline text-sm"
                             >
                                 View All <ArrowRight size={16} className="ml-1" />

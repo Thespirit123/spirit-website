@@ -15,10 +15,12 @@ import {
     limit,
     orderBy,
     query,
+    QueryConstraint,
     serverTimestamp,
     setDoc,
     Timestamp,
-    writeBatch,
+    where,
+    writeBatch
 } from "firebase/firestore";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { db } from "./firebase";
@@ -152,4 +154,101 @@ export const processWalletFunding = async (
     };
 
     return { newTransactionForState };
+};
+
+export const getAllWalletTransactions = async (
+    userId: string,
+    options: {
+        page: number;
+        pageSize: number;
+        type?: "wallet" | "utility";
+        status?: "success" | "pending" | "failed";
+        search?: string;
+    }
+): Promise<{ transactions: Transaction[]; total: number }> => {
+    const transactionsColRef = collection(
+        db,
+        "users",
+        userId,
+        "wallets",
+        "utilities",
+        "transactions"
+    );
+
+    const constraints: QueryConstraint[] = [orderBy("timestamp", "desc")];
+
+    if (options.type === "wallet") {
+        constraints.push(where("metadata.service", "==", "wallet"));
+    } else if (options.type === "utility") {
+        constraints.push(where("metadata.service", "!=", "wallet"));
+    }
+
+    if (options.status) {
+        constraints.push(where("status", "==", options.status));
+    }
+
+    let allDocs: WalletTransaction[] = [];
+    let total = 0;
+
+    if (options.search) {
+        const snapshot = await getDocs(query(transactionsColRef, ...constraints));
+        allDocs = snapshot.docs.map((doc) => ({ ...(doc.data() as WalletTransaction), id: doc.id }));
+        const filtered = allDocs.filter((txn) =>
+            txn.description?.toLowerCase().includes(options.search!.toLowerCase()) ||
+            txn.reference?.toLowerCase().includes(options.search!.toLowerCase())
+        );
+        total = filtered.length;
+        const paginated = filtered.slice((options.page - 1) * options.pageSize, options.page * options.pageSize);
+        return {
+            transactions: paginated.map((txn) => {
+                const date =
+                    txn.timestamp instanceof Timestamp ? txn.timestamp.toDate() : new Date();
+                return {
+                    // @ts-expect-error
+                    id: txn.id,
+                    type: (txn.metadata?.service as TransactionType) || "wallet",
+                    description: txn.description,
+                    amount: txn.amount,
+                    date: date.toISOString().replace("T", " ").slice(0, 16),
+                    status: txn.status,
+                    isCredit: txn.type === "credit",
+                    reference: txn.reference,
+                    paymentMethod: txn.paymentMethod,
+                };
+            }),
+            total,
+        };
+    }
+
+    const q = query(
+        transactionsColRef,
+        ...constraints,
+        limit(options.pageSize * options.page)
+    );
+    const snapshot = await getDocs(q);
+    const docs = snapshot.docs.map((doc) => ({ ...(doc.data() as WalletTransaction), id: doc.id }));
+    total = docs.length;
+    const paginated = docs.slice((options.page - 1) * options.pageSize, options.page * options.pageSize);
+
+    const allSnapshot = await getDocs(query(transactionsColRef));
+    const allCount = allSnapshot.size;
+
+    return {
+        transactions: paginated.map((txn) => {
+            const date =
+                txn.timestamp instanceof Timestamp ? txn.timestamp.toDate() : new Date();
+            return {
+                id: txn.id,
+                type: (txn.metadata?.service as TransactionType) || "wallet",
+                description: txn.description,
+                amount: txn.amount,
+                date: date.toISOString().replace("T", " ").slice(0, 16),
+                status: txn.status,
+                isCredit: txn.type === "credit",
+                reference: txn.reference,
+                paymentMethod: txn.paymentMethod,
+            };
+        }),
+        total: allCount,
+    };
 };
