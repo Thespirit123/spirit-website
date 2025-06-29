@@ -12,13 +12,11 @@ import {
     ArrowRight,
     ArrowUpRight,
     Clock,
-    MessageSquare,
     Phone,
-    Receipt,
     Tv,
     Wallet,
     Wifi,
-    Zap,
+    Zap
 } from "lucide-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -312,46 +310,6 @@ const UtilitiesDashboardPage: React.FC = () => {
                                 </h3>
                                 <p className="text-sm text-[#8E9BAA]">
                                     DSTV, GOTV & StarTimes
-                                </p>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </a>
-            </div>
-
-            <h3 className="text-xl font-bold text-[#394B59] mb-4 mt-8">
-                Account & Support
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="/utilities/transactions">
-                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                        <CardContent className="p-6">
-                            <div className="flex flex-col items-center text-center">
-                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
-                                    <Receipt size={24} />
-                                </div>
-                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
-                                    All Transactions
-                                </h3>
-                                <p className="text-sm text-[#8E9BAA]">
-                                    View your payment history
-                                </p>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </a>
-                <a href="/utilities/contact">
-                    <Card className="transition-transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                        <CardContent className="p-6">
-                            <div className="flex flex-col items-center text-center">
-                                <div className="p-4 bg-[#F5F7F9] rounded-full mb-4 text-[#008EA8]">
-                                    <MessageSquare size={24} />
-                                </div>
-                                <h3 className="text-lg font-medium text-[#394B59] mb-2">
-                                    Customer Support
-                                </h3>
-                                <p className="text-sm text-[#8E9BAA]">
-                                    Get help and support
                                 </p>
                             </div>
                         </CardContent>

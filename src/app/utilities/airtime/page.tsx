@@ -4,6 +4,7 @@ import nineMobileLogo from "@/assets/images/9mobile-logo.png";
 import airtelLogo from "@/assets/images/airtel-logo.png";
 import gloLogo from "@/assets/images/globacom-logo.png";
 import mtnLogo from "@/assets/images/mtn-logo.jpeg";
+import RevalidateModal from "@/components/RevalidateModal";
 import ProgressSteps from "@/components/ui/ProgressSteps";
 import { useAuth } from "@/hooks/useAuth";
 import { getWalletData } from "@/lib/wallet";
@@ -36,6 +37,7 @@ const AirtimePurchasePage: React.FC = () => {
     const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const [transactionResult, setTransactionResult] =
         useState<TransactionResult | null>(null);
+    const [showRevalidateModal, setShowRevalidateModal] = useState(false);
 
     const fetchWalletBalance = useCallback(async () => {
         if (!user?.uid) return;
@@ -133,7 +135,7 @@ const AirtimePurchasePage: React.FC = () => {
                         <ReviewStep
                             formData={formData}
                             walletBalance={walletBalance}
-                            onConfirm={handlePayment}
+                            onConfirm={() => setShowRevalidateModal(true)}
                             onBack={() => setCurrentStep(1)}
                             isProcessing={isProcessing}
                         />
@@ -169,6 +171,13 @@ const AirtimePurchasePage: React.FC = () => {
                     </div>
                 )}
             </div>
+            {showRevalidateModal && user && (
+                <RevalidateModal
+                    user={user}
+                    onClose={() => setShowRevalidateModal(false)}
+                    onSuccess={handlePayment}
+                />
+            )}
         </div>
     );
 };

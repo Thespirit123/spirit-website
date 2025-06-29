@@ -1,5 +1,5 @@
 "use client";
-
+import RevalidateModal from "@/components/RevalidateModal";
 import { Card, CardContent } from "@/components/ui/card";
 import ProgressSteps from "@/components/ui/ProgressSteps";
 import { useAuth } from "@/hooks/useAuth";
@@ -26,6 +26,7 @@ const ElectricityPurchasePage: React.FC = () => {
   const [formData, setFormData] = useState<ElectricityFormData | null>(null);
   const [transactionResult, setTransactionResult] =
     useState<ElectricityTransactionResult | null>(null);
+  const [showRevalidateModal, setShowRevalidateModal] = useState(false);
 
   const fetchInitialData = useCallback(async () => {
     if (!user?.uid) return;
@@ -132,7 +133,7 @@ const ElectricityPurchasePage: React.FC = () => {
           formData && (
             <ReviewStep
               formData={formData}
-              onConfirm={handlePayment}
+              onConfirm={() => setShowRevalidateModal(true)}
               onBack={() => setCurrentStep(1)}
               isProcessing={isProcessing}
             />
@@ -172,6 +173,13 @@ const ElectricityPurchasePage: React.FC = () => {
           </Card>
         )}
       </div>
+      {showRevalidateModal && user && (
+        <RevalidateModal
+          user={user}
+          onClose={() => setShowRevalidateModal(false)}
+          onSuccess={handlePayment}
+        />
+      )}
     </div>
   );
 };

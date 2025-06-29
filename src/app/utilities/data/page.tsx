@@ -4,6 +4,7 @@ import nineMobileLogo from "@/assets/images/9mobile-logo.png";
 import airtelLogo from "@/assets/images/airtel-logo.png";
 import gloLogo from "@/assets/images/globacom-logo.png";
 import mtnLogo from "@/assets/images/mtn-logo.jpeg";
+import RevalidateModal from "@/components/RevalidateModal";
 import { Card, CardContent } from "@/components/ui/card";
 import ProgressSteps from "@/components/ui/ProgressSteps";
 import { useAuth } from "@/hooks/useAuth";
@@ -15,7 +16,7 @@ import {
     Network,
     TransactionResult,
 } from "@/types/wallet";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { DataSkeleton } from "./components/DataSkeleton";
 import { OrderStep } from "./components/OrderStep";
@@ -51,6 +52,7 @@ const DataPurchasePage: React.FC = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [transactionResult, setTransactionResult] =
         useState<TransactionResult | null>(null);
+    const [showRevalidateModal, setShowRevalidateModal] = useState(false);
 
     const fetchInitialData = useCallback(async () => {
         if (!user?.uid) return;
@@ -172,7 +174,7 @@ const DataPurchasePage: React.FC = () => {
                     formData && (
                         <ReviewStep
                             formData={formData}
-                            onConfirm={handlePayment}
+                            onConfirm={() => { setShowRevalidateModal(true) }}
                             onBack={() => setCurrentStep(1)}
                             isProcessing={isProcessing}
                         />
@@ -210,6 +212,13 @@ const DataPurchasePage: React.FC = () => {
                     </Card>
                 )}
             </div>
+            {showRevalidateModal && user && (
+                <RevalidateModal
+                    user={user}
+                    onClose={() => setShowRevalidateModal(false)}
+                    onSuccess={handlePayment}
+                />
+            )}
         </div>
     );
 };
