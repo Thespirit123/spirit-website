@@ -285,6 +285,8 @@ export interface TransactionResult {
   details: {
     transactionId: string;
     date: string;
+    originalAmount?: number;
+    chargedAmount?: number;
   } & Partial<AirtimeFormData>;
 }
 

@@ -19,7 +19,9 @@ const ReviewStepComponent: React.FC<ReviewStepProps> = ({
     onBack,
     isProcessing,
 }) => {
-    const hasSufficientBalance = walletBalance >= formData.amount;
+    const discount = Math.floor(formData.amount * 0.01);
+    const finalAmount = formData.amount - discount;
+    const hasSufficientBalance = walletBalance >= finalAmount;
 
     return (
         <>
@@ -51,16 +53,20 @@ const ReviewStepComponent: React.FC<ReviewStepProps> = ({
                         </div>
                     </div>
                     <div className="flex justify-between items-center">
-                        <span className="text-gray-500">Amount</span>
+                        <span className="text-gray-500">Original Amount</span>
                         <span className="font-medium text-gray-800">
                             ₦{formData.amount.toLocaleString()}
                         </span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                        <span className="text-gray-500">Discount (1%)</span>
+                        <span className="text-green-600 font-medium">- ₦{discount.toLocaleString()}</span>
                     </div>
                     <div className="border-t border-gray-200 my-2" />
                     <div className="flex justify-between items-center">
                         <span className="text-gray-500 font-semibold">Total</span>
                         <span className="font-bold text-xl text-blue-600">
-                            ₦{formData.amount.toLocaleString()}
+                            ₦{finalAmount.toLocaleString()}
                         </span>
                     </div>
                 </div>

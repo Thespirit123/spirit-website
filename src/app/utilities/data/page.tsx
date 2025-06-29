@@ -188,7 +188,7 @@ const DataPurchasePage: React.FC = () => {
     };
 
     return (
-        <div className="bg-gray-50 min-h-screen pt-32 pb-10">
+        <div className="bg-gray-50 min-h-screen pt-2 md:pt-32 pb-10">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-8">
                     <h2 className="text-3xl font-bold text-gray-800">Buy Data</h2>

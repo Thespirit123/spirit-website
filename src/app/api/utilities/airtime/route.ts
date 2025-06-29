@@ -22,10 +22,13 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        const discount = Math.floor(amount * 0.01);
+        const chargedAmount = amount - discount;
+
         const walletRef = adminDb.doc(`users/${userId}/wallets/utilities`);
         const walletDoc = await walletRef.get();
 
-        if (!walletDoc.exists || (walletDoc.data()?.balance || 0) < amount) {
+        if (!walletDoc.exists || (walletDoc.data()?.balance || 0) < chargedAmount) {
             return NextResponse.json(
                 { message: "Insufficient wallet balance" },
                 { status: 400 }
@@ -72,12 +75,14 @@ export async function POST(req: NextRequest) {
         const batch = adminDb.batch();
 
         batch.update(walletRef, {
-            balance: FieldValue.increment(-amount),
+            balance: FieldValue.increment(-chargedAmount),
             lastUpdated: FieldValue.serverTimestamp(),
         });
 
         batch.set(transactionRef, {
             amount,
+            chargedAmount,
+            discountApplied: "1%",
             description: `Airtime purchase for ${phoneNumber}`,
             paymentMethod: "wallet",
             reference: airtimeResult.data?.reference || transactionId,
@@ -88,7 +93,8 @@ export async function POST(req: NextRequest) {
             metadata: {
                 service: "airtime",
                 recipient: phoneNumber,
-                networkApiId: networkApiId,
+                networkApiId,
+                discount,
                 providerResponse: airtimeResult.data,
             },
         });
@@ -97,7 +103,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             status: "success",
-            message: `Successfully sent ₦${amount.toLocaleString()} airtime to ${phoneNumber}.`,
+            message: `Successfully sent ₦${amount.toLocaleString()} airtime to ${phoneNumber} (₦${discount.toLocaleString()} discount applied).`,
             transactionId,
         });
     } catch (error) {

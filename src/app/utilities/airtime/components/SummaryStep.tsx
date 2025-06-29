@@ -16,6 +16,12 @@ const SummaryStepComponent: React.FC<SummaryStepProps> = ({ result }) => {
 
     const isSuccess = result.status === "success";
 
+    const { details } = result;
+
+    const originalAmount = details.originalAmount ?? details.amount ?? 0;
+    const discount = Math.floor(originalAmount * 0.01);
+    const chargedAmount = originalAmount - discount;
+
     return (
         <div className="text-center">
             {isSuccess ? (
@@ -37,39 +43,47 @@ const SummaryStepComponent: React.FC<SummaryStepProps> = ({ result }) => {
                 <div className="flex justify-between items-center">
                     <span className="text-gray-500">Transaction ID</span>
                     <span className="font-mono text-xs text-gray-700">
-                        {result.details.transactionId}
+                        {details.transactionId}
                     </span>
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-gray-500">Date</span>
                     <span className="font-medium text-gray-700">
-                        {new Date(result.details.date).toLocaleString()}
+                        {new Date(details.date).toLocaleString()}
                     </span>
                 </div>
-                {result.details.network && (
+                {details.network && (
                     <div className="flex justify-between items-center">
                         <span className="text-gray-500">Network</span>
                         <span className="font-medium text-gray-700">
-                            {result.details.network.name}
+                            {details.network.name}
                         </span>
                     </div>
                 )}
-                {result.details.phoneNumber && (
+                {details.phoneNumber && (
                     <div className="flex justify-between items-center">
                         <span className="text-gray-500">Recipient</span>
                         <span className="font-medium text-gray-700">
-                            {result.details.phoneNumber}
+                            {details.phoneNumber}
                         </span>
                     </div>
                 )}
-                {result.details.amount && (
-                    <div className="flex justify-between items-center">
-                        <span className="text-gray-500">Amount</span>
-                        <span className="font-bold text-gray-800">
-                            ₦{result.details.amount.toLocaleString()}
-                        </span>
-                    </div>
-                )}
+                <div className="flex justify-between items-center">
+                    <span className="text-gray-500">Original Amount</span>
+                    <span className="text-gray-700">
+                        ₦{originalAmount.toLocaleString()}
+                    </span>
+                </div>
+                <div className="flex justify-between items-center">
+                    <span className="text-gray-500">Discount (1%)</span>
+                    <span className="text-green-600">- ₦{discount.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between items-center font-semibold border-t border-gray-200 pt-2">
+                    <span className="text-gray-700">Amount</span>
+                    <span className="text-blue-600 font-bold">
+                        ₦{chargedAmount.toLocaleString()}
+                    </span>
+                </div>
             </div>
 
             <div className="flex items-center justify-center gap-4">
