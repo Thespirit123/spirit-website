@@ -1,3 +1,4 @@
+import { usePayment } from "@/context/payment";
 import {
   CRACKED_APPS_PLANS,
   MOVIE_PORTAL_PLANS,
@@ -77,11 +78,33 @@ const StepTwo = ({
   onBack,
   fwConfig,
 }: StepTwoProps) => {
+  const { isEligibleForDiscount, discountPercentage, getDiscountedPrice } = usePayment();
+
+  const originalPrice = selectedPlanDetails.price;
+  const discountedPrice = getDiscountedPrice(originalPrice);
+  const savings = originalPrice - discountedPrice;
+  const hasDiscount = isEligibleForDiscount && discountPercentage > 0;
+
   const isWhatsAppTool = selectedPlanDetails.name
     .toLowerCase()
     .includes("whatsapp");
+
   return (
     <div className="py-4 md:py-6">
+      {hasDiscount && (
+        <div className="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <span className="text-2xl">🎉</span>
+            <h4 className="font-bold text-green-800">First-Time User Special!</h4>
+          </div>
+          <p className="text-center text-green-700 text-sm">
+            You&apos;re getting <span className="font-bold">{discountPercentage}% OFF</span> your first purchase!
+            <br />
+            <span className="text-green-600">Save ₦{savings.toLocaleString()} today!</span>
+          </p>
+        </div>
+      )}
+
       <div className="relative mb-6 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent" />
         <div className="relative p-6 border border-brand-primary/20 rounded-xl">
@@ -103,13 +126,34 @@ const StepTwo = ({
           </div>
 
           <div className="mt-4 flex items-baseline gap-2">
-            <p className="text-3xl font-bold text-gray-900">
-              ₦{selectedPlanDetails.price.toLocaleString()}
-            </p>
-            {selectedPlanDetails.originalPrice && (
-              <p className="text-base text-gray-500 line-through">
-                ₦{selectedPlanDetails.originalPrice.toLocaleString()}
-              </p>
+            {hasDiscount ? (
+              <div className="space-y-2">
+                <div className="flex items-center gap-3">
+                  <p className="text-lg text-gray-500 line-through">
+                    ₦{originalPrice.toLocaleString()}
+                  </p>
+                  <span className="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+                    {discountPercentage}% OFF
+                  </span>
+                </div>
+                <p className="text-3xl font-bold text-green-600">
+                  ₦{discountedPrice.toLocaleString()}
+                </p>
+                <p className="text-sm text-green-600 font-medium">
+                  You save ₦{savings.toLocaleString()}!
+                </p>
+              </div>
+            ) : (
+              <>
+                <p className="text-3xl font-bold text-gray-900">
+                  ₦{originalPrice.toLocaleString()}
+                </p>
+                {selectedPlanDetails.originalPrice && (
+                  <p className="text-base text-gray-500 line-through">
+                    ₦{selectedPlanDetails.originalPrice.toLocaleString()}
+                  </p>
+                )}
+              </>
             )}
           </div>
 
@@ -186,8 +230,10 @@ const StepTwo = ({
           {...fwConfig}
           className={cn(
             "flex-[2] py-3 px-6 rounded-lg font-semibold transition-all duration-200",
-            "bg-brand-primary text-white hover:bg-brand-primary/90",
-            "focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2",
+            hasDiscount
+              ? "bg-green-600 text-white hover:bg-green-700 focus:ring-green-600"
+              : "bg-brand-primary text-white hover:bg-brand-primary/90 focus:ring-brand-primary",
+            "focus:outline-none focus:ring-2 focus:ring-offset-2",
             "disabled:opacity-50 disabled:cursor-not-allowed"
           )}
           disabled={
@@ -222,6 +268,8 @@ export const PaymentModal = ({
   customerInfo,
   setCustomerInfo,
 }: PaymentModalProps) => {
+  const { getDiscountedPrice } = usePayment();
+
   const [step, setStep] = useState<Step>(() => {
     const initialStep =
       productType === "whatsapp-tool" || productType === "cracked-apps"
@@ -276,10 +324,12 @@ export const PaymentModal = ({
     setStep(1);
   };
 
+  const finalAmount = selectedPlanDetails ? getDiscountedPrice(selectedPlanDetails.price) : 0;
+
   const config = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY!,
     tx_ref: Date.now().toString(),
-    amount: selectedPlanDetails?.price ?? 0,
+    amount: finalAmount,
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
@@ -332,10 +382,10 @@ export const PaymentModal = ({
           {productType === "whatsapp-tool"
             ? "WhatsApp Tool License"
             : productType === "cracked-apps"
-            ? "Cracked Apps Purchase"
-            : step === 1
-            ? "Choose Your App"
-            : "Complete Your Purchase"}
+              ? "Cracked Apps Purchase"
+              : step === 1
+                ? "Choose Your App"
+                : "Complete Your Purchase"}
         </h2>
       </ModalHeader>
 

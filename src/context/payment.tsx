@@ -1,10 +1,12 @@
 import { PaymentModal } from "@/components/payment-modal";
 import { SuccessModal } from "@/components/success-modal";
+import { useEmailDiscount } from "@/hooks/useEmailDiscount";
+import { useFirstTimeDiscount } from "@/hooks/useFirstTimeDiscount";
 import { APP_DOWNLOADS } from "@/lib/constants";
 import { createPurchaseRecord } from "@/lib/purchases";
 import { DownloadAppType, PaymentError, PaymentPlan } from "@/types";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 interface CustomerInfo {
@@ -26,6 +28,10 @@ interface PaymentContextType {
   customerInfo: CustomerInfo;
   setCustomerInfo: (info: CustomerInfo) => void;
   handleOpenPayment: (planId?: string) => void;
+  isEligibleForDiscount: boolean;
+  discountPercentage: number;
+  isCheckingEmail: boolean;
+  getDiscountedPrice: (originalPrice: number) => number;
 }
 
 const PaymentContext = createContext<PaymentContextType | null>(null);
@@ -39,6 +45,8 @@ export const PaymentProvider = ({
   children,
   productType = "movie-portal",
 }: PaymentProviderProps) => {
+  const { isFirstTimeUser: isBrowserFirstTime, markDiscountUsed: markBrowserDiscountUsed } = useFirstTimeDiscount();
+  const { isFirstTimeEmail, checkEmailDiscount, isCheckingEmail } = useEmailDiscount();
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [customerEmail, setCustomerEmail] = useState("");
@@ -50,6 +58,26 @@ export const PaymentProvider = ({
     phone: "",
     referralCode: "",
   });
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [emailChecked, setEmailChecked] = useState(false);
+
+  useEffect(() => {
+    if (customerInfo.email && !emailChecked) {
+      checkEmailDiscount(customerInfo.email).then(() => {
+        setEmailChecked(true);
+      });
+    }
+  }, [customerInfo.email, emailChecked, checkEmailDiscount]);
+
+  const isEligibleForDiscount = (isBrowserFirstTime || isFirstTimeEmail) && !discountApplied;
+  const discountPercentage = isEligibleForDiscount ? 50 : 0;
+
+  const getDiscountedPrice = (originalPrice: number): number => {
+    if (isEligibleForDiscount) {
+      return Math.floor(originalPrice * 0.5);
+    }
+    return originalPrice;
+  };
 
   const handleOpenPayment = (planId?: string) => {
     if (planId) {
@@ -63,6 +91,10 @@ export const PaymentProvider = ({
     planDetails: PaymentPlan
   ) => {
     try {
+      if (isEligibleForDiscount) {
+        markBrowserDiscountUsed();
+      }
+
       let downloadType: DownloadAppType;
 
       if (productType === "cracked-apps") {
@@ -95,10 +127,11 @@ export const PaymentProvider = ({
       setShowSuccessModal(true);
 
       const purchaseId = await createPurchaseRecord(response, {
-        id: planDetails.id,
-        name: planDetails.name,
-        platform: planDetails.platform,
-        price: planDetails.price,
+        ...planDetails,
+        originalPrice: planDetails.price,
+        discountedPrice: getDiscountedPrice(planDetails.price),
+        discountPercentage,
+        isFirstTimePurchase: isEligibleForDiscount,
         appType: downloadType,
         referralCode: customerInfo.referralCode,
       });
@@ -152,6 +185,10 @@ export const PaymentProvider = ({
     customerInfo,
     setCustomerInfo,
     handleOpenPayment,
+    isEligibleForDiscount,
+    discountPercentage,
+    isCheckingEmail,
+    getDiscountedPrice,
   };
 
   return (

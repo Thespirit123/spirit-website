@@ -27,6 +27,10 @@ export const createPurchaseRecord = async (
     name: string;
     platform: Platform;
     price: number;
+    originalPrice?: number;
+    discountedPrice?: number;
+    discountPercentage?: number;
+    isFirstTimePurchase?: boolean;
     appType: DownloadAppType;
     referralCode?: string;
   }
@@ -44,7 +48,7 @@ export const createPurchaseRecord = async (
 
       if (validation.isValid && validation.referrerId) {
         referrerId = validation.referrerId;
-        commissionAmount = productDetails.price * 0.1;
+        commissionAmount = (productDetails.discountedPrice || productDetails.price) * 0.1;
         commissionStatus = "pending";
       }
     }
@@ -56,6 +60,10 @@ export const createPurchaseRecord = async (
       customerName: response.customer.name,
       appType: productDetails.appType,
       amount: productDetails.price,
+      originalPrice: productDetails.originalPrice,
+      discountedPrice: productDetails.discountedPrice,
+      discountPercentage: productDetails.discountPercentage,
+      isFirstTimePurchase: productDetails.isFirstTimePurchase,
       status: TransactionStatus.COMPLETED,
       createdAt: new Date(),
       ...(productDetails.referralCode && {

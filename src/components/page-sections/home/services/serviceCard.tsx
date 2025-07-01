@@ -38,9 +38,8 @@ export const ServiceCard = ({
 
   return (
     <div
-      className={`flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 lg:gap-20 mt-10 md:mt-20 ${
-        isReversed ? "md:flex-row-reverse" : ""
-      }`}
+      className={`flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 lg:gap-20 mt-10 md:mt-20 ${isReversed ? "md:flex-row-reverse" : ""
+        }`}
     >
       <div className="w-full md:w-[450px] lg:w-[500px]">
         <Image
@@ -76,7 +75,7 @@ export const ServiceCard = ({
           href={href}
           onClick={handleClick}
         >
-          learn More
+          Learn More
           {/* {isUtility ? "learn More" : "Learn More"} */}
         </Button>
       </div>
