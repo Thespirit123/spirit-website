@@ -5,17 +5,18 @@ import Button from "@/components/custom-ui/button";
 import { Text } from "@/components/custom-ui/text";
 import { useAuth } from "@/hooks/useAuth";
 import { getSelectedPlatform, SelectedPlatform, setSelectedPlatform } from "@/lib/platform-storage";
-import { LayoutDashboard, ShoppingCart } from "lucide-react";
+import { LayoutDashboard, LogOut, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 const SelectPlatformPage = () => {
     const router = useRouter();
-    const { user, loading } = useAuth();
+    const { user, loading, logout } = useAuth();
+    const isLoggingOut = useRef(false);
 
     useEffect(() => {
-        if (!loading) {
+        if (!loading && !isLoggingOut.current) {
             if (!user) {
                 router.replace("/auth/login");
                 return;
@@ -40,7 +41,14 @@ const SelectPlatformPage = () => {
         }
     };
 
-    if (loading || !user) {
+    const handleLogout = useCallback(async () => {
+        isLoggingOut.current = true;
+        setSelectedPlatform(null);
+        router.replace("/");
+        await logout();
+    }, [logout, router]);
+
+    if (loading || (!user && !isLoggingOut.current)) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-gray-100">
                 <Text>Loading...</Text>
@@ -83,6 +91,13 @@ const SelectPlatformPage = () => {
                         <ShoppingCart className="w-5 h-5" />
                         Utilities Purchase
                     </Button>
+                    <button
+                        onClick={handleLogout}
+                        className="w-full text-red-700 hover:text-red-800 py-3 text-base flex items-center justify-center gap-2"
+                    >
+                        <LogOut className="w-5 h-5 text-red-800 font-semibold" />
+                        <p className="text-lg font-semibold">Exit</p>
+                    </button>
                 </div>
             </div>
         </section>
