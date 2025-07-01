@@ -5,6 +5,7 @@ import ChatButton from "@/components/custom-ui/chat-button";
 import {
     ChevronLeft,
     LayoutDashboard,
+    LogOut,
     Menu,
     MessageSquare,
     Phone,
@@ -15,8 +16,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { setSelectedPlatform } from "@/lib/platform-storage";
 
 type SidebarOption =
     | "overview"
@@ -25,7 +27,8 @@ type SidebarOption =
     | "electricity"
     | "cable"
     | "transactions"
-    | "contact";
+    | "contact"
+    | "logout";
 
 const SIDEBAR_OPTIONS: {
     key: SidebarOption;
@@ -75,6 +78,12 @@ const SIDEBAR_OPTIONS: {
             href: "https://chat.whatsapp.com/IZ9kgz1qkJW4wpDZl36KwR",
             icon: <MessageSquare size={20} />,
         },
+        {
+            key: "logout",
+            label: "Logout",
+            href: "/select-platform",
+            icon: <LogOut size={20} />
+        }
     ];
 
 interface UtilitiesLayoutProps {
@@ -85,16 +94,25 @@ const Sidebar: React.FC<{
     open: boolean;
     onClose: () => void;
     activeKey: SidebarOption;
-}> = ({ open, onClose, activeKey }) => (
-    <>
-        <div
-            className={`fixed inset-0 z-40 !bg-black/70 transition-opacity lg:hidden ${open ? "opacity-50 pointer-events-auto" : "opacity-0 pointer-events-none"
-                }`}
-            onClick={onClose}
-            aria-hidden={!open}
-        />
-        <aside
-            className={`
+}> = ({ open, onClose, activeKey }) => {
+    const router = useRouter();
+
+    const handleLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        setSelectedPlatform(null);
+        router.push("/select-platform");
+    };
+
+    return (
+        <>
+            <div
+                className={`fixed inset-0 z-40 !bg-black/70 transition-opacity lg:hidden ${open ? "opacity-50 pointer-events-auto" : "opacity-0 pointer-events-none"
+                    }`}
+                onClick={onClose}
+                aria-hidden={!open}
+            />
+            <aside
+                className={`
         transition-transform duration-300
         bg-white border-r border-neutral-200
         h-full z-50
@@ -104,51 +122,66 @@ const Sidebar: React.FC<{
         lg:translate-x-0 lg:static lg:block lg:shadow-none
         shadow-lg
       `}
-            aria-label="Sidebar"
-        >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
-                <Link href="/">
-                    <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority />
-                </Link>
-                <button
-                    onClick={onClose}
-                    className="p-2 rounded hover:bg-gray-100"
-                    aria-label="Close sidebar"
-                >
-                    <ChevronLeft size={24} className="lg:hidden" />
-                </button>
-            </div>
-            <nav className="flex flex-col gap-1 px-2 py-6">
-                {SIDEBAR_OPTIONS.map((opt) => (
-                    <a
-                        key={opt.key}
-                        href={opt.href}
-                        target={opt.key === "contact" ? "_blank" : undefined}
-                        rel={opt.key === "contact" ? "noopener noreferrer" : undefined}
-                        className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors
-                ${activeKey === opt.key
-                                ? "text-[#008EA8]"
-                                : "text-[#394B59] hover:bg-[#F5F7F9]"
-                            }
-            `}
-                        tabIndex={0}
-                        aria-current={activeKey === opt.key ? "page" : undefined}
+                aria-label="Sidebar"
+            >
+                <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100">
+                    <Link href="/">
+                        <Image src={LogoImg} alt="Spirit Media Logo" width={90} height={40} priority />
+                    </Link>
+                    <button
+                        onClick={onClose}
+                        className="p-2 rounded hover:bg-gray-100"
+                        aria-label="Close sidebar"
                     >
-                        {React.cloneElement(opt.icon as React.ReactElement, {
-                            // @ts-expect-error
-                            color: activeKey === opt.key ? "#008EA8" : "#394B59",
-                        })}
-                        <span
-                            className={activeKey === opt.key ? "font-bold text-[#008EA8]" : undefined}
+                        <ChevronLeft size={24} className="lg:hidden" />
+                    </button>
+                </div>
+                <nav className="flex flex-col gap-1 px-2 py-6">
+                    {SIDEBAR_OPTIONS.map((opt) => (
+                        <a
+                            key={opt.key}
+                            href={opt.href}
+                            onClick={opt.key === "logout" ? handleLogout : undefined}
+                            target={opt.key === "contact" ? "_blank" : undefined}
+                            rel={opt.key === "contact" ? "noopener noreferrer" : undefined}
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors
+                            ${opt.key === "logout"
+                                    ? "text-red-600 font-bold hover:bg-red-50"
+                                    : activeKey === opt.key
+                                        ? "text-[#008EA8]"
+                                        : "text-[#394B59] hover:bg-[#F5F7F9]"
+                                }
+                        `}
+                            tabIndex={0}
+                            aria-current={activeKey === opt.key ? "page" : undefined}
                         >
-                            {opt.label}
-                        </span>
-                    </a>
-                ))}
-            </nav>
-        </aside>
-    </>
-);
+                            {React.cloneElement(opt.icon as React.ReactElement, {
+                                // @ts-expect-error
+                                color:
+                                    opt.key === "logout"
+                                        ? "#dc2626" // Tailwind red-600
+                                        : activeKey === opt.key
+                                            ? "#008EA8"
+                                            : "#394B59",
+                            })}
+                            <span
+                                className={
+                                    opt.key === "logout"
+                                        ? "font-bold text-red-600"
+                                        : activeKey === opt.key
+                                            ? "font-bold text-[#008EA8]"
+                                            : undefined
+                                }
+                            >
+                                {opt.label}
+                            </span>
+                        </a>
+                    ))}
+                </nav>
+            </aside>
+        </>
+    );
+};
 
 const UtilitiesLayout: React.FC<UtilitiesLayoutProps> = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -163,6 +196,7 @@ const UtilitiesLayout: React.FC<UtilitiesLayoutProps> = ({ children }) => {
             else if (pathname.includes("/cable")) setActiveKey("cable");
             else if (pathname.includes("/transactions")) setActiveKey("transactions");
             else if (pathname.includes("/contact")) setActiveKey("contact");
+            else if (pathname.includes("/select-platform")) setActiveKey("logout");
             else setActiveKey("overview");
         }
     }, [pathname]);
