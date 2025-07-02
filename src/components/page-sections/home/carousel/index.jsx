@@ -5,6 +5,7 @@ import Carousel from "react-multi-carousel";
 import HeroImg from "/public/Image8.png";
 import HeroImg1 from "/public/sliderImage.jpeg";
 import HeroImg2 from "/public/sliderImage1.jpeg";
+import HeroImg3 from "/public/freebiesHeroCaro.jpeg";
 import Image from "next/image";
 import "./carousel.css"
 
@@ -30,7 +31,7 @@ const responsive = {
 };
 
 
-const CarouselDiv =()=>{
+  const CarouselDiv =({onExplore})=>{
 
  const {deviceType,setDeviceType} = useState("mobile")
  
@@ -49,7 +50,7 @@ const CarouselDiv =()=>{
             <div  className="NewArrivalD">
         <div  className="NewArrivalD1">Your Plug For Foreign Numbers, Bill Payments, Movies & <span style={{color:'#008ea8'}}>More!</span></div>
         <p  className="NewArrivalD2">Get everything you need in one place.</p>
-        <div  className="NewArrivalD3">Explore Our Products</div>
+        <div className="BB"><button  className="NewArrivalD3" onClick={onExplore} >Explore Our Products</button></div>
         </div>
      </div>
   </div>
@@ -80,7 +81,7 @@ const CarouselDiv =()=>{
               src={HeroImg1}
               alt="Hero Screens"
            
-              className="sectionImg"
+              className="sectionImg4"
               
             />
     
@@ -93,7 +94,7 @@ const CarouselDiv =()=>{
               alt="Hero Screens"
             
              
-              className="sectionImg"
+              className="sectionImg4"
               
             />
         
@@ -102,28 +103,16 @@ const CarouselDiv =()=>{
  <div >
   <div  className="section1">
      <Image
-              src={HeroImg1}
+              src={HeroImg3}
               alt="Hero Screens"
            
-              className="sectionImg"
+              className="sectionImg4"
               
             />
     
   </div>
   </div>
-   <div >
-  <div  className="section1">
-     <Image
-              src={HeroImg2}
-              alt="Hero Screens"
-            
-             
-              className="sectionImg"
-              
-            />
-        
-  </div>
-  </div>
+  
 </Carousel>
 
 </div>
@@ -132,6 +121,5 @@ const CarouselDiv =()=>{
         </div>
     )
 }
-
 
 export default CarouselDiv;

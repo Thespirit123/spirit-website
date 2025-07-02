@@ -90,7 +90,7 @@ transition: all 2s;
     padding:2px 15px;
 }
 .sT{
-    font-weight:500 ;
+    font-weight:bold ;
     font-size: 20px;
     margin-bottom: 15px;
     color: #008ea8;
@@ -104,11 +104,14 @@ border-radius: 6px;
 /* border:1px solid #e5e5e5; */
 box-shadow: 0px 1px 13px 0px #e1e1e5;
 }
+    /* .OurP14{
+        font-weight: bold;
+    } */
 
 .sT1{
     font-size: 14px;
     font-weight:400;
-    color:#5d5858;
+    color:#14131380;
 
 }
 .FourD{
@@ -273,7 +276,7 @@ font-size: 26px;
     margin-bottom: 20px;
 }
 .payN2{
-padding: 6px 20px;
+padding: 8px 20px;
 border-radius: 6px; 
 background-color: #fff;
 color:#000;
@@ -376,6 +379,9 @@ box-shadow: 0px 2px 0px 2px #79a1ad4d;
         .hideD{
             display:none;
         }
+        .sT{
+            font-size: 16px;
+        }
         .PSectionT{
         padding:2px 15px
         }
@@ -425,12 +431,16 @@ box-shadow: 0px 2px 0px 2px #79a1ad4d;
     padding: 3px 15px 60px 15px;
 }
 .count2{
-    flex: 0 0 40%;
+    flex: 0 0 45%;
     box-sizing: border-box;
     text-align: left;
 }
 .secText{
-    font-size: 14px;
+    font-size: 12px;
+    text-align:center
+}
+.bkP{
+    text-align:center
 }
 .platform1{
     padding:50px 10px 20px 10px;

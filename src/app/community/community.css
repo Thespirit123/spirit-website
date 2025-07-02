@@ -24,6 +24,7 @@
     padding: 8px 15px;
     color: #008ea8;
     border-radius: 8px;
+    font-size: 14px;
 
 }
 
@@ -482,7 +483,13 @@
 
     .communityTextHero {
         text-align: center;
-        font-size: 28px;
+        font-size: 24px;
+    }
+    .communityText1{
+        font-size: 14px;
+    }
+    .countHeader1 {
+        font-size: 12px;
     }
 
     .communityCountDiv {

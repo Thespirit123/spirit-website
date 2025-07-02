@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./section.css"
 import Image from "next/image";
 import ContentImage from "@/assets/images/freebies1.jpeg";
@@ -15,17 +15,62 @@ const form = () => {
 
   // const textLink = [{id:1,text:"All Resources", section:""},{id:2,text:"Health", section:""},{id:3,text:"Wealth", section:""},{id:4,text:"Mindset", section:""},{id:5,text:"Sex", section:""},{id:6,text:"Tools", section:""}]
   const featuredFreebies = [{id:1,text:"How To Perfectly Run Sponsored Ads On Meta & Instagram",text1:'500 downloads', img:ContentImag},{id:2,text:"How To Make A Girl Experience Orgasm",text1:'3500 downloads',img:ContentImag1}]
-  const featuredFreebies1 = [{id:1,text:'Auto Responder for WhatsApp',text1:'No more stress! Our premium auto responder replies to all your clients instantly - on the go.',text2:'2,547 downloads',text3:'Tools',text4:'Required Email',img:ContentImage2, category:"Tools"},
-    {id:2,text:'How to Perfectly Run Sponsored Ads on Meta & Instagram',text1:"Discover the hidden secrets your mentors won't tell you. This free course gives you real insights into running effective sponsored ads.",text2:'1.823 downloads',text3:'Wealth',text4:'',img:ContentImag, category:"Wealth"},
-    {id:3,text:'How to Make a Girl Experience Orgasm',text1:'Learn how truly satisfy the woman you love. This guide teaches you how to help her climax and enjoy intense pleasure.',text2:'3,102 downloads',text3:'Sex',text4:'Required email',img:ContentImag1, category:"Sex"},
-    {id:4,text:'Attia - Outline',text1:"Health is Wealth isn't just a saying. Peter Attia's book shows you how to live a longer purposeful life.",text2:'3,102 downloads',text3:'Health',text4:'Required email',img:ContentImg, category:"Health"},
-    {id:5,text:"Alex's Books on Offers and Leads",text1:'Forget overpriced marketing courses. These books give you practical strategies that actually work. ',text2:'3,102 downloads',text3:'Wealth',text4:'Required email',img:ContentImage1, category:"Wealth"},
-  {id:6,text:'The Richest Man in Babylon',text1:'The first book that changed how I see money. Its storytelling approach teaches timeless lessons on building wealth.',text2:'3,102 downloads',text3:'Wealth',text4:'Required email',img:ContentImag2, category:"Wealth"},
-{id:7,text:'Letters from a Stoic',text1:'The godfather of stoicism breaks it down in this classic. Timeless Wisdom for a better, calmer life. ',text2:'3,102 downloads',text3:'Mindset',text4:'Required email',img:ContentImage, category:"Mindset"}]
+  const featuredFreebies1 = [{id:1,text:'Auto Responder for WhatsApp',text1:'No more stress! Our premium auto responder replies to all your clients instantly - on the go.',text2:'2,547 downloads',text3:'Tools',text4:'Requires Email',img:ContentImage2, category:"Tools"},
+    {id:2,text:'How to Perfectly Run Sponsored Ads on Meta & Instagram',text1:"Discover the hidden secrets your mentors won't tell you. This free course gives you real insights into running effective sponsored ads.",text2:'1.823 downloads',text3:'Wealth',text4:'Requires Telegram',img:ContentImag, category:"Wealth"},
+    {id:3,text:'How to Make a Girl Experience Orgasm',text1:'Learn how truly satisfy the woman you love. This guide teaches you how to help her climax and enjoy intense pleasure.',text2:'3,102 downloads',text3:'Sex',text4:'Requires Email',img:ContentImag1, category:"Sex"},
+    {id:4,text:'Attia - Outline',text1:"Health is Wealth isn't just a saying. Peter Attia's book shows you how to live a longer purposeful life.",text2:'3,102 downloads',text3:'Health',text4:'Requires Email',img:ContentImg, category:"Health"},
+    {id:5,text:"Alex's Books on Offers and Leads",text1:'Forget overpriced marketing courses. These books give you practical strategies that actually work. ',text2:'3,102 downloads',text3:'Wealth',text4:'Requires Email',img:ContentImage1, category:"Wealth"},
+  {id:6,text:'The Richest Man in Babylon',text1:'The first book that changed how I see money. Its storytelling approach teaches timeless lessons on building wealth.',text2:'3,102 downloads',text3:'Wealth',text4:'Requires Email',img:ContentImag2, category:"Wealth"},
+{id:7,text:'Letters from a Stoic',text1:'The godfather of stoicism breaks it down in this classic. Timeless Wisdom for a better, calmer life. ',text2:'3,102 downloads',text3:'Mindset',text4:'Requires Email',img:ContentImage, category:"Mindset"}]
 
 const [selectedCategory,setSelectedCategory] = useState("All Resources");
 const categories = ["All Resources", ...new Set(featuredFreebies1.map(item =>item.category))]
 const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : featuredFreebies1.filter(item => item.category === selectedCategory)
+const [show,setShow] = useState(false)
+const [modalName,setModalName] = useState("")
+
+const [form, setForm] = useState({ name: '', email: '', phone: '', file: "" });
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value});
+  };
+
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(form)
+    const res = await fetch('/api/sendLink/send-link', {
+      method: 'POST',
+      body: JSON.stringify(form),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await res.json();
+    setMessage(data.message);
+  };
+
+
+const changeModal=({name})=>{
+  setShow(!show)
+  setModalName(name)
+}
+
+  useEffect(() => {
+    if (show) {
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore scroll
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup in case the component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [show]);
+
+  // if (!isOpen) return null;
   return ( 
     <div > 
       {/* section ! hero section */}
@@ -53,7 +98,7 @@ const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : 
         </div>
         </div>
         <div className=''>
-        <div className='FFee'>
+        <div className='FFee' data-aos="fade-up" data-aos-delay="100">
           {/* <svg width="20" height="20" viewBox="0 0 20 20" fill="none" >
 <path d="M9.99984 1.66699L12.5748 6.88366L18.3332 7.72533L14.1665 11.7837L15.1498 17.517L9.99984 14.8087L4.84984 17.517L5.83317 11.7837L1.6665 7.72533L7.42484 6.88366L9.99984 1.66699Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg> */}
@@ -62,7 +107,7 @@ const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : 
 <div className="bvn">
         <div className='ArticleSec2'>
           {featuredFreebies.map((app)=>(
-           <div key={app.id} className='ArticleSec'>
+           <div key={app.id} className='ArticleSec' data-aos="fade-up" data-aos-delay="100">
                    
             <Image src={app.img} alt="section Image" className="imag"/>
           
@@ -80,7 +125,7 @@ const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : 
         <div className='CopTu'>
         <div className='componentSec'>
           {filteredInfo.map((app)=>(
-            <div key={app.id} className='componentSec1'>
+            <div key={app.id} className='componentSec1' data-aos="fade-up" data-aos-delay="100" >
               <div className="cardUnit">
                <Image src={app.img} alt="Freebies Image" width="500" height="500"  style={{objectFit:"cover"}} className="cardImg"/>
               <div className='cardUnit1'>
@@ -89,7 +134,7 @@ const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : 
 <path d="M5.27588 6.97168L8.60921 10.305L11.9425 6.97168" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 <path d="M8.60938 10.3047V2.30469" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
-<span className="DN">Download Now</span></div>
+<span className="DN" onClick={()=>{setShow(!show), setModalName(app.text)}}>Download Now</span></div>
                   <div className=''>
                    
 </div>
@@ -117,6 +162,35 @@ const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : 
 
         </div>
       </div>
+
+      {show ?
+      <div>
+      <div className='modalLH'  onClick={()=>setShow(!show)}></div>
+
+        <div className='modalL1'>
+          <div className='modalForFreebies'>
+           <div className="ModalHeader" >{modalName}</div>
+           <div><input  type="text" name="file" className='modalInput' value={modalName} readOnly onClick={handleChange} style={{display:"none"}} /></div>
+        <div className='modalL'>
+          <label htmlFor="">Name</label>
+          <div><input  type="text" name="name" placeholder='enter your name' className='modalInput' onChange={handleChange} /></div>
+        </div>
+         <div className='modalL'>
+          <label htmlFor="">Email</label>
+          <div><input  type="email" name="email" placeholder='enter your email'  className='modalInput' onChange={handleChange} /></div>
+        </div>
+         <div className='modalL'>
+          <label htmlFor="">Phone Number</label>
+          <div><input  type="number" name="phone" placeholder=' enter your phone number'   className='modalInput' onChange={handleChange}/></div>
+        </div>
+        <div><button className="modalSubmit" onClick={handleSubmit}>Submit</button></div>
+        {message && <p>{message}</p>}
+        </div>
+        </div>
+
+
+      </div>
+      :""}
         
     </div>
   )

@@ -1,7 +1,7 @@
 .featPro {
     width: 100%;
-    max-width: 1200px;
-    padding: 10px 15px;
+    max-width: 1300px;
+    padding: 10px 50px;
     margin: 0 auto;
 }
 
@@ -38,6 +38,7 @@ position: relative;
     height: 100%;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    object-fit: cover;
 }
 
 .featuredProductCardBestSell {
@@ -46,10 +47,11 @@ position: relative;
     left: 10px;
     padding: 5px 8px;
     border-radius: 4px;
-    background-color: #008EA8;
+    background-color:rgba(0, 143, 168, 0.53);
     width: fit-content;
     z-index: 1;
     color: #fff;
+    /* backdrop-filter:blur(100px) */
 }
 
 .featuredProductCardAddToCart {
@@ -63,6 +65,7 @@ position: relative;
     background-color: #008EA8;
     width: fit-content;
     color: #fff;
+    transition:all 5s
 
 }
 
@@ -70,6 +73,11 @@ position: relative;
     display: flex;
     align-items: center;
     gap: 8px
+}
+.featuredProductCardAddToCart:hover{
+    color:#008EA8;
+    background: #fff;
+    transform:translateY(5px 0 0 0)
 }
 
 .featuredProductCardLoveIcone {
@@ -135,6 +143,12 @@ position: relative;
 
 }
 
+@media(max-width:768px){
+    .featPro{
+padding:10px 15px;
+    }
+}
+
 @media(max-width:508px) {
     .featuredProductDiv {
         flex-direction: column;
@@ -151,10 +165,18 @@ position: relative;
 
 }
 
-@media(min-width:1440px){
+@media(min-width:1441px) and (max-width:1870px){
     .featPro {
            
-            max-width: 1300px;
+            max-width: 1395px;
+            
+        }
+}
+
+@media(min-width:1873px){
+    .featPro {
+           
+            max-width: 1872px;
             
         }
 }

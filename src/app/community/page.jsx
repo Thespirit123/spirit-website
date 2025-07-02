@@ -95,16 +95,16 @@ const page = () => {
 
 <div className='topDivB'>
       <div className='communitySection2'>
-        <div className='communitySection2Text'>Earn & Redeem Rewards</div>
-        <div className='communitySection2Text1'>Join our community rewards program and unlock exclusive benefits, discounts, and 
+        <div className='communitySection2Text' data-aos="fade-up" data-aos-delay="100">Earn & Redeem Rewards</div>
+        <div className='communitySection2Text1' data-aos="fade-up" data-aos-delay="100" >Join our community rewards program and unlock exclusive benefits, discounts, and 
 special offers.</div>
 <div className='communitySection3'>
   <div className='communitySection4'>
     <div className='communitySection4Div'>
-      <p className='RewardJ'>Your Rewards Journey</p>
-      <p className='RewardJ1'>Choose between airtime & foreign number and pull your friends in. With that you can unlock exclusive benefits. </p>
+      <p className='RewardJ' data-aos="fade-up" data-aos-delay="100">Your Rewards Journey</p>
+      <p className='RewardJ1' data-aos="fade-up" data-aos-delay="100">Choose between airtime & foreign number and pull your friends in. With that you can unlock exclusive benefits. </p>
     </div>
-    <div className='communitySection4Div'>
+    <div className='communitySection4Div' data-aos="slide-right" data-aos-delay="100">
       <div className='pointsDiv'>
         <div className='pointsDiv1'>350 points</div>
         <div className='pointsDiv2'>500 points needed</div>
@@ -120,7 +120,7 @@ special offers.</div>
   </div>
   <div className='communitySection4 aad'>
 {waysToEarnDiv.map((app)=>(
-    <div key={app.id} className='communitySection4Div rfr'>
+    <div key={app.id} className='communitySection4Div rfr' data-aos="fade-up" data-aos-delay="100" >
       <div className='wwY'>
         <div className="IconLove">
           {app.icon}
@@ -149,10 +149,10 @@ special offers.</div>
 <div className="CoverMeS">
     <div className='InviteFriendHousing'>
       <div className='InviteFriendHousing1 vfg'>
-      <div className='ffRR'>Friend Referrals</div>
-      <div className='ffRR1' >Give your friends & family up to 50% of their first purchase. For each 
+      <div className='ffRR' data-aos="fade-up" data-aos-delay="100" >Friend Referrals</div>
+      <div className='ffRR1' data-aos="fade-up" data-aos-delay="100">Give your friends & family up to 50% of their first purchase. For each 
 you will receive  up to ₦2000 in rewards!</div>
-<div className='theyGot'>
+<div className='theyGot' data-aos="slide-right" data-aos-delay="100">
   <div className=''><svg width="79" height="80" viewBox="0 0 79 80" fill="none" >
 <g filter="url(#filter0_dd_1030_6069)">
 <path d="M4.5 38.4725C4.5 19.2057 20.1188 3.58691 39.3855 3.58691C58.6523 3.58691 74.2711 19.2057 74.2711 38.4725C74.2711 57.7392 58.6523 73.358 39.3855 73.358C20.1188 73.358 4.5 57.7392 4.5 38.4725Z" fill="white"/>
@@ -185,7 +185,7 @@ you will receive  up to ₦2000 in rewards!</div>
     <p className='coupon'>2000 off coupon</p> 
    </div>
 </div>
-<div className='theyGot'>
+<div className='theyGot' data-aos="slide-right" data-aos-delay="100" >
   <div><svg width="79" height="80" viewBox="0 0 79 80" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_dd_1030_6081)">
 <path d="M4.5 38.3162C4.5 19.0494 20.1188 3.43066 39.3855 3.43066C58.6523 3.43066 74.2711 19.0494 74.2711 38.3162C74.2711 57.583 58.6523 73.2017 39.3855 73.2017C20.1188 73.2017 4.5 57.583 4.5 38.3162Z" fill="white"/>
@@ -218,16 +218,18 @@ you will receive  up to ₦2000 in rewards!</div>
     <p className='coupon'>2000 off coupon +100 points</p> 
    </div>
 </div>
-<div className='ShareYourR'><span>Share Your Referral Link</span>
+<a href="/cracked">
+<div className='ShareYourR' data-aos="slide-up" data-aos-delay="100"  ><span>Share Your Referral Link</span>
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" >
 <path d="M8.17595 13.4125C8.42064 12.9231 8.55872 12.3708 8.55872 11.7869C8.55872 11.2031 8.42064 10.6507 8.17595 10.1614M8.17595 13.4125C7.80978 14.1446 7.20716 14.7316 6.46571 15.0785C5.72426 15.4253 4.88742 15.5117 4.09076 15.3236C3.29411 15.1355 2.5843 14.6839 2.07633 14.042C1.56836 13.4001 1.29199 12.6055 1.29199 11.7869C1.29199 10.9684 1.56836 10.1738 2.07633 9.53188C2.5843 8.88999 3.29411 8.43841 4.09076 8.25029C4.88742 8.06217 5.72426 8.14853 6.46571 8.49538C7.20716 8.84223 7.80978 9.42926 8.17595 10.1614M8.17595 13.4125L16.2093 17.4292M8.17595 10.1614L16.2093 6.14468M16.2093 17.4292C15.7782 18.2914 15.7072 19.2896 16.0121 20.2042C16.317 21.1188 16.9726 21.8748 17.8349 22.3059C18.6971 22.737 19.6953 22.808 20.6099 22.5031C21.5245 22.1983 22.2805 21.5426 22.7116 20.6803C23.1427 19.8181 23.2137 18.8199 22.9088 17.9053C22.604 16.9907 21.9483 16.2347 21.086 15.8036C20.6591 15.5901 20.1943 15.4629 19.7181 15.429C19.242 15.3952 18.7639 15.4555 18.311 15.6064C17.3964 15.9113 16.6404 16.5669 16.2093 17.4292ZM16.2093 6.14468C16.4228 6.57155 16.7183 6.95218 17.0788 7.26487C17.4394 7.57755 17.858 7.81614 18.3108 7.96704C18.7636 8.11793 19.2417 8.17816 19.7178 8.14429C20.1938 8.11042 20.6586 7.98312 21.0854 7.76964C21.5123 7.55617 21.8929 7.26071 22.2056 6.90013C22.5183 6.53956 22.7569 6.12092 22.9078 5.66813C23.0587 5.21535 23.1189 4.73727 23.085 4.26121C23.0512 3.78514 22.9239 3.32041 22.7104 2.89354C22.2793 2.03145 21.5233 1.37593 20.6089 1.07119C19.6944 0.766446 18.6964 0.83745 17.8343 1.26858C16.9722 1.69971 16.3167 2.45564 16.0119 3.37009C15.7072 4.28453 15.7782 5.28258 16.2093 6.14468Z" stroke="white" strokeWidth="1.45356" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
 </div>
+</a>
 
       </div>
       <div className='InviteFriendHousing1'>
-        <div style={{padding:"10px",background:"#fff",borderRadius:"10px",height:"500px"}}>
+        <div style={{padding:"10px",background:"#fff",borderRadius:"10px",height:"500px"}} data-aos="slide-up" data-aos-delay="100" >
          <Image src={ContentImage} alt="section Image" className="klk"/>
         </div>
         
@@ -238,10 +240,10 @@ you will receive  up to ₦2000 in rewards!</div>
 
 <div className='NLN'>
     <div className='JoinCommSec'>
-      <p className="JoinOurCommunity">Join Our Interactive Community</p>
-      <p className="JoinOurCommunity1">For All your updates on everything Spirit, Kindly join our interactive communities below.</p>
+      <p className="JoinOurCommunity" data-aos="fade-down" data-aos-delay="100">Join Our Interactive Community</p>
+      <p className="JoinOurCommunity1" data-aos="fade-up" data-aos-delay="100" >For All your updates on everything Spirit, Kindly join our interactive communities below.</p>
       <div className="JoinOurCommunity2" >
-        <div className="JoinOurCommunity3">
+        <div className="JoinOurCommunity3" data-aos="fade-up" data-aos-delay="100" >
         <svg width="31" height="31" viewBox="0 0 33 33" fill="none" >
 <g clipPath="url(#clip0_1030_6115)">
 <path d="M27.1865 3.50684C27.5267 3.42773 27.8788 3.42124 28.2207 3.48633L28.3672 3.51855C28.757 3.61729 29.1187 3.80855 29.417 4.07617L29.7021 4.33203H27.7998L27.8018 4.6582L27.1191 5.14453L4.27344 11.7363L2.62305 12.2129L4.16211 12.9766L10.1436 15.9443L10.46 16.1016L10.7666 15.9287L16.5254 12.6992L12.3232 15.6973L11.9141 15.9893L12.0811 16.4629L15.6836 26.71L15.9424 27.4453L16.6289 27.0762L22.0342 24.1699C22.1075 24.1487 22.1833 24.1389 22.2598 24.1416L22.3486 24.1504C22.4679 24.1694 22.5826 24.217 22.6797 24.29V24.291L28.2363 28.4971L29.3164 29.3154L29.3066 27.96L29.1416 5.3418L30.5596 4.33203H30.1064L30.377 4.00586L30.8428 3.44238C30.9781 3.56385 31.0985 3.70644 31.1982 3.86719V3.86621C31.3688 4.14129 31.4741 4.45818 31.5039 4.78809L31.5117 4.92969L31.6787 27.8857V28.0293C31.6691 28.2835 31.6064 28.5327 31.4961 28.7617L31.4375 28.875C31.2902 29.1336 31.0844 29.3487 30.8398 29.5029L30.7324 29.5654C30.4766 29.7022 30.1911 29.7719 29.9023 29.7695L29.7783 29.7646C29.4895 29.7414 29.2107 29.6457 28.9658 29.4863L28.8633 29.4141H28.8623L23.3389 25.2412L22.9287 24.9316L22.5244 25.248L17.0928 29.498C17.0801 29.5063 17.0645 29.5169 17.043 29.5283L17.0332 29.5332L17.0234 29.5391C16.852 29.638 16.6659 29.7083 16.4727 29.7461L16.2773 29.7725C16.0808 29.7887 15.8837 29.7721 15.6934 29.7236L15.5059 29.665H15.5049C15.3196 29.5953 15.1466 29.4951 14.9932 29.3691L14.8467 29.2344L14.7148 29.085C14.5924 28.9291 14.4957 28.754 14.4297 28.5664H14.4307L10.4697 17.2031L10.3809 16.9473L10.1387 16.8262L3.44824 13.4766L3.44141 13.4736L3.32031 13.4082C3.0844 13.2705 2.88637 13.0833 2.74219 12.8613L2.6748 12.7471C2.52754 12.4748 2.46087 12.1695 2.47949 11.8643L2.49219 11.7334C2.53513 11.4303 2.66353 11.1393 2.86816 10.8877L2.96094 10.7822C3.21985 10.5081 3.56399 10.3059 3.95605 10.208L3.97949 10.2021L27.1865 3.50684Z" fill="#008EA8" stroke="#008EA8" strokeWidth="1.33529"/>
@@ -255,21 +257,21 @@ you will receive  up to ₦2000 in rewards!</div>
 <span>Join Telegram Channel</span>
 
         </div>
-         <div className="JoinOurCommunity4">
+         <div className="JoinOurCommunity4" data-aos="fade-up" data-aos-delay="100" >
          <svg width="30" height="31" viewBox="0 0 32 33" fill="none" >
 <path d="M16.1299 1.4082H16.1309C18.005 1.40327 19.8629 1.74706 21.6094 2.4209L21.957 2.55957C23.6882 3.27732 25.2702 4.31064 26.6221 5.60547L26.8896 5.86816L26.8926 5.87109C28.3085 7.28114 29.4305 8.95814 30.1943 10.8047C30.9104 12.5359 31.2983 14.384 31.3389 16.2549L31.3428 16.6299V16.6309C31.3389 25.0192 24.5123 31.8445 16.1299 31.8447H16.123L15.6475 31.8369C13.2719 31.7623 10.9445 31.1313 8.85352 29.9922L8.62109 29.8662L8.36523 29.9326L1.06348 31.8477L3.0127 24.7344L3.08691 24.4658L2.94727 24.2236C1.6164 21.9184 0.916104 19.302 0.916016 16.6201C0.919793 8.3641 7.53366 1.62191 15.7373 1.41309L16.1299 1.4082ZM16.1348 2.75488C8.4864 2.75488 2.26546 8.9743 2.26367 16.6201C2.2597 19.0674 2.90526 21.4689 4.12988 23.5811L4.38184 24H4.38281L4.53906 24.25L3.28516 28.8389L2.97949 29.9541L4.09863 29.6611L8.82324 28.4199L9.06543 28.5635L9.06641 28.5645C11.0695 29.7509 13.3373 30.4115 15.6592 30.4893L16.124 30.4971H16.1299C23.6538 30.4968 29.7981 24.4703 29.9922 16.9893L29.9961 16.6318C30.0013 14.9235 29.6891 13.2302 29.0762 11.6377L28.9492 11.3203C28.2525 9.63602 27.2291 8.10639 25.9375 6.82031H25.9385C23.3217 4.2008 19.8373 2.75488 16.1348 2.75488ZM10.5068 9.9541C10.7697 9.9541 11.0214 9.95687 11.2363 9.9668V9.96582C11.2881 9.96845 11.3383 9.96883 11.3643 9.96875C11.379 9.96871 11.3905 9.96866 11.3994 9.96875C11.4267 10.0023 11.4782 10.0786 11.5439 10.2354V10.2363C11.7084 10.6325 11.988 11.3162 12.2412 11.9316C12.3628 12.2271 12.483 12.5189 12.5811 12.7529L12.7881 13.2275C12.8146 13.2802 12.8203 13.3075 12.8223 13.3174C12.8216 13.3189 12.8214 13.321 12.8203 13.3232C12.7081 13.5467 12.6658 13.6447 12.5957 13.7451L12.5127 13.8516H12.5117C12.3325 14.0611 12.195 14.2378 12.0723 14.3779L11.9541 14.5059L11.9521 14.5078C11.8714 14.5886 11.6574 14.7903 11.5508 15.0771C11.4207 15.4272 11.4783 15.788 11.6729 16.123V16.124C11.9005 16.5161 12.6526 17.746 13.7822 18.8232L14.0127 19.0361L14.0137 19.0371C15.2145 20.1077 16.3055 20.6421 16.9141 20.9121L17.3477 21.1035L17.3516 21.1055C17.5934 21.226 17.893 21.3347 18.2217 21.2949C18.5783 21.2516 18.8327 21.0528 19.0127 20.8457L19.0117 20.8447C19.2331 20.5913 20.0083 19.6847 20.3086 19.2383C20.3132 19.2397 20.3182 19.2416 20.3232 19.2432L20.4307 19.2812C20.5769 19.3356 21.1137 19.5877 21.7109 19.876L23.0703 20.541L23.0713 20.542C23.1754 20.594 23.2728 20.641 23.3506 20.6787C23.4204 20.7125 23.474 20.7386 23.5176 20.7617C23.519 20.8254 23.5184 20.9085 23.5098 21.0088C23.4917 21.2178 23.4477 21.4802 23.3652 21.7705L23.2695 22.0703C23.1811 22.3173 22.8623 22.6586 22.3604 22.9805C21.9345 23.2535 21.5006 23.4339 21.2275 23.5L21.1211 23.5215H21.1201C20.5723 23.604 19.9278 23.6387 19.2275 23.4717L18.9238 23.3877L18.9219 23.3867L18.4688 23.2412C18.147 23.1344 17.7848 23.0061 17.375 22.8447L16.7236 22.5762C12.9405 20.9428 10.45 17.1097 10.2139 16.7959H10.2129C10.1153 16.6648 9.74212 16.166 9.3916 15.4756C9.033 14.7692 8.72754 13.9186 8.72754 13.0928C8.72762 11.837 9.2078 11.0782 9.59961 10.6113L9.94141 10.2334H9.94238C10.1572 9.99801 10.395 9.9541 10.5068 9.9541Z" fill="black" stroke="white" strokeWidth="1.33529"/>
 </svg>
 
           <span>Join WhatsApp community</span></div>
       </div>
-      <div className="JoinOurCommunity5"> Stay Updated with the latest news, events,and exclusive content</div>
+      <div className="JoinOurCommunity5" data-aos="fade-up" data-aos-delay="100"> Stay Updated with the latest news, events,and exclusive content</div>
     </div>
 
     </div>
 
 <div className='sectionTestimony'>
 {testimony.map((app)=>(
-    <div key={app.id} className='goingUp'>
+    <div key={app.id} className='goingUp' data-aos="fade-up" data-aos-delay="100">
       <div className='iconDiv'>{app.icon}</div>
       <div className='textFF'>{app.text}</div>
       <div className='textFF1'>{app.text1}</div>
@@ -277,7 +279,7 @@ you will receive  up to ₦2000 in rewards!</div>
     ))}
     </div>
 
-    <div className='Members5'>500 members have join</div>
+    {/* <div className='Members5'>500 members have join</div> */}
 
     </div>
   )

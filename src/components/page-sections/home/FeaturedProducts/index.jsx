@@ -11,7 +11,7 @@ const index = () => {
 
 
    
-  const featuredProducts = [{id:1, text:"USA Foreign Number  ", Price:"1000", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+  const featuredProducts = [{id:1, href:"/international-numbers", text:"USA Foreign Number  ", Price:"1000", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -45,7 +45,7 @@ const index = () => {
 </clipPath>
 </defs>
 </svg>
-, cartText:"Best Seller",href:"",img:HeroImg},{id:2, text:"10gb Data Plan", Price:"2800", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+, cartText:"Best Seller",img:HeroImg},{id:2, text:"10gb Data Plan", Price:"2800", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -111,7 +111,7 @@ const index = () => {
 <rect width="16" height="16" fill="white" transform="translate(64)"/>
 </clipPath>
 </defs>
-</svg>, cartText:"Limited",href:"", img:HeroImg2},{id:4, text:"Marketing 101 (How to Perfectly Run Sponsored Ads On Instagram and meta)", Price:"100k", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+</svg>, cartText:"Limited",href:"/cracked", img:HeroImg2},{id:4, text:"Marketing 101 (How to Perfectly Run Sponsored Ads On Instagram and meta)", Price:"100k", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
@@ -144,14 +144,14 @@ const index = () => {
 <rect width="16" height="16" fill="white" transform="translate(64)"/>
 </clipPath>
 </defs>
-</svg>, cartText:"Popular",href:"", img:HeroImg3}]
+</svg>, cartText:"Popular",href:"/freebies", img:HeroImg3}]
   return (
     <div className='featPro'>
-      <div className='featuredText'><span className="FP">Featured Products</span><span className=""><a href="" className="FPLink"></a></span></div>
+      <div className='featuredText' data-aos="fade-up" data-aos-delay="200"><span className="FP">Featured Products</span><span className=""><a href="" className="FPLink"></a></span></div>
 
       <div className='featuredProductDiv'>
         {featuredProducts.map((app)=>(
-        <div className='featuredProductCard' key={app.id}>
+        <div className='featuredProductCard' key={app.id} data-aos="fade-up" data-aos-delay="200" >
            <div className='featuredProductCardImageDiv'>
             <Image
         src={app.img}
@@ -175,7 +175,7 @@ const index = () => {
 </clipPath>
 </defs>
 </svg>            
-<span>Get Now</span></div>
+ <a href={app.href}><span>Get Now</span></a></div>
             <div className='featuredProductCardLoveIcone'><svg width="17" height="16" viewBox="0 0 17 16" fill="none">
 <g clipPath="url(#clip0_709_978)">
 <path d="M13.1668 9.33333C14.1602 8.36 15.1668 7.19333 15.1668 5.66667C15.1668 4.69421 14.7805 3.76158 14.0929 3.07394C13.4053 2.38631 12.4726 2 11.5002 2C10.3268 2 9.50016 2.33333 8.50016 3.33333C7.50016 2.33333 6.6735 2 5.50016 2C4.5277 2 3.59507 2.38631 2.90744 3.07394C2.2198 3.76158 1.8335 4.69421 1.8335 5.66667C1.8335 7.2 2.8335 8.36667 3.8335 9.33333L8.50016 14L13.1668 9.33333Z" stroke="#0F172A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
