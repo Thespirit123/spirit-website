@@ -1,4 +1,5 @@
 "use client";
+import { FAQSection } from "@/components/page-sections/home/faq";
 import FeaturedProducts from "@/components/page-sections/home/FeaturedProducts";
 import { HeroSection } from "@/components/page-sections/home/hero";
 import { ServicesSection } from "@/components/page-sections/home/services";
@@ -20,7 +21,6 @@ export default function Home() {
         <ServicesSection ref={servicesRef} />
         <TestimonialsSection />
         <FAQSection />
-        <EmailSubscription />
       </div>
     </>
   );
