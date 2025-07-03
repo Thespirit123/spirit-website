@@ -1,5 +1,7 @@
 "use client";
 import { useEffect } from "react";
+import AOS from 'aos';
+import "aos/dist/aos.css";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
 import { Loading } from "@/components/loading";
@@ -10,8 +12,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useMemo, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import AOS from 'aos';
-import "aos/dist/aos.css";
 
 const queryClient = new QueryClient();
 
