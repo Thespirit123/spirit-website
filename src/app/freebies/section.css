@@ -20,22 +20,30 @@
     font-weight: 600;
 }
 .modalLH{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
+       position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-       background-color: #ffffff3b;
+    background-color: #c1c4c5cf;
     z-index: 4500;
-    backdrop-filter: blur(27px);
+    backdrop-filter: blur(3px);
 
+}
+.featherCloseIcon{
+    cursor:pointer;
+}
+.iconCloseModal{
+    display:flex;
+    justify-content: end;
+    padding-bottom: 10px;
 }
 .modalForFreebies{
     padding:15px;
     border-radius: 10px;
     background-color: #fff;
     width:100%;
-     max-width: 500px;
+    max-width: 500px;
     margin: 0 auto;
         box-shadow: 0px 2px 10px 0px #20232336;
   
@@ -276,6 +284,7 @@ gap:20px
 }
 .opp{
     background:#007f96;
+    cursor: pointer;
 }
 .opp1{
     background:#858080bd;

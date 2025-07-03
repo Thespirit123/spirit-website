@@ -31,10 +31,15 @@ const NavLink: React.FC<NavLinkProps> = ({
         }
     };
 
-    const isActive =
-        (href === "/" && pathname === "/") ||
-        (href !== "/" && pathname === href) ||
-        (href !== "/" && pathname.startsWith(`${href}/`));
+   const isActive =
+  href &&
+  pathname &&
+  (
+    (href === "/" && pathname === "/") ||
+    (href !== "/" && pathname === href) ||
+    (href !== "/" && pathname.startsWith(`${href}/`))
+  );
+
 
     return (
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

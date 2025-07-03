@@ -2,6 +2,10 @@
 
 import React, {useState, useEffect} from 'react'
 import "./section.css"
+import axios from "axios";
+
+// import { pdfFiles } from '../../lib/pdfFiles';
+// import { pdfArray } from "@/utils/pdfArray";
 import Image from "next/image";
 import ContentImage from "@/assets/images/freebies1.jpeg";
 import ContentImage1 from "@/assets/images/freebies3.jpeg";
@@ -17,8 +21,8 @@ const form = () => {
   const featuredFreebies = [{id:1,text:"How To Perfectly Run Sponsored Ads On Meta & Instagram",text1:'500 downloads', img:ContentImag},{id:2,text:"How To Make A Girl Experience Orgasm",text1:'3500 downloads',img:ContentImag1}]
   const featuredFreebies1 = [{id:1,text:'Auto Responder for WhatsApp',text1:'No more stress! Our premium auto responder replies to all your clients instantly - on the go.',text2:'2,547 downloads',text3:'Tools',text4:'Requires Email',img:ContentImage2, category:"Tools"},
     {id:2,text:'How to Perfectly Run Sponsored Ads on Meta & Instagram',text1:"Discover the hidden secrets your mentors won't tell you. This free course gives you real insights into running effective sponsored ads.",text2:'1.823 downloads',text3:'Wealth',text4:'Requires Telegram',img:ContentImag, category:"Wealth"},
-    {id:3,text:'How to Make a Girl Experience Orgasm',text1:'Learn how truly satisfy the woman you love. This guide teaches you how to help her climax and enjoy intense pleasure.',text2:'3,102 downloads',text3:'Sex',text4:'Requires Email',img:ContentImag1, category:"Sex"},
-    {id:4,text:'Attia - Outline',text1:"Health is Wealth isn't just a saying. Peter Attia's book shows you how to live a longer purposeful life.",text2:'3,102 downloads',text3:'Health',text4:'Requires Email',img:ContentImg, category:"Health"},
+    {id:3,text:'How to Make a Girl Experience Orgasm', text1:'Learn how truly satisfy the woman you love. This guide teaches you how to help her climax and enjoy intense pleasure.', text2:'3,102 downloads',text3:'Sex',text4:'Requires Email',img:ContentImag1, category:"Sex"},
+    {id:4,text:'Attia - Outline',text1:"Health is Wealth isn't just a saying. Peter Attia's book shows you how to live a longer purposeful life.",text2:'3,102 downloads',text3:'Health',text4:'Requires Email', img:ContentImg, category:"Health"},
     {id:5,text:"Alex's Books on Offers and Leads",text1:'Forget overpriced marketing courses. These books give you practical strategies that actually work. ',text2:'3,102 downloads',text3:'Wealth',text4:'Requires Email',img:ContentImage1, category:"Wealth"},
   {id:6,text:'The Richest Man in Babylon',text1:'The first book that changed how I see money. Its storytelling approach teaches timeless lessons on building wealth.',text2:'3,102 downloads',text3:'Wealth',text4:'Requires Email',img:ContentImag2, category:"Wealth"},
 {id:7,text:'Letters from a Stoic',text1:'The godfather of stoicism breaks it down in this classic. Timeless Wisdom for a better, calmer life. ',text2:'3,102 downloads',text3:'Mindset',text4:'Requires Email',img:ContentImage, category:"Mindset"}]
@@ -29,31 +33,34 @@ const filteredInfo = selectedCategory === "All Resources" ? featuredFreebies1 : 
 const [show,setShow] = useState(false)
 const [modalName,setModalName] = useState("")
 
-const [form, setForm] = useState({ name: '', email: '', phone: '', file: "" });
+const [form, setForm] = useState({ name: '', email: '', phone: '', pdfHeader: "" });
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value});
+    setForm({ ...form, [e.target.name]: e.target.value, pdfHeader: modalName});
   };
 
-   const handleSubmit = async (e) => {
+  
+
+ 
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(form)
-    const res = await fetch('/api/sendLink/send-link', {
-      method: 'POST',
-      body: JSON.stringify(form),
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-    const data = await res.json();
-    setMessage(data.message);
+    setMessage("Sending...");
+   
+    try {
+      const res = await axios.post("/api/submit", form);
+      setMessage(res.data.message);
+    } catch (err) {
+      setMessage(err.response?.data?.message || "Something went wrong.");
+    }
   };
 
 
-const changeModal=({name})=>{
-  setShow(!show)
-  setModalName(name)
-}
+// const changeModal=({name})=>{
+//   setShow(!show)
+//   setModalName(name)
+// }
 
   useEffect(() => {
     if (show) {
@@ -169,6 +176,8 @@ const changeModal=({name})=>{
 
         <div className='modalL1'>
           <div className='modalForFreebies'>
+
+           <div className="iconCloseModal"> <svg  width="24" height="24" viewBox="0 0 24 24"   onClick={()=>setShow(!show)} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="featherCloseIcon"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
            <div className="ModalHeader" >{modalName}</div>
            <div><input  type="text" name="file" className='modalInput' value={modalName} readOnly onClick={handleChange} style={{display:"none"}} /></div>
         <div className='modalL'>

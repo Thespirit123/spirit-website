@@ -30,6 +30,7 @@ export default function RootLayoutClient({
       pathname?.startsWith("/auth") ||
       pathname?.startsWith("/confessions") ||
       pathname?.startsWith("/utilities") ||
+      pathname?.startsWith("/select-platform") ||
       isConfessionsSubdomain
     );
   }, [pathname, isConfessionsSubdomain]);
