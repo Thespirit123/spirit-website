@@ -1,6 +1,4 @@
 "use client";
-import { FAQSection } from "@/components/page-sections/home/faq";
-import   EmailSubscription   from "@/components/page-sections/home/formSubscription";
 import FeaturedProducts from "@/components/page-sections/home/FeaturedProducts";
 import { HeroSection } from "@/components/page-sections/home/hero";
 import { ServicesSection } from "@/components/page-sections/home/services";
@@ -16,13 +14,13 @@ export default function Home() {
 
   return (
     <>
-    <div style={{overflowX : "hidden"}}>
-      <HeroSection />
-      <FeaturedProducts/>
-      <ServicesSection ref={servicesRef} />
-      <TestimonialsSection />
-      <FAQSection />
-      <EmailSubscription/>
+      <div style={{ overflowX: "hidden" }}>
+        <HeroSection />
+        <FeaturedProducts />
+        <ServicesSection ref={servicesRef} />
+        <TestimonialsSection />
+        <FAQSection />
+        <EmailSubscription />
       </div>
     </>
   );

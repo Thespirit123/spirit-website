@@ -4,6 +4,7 @@ import Button from "@/components/custom-ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WalletFundingModal } from "@/components/wallet-funding-modal";
 import { useAuth } from "@/hooks/useAuth";
+import { useTransactionVerification } from "@/hooks/useTransactionVerification";
 import { getWalletData, processWalletFunding } from "@/lib/wallet";
 import { CustomerInfo, Transaction } from "@/types/wallet";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
@@ -40,12 +41,10 @@ const getTransactionIcon = (type: Transaction["type"]): React.ReactNode => {
 
 const UtilitiesDashboardPage: React.FC = () => {
     const { user } = useAuth();
-    console.log('user', user)
+    const { verifyPendingTransactions } = useTransactionVerification();
     const [walletBalance, setWalletBalance] = useState<number>(0);
     const [showFundingModal, setShowFundingModal] = useState(false);
-    const [recentTransactions, setRecentTransactions] = useState<Transaction[]>(
-        []
-    );
+    const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const fetchWalletData = useCallback(async () => {
@@ -56,13 +55,19 @@ const UtilitiesDashboardPage: React.FC = () => {
             const { balance, transactions } = await getWalletData(user.uid);
             setWalletBalance(balance);
             setRecentTransactions(transactions);
+
+            const result = await verifyPendingTransactions();
+            if (result.processed > 0) {
+                toast.success(`${result.processed} pending transaction(s) have been processed successfully!`);
+                setTimeout(() => window.location.reload(), 2000);
+            }
         } catch (error) {
             console.error("Error fetching wallet data:", error);
             toast.error("Failed to load wallet data");
         } finally {
             setIsLoading(false);
         }
-    }, [user]);
+    }, [user, verifyPendingTransactions]);
 
     useEffect(() => {
         if (user?.uid) {

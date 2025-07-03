@@ -57,6 +57,7 @@ const DataPurchasePage: React.FC = () => {
     const fetchInitialData = useCallback(async () => {
         if (!user?.uid) return;
         setIsLoading(true);
+
         try {
             const [walletData, plansResponse] = await Promise.all([
                 getWalletData(user.uid),
@@ -68,7 +69,9 @@ const DataPurchasePage: React.FC = () => {
             if (!plansResponse.ok) {
                 throw new Error("Failed to fetch data plans");
             }
+
             const plansApi: DataPlansApiResponse = await plansResponse.json();
+
             setAllPlans(plansApi.data_list);
 
             const types = plansApi.available_network_types
@@ -107,40 +110,44 @@ const DataPurchasePage: React.FC = () => {
         setIsProcessing(true);
         try {
             const token = await user.getIdToken();
+
+            const requestPayload = {
+                networkId: formData.network.apiId,
+                planId: formData.plan.plan_id,
+                phoneNumber: formData.phoneNumber,
+                amount: parsePrice(formData.plan.plan_price),
+            };
+
             const response = await fetch("/api/utilities/data", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify({
-                    networkId: formData.network.apiId,
-                    planId: formData.plan.plan_id,
-                    phoneNumber: formData.phoneNumber,
-                    amount: parsePrice(formData.plan.plan_price),
-                }),
+                body: JSON.stringify(requestPayload),
             });
 
             const result = await response.json();
 
-            if (!response.ok) {
+            if (response.ok) {
+                setTransactionResult({
+                    status: "success",
+                    message: result.message,
+                    details: {
+                        ...formData,
+                        transactionId: result.transactionId,
+                        date: new Date().toISOString(),
+                    },
+                });
+                setWalletBalance((prev) => prev - parsePrice(formData.plan.plan_price));
+                setCurrentStep(3);
+            } else {
                 throw new Error(result.message || "An unknown error occurred.");
             }
-
-            setTransactionResult({
-                status: "success",
-                message: result.message,
-                details: {
-                    ...formData,
-                    transactionId: result.transactionId,
-                    date: new Date().toISOString(),
-                },
-            });
-
-            setWalletBalance((prev) => prev - parsePrice(formData.plan.plan_price));
         } catch (error) {
             const errorMessage =
                 error instanceof Error ? error.message : "An unknown error occurred.";
+
             setTransactionResult({
                 status: "failed",
                 message: `Your transaction could not be completed. ${errorMessage}`,
@@ -151,9 +158,9 @@ const DataPurchasePage: React.FC = () => {
                 },
             });
             toast.error(errorMessage);
+            setCurrentStep(3);
         } finally {
             setIsProcessing(false);
-            setCurrentStep(3);
         }
     };
 

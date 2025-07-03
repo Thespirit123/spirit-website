@@ -2,6 +2,7 @@
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/hooks/useAuth";
+import { useTransactionVerification } from "@/hooks/useTransactionVerification";
 import { getAllWalletTransactions } from "@/lib/wallet";
 import { Transaction } from "@/types/wallet";
 import { ArrowDown, ArrowUp } from "lucide-react";
@@ -12,6 +13,7 @@ const PAGE_SIZE = 10;
 
 const TransactionHistory: React.FC = () => {
     const { user } = useAuth();
+    const { verifyPendingTransactions } = useTransactionVerification();
     const [activeTab, setActiveTab] = useState<"all" | "wallet" | "utility">("all");
     const [statusFilter, setStatusFilter] = useState<"all" | "success" | "pending" | "failed">("all");
     const [search, setSearch] = useState("");
@@ -51,12 +53,18 @@ const TransactionHistory: React.FC = () => {
             }
             setTransactions(filtered);
             setTotal(totalCount);
+
+            const result = await verifyPendingTransactions();
+            if (result.processed > 0) {
+                toast.success(`${result.processed} pending transaction(s) have been processed successfully!`);
+                setTimeout(() => window.location.reload(), 2000);
+            }
         } catch (error) {
             toast.error("Failed to load transactions");
         } finally {
             setIsLoading(false);
         }
-    }, [user, page, activeTab, statusFilter, search]);
+    }, [user, page, activeTab, statusFilter, search, verifyPendingTransactions]);
 
     useEffect(() => {
         setPage(1);
@@ -103,7 +111,6 @@ const TransactionHistory: React.FC = () => {
                 </div>
 
                 <Card className="p-4 md:p-6 shadow-sm border border-[#E5E7EB] rounded-xl bg-white">
-                    {/* Filters */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
                         <div className="flex flex-wrap gap-2">
                             {["all", "wallet", "utility"].map((tab) => (
@@ -122,7 +129,6 @@ const TransactionHistory: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Search & Filter */}
                     <div className="flex flex-col md:flex-row gap-3 mb-5">
                         <Input
                             placeholder="Search transactions..."
@@ -132,7 +138,7 @@ const TransactionHistory: React.FC = () => {
                         />
                         <select
                             value={statusFilter}
-                            onChange={(e) => setStatusFilter(e.target.value as any)}
+                            onChange={(e) => setStatusFilter(e.target.value as typeof statusFilter)}
                             className="px-3 py-2 rounded-md border border-[#D1D5DB] text-sm text-[#374151] w-full md:w-auto focus:outline-none focus:ring-2 focus:ring-[#008EA8]"
                         >
                             <option value="all">All Status</option>
@@ -142,7 +148,6 @@ const TransactionHistory: React.FC = () => {
                         </select>
                     </div>
 
-                    {/* Table for desktop */}
                     <div className="hidden md:block overflow-x-auto rounded-lg border border-[#E5E7EB]">
                         <table className="w-full text-sm min-w-[600px]">
                             <thead className="bg-[#F3F4F6]">
@@ -194,7 +199,6 @@ const TransactionHistory: React.FC = () => {
                         </table>
                     </div>
 
-                    {/* Mobile list view */}
                     <div className="block md:hidden">
                         {isLoading ? (
                             <p className="text-center py-8 text-gray-400">Loading...</p>
@@ -234,7 +238,6 @@ const TransactionHistory: React.FC = () => {
                         )}
                     </div>
 
-                    {/* Pagination */}
                     <div className="flex flex-col md:flex-row items-center justify-between mt-6 gap-3 text-center md:text-left">
                         <p className="text-xs text-[#6B7280]">
                             {transactions.length > 0
