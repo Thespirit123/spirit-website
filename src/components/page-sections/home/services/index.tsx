@@ -149,7 +149,7 @@ export const services = [
 export const ServicesSection = forwardRef<HTMLElement>((props, ref) => (
   <section ref={ref} className="pt-20 pb-10">
     <div className="bg-brand-primary-light text-center w-max mx-auto px-4 py-2 rounded-full">
-      <h3 className="text-brand-primary font-semibold text-2xl">
+      <h3 className="text-brand-primary font-semibold text-2xl" data-aos="fade-up" data-aos-delay="200">
         Our Services
       </h3>
     </div>
@@ -159,6 +159,7 @@ export const ServicesSection = forwardRef<HTMLElement>((props, ref) => (
           key={service.title.highlighted}
           {...service}
           isReversed={index % 2 !== 0}
+
         />
       ))}
     </section>

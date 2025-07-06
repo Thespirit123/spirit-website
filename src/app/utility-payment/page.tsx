@@ -264,6 +264,7 @@ const UtilitiesPage = () => {
                 cardColor={network.color}
                 textColor={network.textColor}
                 plans={network.plans}
+                data-aos="fade-up" data-aos-delay="200"
               />
             ))}
           </div>
@@ -272,13 +273,13 @@ const UtilitiesPage = () => {
 
       <div className="bg-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-3xl font-bold text-gray-800 mb-12">
+          <p className="text-center text-3xl font-bold text-gray-800 mb-12"  data-aos="fade-up" data-aos-delay="200">
             Why choose Spirit Media?
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuresData.map((feature, index) => (
-              <div key={index} className="text-left bg-gray-50 p-6 md:p-8 rounded-lg shadow-sm transition-shadow hover:shadow-md">
+              <div key={index} className="text-left bg-gray-50 p-6 md:p-8 rounded-lg shadow-sm transition-shadow hover:shadow-md" data-aos="fade-up" data-aos-delay="200">
                 <div className="w-14 h-14 bg-[#E6F7FA] rounded-full flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-[#008EA8]" />
                 </div>
@@ -296,15 +297,15 @@ const UtilitiesPage = () => {
 
       <div className="bg-[#F7D358] py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-3xl font-bold text-gray-800 mb-4">
+          <p className="text-center text-3xl font-bold text-gray-800 mb-4" data-aos="fade-down" data-aos-delay="200">
             What our users are saying about us
           </p>
-          <p className="text-center text-gray-700 mb-12 text-lg">
+          <p className="text-center text-gray-700 mb-12 text-lg" data-aos="fade-up" data-aos-delay="200">
             See what our customers are saying about their experience
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" >
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow" data-aos="fade-up" data-aos-delay="200">
               <Text className="text-gray-700 mb-4 leading-relaxed">
                 &quot;When I started using Spirit Media to recharge my phone, I have never had issue when my unit dropped completely so I can recharge anytime, anywhere.&quot;
               </Text>
@@ -314,7 +315,7 @@ const UtilitiesPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow" data-aos="fade-up" data-aos-delay="200">
               <Text className="text-gray-700 mb-4 leading-relaxed">
                 &quot;I&apos;ve been using the Spirit Media app and it&apos;s superb. They have the cheapest for all my family data.&quot;
               </Text>
@@ -324,7 +325,7 @@ const UtilitiesPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow" data-aos="fade-up" data-aos-delay="200">
               <Text className="text-gray-700 mb-4 leading-relaxed">
                 &quot;It&apos;s been more easy Spirit Media to purchase data.&quot;
               </Text>
@@ -334,7 +335,7 @@ const UtilitiesPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow" data-aos="fade-up" data-aos-delay="200">
               <Text className="text-gray-700 mb-4 leading-relaxed">
                 &quot;Made my life very easy. Before now if my units finish, I will have to find the nearest office the next day of which long queues are usually met, but now thanks to Spirit Media.&quot;
               </Text>
@@ -344,7 +345,7 @@ const UtilitiesPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow" data-aos="fade-up" data-aos-delay="200">
               <Text className="text-gray-700 mb-4 leading-relaxed">
                 &quot;It&apos;s convenient for my family and I buy units without the stress of going out to buy more.&quot;
               </Text>
@@ -354,7 +355,7 @@ const UtilitiesPage = () => {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow" data-aos="fade-up" data-aos-delay="200">
               <Text className="text-gray-700 mb-4 leading-relaxed">
                 &quot;It&apos;s been very easy and effective&quot;
               </Text>
@@ -369,13 +370,13 @@ const UtilitiesPage = () => {
 
       <div className="py-12 md:py-16 bg-[#F3F4F6]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-3xl font-bold text-gray-800 mb-12">
+          <p className="text-center text-3xl font-bold text-gray-800 mb-12" data-aos="fade-up" data-aos-delay="200">
             Our Service Providers
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-8 items-center">
             {serviceProvidersData.map((provider) => (
-              <div key={provider.alt} className="bg-white p-4 flex justify-center hover:scale-105 transition-transform rounded-lg shadow-sm">
+              <div key={provider.alt} className="bg-white p-4 flex justify-center hover:scale-105 transition-transform rounded-lg shadow-sm"  data-aos="fade-up" data-aos-delay="200">
                 <Image
                   src={provider.logo}
                   alt={provider.alt}
@@ -393,10 +394,10 @@ const UtilitiesPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
-              <p className="text-white text-2xl font-bold mb-2">
+              <p className="text-white text-2xl font-bold mb-2" data-aos="fade-right" data-aos-delay="200">
                 Buy Airtime/Data instantly with Spirit Media
               </p>
-              <p className="text-white opacity-90">
+              <p className="text-white opacity-90" data-aos="fade-right" data-aos-delay="200">
                 Enter your phone number to get started
               </p>
             </div>

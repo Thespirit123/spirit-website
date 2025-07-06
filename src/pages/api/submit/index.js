@@ -46,10 +46,42 @@ export default async function handler(req, res) {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Your PDF Download Link",
-    html: `<p style="text-align:center; font-weight:600; font-size:20px;color:#000 ">Hi ${name},</p>
-           <p style="Text-align:center; font-size:28px; font-weight:600; color:blue;">Thank You For Your Download</p>
-           <p style="text-align:center; font-size: 16px; color:#000">Click the link below to download your selected PDF:</p>
-           <div style="display:flex; align-item:center; justify-content: center"><a href="${downloadLink}" style="text-align: center; font-size:18px; color:blue">Download ${pdf.filename}</a></div>`,
+    html: `<div style="max-width: 600px; margin: auto; padding: 20px; font-family: Arial, sans-serif; background-color: #000000; color: #ffffff; border: 1px solid #333;">
+    
+    <p style="text-align:center; font-weight:600; font-size:20px;">
+      Hi ${name},
+    </p>
+
+    <p style="text-align:center; font-size:34px; font-weight:600; color:#1a73e8;">
+      Thanks For Your Download
+    </p>
+
+    <p style="text-align:center; font-size:20px; color:#fff">
+      Click the button below to download your selected PDF:
+    </p>
+
+    <div style="text-align:center; margin: 30px 0;">
+      <a href="${downloadLink}" 
+         style="background-color:#1a73e8; color:#fff; padding:12px 24px; border-radius:6px; text-decoration:none; font-size:16px; font-weight:500;">
+        Download ${pdf.filename}
+      </a>
+    </div>
+
+    <p style="text-align:center; font-size:18px; color:#bbb;">
+      If the button doesn't work, copy and paste this link into your browser:
+    </p>
+
+    <p style="text-align:center; word-break:break-all; font-size:16px;">
+      <a href="${downloadLink}" style="color:#1a73e8;">${downloadLink}</a>
+    </p>
+
+    <hr style="margin:40px 0; border:none; border-top:1px solid #333;" />
+
+    <p style="text-align:center; font-size:12px; color:#888;">
+      &copy; ${new Date().getFullYear()} TheSpiritMedia. All rights reserved.
+    </p>
+  </div>
+    `,
   };
 
   try {
