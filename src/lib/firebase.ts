@@ -20,14 +20,7 @@ const firebaseConfig = {
 //   appId: "5",
 //  };
 
-// const firebaseConfig = {
-//  apiKey: "AIzaSyBRM4Zpmsy6_sgZ8dr4uFoxrVcL9bkDhew",
-//    authDomain: "spirit-media.firebaseapp.com" ,
-//    projectId: "spirit-media",
-//   storageBucket: "spirit-media.firebasestorage.app",
-//    messagingSenderId: "981653965516",
-//   appId: "1:981653965516:web:3ebd07dfb4118486e9d069",
-//  };
+
 
 
 
