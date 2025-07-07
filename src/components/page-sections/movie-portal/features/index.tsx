@@ -1,3 +1,5 @@
+"use client"
+
 import Feature1 from "@/assets/icons/feature1.svg";
 import Feature2 from "@/assets/icons/feature2.svg";
 import Feature3 from "@/assets/icons/feature3.svg";

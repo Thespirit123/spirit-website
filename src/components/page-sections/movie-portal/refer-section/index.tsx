@@ -1,3 +1,4 @@
+"use client"
 import ReferImg from "@/assets/images/refer-and-stream.png";
 import TimelineImg from "@/assets/images/timeline.png";
 import Button from "@/components/custom-ui/button";

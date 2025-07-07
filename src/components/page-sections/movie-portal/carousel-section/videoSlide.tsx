@@ -1,3 +1,6 @@
+
+"use client"
+
 import Arrow from "@/assets/icons/arrow";
 import Download from "@/assets/icons/download";
 import Stream from "@/assets/icons/stream";

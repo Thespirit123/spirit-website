@@ -1,4 +1,7 @@
 "use client";
+
+export const dynamic = "force-dynamic"; 
+
 import CarouselSection from "@/components/page-sections/movie-portal/carousel-section";
 import FeaturesSection from "@/components/page-sections/movie-portal/features";
 import HeroSection from "@/components/page-sections/movie-portal/hero";

@@ -1,3 +1,4 @@
+"use client";
 import HeroBgImg from "@/assets/images/home-hero-bg.png";
 import HeroImg from "@/assets/images/movies-hero.png";
 import Button from "@/components/custom-ui/button";

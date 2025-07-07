@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react'
 import "./featuredProducts.css"
 import HeroImg from "@/assets/images/homes1.jpeg";
