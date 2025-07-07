@@ -1,4 +1,5 @@
 "use client";
+
 import { FAQSection } from "@/components/page-sections/home/faq";
 import   EmailSubscription   from "@/components/page-sections/home/formSubscription";
 import FeaturedProducts from "@/components/page-sections/home/FeaturedProducts";

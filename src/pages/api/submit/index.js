@@ -31,7 +31,7 @@ export default async function handler(req, res) {
 
 //   Set up email transport
   const transporter = nodemailer.createTransport({
-    service: "gmail", // or another provider like "mailgun", "outlook"
+    service: "gmail", 
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
@@ -86,7 +86,7 @@ export default async function handler(req, res) {
 
   try {
     await transporter.sendMail(mailOptions);
-    return res.status(200).json({ message: "Download link sent to your email." });
+    return res.status(200).json({ message: "The download link has been sent to your email. If it’s not in your inbox, please check your spam or junk folder." });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Email could not be sent." });

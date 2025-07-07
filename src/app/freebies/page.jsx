@@ -57,27 +57,19 @@ const [form, setForm] = useState({ name: '', email: '', phone: '', pdfHeader: ""
   };
 
 
-// const changeModal=({name})=>{
-//   setShow(!show)
-//   setModalName(name)
-// }
+ 
 
   useEffect(() => {
     if (show) {
-      // Prevent body scroll
       document.body.style.overflow = 'hidden';
     } else {
-      // Restore scroll
       document.body.style.overflow = '';
     }
-
-    // Cleanup in case the component unmounts
     return () => {
       document.body.style.overflow = '';
     };
   }, [show]);
 
-  // if (!isOpen) return null;
   return ( 
     <div > 
       {/* section ! hero section */}
@@ -116,7 +108,7 @@ const [form, setForm] = useState({ name: '', email: '', phone: '', pdfHeader: ""
           {featuredFreebies.map((app)=>(
            <div key={app.id} className='ArticleSec' data-aos="fade-up" data-aos-delay="100">
                    
-            <Image src={app.img} alt="section Image" className="imag"/>
+            <Image src={app.img} alt="section Image" className="imag" />
           
             <div className="DivOnAbsolute">
            <p className="pText like">{app.text}</p>

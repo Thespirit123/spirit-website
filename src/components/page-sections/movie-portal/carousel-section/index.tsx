@@ -1,4 +1,5 @@
 "use client"
+
 import { Slide } from "@/types";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
