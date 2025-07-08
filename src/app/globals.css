@@ -52,3 +52,25 @@ body {
   will-change: transform;
   transform: translateZ(0);
 }
+
+.LMKIM{
+   cursor: pointer;
+  transition: all 0.3s ease;
+  animation: glow-animation 1.5s infinite alternate;
+}
+
+
+@keyframes glow-animation {
+  0% {
+    /* box-shadow: #008ea875 0px 7px 29px 0px; */
+    box-shadow: 0  0 2px #008ea8, 0   0 4px #008ea8, 0   0 6px #008ea8;
+  }
+  50% {
+    /* box-shadow: #008ea875 0px 9px 31px 0px; */
+    box-shadow: 0  0 14px #008ea8b3, 0  0 16px #008ea8b3, 0  0 18px #008ea8b3;
+  }
+  100% {
+    /* box-shadow: #008ea875 0px 7px 29px 0px; */
+    box-shadow: 0  0 2px #008ea8, 0  0 4px #008ea8, 0   0 6px #008ea8;
+  }
+}

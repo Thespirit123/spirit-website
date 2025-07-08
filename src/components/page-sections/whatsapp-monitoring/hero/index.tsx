@@ -9,6 +9,7 @@ const WhatsappHero = () => {
   const { handleOpenPayment } = usePayment();
 
   return (
+    <div  style={{paddingTop:"80px"}}>
     <section className="relative min-h-[calc(100vh-0px)] flex flex-col lg:flex-row -mt-[120px] pt-[200px]">
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 lg:px-16 py-10 lg:py-0">
         <Text
@@ -54,6 +55,7 @@ const WhatsappHero = () => {
         />
       </div>
     </section>
+    </div>
   );
 };
 

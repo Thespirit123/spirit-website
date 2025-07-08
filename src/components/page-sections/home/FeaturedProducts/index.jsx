@@ -80,7 +80,7 @@ const index = () => {
 <rect width="16" height="16" fill="white" transform="translate(64)"/>
 </clipPath>
 </defs>
-</svg>, cartText:"New",href:"", img:HeroImg1},{id:3, text:"Spotify Cracked App", Price:"2000", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
+</svg>, cartText:"New",href:"/utility-payment", img:HeroImg1},{id:3, text:"Spotify Cracked App", Price:"2000", star:<svg width="80" height="16" viewBox="0 0 80 16" fill="none" >
 <g clipPath="url(#clip0_709_914)">
 <path d="M8.00016 1.33301L10.0602 5.50634L14.6668 6.17967L11.3335 9.42634L12.1202 14.013L8.00016 11.8463L3.88016 14.013L4.66683 9.42634L1.3335 6.17967L5.94016 5.50634L8.00016 1.33301Z" stroke="#FACC15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
 </g>
