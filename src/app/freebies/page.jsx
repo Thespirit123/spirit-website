@@ -51,8 +51,22 @@ const [form, setForm] = useState({ name: '', email: '', phone: '', pdfHeader: ""
     try {
       const res = await axios.post("/api/submit", form);
       setMessage(res.data.message);
+      setForm({
+        name: '', 
+        email: '',
+        phone: '',
+        pdfHeader: "" })
+
+         setTimeout(() => {
+        setShow(false);
+        setMessage('');
+      }, 3000);
     } catch (err) {
       setMessage(err.response?.data?.message || "Something went wrong.");
+       setTimeout(() => {
+        setShow(false);
+        setMessage('');
+      }, 3000);
     }
   };
 

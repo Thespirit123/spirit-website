@@ -162,8 +162,8 @@ const Index = () => {
               disabled={loading}
             />
           </div>
-          <div className="FormControlDiv2" >
-            <button  disabled={loading} onclick={handleSubscribe}>
+          <div className="FormControlDiv2"   onClick={handleSubscribe} >
+            <button  disabled={loading} >
               {loading ? 'Submitting...' : 'Subscribe'}
             </button>
           </div>

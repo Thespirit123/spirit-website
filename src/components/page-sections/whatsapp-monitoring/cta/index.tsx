@@ -25,10 +25,11 @@ const CTASection = () => {
             <Text
               variant="h2"
               className="text-white font-semibold text-3xl md:text-4xl"
+              data-aos="fade-up" data-aos-delay="100"
             >
               Start Monitoring Now
             </Text>
-            <p className="text-white/90 mt-4 font-light text-lg md:text-xl max-w-2xl">
+            <p className="text-white/90 mt-4 font-light text-lg md:text-xl max-w-2xl" data-aos="fade-up" data-aos-delay="100">
               Get instant access to comprehensive WhatsApp monitoring. Setup
               takes less than 5 minutes.
             </p>

@@ -35,10 +35,10 @@ const MainFeatures = () => {
   return (
     <section className="w-11/12 max-w-7xl mx-auto py-10 sm:py-16 lg:py-20">
       <div className="flex flex-col items-center text-center">
-        <h3 className="text-brand-primary font-semibold text-3xl">
+        <h3 className="text-brand-primary font-semibold text-3xl"data-aos="fade-down" data-aos-delay="100" >
           Our Main Features
         </h3>
-        <p className="text-lg font-light">
+        <p className="text-lg font-light" data-aos="fade-up" data-aos-delay="100">
           Comprehensive WhatsApp Monitoring with Undetectable Tracking.
         </p>
       </div>
@@ -51,6 +51,7 @@ const MainFeatures = () => {
             title={feature.title}
             subtitle={feature.subtitle}
             loading={index > 1 ? "lazy" : undefined}
+              
           />
         ))}
       </div>

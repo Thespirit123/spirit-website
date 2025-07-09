@@ -7,10 +7,6 @@ export default async function handler(req, res) {
 
   const { name, email, phone, pdfHeader } = req.body;
 
-//   console.log(req.body)
-//    return res.status(200).json({ message: "Received!" });
-
-
   if (!name || !email || !phone || !pdfHeader) {
     return res.status(400).json({ message: "All fields are required." });
   }
@@ -27,18 +23,18 @@ export default async function handler(req, res) {
   if (!pdf) return res.status(404).json({ message: "PDF not found." });
 
 //   const downloadLink = `${process.env.BASE_URL}/api/sendLink/downloads?file=${encodeURIComponent(pdf.filename)}`;
-  const downloadLink = `https://letsee-xyrx.vercel.app/api/sendDownload/downloads?file=${encodeURIComponent(pdf.filename)}`;
+  const downloadLink = `https://spirit-website.vercel.app/api/sendDownload/downloads?file=${encodeURIComponent(pdf.filename)}`;
 
-//   Set up email transport
+
   const transporter = nodemailer.createTransport({
     service: "gmail", 
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
+    // auth: {
+    //   user: process.env.EMAIL_USER,
+    //   pass: process.env.EMAIL_PASS,
+    // },
      auth: {
-      user: "chukwubuikekingsley369@gmail.com",
-      pass: "bwdlnosrmssurjwu",
+      user: "Theespiritmedia@gmail.com",
+      pass: "tnjihsxaajvtntet",
     },
   });
 
