@@ -2,6 +2,7 @@
 import { pdfFiles } from '../../../lib/pdfFiles';
 import nodemailer from "nodemailer";
 
+
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
@@ -25,17 +26,16 @@ export default async function handler(req, res) {
 //   const downloadLink = `${process.env.BASE_URL}/api/sendLink/downloads?file=${encodeURIComponent(pdf.filename)}`;
   const downloadLink = `https://spirit-website.vercel.app/api/sendDownload/downloads?file=${encodeURIComponent(pdf.filename)}`;
 
+  
+
 
   const transporter = nodemailer.createTransport({
     service: "gmail", 
-    // auth: {
-    //   user: process.env.EMAIL_USER,
-    //   pass: process.env.EMAIL_PASS,
-    // },
-     auth: {
-      user: "Theespiritmedia@gmail.com",
-      pass: "tnjihsxaajvtntet",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
+   
   });
 
   const mailOptions = {
