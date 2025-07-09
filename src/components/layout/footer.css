@@ -68,10 +68,10 @@
  
 }
 .fixed {
-    background-color: #ffffff6b;
+    background-color: #fff;
     position: fixed;
     top: 0;
-    backdrop-filter: blur(24px);
+    /* backdrop-filter: blur(24px); */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
