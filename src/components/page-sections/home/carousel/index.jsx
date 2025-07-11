@@ -6,6 +6,8 @@ import HeroImg from "/public/Image8.png";
 import HeroImg1 from "/public/sliderImage.jpeg";
 import HeroImg2 from "/public/sliderImage1.jpeg";
 import HeroImg3 from "/public/freebiesHeroCaro.jpeg";
+import HeroImg4 from "/public/airimeB.jpg";
+
 import Image from "next/image";
 import "./carousel.css"
 
@@ -15,18 +17,18 @@ import "react-multi-carousel/lib/styles.css";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 2,
-    slidesToSlide: 1 // optional, default to 1.
+    items: 3,
+    slidesToSlide: 1 
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 1 // optional, default to 1.
+    slidesToSlide: 1
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    slidesToSlide: 1 // optional, default to 1.
+    slidesToSlide: 1 
   }
 };
 
@@ -104,6 +106,19 @@ const responsive = {
   <div  className="section1">
      <Image
               src={HeroImg3}
+              alt="Hero Screens"
+           
+              className="sectionImg4"
+              
+            />
+    
+  </div>
+  </div>
+
+   <div >
+  <div  className="section1">
+     <Image
+              src={HeroImg4}
               alt="Hero Screens"
            
               className="sectionImg4"
