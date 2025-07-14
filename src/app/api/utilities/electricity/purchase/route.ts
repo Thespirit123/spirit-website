@@ -1,3 +1,14 @@
+/**
+ * 🚨 WARNING: DO NOT MOVE THIS FOLDER 🚨
+ *
+ * This `app/api` directory is **required** by Next.js to define API routes.
+ * Moving or renaming it will **break the backend endpoints** and cause runtime errors.
+ *
+ * Reference: https://nextjs.org/docs/app/api-reference/file-conventions/route#http-methods
+ *
+ * If you're unsure about any changes to this directory, please ASK before modifying.
+ */
+
 import { adminAuth, adminDb } from "@/lib/firebase-admin";
 import { FieldValue } from "firebase-admin/firestore";
 import { NextRequest, NextResponse } from "next/server";
@@ -13,9 +24,9 @@ export async function POST(req: NextRequest) {
         const decodedToken = await adminAuth.verifyIdToken(idToken);
         const userId = decodedToken.uid;
 
-        const { networkId, planId, phoneNumber, amount } = await req.json();
+        const { discoApiId, meterNumber, meterType, amount } = await req.json();
 
-        if (!networkId || !planId || !phoneNumber || !amount) {
+        if (!discoApiId || !meterNumber || !meterType || !amount || amount < 1000) {
             return NextResponse.json(
                 { message: "Invalid request parameters" },
                 { status: 400 }
@@ -32,61 +43,67 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const ncWalletResponse = await fetch("https://ncwallet.africa/api/v1/data", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                trnx_pin: process.env.NCWALLET_TRNX_PIN!,
-                Authorization: process.env.NCWALLET_API_KEY!,
-            },
-            body: JSON.stringify({
-                network: networkId,
-                data_plan: planId,
-                phone_number: phoneNumber,
-                country_code: "NG",
-                bypass: true,
-            }),
-        });
+        const ncWalletResponse = await fetch(
+            "https://ncwallet.africa/api/v1/electricity",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    trnx_pin: process.env.NCWALLET_TRNX_PIN!,
+                    Authorization: process.env.NCWALLET_API_KEY!,
+                },
+                body: JSON.stringify({
+                    meter_id: discoApiId,
+                    meter_number: meterNumber,
+                    meter_type: meterType,
+                    amount: amount.toString(),
+                    bypass: true,
+                }),
+            }
+        );
 
-        const dataResult = await ncWalletResponse.json();
+        const purchaseResult = await ncWalletResponse.json();
 
-        if (dataResult.status !== "success") {
-            const providerMessage = dataResult.message as string | undefined;
+        if (purchaseResult.status !== "success") {
+            const providerMessage = purchaseResult.message as string | undefined;
             if (providerMessage?.toLowerCase().includes("insufficient balance")) {
                 throw new Error(
                     "Transaction failed due to a provider issue. Please try again later."
                 );
             }
             throw new Error(
-                providerMessage || "The data provider failed to process the request."
+                providerMessage || "The electricity provider failed the request."
             );
         }
 
-        const transactionId = `data_${Date.now()}`;
+        const transactionId = purchaseResult.ref_id || `elec_${Date.now()}`;
         const transactionRef = adminDb.doc(
             `users/${userId}/wallets/utilities/transactions/${transactionId}`
         );
 
         const batch = adminDb.batch();
+
         batch.update(walletRef, {
             balance: FieldValue.increment(-amount),
             lastUpdated: FieldValue.serverTimestamp(),
         });
+
         batch.set(transactionRef, {
             amount,
-            description: `Data purchase for ${phoneNumber}`,
+            description: `Electricity purchase for ${meterNumber}`,
             paymentMethod: "wallet",
-            reference: dataResult.data?.reference || transactionId,
+            reference: transactionId,
             status: "success",
             timestamp: FieldValue.serverTimestamp(),
             transactionId,
             type: "debit",
             metadata: {
-                service: "data",
-                recipient: phoneNumber,
-                networkId,
-                planId,
-                providerResponse: dataResult.data,
+                service: "electricity",
+                recipient: meterNumber,
+                discoApiId,
+                meterType,
+                token: purchaseResult.data?.token,
+                providerResponse: purchaseResult.data,
             },
         });
 
@@ -94,14 +111,15 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             status: "success",
-            message: `Data plan successfully sent to ${phoneNumber}.`,
+            message: purchaseResult.message,
             transactionId,
+            token: purchaseResult.data?.token,
         });
     } catch (error) {
         const message =
             error instanceof Error
                 ? error.message
                 : "An internal server error occurred";
-        return NextResponse.json({ message }, { status: 500 });
+        return NextResponse.json({ message: `Transaction failed: ${message}` }, { status: 500 });
     }
 }

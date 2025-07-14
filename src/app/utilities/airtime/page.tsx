@@ -29,7 +29,7 @@ const NETWORKS: Network[] = [
 ];
 
 const AirtimePurchasePage: React.FC = () => {
-    const { user, loading } = useAuth();
+    const { user } = useAuth();
     const [currentStep, setCurrentStep] = useState<Step>(1);
     const [formData, setFormData] = useState<AirtimeFormData | null>(null);
     const [walletBalance, setWalletBalance] = useState<number>(0);
@@ -40,7 +40,6 @@ const AirtimePurchasePage: React.FC = () => {
     const [showRevalidateModal, setShowRevalidateModal] = useState(false);
 
     const fetchWalletBalance = useCallback(async () => {
-        
         if (!user?.uid) return;
         setIsFetchingBalance(true);
         try {
@@ -148,9 +147,6 @@ const AirtimePurchasePage: React.FC = () => {
                 return null;
         }
     };
-
-    if (loading) return <p>Loading...</p>;
-if (!user) return <p>Please sign in to continue.</p>;
 
     return (
         <div className="bg-gray-50 min-h-screen pt-2 md:pt-32 pb-10">

@@ -26,55 +26,64 @@ import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import { db } from "./firebase";
 
 export const getWalletData = async (userId: string): Promise<WalletData> => {
-    const walletRef = doc(db, "users", userId, "wallets", "utilities");
-    const transactionsColRef = collection(
-        db,
-        "users",
-        userId,
-        "wallets",
-        "utilities",
-        "transactions"
-    );
+    try {
+        const walletRef = doc(db, "users", userId, "wallets", "utilities");
+        const transactionsColRef = collection(
+            db,
+            "users",
+            userId,
+            "wallets",
+            "utilities",
+            "transactions"
+        );
 
-    const recentTransactionsQuery = query(
-        transactionsColRef,
-        orderBy("timestamp", "desc"),
-        limit(10)
-    );
+        const recentTransactionsQuery = query(
+            transactionsColRef,
+            orderBy("timestamp", "desc"),
+            limit(10)
+        );
 
-    const [walletDoc, transactionsSnapshot] = await Promise.all([
-        getDoc(walletRef),
-        getDocs(recentTransactionsQuery),
-    ]);
+        const [walletDoc, transactionsSnapshot] = await Promise.all([
+            getDoc(walletRef),
+            getDocs(recentTransactionsQuery),
+        ]);
 
-    let balance = 0;
-    if (walletDoc.exists()) {
-        balance = walletDoc.data().balance || 0;
-    } else {
-        await setDoc(walletRef, {
-            balance: 0,
-            lastUpdated: serverTimestamp(),
+        let balance = 0;
+        if (walletDoc.exists()) {
+            balance = walletDoc.data().balance || 0;
+        } else {
+            await setDoc(walletRef, {
+                balance: 0,
+                lastUpdated: serverTimestamp(),
+            });
+        }
+
+        const transactions: Transaction[] = transactionsSnapshot.docs.map((doc) => {
+            const txn = doc.data() as WalletTransaction;
+            const date =
+                txn.timestamp instanceof Timestamp ? txn.timestamp.toDate() : new Date();
+            return {
+                id: doc.id,
+                type: (txn.metadata?.service as TransactionType) || "wallet",
+                description: txn.description,
+                amount: txn.amount,
+                date: date.toISOString().split("T")[0],
+                status: txn.status,
+                isCredit: txn.type === "credit",
+                reference: txn.reference,
+                paymentMethod: txn.paymentMethod,
+            };
         });
+
+        return { balance, transactions };
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error("getWalletData error:", error.message, error.stack);
+        } else {
+            console.error("getWalletData unknown error:", error);
+        }
+        throw error;
     }
-
-    const transactions: Transaction[] = transactionsSnapshot.docs.map((doc) => {
-        const txn = doc.data() as WalletTransaction;
-        const date =
-            txn.timestamp instanceof Timestamp ? txn.timestamp.toDate() : new Date();
-        return {
-            id: doc.id,
-            type: (txn.metadata?.service as TransactionType) || "wallet",
-            description: txn.description,
-            amount: txn.amount,
-            date: date.toISOString().split("T")[0],
-            status: txn.status,
-            isCredit: txn.type === "credit",
-            reference: txn.reference,
-            paymentMethod: txn.paymentMethod,
-        };
-    });
-
-    return { balance, transactions };
 };
 
 export const processWalletFunding = async (

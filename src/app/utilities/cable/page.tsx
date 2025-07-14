@@ -26,10 +26,6 @@ const CABLE_COMPANIES: CableCompany[] = [
     { id: "showmax", name: "Showmax", apiId: "4" },
 ];
 
-const parsePrice = (price: string): number => {
-    return parseFloat(price.replace(/[^0-9.]/g, ""));
-};
-
 const CablePurchasePage: React.FC = () => {
     const { user } = useAuth();
     const [currentStep, setCurrentStep] = useState<Step>(1);

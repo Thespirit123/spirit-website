@@ -1,9 +1,20 @@
+/**
+ * 🚨 WARNING: DO NOT MOVE THIS FOLDER 🚨
+ *
+ * This `app/api` directory is **required** by Next.js to define API routes.
+ * Moving or renaming it will **break the backend endpoints** and cause runtime errors.
+ *
+ * Reference: https://nextjs.org/docs/app/api-reference/file-conventions/route#http-methods
+ *
+ * If you're unsure about any changes to this directory, please ASK before modifying.
+ */
+
 import { NextResponse } from "next/server";
 
 export async function GET() {
     try {
         const response = await fetch(
-            "https://ncwallet.africa/api/v1/service/id/power",
+            "https://ncwallet.africa/api/v1/service/id/cable",
             {
                 method: "GET",
                 headers: {
@@ -11,11 +22,12 @@ export async function GET() {
                     trnx_pin: process.env.NCWALLET_TRNX_PIN!,
                     Authorization: process.env.NCWALLET_API_KEY!,
                 },
+                next: { revalidate: 3600 }, // Cache for 1 hour
             }
         );
 
         if (!response.ok) {
-            throw new Error("Failed to fetch electricity providers.");
+            throw new Error("Failed to fetch cable plans from the provider.");
         }
 
         const data = await response.json();

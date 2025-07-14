@@ -4,8 +4,10 @@ import Button from "@/components/custom-ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WalletFundingModal } from "@/components/wallet-funding-modal";
 import { useAuth } from "@/hooks/useAuth";
+import { db } from "@/lib/firebase";
 import { getWalletData, processWalletFunding } from "@/lib/wallet";
 import { CustomerInfo, Transaction } from "@/types/wallet";
+import { doc, getDoc } from "firebase/firestore";
 import { FlutterWaveResponse } from "flutterwave-react-v3/dist/types";
 import {
     ArrowDownRight,
@@ -40,24 +42,62 @@ const getTransactionIcon = (type: Transaction["type"]): React.ReactNode => {
 
 const UtilitiesDashboardPage: React.FC = () => {
     const { user } = useAuth();
-    console.log('user', user)
     const [walletBalance, setWalletBalance] = useState<number>(0);
-    const [showFundingModal, setShowFundingModal] = useState(false);
-    const [recentTransactions, setRecentTransactions] = useState<Transaction[]>(
-        []
-    );
+    const [recentTransactions, setRecentTransactions] = useState<Transaction[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [showFundingModal, setShowFundingModal] = useState(false);
+    const [userProfile, setUserProfile] = useState<{
+        name: string;
+        email: string;
+        phone: string;
+        uid: string;
+    } | null>(null);
+
+    useEffect(() => {
+        if (!user?.uid) return;
+        const fetchProfile = async () => {
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists()) {
+                const data = userDoc.data();
+                setUserProfile({
+                    name: data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.username || "User",
+                    email: data.email,
+                    phone: data.phone,
+                    uid: user.uid,
+                });
+            }
+        };
+        fetchProfile();
+    }, [user]);
+
+    useEffect(() => {
+        if (!userProfile) return;
+        const ensureVirtualWallet = async () => {
+            try {
+                const res = await fetch("/api/create-virtual-wallet", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        uid: userProfile.uid,
+                        email: userProfile.email,
+                        name: userProfile.name,
+                        phone: userProfile.phone,
+                    }),
+                });
+                await res.json();
+            } catch (err) { }
+        };
+        ensureVirtualWallet();
+    }, [userProfile]);
 
     const fetchWalletData = useCallback(async () => {
         if (!user?.uid) return;
-
         try {
             setIsLoading(true);
             const { balance, transactions } = await getWalletData(user.uid);
             setWalletBalance(balance);
             setRecentTransactions(transactions);
         } catch (error) {
-            console.error("Error fetching wallet data:", error);
             toast.error("Failed to load wallet data");
         } finally {
             setIsLoading(false);
@@ -72,11 +112,11 @@ const UtilitiesDashboardPage: React.FC = () => {
 
     const customerInfo = useMemo(
         (): CustomerInfo => ({
-            name: user?.displayName || "User",
-            email: user?.email || "",
-            phone: user?.phoneNumber || "",
+            name: userProfile?.name || "User",
+            email: userProfile?.email || "",
+            phone: userProfile?.phone || "",
         }),
-        [user]
+        [userProfile]
     );
 
     const handleFundingSuccess = async (
@@ -87,7 +127,6 @@ const UtilitiesDashboardPage: React.FC = () => {
             toast.error("User not authenticated");
             return;
         }
-
         try {
             const { newTransactionForState } = await processWalletFunding(
                 user.uid,
@@ -102,7 +141,6 @@ const UtilitiesDashboardPage: React.FC = () => {
                 `Successfully added ₦${amount.toLocaleString()} to your wallet`
             );
         } catch (error) {
-            console.error("Error updating wallet:", error);
             toast.error("Failed to update wallet balance");
         }
     };
