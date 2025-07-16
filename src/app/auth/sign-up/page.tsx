@@ -60,7 +60,7 @@ const SignUpPage = () => {
       setError(null);
       setIsLoading(true);
 
-      await signUp({
+      const user = await signUp({
         firstName: data.firstName,
         lastName: data.lastName,
         userName: data.userName.toLowerCase(),
@@ -68,6 +68,19 @@ const SignUpPage = () => {
         dateOfBirth: data.dateOfBirth,
         phone: data.phone,
         password: data.password,
+      });
+
+      await fetch("/api/create-virtual-wallet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          uid: user.uid,
+          email: data.email,
+          name: `${data.firstName} ${data.lastName}`,
+          phone: data.phone.startsWith("+234")
+            ? "0" + data.phone.slice(4)
+            : data.phone,
+        }),
       });
 
       router.push("/select-platform");

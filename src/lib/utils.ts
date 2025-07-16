@@ -32,3 +32,11 @@ export const formatDate = (timestamp: Timestamp) => {
     year: "numeric",
   });
 };
+
+export const formatNigerianPhone = (phone: string): string | null => {
+  if (!phone) return null;
+  const match = phone.match(/^\+234(\d{10})$/);
+  if (match) return `0${match[1]}`;
+  if (/^0\d{10}$/.test(phone)) return phone;
+  return null;
+};

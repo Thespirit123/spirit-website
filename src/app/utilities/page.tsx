@@ -2,9 +2,10 @@
 
 import Button from "@/components/custom-ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { WalletFundingModal } from "@/components/wallet-funding-modal";
+import { VirtualWalletData, WalletFundingModal } from "@/components/wallet-funding-modal";
 import { useAuth } from "@/hooks/useAuth";
 import { db } from "@/lib/firebase";
+import { formatNigerianPhone } from "@/lib/utils";
 import { getWalletData, processWalletFunding } from "@/lib/wallet";
 import { CustomerInfo, Transaction } from "@/types/wallet";
 import { doc, getDoc } from "firebase/firestore";
@@ -52,6 +53,8 @@ const UtilitiesDashboardPage: React.FC = () => {
         phone: string;
         uid: string;
     } | null>(null);
+    const [isNigerianNumber, setIsNigerianNumber] = useState<boolean>(true);
+    const [virtualWallet, setVirtualWallet] = useState<VirtualWalletData | null>(null);
 
     useEffect(() => {
         if (!user?.uid) return;
@@ -59,19 +62,27 @@ const UtilitiesDashboardPage: React.FC = () => {
             const userDoc = await getDoc(doc(db, "users", user.uid));
             if (userDoc.exists()) {
                 const data = userDoc.data();
+                const formattedPhone = formatNigerianPhone(data.phone);
                 setUserProfile({
                     name: data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : data.username || "User",
                     email: data.email,
-                    phone: data.phone,
+                    phone: formattedPhone ?? data.phone,
                     uid: user.uid,
                 });
+                setIsNigerianNumber(!!formattedPhone);
+                if (data.virtualWallet) {
+                    setVirtualWallet(data.virtualWallet as VirtualWalletData);
+                }
             }
         };
         fetchProfile();
     }, [user]);
 
     useEffect(() => {
-        if (!userProfile) return;
+        if (!userProfile || !isNigerianNumber || virtualWallet) {
+            console.log("Conditions not met for ensureVirtualWallet, skipping");
+            return;
+        }
         const ensureVirtualWallet = async () => {
             try {
                 const res = await fetch("/api/create-virtual-wallet", {
@@ -84,11 +95,15 @@ const UtilitiesDashboardPage: React.FC = () => {
                         phone: userProfile.phone,
                     }),
                 });
-                await res.json();
-            } catch (err) { }
+                const result = await res.json();
+                if (result.status && result.data) {
+                    setVirtualWallet(result.data as VirtualWalletData);
+                }
+            } catch (err) {
+            }
         };
         ensureVirtualWallet();
-    }, [userProfile]);
+    }, [userProfile, isNigerianNumber, virtualWallet]);
 
     const fetchWalletData = useCallback(async () => {
         if (!user?.uid) return;
@@ -181,10 +196,15 @@ const UtilitiesDashboardPage: React.FC = () => {
                                 variant="primary"
                                 fullWidth
                                 onClick={() => setShowFundingModal(true)}
-                                disabled={isLoading}
+                                disabled={isLoading || !isNigerianNumber}
                             >
                                 Fund Wallet
                             </Button>
+                            {!isNigerianNumber && (
+                                <div className="text-red-500 mt-2 text-sm">
+                                    Funding is only available for Nigerian phone numbers.
+                                </div>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
@@ -358,9 +378,7 @@ const UtilitiesDashboardPage: React.FC = () => {
             <WalletFundingModal
                 isOpen={showFundingModal}
                 onClose={() => setShowFundingModal(false)}
-                onSuccess={handleFundingSuccess}
-                onError={handleFundingError}
-                customerInfo={customerInfo}
+                walletData={virtualWallet}
             />
         </div>
     );

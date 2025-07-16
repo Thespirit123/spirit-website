@@ -89,7 +89,7 @@ const SelectPlatformPage = () => {
                         size="lg"
                     >
                         <ShoppingCart className="w-5 h-5" />
-                        Utilities Purchase
+                        Data/airtime Purchase
                     </Button>
                     <button
                         onClick={handleLogout}
